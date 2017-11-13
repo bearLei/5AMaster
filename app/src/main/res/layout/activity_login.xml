@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/ic_login_bg">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:padding="3dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_logo" />
+
+    <TextView
+        android:text="@string/app_logo_name_zh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:gravity="center_horizontal"
+        android:id="@+id/textView"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="@string/app_logo_name_en"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:id="@+id/textView2"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:text="角色选择"
+        android:layout_width="225dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/input_white_with_border"
+        android:gravity="center_vertical"
+        android:textColor="@color/dark_font"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:drawableRight="@mipmap/ic_open_select"
+        android:id="@+id/tv_role_choose"
+        android:visibility="gone"
+        android:textSize="13sp" />
+
+    <TextView
+        android:text="学校选择"
+        android:layout_width="225dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="14dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/input_white_with_border"
+        android:gravity="center_vertical"
+        android:textColor="@color/dark_font"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:drawableRight="@mipmap/ic_open_select"
+        android:id="@+id/tv_school_choose"
+        android:visibility="invisible"
+        android:textSize="13sp" />
+
+    <FrameLayout
+        style="@style/login_input_style"
+        android:layout_marginTop="14dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+        <EditText
+            android:text=""
+            android:hint="账号"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/input_white_with_border"
+            android:gravity="center_vertical"
+            android:textColor="@color/dark_font"
+            android:id="@+id/tv_login_name"
+            android:textSize="13sp" />
+        <TextView
+            android:text="获取验证码"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:textColor="@color/green_bg"
+            android:id="@+id/tv_verify_code"
+            android:visibility="gone"
+            android:textSize="13sp" />
+    </FrameLayout>
+
+
+    <EditText
+        android:text=""
+        android:hint="密码"
+        android:layout_width="225dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="14dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/input_white_with_border"
+        android:gravity="center_vertical"
+        android:textColor="@color/dark_font"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:inputType="textPassword"
+        android:id="@+id/tv_login_pwd"
+        android:textSize="13sp" />
+
+    <TextView
+        android:text="忘记密码"
+        android:layout_width="225dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_pwd_forget"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+
+    <Button
+        android:text="登录"
+        android:layout_width="225dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/input_green_with_border"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/btn_login"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+
+    <TextView
+        android:text="© 菩提教育"
+        android:layout_width="225dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:id="@+id/textView4"
+        android:textColor="@color/white"
+        android:textSize="9sp" />
+</LinearLayout>

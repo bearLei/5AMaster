@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/window_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/circle_small_corner_dark_bg"
+        android:paddingBottom="5dip"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:paddingTop="5dip">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/event_date_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="2016-12-02"
+                android:textColor="@color/dark_font"
+                android:textSize="13sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
+            <TextView
+                android:id="@+id/event_status_tv"
+                android:layout_width="64dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/circle_corner_blue_bg"
+                android:gravity="center"
+                android:text="已处理"
+                android:textColor="@color/status_blue"
+                android:textSize="13sp" />
+
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/window_bg"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/eventtype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="事件类型："
+                android:textColor="@color/dark_font"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/eventtype_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="打架斗殴"
+                android:textColor="@color/dark_bg3"
+                android:textSize="13sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/event_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="地        点："
+                android:textColor="@color/dark_font"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/event_address_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="深圳市寻梅科技大厦1320"
+                android:textColor="@color/dark_bg3"
+                android:textSize="13sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/event_des"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="描        述："
+                android:textColor="@color/dark_font"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/event_des_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:text="1896年雅典奥运会上，当他第一个冲破终点时，全场雀跃，欢声雷动。总裁判、希腊王储情不自禁地陪他跑向终点，总裁判、希腊王储情不自禁地陪他跑向终点希腊国王乔治一世也步下观礼台迎接着这位民族英雄。"
+                android:textColor="@color/dark_bg3"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/make_event_linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dip"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="学        生:"
+                android:textColor="@color/dark_font"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/ic_avatar_default"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_name_duty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="张三风（主要事件人）"
+                    android:textColor="@color/dark_bg3"
+                    android:textSize="13sp"/>
+                <TextView
+                    android:id="@+id/tv_class_grade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="三年二班"
+                    android:textColor="@color/dark_bg3"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="15dip"
+        android:background="@color/line_bg" />
+
+</LinearLayout>

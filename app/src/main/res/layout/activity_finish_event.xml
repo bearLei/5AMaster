@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_finish_event"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/window_bg"
+    tools:context="com.puti.education.ui.uiTeacher.FinishEventActivity">
+    <include layout="@layout/one_element_titlebar_layout"/>
+    <com.puti.education.widget.CommonNestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:id = "@+id/scrollview">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include layout="@layout/layout_finish_event" />
+            <FrameLayout
+                android:id="@+id/layout_one_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                android:visibility="visible">
+
+                <Button
+                    android:id="@+id/btn_event_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dip"
+                    android:layout_marginLeft="15dip"
+                    android:layout_marginRight="15dip"
+                    android:background="@drawable/green_circle_btn_bg"
+                    android:gravity="center"
+                    android:text="结束事件"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"/>
+
+            </FrameLayout>
+            </LinearLayout>
+    </com.puti.education.widget.CommonNestedScrollView>
+</LinearLayout>

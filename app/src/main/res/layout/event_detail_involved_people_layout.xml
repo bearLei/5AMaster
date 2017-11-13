@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="5dip"
+        android:layout_height="match_parent"
+        android:background="@color/window_bg" />
+
+    <LinearLayout
+        android:layout_width="230dip"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/detail_head_img"
+            android:layout_width="75dip"
+            android:layout_height="75dip"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dip"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_circle_bg" />
+
+        <TextView
+            android:id="@+id/detail_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dip"
+            android:text="程明"
+            android:textColor="@color/dark_font"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/detail_class_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="11dip"
+            android:text="艺术学院-09级02班"
+            android:textColor="@color/dark_font"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/detail_responseble_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="11dip"
+            android:paddingBottom="3dip"
+            android:paddingLeft="7dip"
+            android:paddingRight="7dip"
+            android:paddingTop="3dip"
+            android:text=""
+            android:textColor="#ffffff"
+            android:textSize="10sp"
+            android:layout_marginBottom="35dip"/>
+
+        <com.puti.education.widget.RadarView
+            android:id="@+id/involved_people_ratingbar"
+            android:layout_width="match_parent"
+            android:layout_height="165dip"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="18dip"
+            android:visibility="visible" />
+
+
+        <LinearLayout
+            android:id="@+id/detail_zuozheng_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dip"
+            android:layout_marginTop="32dip"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_mobile_yz_record" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dip"
+                android:text="手机提交的佐证记录"
+                android:textColor="#acacac"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="5dip"
+        android:layout_height="match_parent"
+        android:background="@color/window_bg" />
+</LinearLayout>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include layout="@layout/two_element_titlebar_layout"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal" >
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#ffffff"
+            android:layout_marginTop="1px" >
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="30dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:text=" "
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_title"
+                            android:textSize="12sp"
+                            android:textColor="@color/dark_font"/>
+
+                        <TextView
+                            android:text=" "
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="15dp"
+                            android:textSize="11dp"
+                            android:id="@+id/tv_content" />
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_marginTop="12dp"
+                        android:background="#DFDFDF"/>
+
+                    <com.puti.education.widget.RatingBarView
+                        android:id="@+id/custom_ratingbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="70dp"
+                        android:layout_marginRight="70dp"
+                        app:starCount="5"
+                        app:starEmpty="@mipmap/ic_rate_off"
+                        app:starFill="@mipmap/ic_rate_on"
+                        app:starImageSize="50dp"/>
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:layout_marginTop="30dp">
+
+                        <EditText
+                            android:id="@+id/et_desc"
+                            android:layout_width="match_parent"
+                            android:layout_height="206dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/input_dark_with_right_border"
+                            android:hint="输入您对该事件涉事人的评价"
+                            style="@style/big_input_edittext_style">
+
+
+                        </EditText>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:text="评价"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_marginTop="28dp"
+                        android:background="@drawable/selector_button_bg_with_green"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:id="@+id/btn_commit" />
+                </LinearLayout>
+            </ScrollView>
+        </FrameLayout>
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

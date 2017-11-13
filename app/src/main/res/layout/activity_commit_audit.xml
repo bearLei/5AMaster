@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/two_element_titlebar_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:orientation="horizontal"
+        android:background="#ffffff"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/text_record_linear"
+            android:layout_width="60dip"
+            android:layout_height="52dip"
+            android:layout_marginLeft="15dip"
+            android:background="@drawable/gray_corners_border_bg"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_text"/>
+
+            <TextView
+                android:id="@+id/event_text_record_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dip"
+                android:gravity="center"
+                android:text="文字记录"
+                android:textSize="10dip"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/text_pic_record_linear"
+            android:layout_width="60dip"
+            android:layout_height="52dip"
+            android:layout_marginLeft="30dip"
+            android:layout_marginRight="30dip"
+            android:background="@drawable/gray_corners_border_bg"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_picture"/>
+
+            <TextView
+                android:id="@+id/event_pic_record_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dip"
+                android:gravity="center"
+                android:text="图文记录"
+                android:textSize="10dip"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/media_record_linear"
+            android:layout_width="60dip"
+            android:layout_height="52dip"
+            android:background="@drawable/gray_corners_border_bg"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_music"/>
+
+            <TextView
+                android:id="@+id/event_media_record_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dip"
+                android:gravity="center"
+                android:text="音频记录"
+                android:textSize="10dip"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!--提交审核列表-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/event_edit_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:cacheColorHint="#00000000"
+        android:divider="@color/window_bg"
+        android:dividerHeight="1px"
+        android:overScrollMode="never" />
+
+
+</LinearLayout>

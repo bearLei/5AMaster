@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/window_bg"
+              android:orientation="vertical">
+
+    <include layout="@layout/two_element_titlebar_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip">
+
+        <RadioGroup
+            android:id = "@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dip"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingBottom="10dip"
+            >
+
+
+            <RadioButton
+                android:id="@+id/stu_choose_btn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="150dip"
+                android:layout_height="40dip"
+                android:background="@drawable/green_circle_btn_bg"
+                android:gravity="center"
+                android:text="学生"
+                android:textColor="#ffffff"
+                android:button="@null"/>
+
+            <RadioButton
+                android:id="@+id/teacher_choose_btn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="150dip"
+                android:layout_height="40dip"
+                android:layout_marginLeft="15dip"
+                android:background="@drawable/green_circle_btn_bg"
+                android:gravity="center"
+                android:text="老师"
+                android:textColor="#ffffff"
+                android:button="@null"/>
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:id = "@+id/choose_btn_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dip"
+            android:layout_marginBottom="10dip"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/class_choose_btn"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="150dip"
+                android:layout_height="35dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dp"
+                android:paddingRight="10dip"
+                android:paddingLeft="10dip"
+                android:background="@drawable/gray_border_bg"
+                android:drawableRight="@mipmap/ic_down_arrow"
+                android:gravity="center"
+                android:text="班级"
+                android:textColor="#707070"
+                android:textSize="11sp"/>
+
+            <EditText
+                android:id="@+id/et_input_name"
+                android:layout_width="wrap_content"
+                android:layout_height="35dip"
+                android:inputType="textPersonName"
+                android:textColor="#707070"
+                android:imeOptions="actionSearch"
+                android:textSize="11sp"
+                android:layout_weight="1"
+                android:background="@drawable/input_dark_with_right_border"
+                android:hint="请输入学生姓名" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/person_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:overScrollMode="never" />
+
+        <com.puti.education.widget.QuickIndexBar
+            android:id="@+id/quick_indexbar"
+            android:layout_gravity="right"
+            android:layout_width="22dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip"
+            android:visibility="visible"/>
+
+        <include layout="@layout/list_empty_layout"/>
+
+    </FrameLayout>
+
+
+</LinearLayout>

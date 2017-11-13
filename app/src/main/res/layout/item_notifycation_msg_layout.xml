@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="75dip"
+    android:background="#ffffff"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dip"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/msg_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="抢购"
+                android:layout_toStartOf="@+id/msg_date_tv"
+                android:layout_alignParentLeft="true"
+                android:textColor="#6b6b6b"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/msg_date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:maxLines="1"
+                android:text="2015-10-11"
+                android:textColor="#B5B5B5"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/msg_des_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="小米6可是刷爆了手机圈的头条,4月28号,也就是明天将是小米6的首次开卖的日子。众位米粉已经磨刀霍霍,准备开"
+            android:textColor="#6b6b6b"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+    <View style="@style/line_style"
+        android:layout_alignParentBottom="true"/>
+
+
+</RelativeLayout>

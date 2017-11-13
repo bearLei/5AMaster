@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dip"
+    android:orientation="vertical"
+    android:gravity="center_vertical">
+
+    <FrameLayout
+        android:id = "@+id/frame_layout"
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dip">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_media"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_toRightOf="@id/frame_layout"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="10dip">
+
+        <TextView
+            android:id = "@+id/file_name_tv"
+            android:layout_toRightOf="@id/frame_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_font"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="13sp"
+            android:layout_marginRight="36dip"/>
+
+        <TextView
+            android:id = "@+id/file_size_tv"
+            android:layout_marginTop="6dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dark_font"
+            android:text="5M"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id = "@+id/file_checkbox"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_item_unselected"/>
+
+   <View
+       android:layout_alignParentBottom="true"
+       style="@style/line_style"/>
+
+
+</RelativeLayout>

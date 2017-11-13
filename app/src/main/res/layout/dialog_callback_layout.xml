@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="330dip"
+    android:layout_height="wrap_content"
+    android:background="@drawable/gray_border_bg"
+    android:orientation="vertical"
+    android:paddingLeft="20dip"
+    android:paddingRight="20dip">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dip"
+        android:text="反馈"
+        android:textColor="@color/dark_font"
+        android:textSize="13sp"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/record_text_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dip"
+        android:lineSpacingExtra="2dip"
+        android:padding="10dip"
+        android:text="我们的祖国是多么的广大"
+        android:minHeight="50dip"
+        android:textColor="#555555"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/date_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:gravity="left"
+        android:text="2015-10-12"
+        android:textColor="#a5a5a5"
+        android:textSize="12sp" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gray_border_bg"
+        android:layout_marginTop="20dip">
+
+        <ImageView
+            android:id="@+id/record_img"
+            android:layout_width="90dip"
+            android:layout_height="90dip"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_picture"
+            android:padding="1dip"/>
+
+    </FrameLayout>
+
+
+
+    <Button
+        android:id="@+id/sure_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:layout_marginTop="20dip"
+        android:layout_marginBottom="20dip"
+        android:background="@drawable/green_circle_btn_bg"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+
+</LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="common_status_color">#6bb332</color>
+    <color name="weekday_undeal_line">#67CDDC</color>
+    <color name="weekday_deal_line">#F18C17</color>
+
+    <color name="white">#ffffff</color>
+    <color name="dark_font">#6B6B6B</color>
+    <color name="dark_bg">#CCCCCC</color>
+    <color name="dark_bg2">#F0F0F2</color>
+    <color name="green_bg">#61DF17</color>
+    <color name="green_font">#5FAA2D</color>
+    <color name="dark_tab_font">#616161</color>
+    <color name="dark_font2">#B5B5B5</color>
+    <color name="window_bg">#f0f0f2</color>
+    <color name="green_tab_selected">#EDFFD5</color>
+    <color name="dark_bg3">#999999</color>
+
+    <!--问卷部分-->
+    <color name="green_select">#D0EBAE</color>
+    <color name="green_btn_bg">#83C63C</color>
+    <color name="green_btn_camera">#63AD30</color>
+    
+    <!--学生首页部分-->
+    <color name="green_font_score">#6A9B39</color>
+    <color name="dark_circle">#DBDBDB</color>
+
+    <color name="dart_hint_font">#ADADAD</color>
+    <color name="deep_green_font">#4c8029</color>
+
+    <color name="line_bg">@color/window_bg</color>
+
+    <color name="photopicker_background">#181819</color>
+
+    <color name="black_font">#3E3E3E</color>
+    <color name="dark_check_font">#9c9c9c</color>
+
+    <color name="pop_list_press">#D0EBAE</color>
+    <color name="pop_list_normal">#ffffff</color>
+
+    <!--录音相关-->
+    <color name="colorGray">#33000000</color>
+
+    <color name="province_line_border">#D0D0D0</color>
+
+    <color name="swipe_refresh_progress">#61DF17</color>
+
+    <!--按键边框颜色-->
+    <color name="status_red">#F93014</color>
+    <color name="status_green">#63AE2F</color>
+    <color name="status_orange">#FE9B00</color>
+    <color name="status_blue">#008FFF</color>
+    <color name="status_dark">#999999</color>
+
+</resources>

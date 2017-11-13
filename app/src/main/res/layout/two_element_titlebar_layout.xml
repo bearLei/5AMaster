@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_search_topbar"
+    style="@style/topbarStyle" >
+
+    <FrameLayout
+        android:id = "@+id/back_frame"
+        android:layout_width="60dip"
+        android:layout_height="fill_parent"
+        android:onClick="finishActivity" >
+
+        <ImageView
+            android:id="@+id/back_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/backicon_margin"
+            android:src="@mipmap/ic_back" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/title_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="事件处理"/>
+
+    <TextView
+        android:text="提交"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingRight="10dip"
+        android:paddingLeft="10dip"
+        android:layout_alignParentRight="true"
+        android:id="@+id/tv_right"
+        android:visibility="invisible"/>
+
+</RelativeLayout>

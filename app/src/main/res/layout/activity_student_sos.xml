@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/window_bg"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/layout_search_topbar"
+        style="@style/topbarStyle" >
+
+        <FrameLayout
+            android:id = "@+id/back_frame"
+            android:layout_width="60dip"
+            android:layout_height="fill_parent"
+            android:onClick="finishActivity"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/back_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/backicon_margin"
+                android:src="@mipmap/ic_back" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/title_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:id="@+id/img_menu"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@mipmap/ic_right_menu"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="center" />
+
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id = "@+id/layout_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/bmapView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true" />
+
+        <Button
+            android:text="按住录音求助"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="50dip"
+            android:layout_marginRight="50dip"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/green_circle_btn_bg"
+            android:textColor="@color/white"
+            android:id="@+id/btn_sos" />
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/layout_search_topbar"
+        style="@style/topbarStyle" >
+
+        <FrameLayout
+            android:id = "@+id/back_frame"
+            android:layout_width="60dip"
+            android:layout_height="fill_parent"
+            android:onClick="finishActivity" >
+
+            <ImageView
+                android:id="@+id/back_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/backicon_margin"
+                android:src="@mipmap/ic_back" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/title_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@mipmap/ic_add"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="50dp"
+            android:scaleType="center"
+            android:id="@+id/img_new_record"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@mipmap/ic_filter"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="center"
+            android:id="@+id/img_filter_record"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="49dp">
+        <TextView
+            android:text="家长"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/font_13"
+            android:textColor="@color/green_font"/>
+
+        <TextView
+            android:text="学生"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_student"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/font_13"
+            android:textColor="@color/green_font"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/window_bg">
+
+        <com.github.jdsjlzx.recyclerview.LRecyclerView
+            android:id="@+id/record_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <include layout="@layout/list_empty_layout"/>
+
+    </FrameLayout>
+
+</LinearLayout>

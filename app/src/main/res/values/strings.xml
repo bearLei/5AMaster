@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">A校园</string>
+
+    <string name="app_logo_name_zh">学生\"养成教育\"大数据综合服务平台</string>
+    <string name="app_logo_name_en">Students\'\"education\"big data integrated service platform</string>
+
+    <string name="navi_home">主页</string>
+    <string name="navi_survey">调查</string>
+    <string name="navi_sos">求助</string>
+    <string name="navi_report">举报</string>
+    <string name="navi_mine">我的</string>
+    <string name="navi_event">事件</string>
+    <string name="navi_survey_online">在线调查</string>
+    <string name="navi_cooperation">家校协同</string>
+    <string name="title_activity_record_only">RecordOnlyActivity</string>
+
+</resources>

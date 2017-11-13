@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_bg2">
+
+    <include layout="@layout/two_element_titlebar_layout"/>
+
+    <LinearLayout
+        android:id="@+id/layout_large"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/title_test"
+            android:text="问卷结果:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp"
+            android:textColor="@color/dark_font" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:minHeight="111dp"
+            android:paddingTop="10dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="描述"
+                android:textSize="12dp"
+                android:gravity="top"
+                android:paddingTop="1dp"
+                android:id="@+id/tv_result"
+                android:minHeight="100dp"
+                android:background="@color/white"/>
+
+        </LinearLayout>
+
+</LinearLayout>

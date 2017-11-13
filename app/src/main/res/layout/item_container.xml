@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_parent_container"
+    android:layout_width="85dp"
+    android:layout_height="85dp"
+    android:orientation="vertical"
+    android:background="@drawable/input_dark_with_right_border">
+
+    <FrameLayout
+        android:layout_width="85dp"
+        android:layout_height="85dp">
+        <ImageView
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:srcCompat="@null"
+            android:scaleType="centerInside"
+            android:id="@+id/img_photo" />
+
+        <TextView
+            android:id = "@+id/head_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="上传图片"
+            android:layout_centerVertical="true"
+            android:drawableTop="@mipmap/ic_photo_add"
+            android:drawablePadding="10dp"
+            android:textColor="#666666"
+            android:textSize="10sp"
+            android:gravity="center_vertical"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_small_delete"
+            android:layout_gravity="right"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="2dp"
+            android:id="@+id/img_right_delete"
+            android:visibility="gone"/>
+    </FrameLayout>
+</LinearLayout>
+
+

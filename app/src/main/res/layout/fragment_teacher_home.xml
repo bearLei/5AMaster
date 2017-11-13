@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        android:background="@mipmap/top_title_bar_bg">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:paddingTop="6dip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="菩提教育"
+                android:textColor="@android:color/white"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="PUTI EDUCATION"
+                android:textColor="@android:color/white"
+                android:textSize="6sp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/add_event_rel"
+            android:layout_width="@dimen/topbar_height"
+            android:layout_height="@dimen/topbar_height"
+            android:layout_alignParentRight="true"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/ic_add_event" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <com.puti.education.widget.AppSwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/window_bg">
+
+        <com.puti.education.widget.CommonNestedScrollView
+            android:id="@+id/scroll_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/newnotice_rel"
+                    android:layout_width="match_parent"
+                    android:layout_height="49dip"
+                    android:layout_margin="@dimen/teacher_home_content_margin"
+                    android:paddingLeft="17dp"
+                    android:paddingRight="17dp"
+                    android:background="@drawable/yellow_corner_bg">
+
+                    <TextView
+                        android:id="@+id/tv_notice_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"
+                        android:text=""
+                        android:layout_toStartOf="@+id/tv_notice_time"
+                        android:layout_marginEnd="2dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_notice_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:text=""
+                        android:textColor="@android:color/white"
+                        android:textSize="10sp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/today_event_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/teacher_home_content_padding"
+                    android:paddingRight="@dimen/teacher_home_content_padding"
+                    android:visibility="visible">
+
+                    <TextView
+                        style="@style/teahcher_content_title_style"
+                        android:text="今日待处理学生事件"
+                        android:textStyle="bold"/>
+                    <include
+                        layout="@layout/list_title"
+                        android:id="@+id/table_title"/>
+
+                    <ListView
+                        android:id="@+id/today_event_lv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cacheColorHint="#00000000"
+                        android:divider="@color/white"
+                        android:dividerHeight="1px"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="251dip"
+                    android:background="@android:color/white"
+                    android:layout_marginTop="@dimen/teacher_home_content_margin"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/teacher_home_content_padding"
+                    android:paddingRight="@dimen/teacher_home_content_padding">
+
+                    <TextView
+                        style="@style/teahcher_content_title_style"
+                        android:text="本周事件"
+                        android:textStyle="bold"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.puti.education.widget.WeekEventView
+                            android:id="@+id/weekevent_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="167dip"
+                            android:layout_marginLeft="15dip"
+                            android:layout_marginRight="15dip"
+                            android:layout_marginTop="23dip" />
+
+                        <ProgressBar
+                            android:id="@+id/weekevent_pro1"
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:visibility="visible" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/teacher_action_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/teacher_home_content_margin"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/teacher_home_content_padding"
+                    android:paddingRight="@dimen/teacher_home_content_padding">
+
+                    <TextView
+                        style="@style/teahcher_content_title_style"
+                        android:text="教师行为分析数据"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="15dip"
+                        android:layout_marginTop="15dip"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dip"
+                        android:paddingRight="10dip">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv_uba_title1"
+                                    style="@style/teahcher_pbar_title"
+                                    android:text="处理事件总数" />
+
+                                <TextView
+                                    android:id="@+id/tv_uba_value1"
+                                    style="@style/teahcher_pbar_title"
+                                    android:text=""
+                                    android:textColor="@color/dark_font" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/teacher_home_pbar_margintop"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv_uba_title3"
+                                    style="@style/teahcher_pbar_title"
+                                    android:text="流失率" />
+
+                                <TextView
+                                    android:id="@+id/tv_uba_value3"
+                                    style="@style/teahcher_pbar_title"
+                                    android:text=""
+                                    android:textColor="@color/dark_font" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/teacher_home_pbar_margintop"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv_uba_title5"
+                                    style="@style/teahcher_pbar_title"
+                                    android:text="带领过的班级" />
+
+                                <TextView
+                                    android:id="@+id/tv_uba_value5"
+                                    style="@style/teahcher_pbar_title"
+                                    android:text=""
+                                    android:textColor="@color/dark_font" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv_uba_title2"
+                                    style="@style/teahcher_pbar_title"
+                                    android:text="最近一年管理数" />
+
+                                <TextView
+                                    android:id="@+id/tv_uba_value2"
+                                    style="@style/teahcher_pbar_title"
+                                    android:text=""
+                                    android:textColor="@color/dark_font" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/teacher_home_pbar_margintop"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv_uba_title4"
+                                    style="@style/teahcher_pbar_title"
+                                    android:text="学生投诉数" />
+
+                                <TextView
+                                    android:id="@+id/tv_uba_value4"
+                                    style="@style/teahcher_pbar_title"
+                                    android:text=""
+                                    android:textColor="@color/dark_font" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/teacher_home_pbar_margintop"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv_uba_title6"
+                                    style="@style/teahcher_pbar_title"
+                                    android:text="家长投诉数" />
+
+
+                                <TextView
+                                    android:id="@+id/tv_uba_value6"
+                                    style="@style/teahcher_pbar_title"
+                                    android:text=""
+                                    android:textColor="@color/dark_font" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_multi_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="283dip"
+                    android:layout_marginTop="@dimen/teacher_home_content_margin"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/teacher_home_content_padding"
+                    android:paddingRight="@dimen/teacher_home_content_padding">
+
+                    <TextView
+                        style="@style/teahcher_content_title_style"
+                        android:text="教师能力分和经验分"
+                        android:textStyle="bold"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.puti.education.widget.MultiBarChartView
+                            android:id="@+id/multi_bar_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="172dip"
+                            android:layout_marginTop="35dip" />
+
+                        <ProgressBar
+                            android:id="@+id/teacher_pro4"
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:visibility="visible" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/teacher_home_content_margin" />
+
+
+            </LinearLayout>
+
+
+        </com.puti.education.widget.CommonNestedScrollView>
+
+    </com.puti.education.widget.AppSwipeRefreshLayout>
+
+
+</LinearLayout>

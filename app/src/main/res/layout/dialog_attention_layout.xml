@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="330dip"
+    android:layout_height="wrap_content"
+    android:background="@drawable/gray_border_bg"
+    android:orientation="vertical"
+    android:paddingLeft="20dip"
+    android:paddingRight="20dip"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dip"
+        android:text="关注微信公众号"
+        android:textColor="@color/dark_font"
+        android:textStyle="bold"
+        android:textSize="16sp" />
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gray_border_bg"
+        android:layout_marginTop="20dip">
+
+        <ImageView
+            android:id="@+id/ewm_img"
+            android:layout_width="125dip"
+            android:layout_height="125dip"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_picture"
+            android:padding="1dip"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/wx_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:gravity="left"
+        android:text="恐龙蛋"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#aeaeae"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dip"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="20dip">
+
+        <Button
+            android:id="@+id/cancel_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="40dip"
+            android:layout_weight="1"
+            android:background="@drawable/gray_circle_btn_bg"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#979797"
+            android:textSize="14sp"
+            android:layout_marginRight="10dip"/>
+
+        <Button
+            android:id="@+id/sure_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="40dip"
+            android:background="@drawable/green_circle_btn_bg"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dip"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@android:color/white"
+              android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/event_punish_img"
+        android:layout_width="49dip"
+        android:layout_height="49dip"
+        android:layout_marginTop="16dip"
+        android:scaleType="centerCrop"
+        android:layout_marginLeft="15dip"
+        android:src="@drawable/img_circle_bg"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="18dip"
+        android:layout_marginTop="16dip"
+        android:layout_marginBottom="9dip"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/event_punish_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="陈建斌"
+                android:textColor="#3e3e3e"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/event_punish_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:background="@drawable/red_circle_btn_bg"
+                android:paddingBottom="3dip"
+                android:paddingLeft="5dip"
+                android:paddingRight="5dip"
+                android:paddingTop="3dip"
+                android:text="主要负责人"
+                android:textColor="#ffffff"
+                android:textSize="10sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/event_punish_msg_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:text="参数会被指定的转换器转换成字符串或字节流提交到服务器，如果没有指定转换器"
+            android:lineSpacingExtra="@dimen/event_detail_line_space"
+            android:textColor="#626262"
+            android:textSize="13sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

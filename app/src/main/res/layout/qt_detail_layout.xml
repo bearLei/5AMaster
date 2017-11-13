@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include layout="@layout/two_element_titlebar_layout"/>
+
+    <LinearLayout
+        android:id="@+id/layout_title"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_search_topbar"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="17dp"
+        android:minHeight="111dp">
+
+        <TextView
+            android:text="标题"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_title"
+            android:textSize="12sp"
+            android:textColor="@color/dark_font" />
+
+        <TextView
+            android:text="简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:id="@+id/tv_content"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id = "@+id/recycler_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:layout_below="@id/layout_title"
+        android:textColor="@color/dark_font"
+        android:background="@color/white"/>
+
+
+</RelativeLayout>

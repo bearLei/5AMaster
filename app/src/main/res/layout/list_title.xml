@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/circle_top_dark_bg">
+    <TextView
+        android:id="@+id/text_id"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:maxLines="1"
+        android:text="涉事人" />
+    <View
+        android:layout_width="1.5dip"
+        android:layout_height="fill_parent"
+        android:background="@color/white"/>
+
+    <TextView
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:maxLines="1"
+        android:gravity="center"
+        android:text="班级" />
+    <View
+        android:layout_width="1.5dip"
+        android:layout_height="fill_parent"
+        android:background="@color/white"/>
+
+    <TextView
+        android:id="@+id/text_goods_name"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:maxLines="1"
+        android:gravity="center"
+        android:text="事件类型" />
+
+    <View
+        android:layout_width="1.5dip"
+        android:layout_height="fill_parent"
+        android:background="@color/white"/>
+
+    <TextView
+        android:id="@+id/text_codeBar"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingBottom="10dip"
+        android:textColor="@color/white"
+        android:paddingTop="10dip"
+        android:maxLines="1"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:text="责任类型" />
+</LinearLayout>

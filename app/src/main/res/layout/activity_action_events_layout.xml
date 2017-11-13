@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include layout="@layout/two_element_titlebar_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/white">
+        <FrameLayout
+            android:id="@+id/layout_event_status"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/id_event_status"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:drawableRight="@mipmap/ic_down_choose"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:textColor="@color/dark_font"
+                android:text="处理状态"/>
+        </FrameLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:background="@color/window_bg"/>
+        <FrameLayout
+            android:id="@+id/layout_event_type"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+            <TextView
+                android:id="@+id/id_event_type"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawableRight="@mipmap/ic_down_choose"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="14dp"
+                android:textColor="@color/dark_font"
+                android:text="事件类型"/>
+        </FrameLayout>
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_bg2"
+        android:paddingTop="10dp">
+
+        <com.github.jdsjlzx.recyclerview.LRecyclerView
+            android:id="@+id/lv_events"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"/>
+
+        <include layout="@layout/list_empty_layout" />
+
+    </FrameLayout>
+
+</LinearLayout>

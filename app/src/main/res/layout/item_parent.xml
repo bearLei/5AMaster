@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:id = "@+id/item_container">
+
+    <ImageView
+        android:id = "@+id/grid_head_img"
+        android:layout_width="49dip"
+        android:layout_height="49dip"
+        android:scaleType="centerCrop"
+        android:background="@drawable/img_circle_bg"
+        android:layout_marginBottom="10dip"/>
+
+    <TextView
+        android:id = "@+id/grid_head_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/dark_font"
+        android:text="杨艳"/>
+
+    <ImageView
+        android:id = "@+id/prent_sign_img"
+        android:layout_marginTop="10dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_item_unselected"/>
+
+</LinearLayout>

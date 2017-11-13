@@ -1,0 +1,156 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+    </style>
+
+    <style name="login_input_style">
+        <item name="android:layout_width">225dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:background">@drawable/input_white_with_border</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <!-- 标题栏 -->
+    <style name="topbarStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/topbar_height</item>
+        <item name="android:background">@mipmap/top_title_bar_bg</item>
+    </style>
+
+    <!--教师模块开始-->
+    <style name="teahcher_content_title_style">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#6B6B6B</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginTop">10dip</item>
+    </style>
+
+    <style name="teahcher_pbar_title">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">#B7B7B7</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">93dip</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="line_style">
+        <item name="android:layout_height">1px</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/dark_circle</item>
+    </style>
+
+    <style name="line_wide_style">
+        <item name="android:layout_height">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/dark_circle</item>
+    </style>
+
+
+    <style name="event_detail_record_parent">
+        <item name="android:layout_height">53dip</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingLeft">15dip</item>
+        <item name="android:paddingRight">15dip</item>
+    </style>
+
+    <style name="event_detail_record_tv">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">60dip</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/dark_font</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="event_detail_record_right_tv" parent="event_detail_record_tv">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginLeft">75dip</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="personal_info_text_style">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">105dip</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/dark_font</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">15dip</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="personal_info_right_text_style" parent="personal_info_text_style">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:paddingRight">15dip</item>
+        <item name="android:paddingLeft">0dip</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">120dip</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">right|center_vertical</item>
+    </style>
+
+    <style name="personal_info_textparent_style">
+        <item name="android:layout_height">53dip</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <!--教师模块 结束-->
+
+    <!--定义打分样式-->
+    <style name="RadingStyle" parent="@android:style/Widget.RatingBar">
+        <!-- 定义星星图片 -->
+        <item name="android:progressDrawable">@drawable/layer_live_rating_bar</item>
+    </style>
+
+    <!--大输入框样式-->
+    <style name="big_input_edittext_style">
+        <item name="android:paddingTop">13dp</item>
+        <item name="android:paddingBottom">13dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:gravity">top</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/dark_font</item>
+    </style>
+
+    <!--相片选择样式-->
+    <style name="ActionMenuTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Menu">
+        <item name="android:textSize">@dimen/action_text_size</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="PhotoPickerTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/photopicker_background</item>
+        <item name="actionMenuTextAppearance">@style/ActionMenuTextStyle</item>
+    </style>
+
+    <!--dialog样式-->
+    <style name="dialog_theme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!--日期选择dialog样式-->
+    <style name="timechoosedialog" parent="dialog_theme">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

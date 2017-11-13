@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_search_topbar"
+    style="@style/topbarStyle">
+
+
+    <FrameLayout
+        android:id="@+id/back_frame"
+        android:layout_width="60dip"
+        android:layout_height="fill_parent">
+
+        <ImageView
+            android:id="@+id/back_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/backicon_margin"
+            android:src="@mipmap/ic_back" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/title_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/top_title_font_size" />
+
+    <FrameLayout
+        android:id="@+id/frame_img"
+        android:layout_width="60dip"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/backicon_margin">
+
+        <ImageView
+            android:id="@+id/right_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="@dimen/backicon_margin"
+            android:src="@mipmap/ic_edit" />
+    </FrameLayout>
+
+</RelativeLayout>

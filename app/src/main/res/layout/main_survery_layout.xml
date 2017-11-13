@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include layout="@layout/one_element_titlebar_layout" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="49dp">
+
+        <TextView
+            android:text="在线调查"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_question"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/font_13"
+            android:textColor="@color/green_font"/>
+
+        <TextView
+            android:text="互评"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_review"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/font_13"
+            android:textColor="@color/green_font"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_bg2"
+        android:paddingTop="10dp">
+
+        <FrameLayout
+            android:id="@+id/layout_questions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <com.github.jdsjlzx.recyclerview.LRecyclerView
+                android:id="@+id/recycler_questions"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:overScrollMode="never"/>
+            <include layout="@layout/list_empty_layout" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:id="@+id/review_layout" >
+
+            <RelativeLayout
+                android:id="@+id/review_student_layout"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="73dp"
+                android:background="@drawable/item_white_with_border"
+                >
+
+                <TextView
+                    android:text="评价同学"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/tv_review_student"
+                    android:textColor="@color/dark_font2"
+                    android:drawableRight="@mipmap/ic_review_edit_off"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_review_edit_bg"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="6dp"
+                     />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/review_teacher_layout"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="73dp"
+                android:background="@drawable/item_white_with_border"
+                >
+
+                <TextView
+                    android:text="评价老师"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/tv_review_teacher"
+                    android:textColor="@color/dark_font2"
+                    android:drawableRight="@mipmap/ic_review_edit_off"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_review_edit_bg"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="6dp"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/review_parent_layout"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="73dp"
+                android:background="@drawable/item_white_with_border"
+                >
+
+                <TextView
+                    android:text="评价家长"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/tv_review_parent"
+                    android:textColor="@color/dark_font2"
+                    android:drawableRight="@mipmap/ic_review_edit_off"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_review_edit_bg"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="6dp"
+                     />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/review_event_layout"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="73dp"
+                android:background="@drawable/item_white_with_border"
+                >
+
+                <TextView
+                    android:text="评价事件"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/tv_review_event"
+                    android:textColor="@color/dark_font2"
+                    android:drawableRight="@mipmap/ic_review_edit_off"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:textSize="14sp"
+                    android:layout_centerVertical="true" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_review_edit_bg"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="6dp"
+                     />
+            </RelativeLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

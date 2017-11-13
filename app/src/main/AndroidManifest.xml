@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.puti.education">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <!-- 极光相关权限 -->
+    <permission
+        android:name="com.puti.education.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.puti.education.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- 拍照相关 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.AppStartActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.uiCommon.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.ForgetPwdActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 公共部分 -->
+        <activity
+            android:name=".ui.uiTeacher.TeacherAddEventActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.uiCommon.MutualReviewDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.EventReviewDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.EventRecordListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.QtExceptionEventDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.QuestionnaireDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.uiCommon.MsgListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.BlueBoundActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.ChooseHeadListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.ProfessorListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.WebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.QuestionnaireResult"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.MutualReviewTeacherActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.MutualReviewParentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.PhotoReviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.EventTypeChooseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.EventDutyChooseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.EventParentChooseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.EventEvaluationDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.RecordOnlyActivity"
+            android:screenOrientation="portrait"/>
+
+        <!-- 教师端 开始 -->
+        <activity
+            android:name=".ui.uiTeacher.TeacherMainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiTeacher.TeacherEventDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.uiTeacher.TeacherPersonalInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiTeacher.ChoosePersonListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
+        <activity
+            android:name=".ui.uiTeacher.ProofListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiTeacher.AddQuestionaireActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiTeacher.CommitAuditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiTeacher.InvolvedPeopleChooseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiTeacher.AddEventWithInputTextActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiTeacher.AddEventWithPictrueTextActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiTeacher.SystemAudioListChooseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiCommon.VideoRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiTeacher.DetectiveListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiTeacher.ReportListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiTeacher.ReportConfirmActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 教师端 结束 -->
+
+
+        <!-- 学生端 开始 -->
+        <activity
+            android:name=".ui.uiStudent.StudentMainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiStudent.StudentSosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiStudent.ActionEventActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiStudent.PracticeListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiStudent.StudentInofActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiStudent.PracticeAddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiStudent.PracticeDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiStudent.StudentReportAddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiStudent.StudentReportDetailActivity"
+            android:screenOrientation="portrait" />
+        <!-- 学生端 结束 -->
+
+
+        <!-- 家长端 开始 -->
+        <activity
+            android:name=".ui.uiPatriarch.PatriarchMainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiPatriarch.TrainPracticeAddActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.uiPatriarch.ParentInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiPatriarch.AnonymityListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiPatriarch.AnonymityLetterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiPatriarch.TrainPracticeDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiPatriarch.GrowthTrackDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiPatriarch.ActionEventAddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiPatriarch.ActionEventDetailActivity"
+            android:screenOrientation="portrait" />
+        <!--  -->
+
+        <activity
+            android:name="com.lidong.photopicker.PhotoPickerActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/PhotoPickerTheme" />
+        <activity
+            android:name="com.lidong.photopicker.PhotoPreviewActivity"
+            android:theme="@style/PhotoPickerTheme" />
+
+        <!-- 百度地图相关的service -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="CSOk64CvRlOHMHqppnxuPURxvfKCEoDC" />
+
+        <service android:name=".core.service.SosService" />
+
+        <!-- 极光相关 -->
+        <!-- Rich push 核心功能 since 2.0.6 -->
+        <activity
+            android:name="cn.jpush.android.ui.PopWinActivity"
+            android:exported="false"
+            android:theme="@style/MyDialogStyle" />
+
+        <!-- Required SDK核心功能 -->
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.puti.education" />
+            </intent-filter>
+        </activity>
+
+        <!-- Required SDK 核心功能 -->
+        <!-- 可配置android:process参数将PushService放在其他进程中 -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:exported="false"
+            android:process=":mult">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+
+        <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
+        <!-- 若不启用该功能可删除该组件，将不拉起其他应用也不能被其他应用拉起 -->
+        <service
+            android:name="cn.jpush.android.service.DaemonService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.DaemonService" />
+
+                <category android:name="com.puti.education" />
+            </intent-filter>
+        </service>
+
+        <!-- Required SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" /> <!-- Required  显示通知栏 -->
+                <category android:name="com.puti.education" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Required SDK核心功能 -->
+        <receiver
+            android:name="cn.jpush.android.service.AlarmReceiver"
+            android:exported="false" />
+
+        <!-- User defined.  For test only  用户自定义的广播接收器 -->
+        <receiver
+            android:name=".core.receiver.JpushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.CONNECTION" /> <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.puti.education" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Required  . Enable it you can get statistics data with channel -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="7798dabc3506ccf309876074" />
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" /> <!-- </>值来自开发者平台取得的AppKey -->
+
+        <activity android:name=".ui.uiTeacher.FinishEventActivity" />
+        <activity android:name=".ui.uiTeacher.SampleListsActivity" />
+        <activity android:name=".ui.uiCommon.EventEvaluationActivity" />
+        <activity android:name=".ui.uiTeacher.DetectiveConfirmActivity" />
+
+    </application>
+
+</manifest>

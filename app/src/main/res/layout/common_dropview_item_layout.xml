@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/pop_item_height"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/item_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pop_item_height"
+        android:layout_centerInParent="true"
+        android:background="@color/white"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="10dip"
+        android:maxLines="1"
+        android:text="测试测试"
+        android:textColor="@color/dark_font"
+        android:textSize="13sp"/>
+
+    <View
+        style="@style/line_style"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

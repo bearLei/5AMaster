@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/two_element_titlebar_layout" />
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/window_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/window_bg"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/circle_small_corner_dark_bg"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:padding="15dp"
+                android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/title_value_distance"
+                            android:gravity="center_vertical"
+                            android:hint="主题"
+                            android:textColor="@color/dark_font"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/tv_theme"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:layout_weight="2.2"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:layout_marginRight="15dp"
+                            android:background="@drawable/circle_small_corner_dark_bg"
+                            android:textColor="@color/dark_font"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:id="@+id/tv_type"
+                            android:layout_width="0dp"
+                            android:layout_height="39dp"
+                            android:layout_weight="1"
+                            android:text="培训"
+                            android:gravity="center_vertical|right"
+                            android:background="@drawable/circle_small_corner_dark_bg"
+                            android:drawableRight="@mipmap/ic_down_choose"
+                            android:drawablePadding="10dp"
+                            android:textColor="@color/dark_font"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="15dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginRight="@dimen/title_value_distance"
+                            android:hint="内容"
+                            android:textColor="@color/dark_font"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/tv_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="85dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:scrollbars="vertical"
+                            android:fadeScrollbars="false"
+                            android:background="@drawable/circle_small_corner_dark_bg"
+                            android:textColor="@color/dark_font"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="39dp"
+                            android:gravity="center_vertical"
+                            android:hint="时间"
+                            android:textColor="@color/dark_font"
+                            android:layout_marginRight="@dimen/title_value_distance"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:background="@drawable/circle_small_corner_dark_bg"
+                            android:textColor="@color/dark_font"
+                            android:textSize="12sp"/>
+
+                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="39dp"
+                        android:gravity="center_vertical"
+                        android:hint="地点"
+                        android:textColor="@color/dark_font"
+                        android:layout_marginRight="@dimen/title_value_distance"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/tv_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:textColor="@color/dark_font"
+                        android:background="@drawable/circle_small_corner_dark_bg"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="53dp"
+                            android:gravity="center_vertical"
+                            android:hint="结果"
+                            android:layout_marginRight="@dimen/title_value_distance"
+                            android:textColor="@color/dark_font"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/tv_result"
+                            android:layout_width="match_parent"
+                            android:layout_height="85dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:scrollbars="vertical"
+                            android:fadeScrollbars="false"
+                            android:background="@drawable/circle_small_corner_dark_bg"
+                            android:textColor="@color/dark_font"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                     android:focusable="true"
+                     android:focusableInTouchMode="true">
+
+                     <TextView
+                        android:id="@+id/editText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:gravity="top"
+                        android:hint="图片"
+                        android:inputType="textMultiLine"
+                        android:layout_marginRight="@dimen/title_value_distance"
+                        android:minHeight="100dp"
+                        android:minLines="3"
+                        android:paddingTop="1dp"
+                        android:textColor="@color/dark_font"
+                        android:textSize="14sp" />
+
+                     <LinearLayout
+                         android:id="@+id/itemcontainer_photo"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="vertical"
+                         android:layout_marginBottom="5dp"
+                         android:layout_marginTop="10dp"
+                         >
+                     </LinearLayout>
+
+                 </LinearLayout>
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_commit"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
+                android:layout_marginTop="26dp"
+                android:background="@drawable/green_circle_btn_bg"
+                android:text="提交"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

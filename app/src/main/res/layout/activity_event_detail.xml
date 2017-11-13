@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/window_bg"
+              android:orientation="vertical">
+
+    <include layout="@layout/two_element_titlebar_layout"/>
+
+    <com.puti.education.widget.CommonNestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:id = "@+id/scrollview">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--责任关系佐证记录-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <RelativeLayout
+                    style="@style/event_detail_record_parent">
+
+                    <TextView
+                        style="@style/event_detail_record_tv"
+                        android:text="时间"/>
+
+                    <TextView
+                        android:id="@+id/tv_event_time"
+                        style="@style/event_detail_record_right_tv"
+                        android:text=""/>
+
+                </RelativeLayout>
+
+                <View style="@style/line_style"/>
+
+                <RelativeLayout
+                    style="@style/event_detail_record_parent">
+
+                    <TextView
+                        style="@style/event_detail_record_tv"
+                        android:text="地点"/>
+
+                    <TextView
+                        android:id="@+id/event_address_tv"
+                        style="@style/event_detail_record_right_tv"
+                        android:text=""/>
+
+                </RelativeLayout>
+
+                <View style="@style/line_wide_style"/>
+
+                <com.puti.education.widget.GridViewForScrollView
+                    android:id="@+id/involved_people_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11.5dip"
+                    android:layout_marginLeft="15dp"
+                    android:horizontalSpacing="10dip"
+                    android:minHeight="75dip"
+                    android:numColumns="4"
+                    android:verticalSpacing="10dip" />
+
+                <RelativeLayout
+                    style="@style/event_detail_record_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true">
+
+                    <TextView
+                        android:id="@+id/tv_level_title"
+                        style="@style/event_detail_record_tv"
+                        android:text="事件等级"/>
+
+                    <com.puti.education.widget.RatingSmallBarView
+                        android:id="@+id/rbv_event_level"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/tv_level_title"
+                        android:layout_centerVertical="true"
+                        app:starCount="5"
+                        app:starEmpty="@mipmap/ic_rate_small_off"
+                        app:starFill="@mipmap/ic_rate_small_on"
+                        app:starImageSize="35dp"/>
+
+                </RelativeLayout>
+
+                <View style="@style/line_style"/>
+
+                <RelativeLayout
+                    style="@style/event_detail_record_parent">
+
+                    <TextView
+                        style="@style/event_detail_record_tv"
+                        android:text="事件类型"/>
+
+                    <TextView
+                        android:id="@+id/event_type_tv"
+                        style="@style/event_detail_record_right_tv"
+                        android:text=""/>
+
+                </RelativeLayout>
+
+                <View style="@style/line_wide_style"/>
+
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_event_desc_name"
+                        style="@style/event_detail_record_tv"
+
+                        android:text="事件描述"/>
+
+                    <TextView
+                        android:id="@+id/event_des_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="10dp"
+                        android:scrollbars="vertical"
+                        android:background="@drawable/circle_small_corner_dark_bg"
+                        android:layout_below="@id/tv_event_desc_name"
+                        android:text=""/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <!--佐证记录-->
+            <LinearLayout
+                android:id="@+id/confirm_record_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:paddingBottom="21dip"
+                android:paddingTop="20dip"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dip"
+                    android:text="佐证记录"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_font"
+                    android:textSize="13sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:id="@+id/text_pic_proof_linear"
+                        android:layout_width="99dip"
+                        android:layout_height="91dip"
+                        android:layout_marginLeft="15dip"
+                        android:background="@drawable/gray_corners_border_bg"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_picture"/>
+
+                        <TextView
+                            android:id="@+id/event_pic_record_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dip"
+                            android:gravity="center"
+                            android:text="图文记录"
+                            android:textSize="10dip"/>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/media_proof_linear"
+                        android:layout_width="99dip"
+                        android:layout_height="91dip"
+                        android:layout_marginLeft="15dip"
+                        android:background="@drawable/gray_corners_border_bg"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_music"/>
+
+                        <TextView
+                            android:id="@+id/event_media_record_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dip"
+                            android:gravity="center"
+                            android:text="音频记录"
+                            android:textSize="10dip"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/video_proof_linear"
+                        android:layout_width="99dip"
+                        android:layout_height="91dip"
+                        android:layout_marginLeft="15dip"
+                        android:background="@drawable/gray_corners_border_bg"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_video"/>
+
+                        <TextView
+                            android:id="@+id/event_video_record_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dip"
+                            android:gravity="center"
+                            android:text="视频记录"
+                            android:textSize="10dip"/>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--事件确认过程-->
+            <LinearLayout
+                android:id="@+id/layout_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingTop="15dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:visibility="gone">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/img_main_avatar"
+                        android:layout_width="57dp"
+                        android:layout_height="57dp"
+                        android:src="@mipmap/ic_avatar_default" />
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/dark_font"
+                        android:textSize="12sp"
+                        android:text="张三风"/>
+                    <TextView
+                        android:id="@+id/tv_duty_type"
+                        android:layout_width="78dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/circle_corner_green_bg"
+                        android:textColor="@color/status_green"
+                        android:gravity="center"
+                        android:textSize="12sp"
+                        android:text="主要事件人"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+                    <RadioGroup
+                        android:id="@+id/rg_event_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dip">
+
+                        <RadioButton
+                            android:id="@+id/confirm_yes_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@drawable/radio_bg"
+                            android:padding="8dip"
+                            android:text="确定事件"
+                            android:textColor="@color/deep_green_font"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/confirm_no_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="60dip"
+                            android:button="@drawable/radio_bg"
+                            android:padding="8dip"
+                            android:text="拒绝事件"
+                            android:textColor="@color/deep_green_font"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/et_refuse_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="80dp"
+                            android:padding="5dp"
+                            android:gravity="top"
+                            android:textColor="@color/dark_bg3"
+                            android:scrollbars="vertical"
+                            android:textSize="13sp"
+                            android:hint="请输入您的理由"
+                            android:background="@drawable/input_dark_with_right_border" />
+                        <LinearLayout
+                            android:id="@+id/layout_relate_parents"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:orientation="horizontal"
+                            android:background="@color/white"
+                            android:gravity="center_vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="关联学生家长"/>
+                            <com.puti.education.widget.GridViewForScrollView
+                                android:id="@+id/gv_linked_parents"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dip"
+                                android:horizontalSpacing="3dip"
+                                android:minHeight="70dip"
+                                android:numColumns="3"
+                                android:verticalSpacing="8dip" />
+
+                        </LinearLayout>
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--班主任处理事件-->
+            <LinearLayout
+                android:id="@+id/layout_event_deal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dip"
+                android:paddingTop="15dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/img_main_avatar_deal"
+                        android:layout_width="57dp"
+                        android:layout_height="57dp"
+                        android:src="@mipmap/ic_avatar_default" />
+                    <TextView
+                        android:id="@+id/tv_name_deal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:textSize="@dimen/sp_13"
+                        android:text="张三风"/>
+                    <TextView
+                        android:id="@+id/tv_duty_type_deal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/circle_corner_green_bg"
+                        android:textColor="@color/status_green"
+                        android:text="主要事件人"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:id="@+id/layout_punish_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:background="@drawable/input_dark_with_bottom_border"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:textSize="@dimen/sp_13"
+                            android:textColor="@color/dark_font"
+                            android:text="处分类型"/>
+                        <TextView
+                            android:id="@+id/tv_punish_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_13"
+                            android:textColor="@color/dark_font"
+                            android:background="@null"
+                            android:hint="请选择"
+                            android:drawableRight="@mipmap/ic_down_choose"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:background="@drawable/input_dark_with_bottom_border"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:textSize="@dimen/sp_13"
+                            android:textColor="@color/dark_font"
+                            android:text="处分详情"/>
+                        <EditText
+                            android:id="@+id/et_punish_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="vertical"
+                            android:textSize="@dimen/sp_13"
+                            android:textColor="@color/dark_font"
+                            android:background="@null" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_dark_with_bottom_border"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textSize="@dimen/sp_13"
+                            android:textColor="@color/dark_font"
+                            android:text="个案分析"/>
+                        <EditText
+                            android:id="@+id/et_sample_detail"
+                            android:layout_width="180dp"
+                            android:layout_height="60dp"
+                            android:textSize="@dimen/sp_13"
+                            android:scrollbars="vertical"
+                            android:textColor="@color/dark_font"
+                            android:background="@null"
+                            />
+
+                        <ImageView
+                            android:id="@+id/iv_sample_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:minWidth="45dp"
+                            android:scaleType="centerInside"
+                            android:src="@mipmap/ic_sample_choose"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" android:background="@drawable/input_dark_with_bottom_border"
+                        android:gravity="top">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textSize="@dimen/sp_13"
+                            android:textColor="@color/dark_font"
+                            android:text="措施对策"/>
+                        <EditText
+                            android:id="@+id/et_deal_strategy"
+                            android:layout_width="180dp"
+                            android:layout_height="60dp"
+                            android:textSize="@dimen/sp_13"
+                            android:scrollbars="vertical"
+                            android:textColor="@color/dark_font"
+                            android:background="@null"/>
+                        <ImageView
+                            android:id="@+id/iv_deal_strategy"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:minWidth="45dp"
+                            android:scaleType="centerInside"
+                            android:src="@mipmap/ic_strage_choose"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:background="@drawable/input_dark_with_bottom_border"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:textSize="@dimen/sp_13"
+                            android:textColor="@color/dark_font"
+                            android:text="推荐课程"/>
+                        <TextView
+                            android:id="@+id/tv_recommand_course"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/sp_13"
+                            android:textColor="@color/dark_font"
+                            android:background="@null"
+                            android:drawableRight="@mipmap/ic_down_choose"/>
+                　　</LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_dark_with_bottom_border"
+                        android:minHeight="38dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:textSize="@dimen/sp_13"
+                            android:textColor="@color/dark_font"
+                            android:text="推荐专家"/>
+                        <com.puti.education.widget.GridViewForScrollView
+                            android:id="@+id/gv_linked_expert"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dip"
+                            android:horizontalSpacing="5dip"
+                            android:minHeight="75dip"
+                            android:numColumns="3"
+                            android:verticalSpacing="8dip" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="@drawable/input_dark_with_bottom_border"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="3dp"
+                            android:textSize="@dimen/sp_13"
+                            android:textColor="@color/dark_font"
+                            android:text="事件扣分"/>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <com.puti.education.widget.SeekbarLayout
+                                android:id="@+id/tv_seekbar_layout"
+                                android:layout_width="match_parent"
+                                android:layout_marginLeft="25dp"
+                                android:layout_height="25dp" />
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/tv_score_down"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#999999"
+                                    android:textSize="13sp"
+                                    android:text="0"
+                                    android:layout_weight="1" />
+
+                                <SeekBar
+                                    android:id="@+id/gb_score"
+                                    android:layout_width="148dp"
+                                    android:layout_height="wrap_content"
+                                    android:max="100"
+                                    android:progress="50"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:id="@+id/tv_score_up"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#999999"
+                                    android:textSize="13sp"
+                                    android:text="0"
+                                    android:layout_weight="1" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/rg_event_deal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/input_dark_with_bottom_border"
+                        android:layout_marginBottom="5dip"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dip">
+
+                        <CheckBox
+                            android:id="@+id/follow_track_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@drawable/radio_bg"
+                            android:textColor="@color/dark_font"
+                            android:textSize="@dimen/sp_13"
+                            android:padding="8dip"
+                            android:text="后续追踪" />
+
+                        <CheckBox
+                            android:id="@+id/office_check_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="60dip"
+                            android:button="@drawable/radio_bg"
+                            android:textColor="@color/dark_font"
+                            android:textSize="@dimen/sp_13"
+                            android:padding="8dip"
+                            android:text="学生处审核" />
+
+                    </LinearLayout>
+            </LinearLayout>
+
+            </LinearLayout>
+
+            <!--学生处审核事件-->
+            <LinearLayout
+                android:id="@+id/layout_check"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="15dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_font"
+                    android:textSize="@dimen/sp_14"
+                    android:text="学生处审核结果"/>
+                <RadioGroup
+                    android:id="@+id/rg_event_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dip"
+                    android:visibility="visible">
+
+                    <RadioButton
+                        android:id="@+id/check_yes_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/radio_bg"
+                        android:padding="8dip"
+                        android:textColor="@color/dark_font"
+                        android:textSize="@dimen/sp_13"
+                        android:text="确定事件" />
+
+                    <RadioButton
+                        android:id="@+id/check_no_radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60dip"
+                        android:button="@drawable/radio_bg"
+                        android:padding="8dip"
+                        android:text="拒绝事件"
+                        android:textColor="@color/dark_font"
+                        android:textSize="@dimen/sp_13" />
+
+                </RadioGroup>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/dark_font"
+                    android:textSize="@dimen/sp_14"
+                    android:text="学生处指导意见"/>
+                <EditText
+                    android:id="@+id/et_office_opinion"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:padding="5dp"
+                    android:gravity="top"
+                    android:textColor="@color/dark_font"
+                    android:textSize="@dimen/sp_13"
+                    android:text=""
+                    android:scrollbars="vertical"
+                    android:background="@drawable/circle_small_corner_dark_bg"/>
+            </LinearLayout>
+
+            <!--事件跟进列表  正在跟踪状态出现-->
+            <LinearLayout
+                android:id="@+id/layout_track_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:layout_marginTop="10dip"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dip"
+                    android:paddingTop="20dip"
+                    android:text="事件跟进"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_font"
+                    android:textSize="13sp"/>
+
+                <com.puti.education.widget.ListViewForScrollView
+                    android:id="@+id/event_follow_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cacheColorHint="#000000"
+                    android:divider="@color/line_bg"
+                    android:dividerHeight="1px"/>
+
+            </LinearLayout>
+
+            <!-- 事件追踪输入,包括班主任跟进，家长跟进-->
+            <LinearLayout
+                android:id="@+id/layout_track_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:visibility="gone" >
+
+                <include layout="@layout/item_event_track_layout"/>
+
+            </LinearLayout>
+
+            <!--已结束状态，显示评分信息-->
+            <LinearLayout
+                android:id="@+id/layout_last_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:visibility="gone" >
+
+                <include layout="@layout/layout_finish_event"/>
+
+            </LinearLayout>
+
+
+            <!-- 结束，继续跟进 ,提交审核 操作 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/window_bg"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:id="@+id/event_two_btn_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:gravity="center_horizontal"
+                    android:paddingBottom="22dip"
+                    android:paddingTop="20dip">
+
+                    <Button
+                        android:id="@+id/event_continu_follow_btn"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="153dip"
+                        android:layout_height="44dip"
+                        android:layout_marginLeft="8dip"
+                        android:background="@drawable/green_circle_btn_bg"
+                        android:gravity="center"
+                        android:text="继续跟进"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp"/>
+                    <Button
+                        android:id="@+id/event_finish_btn"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="153dip"
+                        android:layout_height="44dip"
+                        android:layout_marginLeft="8dip"
+                        android:background="@drawable/red_circle_btn_bg"
+                        android:gravity="center"
+                        android:text="结束"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/layout_one_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="22dip"
+                    android:paddingTop="20dip"
+                    android:visibility="gone">
+
+                    <Button
+                        android:id="@+id/btn_event_btn"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dip"
+                        android:layout_marginLeft="15dip"
+                        android:layout_marginRight="15dip"
+                        android:background="@drawable/green_circle_btn_bg"
+                        android:gravity="center"
+                        android:text="处理事件"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp"/>
+
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </com.puti.education.widget.CommonNestedScrollView>
+
+
+</LinearLayout>

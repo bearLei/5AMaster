@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/window_bg">
+
+
+    <Button
+        android:id="@+id/add_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_marginBottom="20dip"
+        android:text="+"
+        android:textColor="#adadad"
+        android:textSize="20sp"
+        android:background="#ffffff"/>
+
+    <FrameLayout
+        android:layout_below="@id/add_btn"
+        android:id="@+id/event_commit_check_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <Button
+            android:id="@+id/event_commit_check_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="44dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_marginBottom="15dip"
+            android:background="@drawable/green_circle_btn_bg"
+            android:gravity="center"
+            android:text="提交审核"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+    </FrameLayout>
+
+
+</RelativeLayout>

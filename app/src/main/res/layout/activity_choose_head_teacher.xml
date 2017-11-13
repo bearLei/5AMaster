@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/window_bg"
+              android:orientation="vertical">
+
+    <include layout="@layout/two_element_titlebar_layout"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/person_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:overScrollMode="never"/>
+
+        <com.puti.education.widget.QuickIndexBar
+            android:id="@+id/quick_indexbar"
+            android:layout_gravity="right"
+            android:layout_width="22dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip"
+            android:visibility="visible"/>
+
+        <include layout="@layout/list_empty_layout"/>
+
+    </FrameLayout>
+
+
+</LinearLayout>

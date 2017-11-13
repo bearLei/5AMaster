@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+    android:paddingLeft="15dip"
+    android:paddingRight="15dip">
+
+    <TextView
+        android:id="@+id/et_track_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="@dimen/event_detail_line_space"
+        android:text="班主任追踪反馈"
+        android:textColor="#626262"
+        android:textSize="13sp"
+        android:paddingTop="20dip"/>
+
+    <EditText
+        android:id="@+id/et_track_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6.5dip"
+        android:minHeight="74dp"
+        android:gravity="top"
+        android:padding="5dp"
+        android:text=""
+        android:textColor="#626262"
+        android:textSize="12sp"
+        android:background="@drawable/circle_small_corner_dark_bg" />
+
+    <LinearLayout
+        android:id="@+id/confirm_record_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:paddingBottom="21dip"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="附件"
+            android:textColor="@color/dark_font"
+            android:textSize="13sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/text_pic_record_linear"
+                android:layout_width="99dip"
+                android:layout_height="91dip"
+                android:background="@drawable/gray_corners_border_bg"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_picture"/>
+
+                <TextView
+                    android:id="@+id/event_pic_record_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dip"
+                    android:textColor="@color/dark_bg3"
+                    android:gravity="center"
+                    android:text="图文记录"
+                    android:textSize="12dip"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/media_record_linear"
+                android:layout_width="99dip"
+                android:layout_height="91dip"
+                android:layout_marginLeft="15dip"
+                android:background="@drawable/gray_corners_border_bg"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_music"/>
+
+                <TextView
+                    android:id="@+id/event_media_record_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dip"
+                    android:textColor="@color/dark_bg3"
+                    android:gravity="center"
+                    android:text="音频记录"
+                    android:textSize="12dip"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/video_record_linear"
+                android:layout_width="99dip"
+                android:layout_height="91dip"
+                android:layout_marginLeft="15dip"
+                android:background="@drawable/gray_corners_border_bg"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_video"/>
+
+                <TextView
+                    android:id="@+id/event_video_record_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dip"
+                    android:textColor="@color/dark_bg3"
+                    android:gravity="center"
+                    android:text="视频记录"
+                    android:textSize="12dip"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

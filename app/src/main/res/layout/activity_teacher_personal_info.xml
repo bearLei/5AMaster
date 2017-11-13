@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/three_element_title_layout" />
+
+    <com.puti.education.widget.CommonNestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/window_bg"
+                android:paddingBottom="17dip"
+                android:paddingLeft="15dip"
+                android:paddingTop="17dip"
+                android:text="教职信息"
+                android:textSize="13sp" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="教师工号"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
+
+                <EditText
+                    android:id="@+id/personnal_info_teacherid_tv"
+                    style="@style/personal_info_right_text_style" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="学校" />
+
+                <EditText
+                    android:id="@+id/personnal_info_school_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="院系" />
+
+                <EditText
+                    android:id="@+id/personnal_info_department_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="任课专业" />
+
+                <EditText
+                    android:id="@+id/personnal_info_professional_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" />
+
+            <LinearLayout style="@style/personal_info_textparent_style"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="wrap_content"
+                    android:text="班级" />
+
+                <EditText
+                    android:id="@+id/personnal_info_classname_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:layout_marginLeft="1dp"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <View style="@style/line_style" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="工龄" />
+
+                <EditText
+                    android:id="@+id/personnal_info_workage_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="入职时间" />
+
+                <EditText
+                    android:id="@+id/personnal_info_worktime_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:text="" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/window_bg"
+                android:paddingBottom="17dip"
+                android:paddingLeft="15dip"
+                android:paddingTop="17dip"
+                android:text="个人信息"
+                android:textSize="13sp" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="姓名" />
+
+                <EditText
+                    android:id="@+id/personnal_info_name_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="身份证" />
+
+                <EditText
+                    android:id="@+id/personnal_info_id_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="性别" />
+
+                <TextView
+                    android:id="@+id/personnal_info_sex_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="民族" />
+
+                <EditText
+                    android:id="@+id/personnal_info_national_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="电话" />
+
+                <EditText
+                    android:id="@+id/personnal_info_connact_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="出生日期" />
+
+                <EditText
+                    android:id="@+id/personnal_info_birth_date_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="年龄" />
+
+                <EditText
+                    android:id="@+id/personnal_info_age_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:inputType="number"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" android:visibility="gone"/>
+
+            <RelativeLayout style="@style/personal_info_textparent_style">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="户口性质" />
+
+                <EditText
+                    android:id="@+id/personnal_info_address_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="国籍" />
+
+                <EditText
+                    android:id="@+id/personnal_info_contry_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <View style="@style/line_style" />
+
+            <RelativeLayout style="@style/personal_info_textparent_style">
+
+                <TextView
+                    style="@style/personal_info_text_style"
+                    android:text="婚否" />
+
+                <TextView
+                    android:id="@+id/personnal_info_is_married_tv"
+                    style="@style/personal_info_right_text_style"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/window_bg">
+
+                <Button
+                    android:id="@+id/info_commint_btn"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dip"
+                    android:layout_marginBottom="50dip"
+                    android:layout_marginLeft="27dip"
+                    android:layout_marginRight="27dip"
+                    android:layout_marginTop="20dip"
+                    android:background="@drawable/green_circle_btn_bg"
+                    android:text="保存"
+                    android:textColor="#ffffff" />
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+    </com.puti.education.widget.CommonNestedScrollView>
+
+</LinearLayout>

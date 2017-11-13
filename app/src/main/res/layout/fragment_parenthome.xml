@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        android:background="@mipmap/top_title_bar_bg">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:paddingTop="6dip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="菩提教育"
+                android:textColor="@android:color/white"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="PUTI EDUCATION"
+                android:textColor="@android:color/white"
+                android:textSize="6sp" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_img"
+            android:layout_width="60dip"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/backicon_margin">
+
+            <ImageView
+                android:id="@+id/right_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="@dimen/backicon_margin"
+                android:src="@mipmap/ic_add" />
+        </FrameLayout>
+    </RelativeLayout>
+    <com.puti.education.widget.AppSwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/window_bg">
+        <com.puti.education.widget.CommonNestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/window_bg"
+            android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/newnotice_rel"
+                android:layout_width="match_parent"
+                android:layout_height="49dip"
+                android:layout_margin="@dimen/teacher_home_content_margin"
+                android:paddingLeft="17dp"
+                android:paddingRight="17dp"
+                android:background="@drawable/yellow_corner_bg">
+
+                <TextView
+                    android:id="@+id/tv_notice_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:text=""
+                    android:layout_toStartOf="@+id/tv_notice_time"
+                    android:layout_marginEnd="2dp"
+                    android:textColor="@android:color/white"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_notice_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp" />
+
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/parent_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dip" />
+
+                <LinearLayout
+                    android:id="@+id/dot_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginBottom="15dip"
+                    android:layout_marginTop="15dip"
+                    android:gravity="center"
+                    android:orientation="horizontal" />
+
+                <ViewStub
+                    android:id = "@+id/empty_viewstup"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout="@layout/empty_content_layout"/>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
+                android:background="@drawable/white_rect_border_bg"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dip"
+                    android:layout_marginTop="15dip"
+                    android:text="亲子关系描述"
+                    android:textColor="#575757"
+                    android:textSize="12sp" />
+
+                <com.puti.education.widget.RelationDesBarView
+                    android:id="@+id/relation_des_view"
+                    android:layout_width="300dip"
+                    android:layout_height="220dip"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dip" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </com.puti.education.widget.CommonNestedScrollView>
+</com.puti.education.widget.AppSwipeRefreshLayout>
+</LinearLayout>

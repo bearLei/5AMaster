@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="330dip"
+    android:layout_height="300dip"
+    android:gravity="center_horizontal"
+    android:background="@drawable/gray_border_bg"
+    android:paddingLeft="20dip"
+    android:paddingRight="20dip">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="文字记录"
+        android:textSize="13sp"
+        android:textColor="@color/dark_font"
+        android:layout_marginTop="10dip"/>
+
+    <com.puti.education.widget.CommonNestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="150dip"
+        android:layout_marginTop="10dip">
+
+        <TextView
+            android:id = "@+id/record_text_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dip"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:textColor="#555555"
+            android:lineSpacingExtra="2dip"
+            android:text=""/>
+
+    </com.puti.education.widget.CommonNestedScrollView>
+
+    <TextView
+        android:id = "@+id/date_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2015-10-12"
+        android:textSize="12sp"
+        android:gravity="left"
+        android:textColor="#a5a5a5"
+        android:layout_marginTop="15dip"/>
+
+    <Button
+        android:id="@+id/sure_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:background="@drawable/green_circle_btn_bg"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:layout_marginTop="20dip"/>
+
+
+
+</LinearLayout>

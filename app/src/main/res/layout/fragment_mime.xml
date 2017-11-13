@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        android:background="@mipmap/top_title_bar_bg">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:paddingTop="6dip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="菩提教育"
+                android:textColor="@android:color/white"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="PUTI EDUCATION"
+                android:textColor="@android:color/white"
+                android:textSize="6sp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/window_bg"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="75dip"
+                android:layout_height="75dip"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dip"
+                android:background="@mipmap/my_head_bg"
+                >
+
+                <ImageView
+                    android:id="@+id/mine_head_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_avatar_default" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/mine_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dip"
+                android:text=""
+                android:textColor="@color/dark_font"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/mine_class_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="30dip"
+                android:layout_marginTop="11dip"
+                android:text=""
+                android:textColor="@color/dark_font"
+                android:textSize="11sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/mine_msg_center_tv"
+                    android:text="通知中心"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dip"
+                    android:textSize="13sp"
+                    android:textColor="@color/dark_font"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dip"/>
+
+                <View style="@style/line_style"/>
+
+                <TextView
+                    android:id="@+id/mine_person_info_tv"
+                    android:text="个人资料"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dip"
+                    android:textSize="13sp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/dark_font"
+                    android:paddingLeft="15dip"/>
+
+                <View style="@style/line_style"/>
+
+                <TextView
+                    android:id="@+id/mine_record_tv"
+                    android:text="实践记录"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dip"
+                    android:textSize="13sp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/dark_font"
+                    android:paddingLeft="15dip"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/layout_detective"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+                    <View style="@style/line_style"/>
+                    <TextView
+                        android:id="@+id/mine_detective_tv"
+                        android:text="巡检结果"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dip"
+                        android:textSize="13sp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/dark_font"
+                        android:paddingLeft="15dip"
+                        android:visibility="visible"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout_report"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+                    <View style="@style/line_style"/>
+                    <TextView
+                        android:id="@+id/mine_report_tv"
+                        android:text="学生举报"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dip"
+                        android:textSize="13sp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/dark_font"
+                        android:paddingLeft="15dip"
+                        android:visibility="visible"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id = "@+id/mine_loginout_btn"
+                android:layout_width="match_parent"
+                android:layout_height="44dip"
+                android:layout_marginTop="20dip"
+                android:layout_marginRight="27dip"
+                android:layout_marginLeft="27dip"
+                android:text="退出登录"
+                android:textColor="#ffffff"
+                android:background="@drawable/red_circle_btn_bg"
+                style="?android:attr/borderlessButtonStyle"/>
+            <TextView
+                android:text=""
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="12sp"
+                android:id="@+id/tvVersion" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

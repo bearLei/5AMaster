@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="330dip"
+    android:layout_height="320dip"
+    android:background="@drawable/gray_border_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="20dip"
+    android:paddingRight="20dip">
+
+    <TextView
+        android:id="@+id/tvTitleType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:text="音频记录"
+        android:textColor="@color/dark_font"
+        android:textSize="13sp" />
+
+    <LinearLayout
+        android:id="@+id/layout_file"
+        android:layout_width="match_parent"
+        android:layout_height="180dip"
+        android:orientation="vertical">
+
+        <GridView
+            android:id="@+id/involved_people_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11.5dip"
+            android:horizontalSpacing="13dip"
+            android:numColumns="3"
+            android:verticalSpacing="10dip" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/date_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dip"
+        android:gravity="left"
+        android:text="2015-10-12"
+        android:textColor="#a5a5a5"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/sure_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:layout_marginTop="20dip"
+        android:background="@drawable/green_circle_btn_bg"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+
+</LinearLayout>

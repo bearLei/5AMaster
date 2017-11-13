@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_bg2">
+
+    <include layout="@layout/two_element_titlebar_layout"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:minHeight="111dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:hint="活动名称"
+                android:layout_width="wrap_content"
+                android:layout_height="53dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:textSize="12sp"
+                android:layout_marginRight="@dimen/title_value_distance"
+                android:textColor="@color/dart_hint_font" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:id="@+id/tv_practice_name"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/dart_hint_font"
+                android:background="@color/white"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/dark_bg"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:hint="成果"
+                android:layout_width="wrap_content"
+                android:layout_height="53dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:textSize="12sp"
+                android:layout_marginRight="@dimen/title_value_distance"
+                android:textColor="@color/dart_hint_font" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:id="@+id/tv_result"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/dart_hint_font"
+                android:background="@color/white"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/dark_bg"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:hint="时间"
+                android:layout_width="wrap_content"
+                android:layout_height="53dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/dark_font" />
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/dark_font"
+                android:drawableRight="@mipmap/ic_down_arrow"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/dark_bg"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:hint="正文"
+                android:textSize="12dp"
+                android:gravity="top"
+                android:paddingTop="1dp"
+                android:paddingLeft="5dp"
+                android:id="@+id/et_content"
+                android:minHeight="232dp"
+                android:background="@color/white"/>
+
+            <com.puti.education.widget.ItemContainer
+                android:id="@+id/itemcontainer_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+            </com.puti.education.widget.ItemContainer>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+        <Button
+            android:text="提交"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/green_circle_btn_bg"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:id="@+id/btn_commit" />
+
+</LinearLayout>
+</ScrollView>

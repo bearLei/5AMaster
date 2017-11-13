@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+
+    <item name="position_key" type="id"/>
+    <item name="answer_index_key" type="id"/>
+
+    <item name="onclick_parent_view" type="id"/>
+    <item name="onclick_position" type="id"/>
+    <item name="detail_id" type="id"/>
+    <item name="adapter_pos" type="id"/>
+
+</resources>

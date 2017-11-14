@@ -1,1 +1,1 @@
-include ':app', ':photopicker', ':common_recyclerview'
+include ':app', ':photopicker', ':common_recyclerview', ':zxing'

@@ -40,6 +40,7 @@ import com.puti.education.util.ToastUtil;
 import com.puti.education.widget.AppSwipeRefreshLayout;
 import com.puti.education.R;
 import com.puti.education.widget.CommonDropView;
+import com.puti.education.zxing.ZxingUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,8 @@ public class TeacherEventListFragment extends BaseListFragment implements LRecyc
 
     @BindView(R.id.back_img)
     ImageView mImgBack;
+    @BindView(R.id.back_frame)
+    FrameLayout getmFrameZxing;
     @BindView(R.id.right_img)
     ImageView mImgNew;
     @BindView(R.id.frame_img)
@@ -131,7 +134,7 @@ public class TeacherEventListFragment extends BaseListFragment implements LRecyc
 
     @Override
     public void initViews(View view) {
-        mImgBack.setVisibility(View.GONE);
+        mImgBack.setImageResource(R.mipmap.ic_add);
         mImgNew.setImageResource(R.mipmap.ic_add);
         mTitleTv.setText("事件列表");
         mFrameNew.setOnClickListener(new View.OnClickListener() {
@@ -140,6 +143,14 @@ public class TeacherEventListFragment extends BaseListFragment implements LRecyc
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), EventTypeChooseActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        getmFrameZxing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ZxingUtil.g().startZxing(getActivity());
+//                ZxingUtil.g().createImage("");
             }
         });
 

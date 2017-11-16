@@ -25,6 +25,7 @@ import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.PatriarchModel;
 import com.puti.education.netFrame.netModel.StudentModel;
 import com.puti.education.netFrame.netModel.UploadModel;
+import com.puti.education.speech.SpeechUtil;
 import com.puti.education.ui.BaseActivity;
 import com.puti.education.ui.uiCommon.VideoRecordActivity;
 import com.puti.education.ui.uiTeacher.AddEventWithPictrueTextActivity;
@@ -83,6 +84,8 @@ public class ActionEventAddActivity extends BaseActivity {
     LinearLayout mediaRecordLinear;
     @BindView(R.id.video_record_linear)
     LinearLayout mVideoRecordLinear;
+    @BindView(R.id.speech_input)
+    TextView mSpeechInput;
 
 
     private String mChildId;
@@ -163,6 +166,15 @@ public class ActionEventAddActivity extends BaseActivity {
         getEventTypeList();
     }
 
+    @OnClick(R.id.speech_input)
+    public void speech(){
+        SpeechUtil.g(this).createDialog(this, new SpeechUtil.SpeechResultCallBack() {
+            @Override
+            public void result(String s) {
+                mEtDesc.setText(s);
+            }
+        });
+    }
     @OnClick(R.id.event_time_tv)
     public void chooseStartTime(){
         TimeDialog timeDialog = null;

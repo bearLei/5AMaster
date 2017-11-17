@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.puti.education.R;
 import com.puti.education.bean.StudentResponseInfo;
+import com.puti.education.bean.VersionInfo;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.StudentModel;
@@ -82,8 +83,19 @@ public class StudentMineFragment extends BaseFragment{
 
     @OnClick(R.id.mine_msg_center_tv)
     public void gotoMsgCenterClick(){
-        Intent intent = new Intent(getActivity(), MsgListActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(getActivity(), MsgListActivity.class);
+//        startActivity(intent);
+        CommonModel.getInstance().checkVersion(new BaseListener(VersionInfo.class){
+            @Override
+            public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
+                super.responseResult(infoObj, listObj, code, status);
+            }
+
+            @Override
+            public void requestFailed(boolean status, int code, String errorMessage) {
+                super.requestFailed(status, code, errorMessage);
+            }
+        });
     }
 
     @OnClick(R.id.mine_person_info_tv)

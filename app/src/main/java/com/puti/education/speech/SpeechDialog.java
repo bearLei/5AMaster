@@ -2,7 +2,6 @@ package com.puti.education.speech;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 import com.puti.education.R;
 import com.puti.education.util.LogUtil;
-import com.puti.education.widget.FullDialog;
 
 /**
  * Created by lenovo on 2017/11/15.

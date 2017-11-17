@@ -32,6 +32,10 @@ import rx.Observable;
  */
 public interface CommonApi {
 
+    //检查版本更新
+    @GET("base/checkVersion")
+    Observable<ResponseInfo> checkVersion(@Query("versioncode") Integer versionde,@Query("device") Integer device);
+
     @POST("user/applogin")
     Observable<ResponseInfo> loginEx(@Body RequestBody route);
 
@@ -105,7 +109,6 @@ public interface CommonApi {
 
     @GET("base/teacherinfo")
     Observable<ResponseInfo> getTeacherDetail(@Query("uid") String id);
-
     //通知中心
     @GET("notice/pagelist")
     Observable<ResponseInfo> getMsgList(@Query("pageIndex") int pageIndex,@Query("pageSize") int pageSize);

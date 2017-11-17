@@ -1,11 +1,14 @@
 package com.puti.education.netFrame;
 
 import android.text.TextUtils;
+import android.util.Log;
+
 import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.PatriarchModel;
 import com.puti.education.netFrame.netModel.StudentModel;
 import com.puti.education.netFrame.netModel.TeacherModel;
 import com.puti.education.netFrame.netModel.UploadModel;
+import com.puti.education.util.LogUtil;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -54,7 +57,7 @@ public class RetrofitUtil {
     }
 
     public static Retrofit initRetrofit() {
-
+        Log.d("lei","initRetrofit");
         if (!isHttps(BASE_URL)) {
             client = setDefaultBuilder();
         } else {
@@ -88,6 +91,7 @@ public class RetrofitUtil {
 
 
     public static synchronized Retrofit getRetrofit(){
+        Log.d("lei","getRetrofit");
         if (retrofit == null){
             synchronized (RetrofitUtil.class) {
                 if (retrofit == null) {
@@ -126,6 +130,7 @@ public class RetrofitUtil {
         if (DEBUG) {
             mBuilder.addNetworkInterceptor(new NetWorkInterceptor());
         }
+        Log.d("lei","Buider-->"+mBuilder.toString());
         return mBuilder.build();
     }
 
@@ -137,7 +142,7 @@ public class RetrofitUtil {
         mBuilder.readTimeout(DEFAULT_ITMEOUT, TimeUnit.SECONDS);
 
         mBuilder.addNetworkInterceptor(new NetWorkUploadInterceptor());
-
+        Log.d("lei","Buider--->"+mBuilder);
         return mBuilder.build();
     }
 

@@ -43,8 +43,12 @@ public class NetWorkInterceptor implements Interceptor{
     public Response intercept(Chain chain) throws IOException {
 
             Request request = chain.request();
-
-            Request.Builder builder = request.newBuilder();
+            Log.d("lei","当前Request-->"+request.toString());
+        RequestBody body1 = request.body();
+        if (body1 != null) {
+            Log.d("lei", "当前body-->" + body1.toString());
+        }
+        Request.Builder builder = request.newBuilder();
 
             if (!TextUtils.isEmpty(gToken)){
                 //request = builder.addHeader(Key.TOKEN, token).build();
@@ -63,7 +67,6 @@ public class NetWorkInterceptor implements Interceptor{
 
 
             RequestBody requestBody = request.body();
-
 
             Response response = chain.proceed(request);
             long t2 = System.nanoTime();

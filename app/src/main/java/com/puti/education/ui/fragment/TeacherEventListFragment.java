@@ -401,6 +401,18 @@ public class TeacherEventListFragment extends BaseListFragment implements LRecyc
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ZxingUtil.g().onActivityResult(requestCode, resultCode, data, new ZxingUtil.ZxingCallBack() {
+            @Override
+            public void result(String result) {
+                LogUtil.d("lei","扫描结果-->"+result);
+            }
 
+            @Override
+            public void fail() {
 
+            }
+        });
+    }
 }

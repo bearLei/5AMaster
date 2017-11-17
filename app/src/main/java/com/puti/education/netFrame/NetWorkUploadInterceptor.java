@@ -34,7 +34,7 @@ public class NetWorkUploadInterceptor implements Interceptor{
     public Response intercept(Chain chain) throws IOException {
 
             Request request = chain.request();
-
+            LogUtil.d("lei","当前请求--"+request);
             Request.Builder builder = request.newBuilder();
 
             if (!TextUtils.isEmpty(NetWorkInterceptor.gToken)){

@@ -7,11 +7,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.puti.education.R;
+import com.puti.education.appupdate.AppUpdateUtil;
 import com.puti.education.ui.BaseActivity;
 import com.puti.education.ui.fragment.HomeSchoolSynergyFragment;
 import com.puti.education.ui.fragment.ParentHomeFragment;
 import com.puti.education.ui.fragment.PatriarchMineFragment;
 import com.puti.education.ui.fragment.SurveyFragment;
+import com.puti.education.util.LogUtil;
 
 /**
  * 家长模块入口
@@ -55,7 +57,7 @@ public class PatriarchMainActivity extends BaseActivity {
 
     @Override
     public void loadData() {
-
+        AppUpdateUtil.g().queryVersion(this);
     }
 
     private void addTab() {

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.puti.education.App;
+import com.puti.education.appupdate.AppUpdateUtil;
 import com.puti.education.bean.TeacherPersonInfo;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.CommonModel;
@@ -23,6 +24,7 @@ import com.puti.education.R;
 import com.puti.education.ui.fragment.TeacherSynergyFragment;
 import com.puti.education.util.ConfigUtil;
 import com.puti.education.util.Constant;
+import com.puti.education.util.LogUtil;
 import com.puti.education.util.ToastUtil;
 
 /**
@@ -86,7 +88,7 @@ public class TeacherMainActivity extends BaseActivity {
             String userUid = ConfigUtil.getInstance(this).get(Constant.KEY_USER_ID, "");
             getTeacherDetail(userUid);
         }
-
+        AppUpdateUtil.g().queryVersion(this);
     }
 
     public void gotoReview(){

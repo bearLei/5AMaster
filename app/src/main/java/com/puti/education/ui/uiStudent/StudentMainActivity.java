@@ -8,12 +8,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.puti.education.R;
+import com.puti.education.appupdate.AppUpdateUtil;
 import com.puti.education.ui.BaseActivity;
 import com.puti.education.ui.fragment.StudentHomeFragment;
 import com.puti.education.ui.fragment.StudentMineFragment;
 import com.puti.education.ui.fragment.StudentReportListFragment;
 import com.puti.education.ui.fragment.StudentSosFragment;
 import com.puti.education.ui.fragment.SurveyFragment;
+import com.puti.education.util.LogUtil;
 
 /**
  * 学生模块入口
@@ -58,7 +60,7 @@ public class StudentMainActivity extends BaseActivity{
 
     @Override
     public void loadData() {
-
+        AppUpdateUtil.g().queryVersion(this);
     }
 
     private void addTab() {

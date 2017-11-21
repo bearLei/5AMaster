@@ -95,12 +95,12 @@ public class ApkDownloadTask extends AsyncTask<String, Integer, String> {
             }else{
                 reportResult = "APK文件下载不完整"+downloadSize;
             }
-//            AppUpdate.update(m_context, UpdateFile);
+           AppUpdateUtil.update(m_context, UpdateFile);
         } else if(mDownloadCanceled){
             reportResult = "取消下载";
         } else {
             Log.i(TAG, "已经取消了下载");
-//            FileUtils.delFile(UpdateFile);
+            FileUtils.delFile(UpdateFile);
         }
     }
 

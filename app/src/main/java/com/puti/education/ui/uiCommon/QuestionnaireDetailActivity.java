@@ -330,6 +330,7 @@ public class QuestionnaireDetailActivity extends BaseActivity {
 
         switch (resultCode){
 
+            //曹 这里引用是什么意思
             case TeacherAddEventActivity.CODE_RESULT_ADD_EVENT_CHOOSE_STU:
             {
                 ArrayList<EventAboutPeople> people = (ArrayList<EventAboutPeople>)intent.getSerializableExtra(Key.BEAN);

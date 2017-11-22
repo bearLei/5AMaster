@@ -181,6 +181,9 @@
         <activity
             android:name=".ui.uiTeacher.ReportConfirmActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.uiTeacher.AddEventZxingActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 教师端 结束 -->
 

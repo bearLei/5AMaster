@@ -1,5 +1,6 @@
 package com.puti.education.netFrame.netModel;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
@@ -104,13 +105,12 @@ public class CommonModel extends BaseModel{
 
     }
 
-    public void checkVersion(final BaseListener baseListener){
-//        int versioncode = 78;
+    public void checkVersion(int code,final BaseListener baseListener){
 //       JSONObject jsonObject  = new JSONObject();
 //        jsonObject.put("versioncode",78);
 //        jsonObject.put("device",1);
 //        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),jsonObject.toString());
-        mCommonApi.checkVersion(78,1).subscribeOn(Schedulers.io())//请求在子线程
+        mCommonApi.checkVersion(code,1).subscribeOn(Schedulers.io())//请求在子线程
                 .observeOn(AndroidSchedulers.mainThread())//回调在主线程
                 .subscribe(new CommonSubscriber(baseListener){
                     @Override

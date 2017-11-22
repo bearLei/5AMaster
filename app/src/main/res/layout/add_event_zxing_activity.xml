@@ -1,21 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:gravity="center"
+    >
 
-    <com.github.jdsjlzx.recyclerview.LRecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_height="match_parent"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:overScrollMode="never"
-       ></com.github.jdsjlzx.recyclerview.LRecyclerView>
-
+        android:layout_height="wrap_content"
+        android:minHeight="75dp"
+        android:id="@+id/zxing_top"
+        >
+    <com.puti.education.widget.GridViewForScrollView
+        android:id="@+id/involved_people_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11.5dip"
+        android:horizontalSpacing="10dip"
+        android:minHeight="75dp"
+        android:numColumns="4"
+        android:verticalSpacing="10dip" />
+        <TextView
+            android:id="@+id/zxing_sao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="您暂时未添加学生，点我开始添加学生"
+            android:textSize="18sp"
+            android:textColor="#4577dc"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/zxing_top"
         >
         <TextView
             android:id="@+id/goon"

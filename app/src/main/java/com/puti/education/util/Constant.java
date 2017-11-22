@@ -60,11 +60,11 @@ public class Constant {
     public static String EVENT_HAS_FINISH = "已结案";
     public static String EVENT_OTHER_LEADER_RESULT_AFTER_HANDLE = "推送";
 
-    public static final String EVENT_DUTY_MAJOR   = "1";
-    public static final String EVENT_DUTY_MINOR   = "2";
-    public static final String EVENT_DUTY_WITNESS = "3";
-    public static final String EVENT_DUTY_REPORT  = "4";
-    public static final String EVENT_DUTY_KNOWN   = "5";
+    public static final String EVENT_DUTY_MAJOR   = "1";//主要事件人
+    public static final String EVENT_DUTY_MINOR   = "2";//次要事件人
+    public static final String EVENT_DUTY_WITNESS = "3";//证人
+    public static final String EVENT_DUTY_REPORT  = "4";//举报者
+    public static final String EVENT_DUTY_KNOWN   = "5";//知情者
 
     //选择图文，音频，视频记录
     public final static int CODE_RESULT_PARENTS = 997;

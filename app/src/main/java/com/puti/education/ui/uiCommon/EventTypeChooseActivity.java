@@ -11,20 +11,25 @@ import android.widget.TextView;
 
 import com.puti.education.R;
 import com.puti.education.adapter.BasicRecylerAdapter;
+import com.puti.education.bean.EventAboutPeople;
 import com.puti.education.bean.EventType;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.ui.BaseActivity;
+import com.puti.education.ui.uiTeacher.AddEventZxingActivity;
 import com.puti.education.ui.uiTeacher.TeacherAddEventActivity;
 import com.puti.education.util.Constant;
 import com.puti.education.util.DisPlayUtil;
 import com.puti.education.util.ToastUtil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
 import butterknife.BindView;
+
+import static com.puti.education.ui.uiTeacher.AddEventZxingActivity.ZXING_LIST;
 
 public class EventTypeChooseActivity extends BaseActivity {
 
@@ -40,6 +45,7 @@ public class EventTypeChooseActivity extends BaseActivity {
     private List<EventType> mTopList = new ArrayList<>();
     private Stack<EventType> mSk = new Stack<EventType>();
 
+    private ArrayList<EventAboutPeople> mList;//二维码扫描的结果列表
     @Override
     public int getLayoutResourceId() {
         return R.layout.activity_event_type_choose;
@@ -48,6 +54,8 @@ public class EventTypeChooseActivity extends BaseActivity {
     @Override
     public void initVariables() {
         mContext = this;
+        Intent intent = getIntent();
+        mList = (ArrayList<EventAboutPeople>) intent.getSerializableExtra(AddEventZxingActivity.ZXING_LIST);
     }
 
     @Override
@@ -68,13 +76,9 @@ public class EventTypeChooseActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (mSk.size() > 0) {
-                    EventType tempEvent = mSk.pop();
-                    if (mSk.size() <= 0) {
-                        mListAdapter.setDataList(mTopList);
-                    } else {
                         EventType parentEvent = mSk.pop();
                         mListAdapter.setDataList(parentEvent.child);
-                    }
+
                 }else{
                     mTvEventBack.setText("请选择事件类型:");
                     mTvEventBack.setCompoundDrawables(null, null, null,null);
@@ -158,7 +162,6 @@ public class EventTypeChooseActivity extends BaseActivity {
                         tempIc.setBounds(0, 0, tempIc.getMinimumWidth(), tempIc.getMinimumHeight());
                         mTvEventBack.setCompoundDrawables(tempIc, null, null,null);
                         mTvEventBack.setCompoundDrawablePadding(DisPlayUtil.dip2px(mContext, 5));
-
                         mSk.push(entity);
                         setDataList(entity.child);
                     }
@@ -170,11 +173,26 @@ public class EventTypeChooseActivity extends BaseActivity {
 
     private void newEvet(EventType et){
         if (et != null) {
-            Intent intent= new Intent();
-            intent.putExtra("eventtypeid", et.id);
-            intent.putExtra("eventtypename", et.name);
-            intent.putExtra("isabnormal", et.bAbnormal);
-            intent.setClass(this, TeacherAddEventActivity.class);
+            //携参跳转，这里需要二维码扫描的结果
+            //这里处理下是二维码扫描的结果还是直接进入的结果
+            Intent intent = new Intent();
+            //如果是二维码扫描结果并且是异常事件
+            if (et.bAbnormal && mList != null && mList.size() > 0) {
+                intent.putExtra("eventtypeid", et.id);
+                intent.putExtra("eventtypename", et.name);
+                intent.putExtra("isabnormal", et.bAbnormal);
+                intent.putExtra("type",EventDutyChooseActivity.REFER_ZXING);
+                intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mList);
+                intent.setClass(this,EventDutyChooseActivity.class);
+            } else {
+                intent.putExtra("eventtypeid", et.id);
+                intent.putExtra("eventtypename", et.name);
+                intent.putExtra("isabnormal", et.bAbnormal);
+                if (mList != null && mList.size() > 0) {
+                    intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mList);
+                }
+                intent.setClass(this, TeacherAddEventActivity.class);
+            }
             startActivity(intent);
             finish();
         }

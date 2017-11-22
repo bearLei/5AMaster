@@ -30,6 +30,7 @@ import com.puti.education.netFrame.netModel.TeacherModel;
 import com.puti.education.netFrame.response.PageInfo;
 import com.puti.education.ui.uiCommon.EventTypeChooseActivity;
 import com.puti.education.ui.uiPatriarch.TrainPracticeAddActivity;
+import com.puti.education.ui.uiTeacher.AddEventZxingActivity;
 import com.puti.education.ui.uiTeacher.TeacherEventDetailActivity;
 import com.puti.education.ui.uiTeacher.TeacherMainActivity;
 import com.puti.education.util.ConfigUtil;
@@ -58,7 +59,7 @@ public class TeacherEventListFragment extends BaseListFragment implements LRecyc
     @BindView(R.id.back_img)
     ImageView mImgBack;
     @BindView(R.id.back_frame)
-    FrameLayout getmFrameZxing;
+    FrameLayout mFrameZxing;
     @BindView(R.id.right_img)
     ImageView mImgNew;
     @BindView(R.id.frame_img)
@@ -146,10 +147,11 @@ public class TeacherEventListFragment extends BaseListFragment implements LRecyc
             }
         });
 
-        getmFrameZxing.setOnClickListener(new View.OnClickListener() {
+        mFrameZxing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ZxingUtil.g().startZxing(getActivity());
+                startActivity(new Intent(getActivity(), AddEventZxingActivity.class));
+//                ZxingUtil.g().startZxing(getActivity());
 //                ZxingUtil.g().createImage("");
             }
         });

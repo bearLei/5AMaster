@@ -45,6 +45,7 @@ import com.puti.education.widget.RatingBarView;
 import com.puti.education.widget.RatingSmallBarView;
 import com.puti.education.widget.TimeDialog;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class TeacherAddEventActivity extends BaseActivity{
     @BindView(R.id.involved_people_grid)
     GridViewForScrollView mInvolvedPeopleGv;
     @BindView(R.id.event_choose_eventtype_tv)
-    TextView mEventTypeChooseTv;
+    TextView mEventTypeChooseTv;//事件类型
     @BindView(R.id.event_des_tv)
     EditText mDesEditText;
     @BindView(R.id.rbv_event_level)
@@ -101,7 +102,7 @@ public class TeacherAddEventActivity extends BaseActivity{
     private boolean mIsPushOffice = false; //是否推送学生处
 
     private EventAboutPeopleAdapter mInvolvePeopleAdapter = null;//涉事人
-    private ArrayList<EventAboutPeople> mInvolvePeopleList = null;
+    private ArrayList<EventAboutPeople> mInvolvePeopleList = null;//知情人列表
 
     private EventAboutPeopleAdapter mknowEventAdapter = null;//知情人
     private List<EventAboutPeople> mknowEventPeopleList = null;
@@ -139,11 +140,18 @@ public class TeacherAddEventActivity extends BaseActivity{
             if(action.equals(Constant.BROADCAST_ADD_INVOLVER)) {
                 mDutyType = intent.getStringExtra(Key.DUTY_TYPE);
                 ArrayList<EventAboutPeople> involvePeoples = (ArrayList<EventAboutPeople>)intent.getSerializableExtra(Key.DUTY_PEOPLE);
-                if  (involvePeoples != null){
-                    mInvolvePeopleList.remove(mInvolvePeopleList.size()-1);
-                    setDutyTypeExt(involvePeoples, mDutyType);
-                    if (isHasSameEelement(mInvolvePeopleList,involvePeoples)){
+                if  (involvePeoples != null && involvePeoples.size() > 0){
+                    for (int i = 0; i < mInvolvePeopleList.size(); i++) {
+                        EventAboutPeople people = mInvolvePeopleList.get(i);
+                        if (!people.isPeople){
+                            mInvolvePeopleList.remove(i);
+                            break;
+                        }
                     }
+                    mInvolvePeopleList.addAll(involvePeoples);
+//                    mInvolvePeopleList.remove(mInvolvePeopleList.size()-1);
+                    setDutyTypeExt(involvePeoples, mDutyType);
+
                     mInvolvePeopleList.add(mAddSign);
                     mInvolvePeopleAdapter.notifyDataSetChanged();
                 }
@@ -202,6 +210,7 @@ public class TeacherAddEventActivity extends BaseActivity{
     @Override
     public void initVariables() {
 
+        // TODO: 2017/11/17 初始化一堆列表，获取上层携带的参数  这里考虑下传递的二维码扫描结果
         mAddSign = new EventAboutPeople(false);
         mInvolvePeopleList = new ArrayList<>();
         mInvolvePeopleList.add(mAddSign);
@@ -222,8 +231,12 @@ public class TeacherAddEventActivity extends BaseActivity{
 
         mbAbnormal = this.getIntent().getBooleanExtra("isabnormal", false);
         mEventTyPeId = this.getIntent().getIntExtra("eventtypeid", -1);
-        mEventTypeName=this.getIntent().getStringExtra("eventtypename");
+        mEventTypeName = this.getIntent().getStringExtra("eventtypename");
         mEventTypeChooseTv.setText(mEventTypeName);
+        getIntent().getSerializableExtra(AddEventZxingActivity.ZXING_LIST);
+        if (getIntent().getSerializableExtra(AddEventZxingActivity.ZXING_LIST) != null) {
+            mInvolvePeopleList.addAll((ArrayList<EventAboutPeople>) getIntent().getSerializableExtra(AddEventZxingActivity.ZXING_LIST));
+        }
     }
 
     @Override
@@ -254,7 +267,7 @@ public class TeacherAddEventActivity extends BaseActivity{
                         intent.putExtra(Key.CHOOSE_STUDENT,1);
                         intent.putExtra(Key.NUMBER_TO_NEED, Constant.CHOOSE_PEOPLE_MAX);
                         intent.putExtra(Key.NUMBER_IS_CHOOSED, 0);
-                        intent.putExtra(Key.BEAN, mInvolvePeopleList);
+                        intent.putExtra(Key.BEAN, (Serializable) mInvolvePeopleList);
                         intent.setClass(TeacherAddEventActivity.this, ChoosePersonListActivity.class);
                         startActivity(intent);
                     }

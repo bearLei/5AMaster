@@ -19,6 +19,7 @@ import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.TeacherModel;
 import com.puti.education.ui.BaseActivity;
+import com.puti.education.ui.uiTeacher.AddEventZxingActivity;
 import com.puti.education.ui.uiTeacher.ChoosePersonListActivity;
 import com.puti.education.ui.uiTeacher.TeacherAddEventActivity;
 import com.puti.education.util.Constant;
@@ -26,6 +27,7 @@ import com.puti.education.util.DisPlayUtil;
 import com.puti.education.util.Key;
 import com.puti.education.util.ToastUtil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -33,6 +35,9 @@ import java.util.Stack;
 import butterknife.BindView;
 
 public class EventDutyChooseActivity extends BaseActivity {
+
+    public static final int REFER_TEACHER_ADD = 0;//来自老师添加事件页面
+    public static final int REFER_ZXING = 3;//来自二维码扫描
 
     @BindView(R.id.title_textview)
     TextView mTitleTv;
@@ -52,6 +57,8 @@ public class EventDutyChooseActivity extends BaseActivity {
 
     private List<Duty.DutyDetail> mDutyList = new ArrayList<>();
 
+    private int mEventTyPeId = -1;
+    private String mEventTypeName;
     @Override
     public int getLayoutResourceId() {
         return R.layout.activity_event_duty_choose;
@@ -61,7 +68,18 @@ public class EventDutyChooseActivity extends BaseActivity {
     public void initVariables() {
         mContext = this;
         mType = this.getIntent().getIntExtra("type", 0);
-        mAbnormal = this.getIntent().getBooleanExtra(Key.EVENT_ABNORMOL, false);
+
+        if (mType == REFER_TEACHER_ADD) {
+            mAbnormal = this.getIntent().getBooleanExtra(Key.EVENT_ABNORMOL, false);
+        }else if (mType == REFER_ZXING){
+            mAbnormal = this.getIntent().getBooleanExtra("isabnormal", false);
+            mEventTyPeId = this.getIntent().getIntExtra("eventtypeid", -1);
+            mEventTypeName=this.getIntent().getStringExtra("eventtypename");
+           if (mInvolvePeopleList == null){
+               mInvolvePeopleList = new ArrayList<>();
+           }
+            mInvolvePeopleList.addAll((ArrayList<EventAboutPeople>)getIntent().getSerializableExtra(AddEventZxingActivity.ZXING_LIST));
+        }
     }
 
     @Override
@@ -127,25 +145,45 @@ public class EventDutyChooseActivity extends BaseActivity {
 
     private void newEvet(Duty.DutyDetail et){
         if (et != null) {
-            Intent intent= new Intent();
-            intent.putExtra(Key.EVENT_ABNORMOL, mAbnormal);
-            intent.putExtra(Key.DUTY_TYPE, et.key);
-            if (et.key.equals(Constant.EVENT_DUTY_MAJOR) || et.key.equals(Constant.EVENT_DUTY_MINOR) ||
-                    et.key.equals(Constant.EVENT_DUTY_REPORT)){
-                intent.putExtra(Key.CHOOSE_STUDENT,1);
-            }else{
-                intent.putExtra(Key.CHOOSE_BOTH,1);
-            }
+            Intent intent = new Intent();
 
-            intent.putExtra(Key.NUMBER_TO_NEED, Constant.CHOOSE_PEOPLE_MAX);
-            intent.putExtra(Key.NUMBER_IS_CHOOSED, 0);
-            intent.putExtra(Key.BEAN, mInvolvePeopleList);
-            intent.setClass(this, ChoosePersonListActivity.class);
-            startActivity(intent);
+          if (mType == REFER_ZXING) {
+                intent.putExtra("eventtypeid", mEventTyPeId);
+                intent.putExtra("eventtypename", mEventTypeName);
+                intent.putExtra("isabnormal", mAbnormal);
+                opearteLDutyist(et.key);
+                if (mInvolvePeopleList != null && mInvolvePeopleList.size() > 0) {
+                    intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mInvolvePeopleList);
+                }
+                intent.setClass(this, TeacherAddEventActivity.class);
+            }  else  {
+                intent.putExtra(Key.EVENT_ABNORMOL, mAbnormal);
+                intent.putExtra(Key.DUTY_TYPE, et.key);
+                if (et.key.equals(Constant.EVENT_DUTY_MAJOR) || et.key.equals(Constant.EVENT_DUTY_MINOR) ||
+                        et.key.equals(Constant.EVENT_DUTY_REPORT)) {
+                    intent.putExtra(Key.CHOOSE_STUDENT, 1);
+                } else {
+                    intent.putExtra(Key.CHOOSE_BOTH, 1);
+                }
+
+                intent.putExtra(Key.NUMBER_TO_NEED, Constant.CHOOSE_PEOPLE_MAX);
+                intent.putExtra(Key.NUMBER_IS_CHOOSED, 0);
+                intent.putExtra(Key.BEAN, mInvolvePeopleList);
+                intent.setClass(this, ChoosePersonListActivity.class);
+            }
+                startActivity(intent);
             this.finish();
         }
     }
 
+    private void opearteLDutyist(String duty){
+        if (mInvolvePeopleList != null && mInvolvePeopleList.size() > 0){
+            for (int i = 0; i < mInvolvePeopleList.size(); i++) {
+                EventAboutPeople eventAboutPeople = mInvolvePeopleList.get(i);
+                eventAboutPeople.dutyType = duty;
+            }
+        }
+    }
     //责任等级
     private void getDutyList(){
 

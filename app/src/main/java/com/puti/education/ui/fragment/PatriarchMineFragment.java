@@ -13,10 +13,13 @@ import android.widget.TextView;
 import com.puti.education.R;
 import com.puti.education.bean.ParentInfo;
 import com.puti.education.bean.TeacherPersonInfo;
+import com.puti.education.common.BingPhoneListener;
+import com.puti.education.common.PassWordUtil;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.PatriarchModel;
 import com.puti.education.ui.BaseFragment;
+import com.puti.education.ui.uiCommon.ForgetPwdActivity;
 import com.puti.education.ui.uiCommon.LoginActivity;
 import com.puti.education.ui.uiCommon.MsgListActivity;
 import com.puti.education.ui.uiPatriarch.AnonymityListActivity;
@@ -103,7 +106,26 @@ public class PatriarchMineFragment extends BaseFragment{
     public void logout(){
         loginOutRequest();
     }
-
+    //修改密码
+    @OnClick(R.id.layout_change_pwd)
+    public void changePwd(){
+        //没检查到手机号码就弹窗去绑定
+        if ( parentInfo!= null && !TextUtils.isEmpty(parentInfo.mobile)){
+            Intent intent = new Intent();
+            intent.putExtra("schoolid", ConfigUtil.getInstance(getActivity()).get(Constant.KEY_SCHOOL_ID, ""));
+            intent.putExtra("loginname", parentInfo.name);
+            intent.setClass(getActivity(), ForgetPwdActivity.class);
+            startActivity(intent);
+        }else {
+            PassWordUtil.g().showDialog(getActivity(), new BingPhoneListener() {
+                @Override
+                public void bind() {
+                    Intent intent = new Intent(getActivity(), ParentInfoActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+    }
     //显示教师基本信息
     private void showSimpleInfo(ParentInfo info){
         mMineNameTv.setText(info.name);

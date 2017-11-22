@@ -399,6 +399,7 @@ public class LoginActivity extends BaseActivity {
         startService(intent);
     }
 
+    // TODO: 2017/11/22 这里处理成userInfoUtil 
     public void saveSp(LoginUser user){
         if (user != null){
             ConfigUtil.getInstance(this).put(Constant.KEY_ROLE_TYPE, user.type);

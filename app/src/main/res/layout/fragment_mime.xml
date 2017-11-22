@@ -164,6 +164,24 @@
                         android:paddingLeft="15dip"
                         android:visibility="visible"/>
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout_change_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+                    <View style="@style/line_style"/>
+                    <TextView
+                        android:id="@+id/mine_pwd_tv"
+                        android:text="修改密码"
+                        android:layout_width="match_parent"
+                        android:layout_height="53dip"
+                        android:textSize="13sp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/dark_font"
+                        android:paddingLeft="15dip"
+                        android:visibility="visible"/>
+                </LinearLayout>
             </LinearLayout>
 
             <Button

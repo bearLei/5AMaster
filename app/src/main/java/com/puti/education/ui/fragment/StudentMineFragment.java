@@ -14,14 +14,18 @@ import android.widget.TextView;
 import com.puti.education.R;
 import com.puti.education.bean.StudentResponseInfo;
 import com.puti.education.bean.VersionInfo;
+import com.puti.education.common.BingPhoneListener;
+import com.puti.education.common.PassWordUtil;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.StudentModel;
 import com.puti.education.ui.BaseFragment;
+import com.puti.education.ui.uiCommon.ForgetPwdActivity;
 import com.puti.education.ui.uiCommon.LoginActivity;
 import com.puti.education.ui.uiCommon.MsgListActivity;
 import com.puti.education.ui.uiStudent.PracticeListActivity;
 import com.puti.education.ui.uiStudent.StudentInofActivity;
+import com.puti.education.ui.uiTeacher.TeacherPersonalInfoActivity;
 import com.puti.education.util.ConfigUtil;
 import com.puti.education.util.Constant;
 import com.puti.education.util.ImgLoadUtil;
@@ -49,6 +53,7 @@ public class StudentMineFragment extends BaseFragment{
     @BindView(R.id.tvVersion)
     TextView mTvVersion;
 
+    private StudentResponseInfo studentResponseInfo;
     @Override
     public int getLayoutResourceId() {
         return R.layout.fragment_mime;
@@ -104,6 +109,26 @@ public class StudentMineFragment extends BaseFragment{
         loginOutRequest();
     }
 
+    //修改密码
+    @OnClick(R.id.layout_change_pwd)
+    public void changePwd(){
+        //没检查到手机号码就弹窗去绑定
+        if ( studentResponseInfo!= null && !TextUtils.isEmpty(studentResponseInfo.mobile)){
+            Intent intent = new Intent();
+            intent.putExtra("schoolid", ConfigUtil.getInstance(getActivity()).get(Constant.KEY_SCHOOL_ID, ""));
+            intent.putExtra("loginname", studentResponseInfo.name);
+            intent.setClass(getActivity(), ForgetPwdActivity.class);
+            startActivity(intent);
+        }else {
+            PassWordUtil.g().showDialog(getActivity(), new BingPhoneListener() {
+                @Override
+                public void bind() {
+                    Intent intent = new Intent(getActivity(), StudentInofActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+    }
     private void getStudentInfo(){
 
         disLoading();
@@ -115,7 +140,7 @@ public class StudentMineFragment extends BaseFragment{
                 hideLoading();
 
                 if (infoObj != null){
-                    StudentResponseInfo studentResponseInfo  = (StudentResponseInfo) infoObj;
+                    studentResponseInfo  = (StudentResponseInfo) infoObj;
                     mNameTv.setText(studentResponseInfo.name);
                     mClassNameTv.setText(studentResponseInfo.className);
                     ImgLoadUtil.displayCirclePic(R.drawable.img_circle_bg,null,mHeadImg);

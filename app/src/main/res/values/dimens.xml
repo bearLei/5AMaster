@@ -28,4 +28,6 @@
     <dimen name="fab_margin">16dp</dimen>
 
 
+    <dimen name="dp_30">30dp</dimen>
+
 </resources>

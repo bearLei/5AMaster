@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
-    android:gravity="center"
+    android:background="@color/white"
+    android:gravity="bottom"
     >
 
     <RelativeLayout
@@ -21,17 +21,13 @@
         android:minHeight="75dp"
         android:numColumns="4"
         android:verticalSpacing="10dip" />
-        <TextView
+        <ImageView
             android:id="@+id/zxing_sao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/a_campus_sao"
             android:layout_centerVertical="true"
-            android:text="您暂时未添加学生，点我开始添加学生"
-            android:textSize="18sp"
-            android:textColor="#4577dc"
-            android:visibility="gone"
+            android:layout_centerHorizontal="true"
             />
     </RelativeLayout>
     <LinearLayout

@@ -1,9 +1,15 @@
 package com.puti.education.ui.uiTeacher;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
@@ -37,7 +43,7 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
     @BindView(R.id.goon)
     TextView mGoOn;
     @BindView(R.id.zxing_sao)
-    TextView mSao;
+    ImageView mSao;
 
     private EventAboutPeopleAdapter mInvolvePeopleAdapter;
     private ArrayList<EventAboutPeople> mList  ;//知情人列表
@@ -48,7 +54,7 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void initVariables() {
-
+        starZxing();
     }
 
     @Override
@@ -82,7 +88,12 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
     }
 
     private void starZxing(){
-        ZxingUtil.g().startZxing(this);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(AddEventZxingActivity.this, new String[]{Manifest.permission.CAMERA}, 1);
+        }else {
+            ZxingUtil.g().startZxing(this);
+        }
     }
     @Override
     public void onClick(View v) {
@@ -141,5 +152,27 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
 
             }
         });
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        doNext(requestCode, grantResults);
+    }
+
+    private void doNext(int requestCode, int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission Granted
+                starZxing();
+
+            } else {
+                // Permission Denied
+                //  displayFrameworkBugMessageAndExit();
+                Toast.makeText(this, "请在应用管理中打开“相机”访问权限！", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        }
     }
 }

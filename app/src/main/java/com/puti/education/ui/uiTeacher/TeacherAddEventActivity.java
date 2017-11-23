@@ -29,6 +29,7 @@ import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.TeacherModel;
 import com.puti.education.netFrame.netModel.UploadModel;
+import com.puti.education.speech.SpeechUtil;
 import com.puti.education.ui.BaseActivity;
 import com.puti.education.ui.uiCommon.EventDutyChooseActivity;
 import com.puti.education.ui.uiCommon.VideoRecordActivity;
@@ -429,7 +430,15 @@ public class TeacherAddEventActivity extends BaseActivity{
     public void chooseEventTypeClick(){
         //getEventTypeList();
     }
-
+    @OnClick(R.id.speech_input)
+    public void speech(){
+        SpeechUtil.g(this).createDialog(this, new SpeechUtil.SpeechResultCallBack() {
+            @Override
+            public void result(String s) {
+                mDesEditText.setText(s);
+            }
+        });
+    }
     //新增事件
     @OnClick(R.id.event_commit_btn)
     public void eventAddClick(){

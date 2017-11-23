@@ -1,5 +1,6 @@
 package com.puti.education.util.dialog;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.DialogFragment;
 import android.content.Context;
@@ -100,7 +101,7 @@ public class DialogWindow extends DialogFragment implements DialogInterface.OnDi
     public DialogWindow() {
 
     }
-
+    @SuppressLint({"NewApi", "ValidFragment"})
     public DialogWindow(Context context) {
         this.context = context;
     }

@@ -1,6 +1,7 @@
 package com.puti.education.appupdate;
 
 
+import android.annotation.SuppressLint;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.graphics.Color;
@@ -33,8 +34,13 @@ public class UpdateDialog extends DialogFragment {
 
     private ViewGroup rootView;
     private FrameLayout mContainer;
+
+    @SuppressLint({"NewApi", "ValidFragment"})
     public UpdateDialog(Context context) {
         this.context = context;
+    }
+
+    public UpdateDialog() {
     }
 
     @Override

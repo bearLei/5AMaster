@@ -63,6 +63,8 @@ public class EventAboutPeopleAdapter extends ABaseAdapter<EventAboutPeople>{
             involeType.setVisibility(View.VISIBLE);
             setNameDisplay(involeType, people.dutyType);
             involeType.setText(people.involveType);
+        }else {
+            involeType.setVisibility(View.GONE);
         }
         LogUtil.i("people is ",people.isPeople+"");
 

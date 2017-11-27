@@ -112,11 +112,17 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
         }
     }
 
+    /**
+     *
+     * @param info 二维码扫描结果
+     * @return 转换成可以识别的 学生信息
+     */
     private EventAboutPeople opearateInfo(ZxingUserInfo info){
         if (info == null) return null;
         EventAboutPeople eventAboutPeople = new EventAboutPeople();
         eventAboutPeople.uid = info.UID;
         eventAboutPeople.name = info.Name;
+        eventAboutPeople.isPeople = true;
 
         return eventAboutPeople;
     }

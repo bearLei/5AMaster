@@ -188,7 +188,13 @@ public class EventTypeChooseActivity extends BaseActivity {
                 intent.putExtra("eventtypeid", et.id);
                 intent.putExtra("eventtypename", et.name);
                 intent.putExtra("isabnormal", et.bAbnormal);
+                //全部设成主要涉事人
                 if (mList != null && mList.size() > 0) {
+                    for (int i = 0; i < mList.size(); i++) {
+                        EventAboutPeople eventAboutPeople = mList.get(i);
+                        eventAboutPeople.dutyType = "1";
+                        eventAboutPeople.involveType = "主要责任人";
+                    }
                     intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mList);
                 }
                 intent.setClass(this, TeacherAddEventActivity.class);

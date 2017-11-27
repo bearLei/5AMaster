@@ -140,6 +140,7 @@ public class TeacherAddEventActivity extends BaseActivity{
             LogUtil.d("EventAddReceiver"," onReceive ");
             if(action.equals(Constant.BROADCAST_ADD_INVOLVER)) {
                 mDutyType = intent.getStringExtra(Key.DUTY_TYPE);
+                //选择完传递回来的学生列表
                 ArrayList<EventAboutPeople> involvePeoples = (ArrayList<EventAboutPeople>)intent.getSerializableExtra(Key.DUTY_PEOPLE);
                 if  (involvePeoples != null && involvePeoples.size() > 0){
                     for (int i = 0; i < mInvolvePeopleList.size(); i++) {
@@ -150,9 +151,7 @@ public class TeacherAddEventActivity extends BaseActivity{
                         }
                     }
                     mInvolvePeopleList.addAll(involvePeoples);
-//                    mInvolvePeopleList.remove(mInvolvePeopleList.size()-1);
                     setDutyTypeExt(involvePeoples, mDutyType);
-
                     mInvolvePeopleList.add(mAddSign);
                     mInvolvePeopleAdapter.notifyDataSetChanged();
                 }
@@ -189,6 +188,7 @@ public class TeacherAddEventActivity extends BaseActivity{
     }
 
     private void setDutyType(EventAboutPeople people, String dutytype){
+        if (!people.isPeople) return;
         people.dutyType = dutytype;
         if (dutytype.equals(Constant.EVENT_DUTY_MAJOR)) {
             people.involveType = "主要责任人";
@@ -214,7 +214,6 @@ public class TeacherAddEventActivity extends BaseActivity{
         // TODO: 2017/11/17 初始化一堆列表，获取上层携带的参数  这里考虑下传递的二维码扫描结果
         mAddSign = new EventAboutPeople(false);
         mInvolvePeopleList = new ArrayList<>();
-        mInvolvePeopleList.add(mAddSign);
 
         mknowEventPeopleList = new ArrayList<>();
         mknowEventPeopleList.add(mAddSign);
@@ -238,6 +237,8 @@ public class TeacherAddEventActivity extends BaseActivity{
         if (getIntent().getSerializableExtra(AddEventZxingActivity.ZXING_LIST) != null) {
             mInvolvePeopleList.addAll((ArrayList<EventAboutPeople>) getIntent().getSerializableExtra(AddEventZxingActivity.ZXING_LIST));
         }
+
+        mInvolvePeopleList.add(mAddSign);
     }
 
     @Override
@@ -247,7 +248,7 @@ public class TeacherAddEventActivity extends BaseActivity{
         mInvolvePeopleAdapter = new EventAboutPeopleAdapter(this);
         mInvolvedPeopleGv.setAdapter(mInvolvePeopleAdapter);
         mInvolvePeopleAdapter.setmList(mInvolvePeopleList);
-        mInvolvePeopleAdapter.notifyDataSetChanged();
+//        mInvolvePeopleAdapter.notifyDataSetChanged();
         mInvolvedPeopleGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

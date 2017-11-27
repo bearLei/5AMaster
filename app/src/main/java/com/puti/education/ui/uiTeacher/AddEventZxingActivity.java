@@ -146,6 +146,10 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
                 try {
                     ZxingUserInfo info = JSON.parseObject(result, ZxingUserInfo.class);
                     EventAboutPeople eventAboutPeople = opearateInfo(info);
+                    for (int i = 0; i < mList.size(); i++) {
+                        EventAboutPeople tempPeople = mList.get(i);
+                        if (tempPeople.uid.equals(eventAboutPeople.uid)) return;
+                    }
                     mList.add(eventAboutPeople);
                     refresh();
                 }catch (JSONException e){

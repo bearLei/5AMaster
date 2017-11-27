@@ -2,6 +2,7 @@ package com.puti.education.speech;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -53,7 +54,8 @@ public class SpeechDialog extends Dialog implements View.OnClickListener {
     }
 
     public void setEdit(String s){
-        mEdit.setText(s);
+        String lastText = mEdit.getText().toString();
+        mEdit.setText(lastText+s);
     }
 
     public void showDialog(){

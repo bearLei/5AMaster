@@ -171,7 +171,7 @@ public class ActionEventAddActivity extends BaseActivity {
         SpeechUtil.g(this).createDialog(this, new SpeechUtil.SpeechResultCallBack() {
             @Override
             public void result(String s) {
-                mEtDesc.setText(s);
+              mEtDesc.setText(s);
             }
         });
     }

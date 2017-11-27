@@ -436,6 +436,7 @@ public class TeacherAddEventActivity extends BaseActivity{
         SpeechUtil.g(this).createDialog(this, new SpeechUtil.SpeechResultCallBack() {
             @Override
             public void result(String s) {
+
                 mDesEditText.setText(s);
             }
         });

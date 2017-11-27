@@ -105,6 +105,7 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
                 Intent intent = new Intent(this, EventTypeChooseActivity.class);
                 intent.putExtra(ZXING_LIST,(Serializable) mList);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.zxing_sao:
                 starZxing();

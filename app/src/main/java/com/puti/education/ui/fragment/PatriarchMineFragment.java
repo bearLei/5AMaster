@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.puti.education.R;
@@ -47,7 +48,9 @@ public class PatriarchMineFragment extends BaseFragment{
     TextView mMineNameTv;
     @BindView(R.id.tvVersion)
     TextView mTvVersion;
-
+    @BindView(R.id.layout_change_pwd)
+    LinearLayout mLayoutChangePwd;
+    //修改密码
     private ParentInfo parentInfo;
 
     @Override

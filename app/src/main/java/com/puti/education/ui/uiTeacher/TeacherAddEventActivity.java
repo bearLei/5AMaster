@@ -4,7 +4,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -433,6 +438,17 @@ public class TeacherAddEventActivity extends BaseActivity{
     }
     @OnClick(R.id.speech_input)
     public void speech(){
+        //动态申请下录音权限
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{
+                    android.Manifest.permission.RECORD_AUDIO},1);
+        }else {
+            startSpeech();
+        }
+    }
+
+    private void startSpeech(){
         SpeechUtil.g(this).createDialog(this, new SpeechUtil.SpeechResultCallBack() {
             @Override
             public void result(String s) {
@@ -955,5 +971,17 @@ public class TeacherAddEventActivity extends BaseActivity{
     @OnClick(R.id.back_frame)
     public void finishActivityClick(){
         finish();
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode==1&&grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            startSpeech();
+        }else {
+            Toast.makeText(this,"用户拒绝了权限",Toast.LENGTH_SHORT).show();
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

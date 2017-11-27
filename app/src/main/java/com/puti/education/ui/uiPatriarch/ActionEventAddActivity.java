@@ -1,6 +1,10 @@
 package com.puti.education.ui.uiPatriarch;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.puti.education.R;
 import com.puti.education.bean.EventAddress;
@@ -168,10 +173,22 @@ public class ActionEventAddActivity extends BaseActivity {
 
     @OnClick(R.id.speech_input)
     public void speech(){
+
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{
+                    android.Manifest.permission.RECORD_AUDIO},1);
+        }else {
+           startSpeech();
+        }
+
+    }
+
+    private void startSpeech(){
         SpeechUtil.g(this).createDialog(this, new SpeechUtil.SpeechResultCallBack() {
             @Override
             public void result(String s) {
-              mEtDesc.setText(s);
+                mEtDesc.setText(s);
             }
         });
     }
@@ -761,6 +778,14 @@ public class ActionEventAddActivity extends BaseActivity {
     }
 
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode==1&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
+           startSpeech();
+        }else {
+            Toast.makeText(this,"用户拒绝了权限",Toast.LENGTH_SHORT).show();
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
 }

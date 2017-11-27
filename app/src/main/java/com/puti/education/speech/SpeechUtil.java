@@ -18,6 +18,7 @@ import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
 import com.puti.education.R;
 import com.puti.education.util.LogUtil;
+import com.puti.education.util.ToastUtil;
 
 import org.json.JSONObject;
 
@@ -51,6 +52,10 @@ public class SpeechUtil {
     }
     private SpeechDialog dialog ;
     public void createDialog(final Context context, final SpeechResultCallBack speechResultCallBack){
+        if (!CheckAudioPermission.isHasPermission(context)){
+            ToastUtil.show("您已拒绝录音权限，请在设置在打开录音权限");
+            return;
+        }
         if (dialog == null) {
             dialog = new SpeechDialog(context);
         }

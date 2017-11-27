@@ -197,7 +197,7 @@ public class EventDutyChooseActivity extends BaseActivity {
                 hideLoading();
                 if (infoObj != null){
                     Duty duty = (Duty) infoObj;
-                    if (mType == 0){
+                    if (mType == 0 || mType == REFER_ZXING){
                         mDutyList.addAll(duty.options);
                     }else{
                         if (duty.options.size() > 0){

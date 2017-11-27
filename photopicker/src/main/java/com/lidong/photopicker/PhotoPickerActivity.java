@@ -201,13 +201,11 @@ public class PhotoPickerActivity extends AppCompatActivity {
 
             case REQUEST_CAMARE_CODE:
                 {
-
                     if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED ) {
 
                         try {
                                 Intent intent = captureManager.dispatchTakePictureIntent();
                                 startActivityForResult(intent, ImageCaptureManager.REQUEST_TAKE_PHOTO);
-
                         } catch (IOException e) {
                             Toast.makeText(mCxt, R.string.msg_no_camera, Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
@@ -457,11 +455,14 @@ public class PhotoPickerActivity extends AppCompatActivity {
      */
     private void showCameraAction() {
         try {
-            if (requestPermissions(Manifest.permission.CAMERA,REQUEST_CAMARE_CODE,R.string.msg_camera) == 1){
+            if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this,new String[]{
+                        android.Manifest.permission.CAMERA},REQUEST_CAMARE_CODE);
+            }else {
                 Intent intent = captureManager.dispatchTakePictureIntent();
                 startActivityForResult(intent, ImageCaptureManager.REQUEST_TAKE_PHOTO);
             }
-
         } catch (IOException e) {
             Toast.makeText(mCxt, R.string.msg_no_camera, Toast.LENGTH_SHORT).show();
             e.printStackTrace();

@@ -383,6 +383,18 @@
         <activity android:name=".ui.uiCommon.EventEvaluationActivity" />
         <activity android:name=".ui.uiTeacher.DetectiveConfirmActivity" />
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false"
+            >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"
+                />
+        </provider>
+
     </application>
 
 </manifest>

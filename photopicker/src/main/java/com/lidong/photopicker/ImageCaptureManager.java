@@ -3,9 +3,11 @@ package com.lidong.photopicker;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,8 +58,15 @@ public class ImageCaptureManager {
             File photoFile = createImageFile();
             // Continue only if the File was successfully created
             if (photoFile != null) {
+                Uri uri;
+                if (Build.VERSION.SDK_INT >= 24) {
+                    uri= FileProvider.getUriForFile(mContext, mContext.getPackageName()+".fileprovider", photoFile);
+                }else {
+                    uri = Uri.fromFile(photoFile);
+                }
+
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                        Uri.fromFile(photoFile));
+                        uri);
             }
         }
         return takePictureIntent;

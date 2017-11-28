@@ -151,7 +151,7 @@ public class EventDutyChooseActivity extends BaseActivity {
                 intent.putExtra("eventtypeid", mEventTyPeId);
                 intent.putExtra("eventtypename", mEventTypeName);
                 intent.putExtra("isabnormal", mAbnormal);
-                opearteLDutyist(et.key);
+                opearteLDutyist(et.key,et.value);
                 if (mInvolvePeopleList != null && mInvolvePeopleList.size() > 0) {
                     intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mInvolvePeopleList);
                 }
@@ -176,11 +176,12 @@ public class EventDutyChooseActivity extends BaseActivity {
         }
     }
 
-    private void opearteLDutyist(String duty){
+    private void opearteLDutyist(String duty,String dutyName){
         if (mInvolvePeopleList != null && mInvolvePeopleList.size() > 0){
             for (int i = 0; i < mInvolvePeopleList.size(); i++) {
                 EventAboutPeople eventAboutPeople = mInvolvePeopleList.get(i);
                 eventAboutPeople.dutyType = duty;
+                eventAboutPeople.involveType = dutyName;
             }
         }
     }

@@ -155,7 +155,7 @@ public class TeacherAddEventActivity extends BaseActivity{
                             break;
                         }
                     }
-                    mInvolvePeopleList.addAll(involvePeoples);
+                   opraterList(involvePeoples);
                     setDutyTypeExt(involvePeoples, mDutyType);
                     mInvolvePeopleList.add(mAddSign);
                     mInvolvePeopleAdapter.notifyDataSetChanged();
@@ -163,7 +163,21 @@ public class TeacherAddEventActivity extends BaseActivity{
             }
         }
     }
-
+    //处理选择完学生后的列表组合，过滤下相同的
+    private void opraterList(ArrayList<EventAboutPeople> involvePeoples){
+        ArrayList<EventAboutPeople> tempList = involvePeoples;
+        for (int i = 0; i < tempList.size(); i++) {
+            if (mInvolvePeopleList.size() > i){
+                for (int j = 0; j < mInvolvePeopleList.size(); j++) {
+                    EventAboutPeople eventAboutPeople = mInvolvePeopleList.get(j);
+                    if (tempList.get(i).uid.equals(eventAboutPeople.uid)){
+                        tempList.remove(i);
+                    }
+                }
+            }
+        }
+        mInvolvePeopleList.addAll(tempList);
+    }
     public void setReceiver()
     {
         mEventReceiver = new EventAddReceiver();

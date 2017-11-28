@@ -116,7 +116,7 @@ public class StudentMineFragment extends BaseFragment{
         if ( studentResponseInfo!= null && !TextUtils.isEmpty(studentResponseInfo.mobile)){
             Intent intent = new Intent();
             intent.putExtra("schoolid", ConfigUtil.getInstance(getActivity()).get(Constant.KEY_SCHOOL_ID, ""));
-            intent.putExtra("loginname", studentResponseInfo.name);
+            intent.putExtra("loginname", ConfigUtil.getInstance(getActivity()).get(Constant.KEY_LOGIN_NAME,""));
             intent.setClass(getActivity(), ForgetPwdActivity.class);
             startActivity(intent);
         }else {

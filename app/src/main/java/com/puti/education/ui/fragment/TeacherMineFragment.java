@@ -138,7 +138,7 @@ public class TeacherMineFragment extends BaseFragment{
         if (teacherPersonInfo != null && !TextUtils.isEmpty(teacherPersonInfo.phone)){
             Intent intent = new Intent();
             intent.putExtra("schoolid", ConfigUtil.getInstance(getActivity()).get(Constant.KEY_SCHOOL_ID, ""));
-            intent.putExtra("loginname", teacherPersonInfo.name);
+            intent.putExtra("loginname", ConfigUtil.getInstance(getActivity()).get(Constant.KEY_LOGIN_NAME,""));
             intent.setClass(getActivity(), ForgetPwdActivity.class);
             startActivity(intent);
         }else {

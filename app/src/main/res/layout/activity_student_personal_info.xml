@@ -473,7 +473,9 @@
 
             <View style="@style/line_style" />
 
-            <RelativeLayout style="@style/personal_info_textparent_style">
+            <RelativeLayout style="@style/personal_info_textparent_style"
+                android:visibility="gone"
+                >
 
                 <TextView
                     style="@style/personal_info_text_style"

@@ -47,6 +47,7 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
 
     private EventAboutPeopleAdapter mInvolvePeopleAdapter;
     private ArrayList<EventAboutPeople> mList  ;//知情人列表
+    private int refer;// 1 是普通进入   2 教师端新建事件重新选人进入
     @Override
     public int getLayoutResourceId() {
         return R.layout.add_event_zxing_activity;
@@ -55,8 +56,14 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
     @Override
     public void initVariables() {
         starZxing();
+        parseIntent();
     }
 
+    private void parseIntent(){
+        if (getIntent() != null){
+            refer = getIntent().getIntExtra("refer",1);
+        }
+    }
     @Override
     public void initViews() {
         mGridView.setVisibility(View.GONE);
@@ -102,9 +109,15 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
                 starZxing();
                 break;
             case R.id.ok:
-                Intent intent = new Intent(this, EventTypeChooseActivity.class);
-                intent.putExtra(ZXING_LIST,(Serializable) mList);
-                startActivity(intent);
+                if (refer == 2){
+                    Intent intent = new Intent();
+                    intent.putExtra(ZXING_LIST, (Serializable) mList);
+                    setResult(TeacherAddEventActivity.CODE_ZXING,intent);
+                }else {
+                    Intent intent = new Intent(this, EventTypeChooseActivity.class);
+                    intent.putExtra(ZXING_LIST, (Serializable) mList);
+                    startActivity(intent);
+                }
                 finish();
                 break;
             case R.id.zxing_sao:

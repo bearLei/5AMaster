@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -71,6 +72,8 @@ public class TeacherAddEventActivity extends BaseActivity{
 
     public final static int CODE_RESULT_TO_ADD_QUESTION = 888;
 
+    public static final int CODE_ZXING = 999;//二维码扫描
+
     private Handler mHandler = new Handler();
 
     @BindView(R.id.title_textview)
@@ -100,6 +103,9 @@ public class TeacherAddEventActivity extends BaseActivity{
     LinearLayout mediaRecordLinear;
     @BindView(R.id.video_record_linear)
     LinearLayout mVideoRecordLinear;
+    @BindView(R.id.right_frame)
+    FrameLayout mRightFrame;//二维码扫描
+
 
     private String mLat, mLng;
     private int mEventLevel = 0;
@@ -148,23 +154,20 @@ public class TeacherAddEventActivity extends BaseActivity{
                 //选择完传递回来的学生列表
                 ArrayList<EventAboutPeople> involvePeoples = (ArrayList<EventAboutPeople>)intent.getSerializableExtra(Key.DUTY_PEOPLE);
                 if  (involvePeoples != null && involvePeoples.size() > 0){
-                    for (int i = 0; i < mInvolvePeopleList.size(); i++) {
-                        EventAboutPeople people = mInvolvePeopleList.get(i);
-                        if (!people.isPeople){
-                            mInvolvePeopleList.remove(i);
-                            break;
-                        }
-                    }
                    opraterList(involvePeoples);
-                    setDutyTypeExt(involvePeoples, mDutyType);
-                    mInvolvePeopleList.add(mAddSign);
-                    mInvolvePeopleAdapter.notifyDataSetChanged();
                 }
             }
         }
     }
     //处理选择完学生后的列表组合，过滤下相同的
     private void opraterList(ArrayList<EventAboutPeople> involvePeoples){
+        for (int i = 0; i < mInvolvePeopleList.size(); i++) {
+            EventAboutPeople people = mInvolvePeopleList.get(i);
+            if (!people.isPeople){
+                mInvolvePeopleList.remove(i);
+                break;
+            }
+        }
         ArrayList<EventAboutPeople> tempList = involvePeoples;
         for (int i = 0; i < tempList.size(); i++) {
             if (mInvolvePeopleList.size() > i){
@@ -177,6 +180,9 @@ public class TeacherAddEventActivity extends BaseActivity{
             }
         }
         mInvolvePeopleList.addAll(tempList);
+        setDutyTypeExt(involvePeoples, mDutyType);
+        mInvolvePeopleList.add(mAddSign);
+        mInvolvePeopleAdapter.notifyDataSetChanged();
     }
     public void setReceiver()
     {
@@ -264,6 +270,7 @@ public class TeacherAddEventActivity extends BaseActivity{
     public void initViews() {
         mTitleTv.setText("新增事件");
         //涉事人
+        mRightFrame.setVisibility(View.VISIBLE);
         mInvolvePeopleAdapter = new EventAboutPeopleAdapter(this);
         mInvolvedPeopleGv.setAdapter(mInvolvePeopleAdapter);
         mInvolvePeopleAdapter.setmList(mInvolvePeopleList);
@@ -393,6 +400,20 @@ public class TeacherAddEventActivity extends BaseActivity{
                 mAudioLocalFileList.addAll(temImgList);
             }
                 break;
+
+            //二维码
+            case CODE_ZXING:
+               if (intent.getSerializableExtra(AddEventZxingActivity.ZXING_LIST) != null
+                       && mInvolvePeopleList != null){
+                   ArrayList<EventAboutPeople> list = (ArrayList<EventAboutPeople>) intent.getSerializableExtra(AddEventZxingActivity.ZXING_LIST);
+                   if (list != null && list.size() > 0) {
+                       for (int i = 0; i < list.size(); i++) {
+                           mDutyType = "1";
+                          opraterList(list);
+                       }
+                   }
+               }
+                break;
         }
 
 
@@ -429,6 +450,14 @@ public class TeacherAddEventActivity extends BaseActivity{
     @Override
     public void loadData() {
 
+    }
+
+    //二维码点击
+    @OnClick(R.id.right_frame)
+    public void chooseFormZxing(){
+        Intent intent = new Intent(this,AddEventZxingActivity.class);
+        intent.putExtra("refer",2);
+        startActivityForResult(intent,CODE_ZXING);
     }
 
     @OnClick(R.id.choose_address_frame)

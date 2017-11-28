@@ -121,7 +121,7 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
     private EventAboutPeople opearateInfo(ZxingUserInfo info){
         if (info == null) return null;
         EventAboutPeople eventAboutPeople = new EventAboutPeople();
-        eventAboutPeople.uid = info.UID;
+        eventAboutPeople.uid = info.Personnel_UID;
         eventAboutPeople.name = info.Name;
         eventAboutPeople.isPeople = true;
 
@@ -146,6 +146,10 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
             public void result(String result) {
                 try {
                     ZxingUserInfo info = JSON.parseObject(result, ZxingUserInfo.class);
+//                    //不是学生就不处理了
+                    if (info.Personnel_type != 2){
+                        return;
+                    }
                     EventAboutPeople eventAboutPeople = opearateInfo(info);
                     for (int i = 0; i < mList.size(); i++) {
                         EventAboutPeople tempPeople = mList.get(i);

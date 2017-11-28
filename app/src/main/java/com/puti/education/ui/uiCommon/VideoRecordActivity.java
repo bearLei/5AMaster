@@ -250,7 +250,7 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
                 mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                 // TODO: 设置视频格式
                 mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-//                mMediaRecorder.setVideoSize(videoWidth, videoHeight);
+                mMediaRecorder.setVideoSize(videoWidth, videoHeight);
                 //每秒的帧数
 //                mMediaRecorder.setVideoFrameRate(24);
                 //编码格式

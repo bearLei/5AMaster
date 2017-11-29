@@ -173,8 +173,8 @@ public class TeacherAddEventActivity extends BaseActivity{
             if (mInvolvePeopleList.size() > i){
                 for (int j = 0; j < mInvolvePeopleList.size(); j++) {
                     EventAboutPeople eventAboutPeople = mInvolvePeopleList.get(j);
-                    if (tempList.get(i).uid.equals(eventAboutPeople.uid)){
-                        tempList.remove(i);
+                        if (tempList.size() > i && tempList.get(i).uid.equals(eventAboutPeople.uid)) {
+                            tempList.remove(i);
                     }
                 }
             }

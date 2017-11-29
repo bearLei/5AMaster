@@ -307,7 +307,7 @@ public class TrainPracticeAddActivity extends BaseActivity {
 
         mResult = mEtResult.getText().toString();
 
-        if (mImagePaths != null && mImagePaths.size() > 1){
+        if (mImagePaths != null && mImagePaths.size() > 0){
             uploadImages();
         }else{
             commit();

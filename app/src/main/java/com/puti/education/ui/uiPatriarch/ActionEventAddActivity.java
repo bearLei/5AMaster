@@ -185,10 +185,10 @@ public class ActionEventAddActivity extends BaseActivity {
     }
 
     private void startSpeech(){
-        SpeechUtil.g(this).createDialog(this, new SpeechUtil.SpeechResultCallBack() {
+        new SpeechUtil(this).createDialog(this, new SpeechUtil.SpeechResultCallBack() {
             @Override
             public void result(String s) {
-                mEtDesc.setText(s);
+                mEtDesc.append(s);
             }
         });
     }

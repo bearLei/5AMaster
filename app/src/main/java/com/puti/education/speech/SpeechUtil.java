@@ -35,19 +35,16 @@ public class SpeechUtil {
     private RecognizerListener mRecognizerListener;
     private RecognizerDialog iatDialog;
 
-    private static class SingletonHolder {
-        private static final SpeechUtil INSTANCE = new SpeechUtil();
-    }
-    public static SpeechUtil g(Context context){
+
+    public  SpeechUtil (Context context){
         initSpeech(context);
-        return SingletonHolder.INSTANCE;
     }
 
     /**
      * 初始化
      * @param context
      */
-    private static void initSpeech(Context context){
+    private  void initSpeech(Context context){
         SpeechUtility.createUtility(context, SpeechConstant.APPID +"="+APPID);
     }
     private SpeechDialog dialog ;
@@ -85,6 +82,7 @@ public class SpeechUtil {
 
                     @Override
                     public void result(String s) {
+
                         dialog.setEdit(s);
                     }
 
@@ -96,9 +94,14 @@ public class SpeechUtil {
             }
         });
 
-        dialog.show();
+        dialog.showDialog();
     }
-
+    public void onDestroy(){
+        if (dialog != null && dialog.isShowing()){
+            dialog.dismiss();
+            dialog = null;
+        }
+    }
     public void speech(Context context, final SpeechCallBack speechCallBack){
         if (speechCallBack == null) return;
 

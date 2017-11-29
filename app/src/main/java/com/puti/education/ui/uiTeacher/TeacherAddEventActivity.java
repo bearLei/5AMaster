@@ -154,13 +154,13 @@ public class TeacherAddEventActivity extends BaseActivity{
                 //选择完传递回来的学生列表
                 ArrayList<EventAboutPeople> involvePeoples = (ArrayList<EventAboutPeople>)intent.getSerializableExtra(Key.DUTY_PEOPLE);
                 if  (involvePeoples != null && involvePeoples.size() > 0){
-                   opraterList(involvePeoples);
+                   opraterList(involvePeoples,false);
                 }
             }
         }
     }
-    //处理选择完学生后的列表组合，过滤下相同的
-    private void opraterList(ArrayList<EventAboutPeople> involvePeoples){
+    //处理选择完学生后的列表组合，过滤下相同的  mmp的 一个列表的身份类型 你保存个成员变量？？？？ 待优化
+    private void opraterList(ArrayList<EventAboutPeople> involvePeoples,boolean resetType){
         for (int i = 0; i < mInvolvePeopleList.size(); i++) {
             EventAboutPeople people = mInvolvePeopleList.get(i);
             if (!people.isPeople){
@@ -180,7 +180,9 @@ public class TeacherAddEventActivity extends BaseActivity{
             }
         }
         mInvolvePeopleList.addAll(tempList);
+        if (!resetType){
         setDutyTypeExt(involvePeoples, mDutyType);
+        }
         mInvolvePeopleList.add(mAddSign);
         mInvolvePeopleAdapter.notifyDataSetChanged();
     }
@@ -232,6 +234,7 @@ public class TeacherAddEventActivity extends BaseActivity{
     public int getLayoutResourceId() {
         return R.layout.activity_teacher_event_add;
     }
+
 
     @Override
     public void initVariables() {
@@ -350,6 +353,11 @@ public class TeacherAddEventActivity extends BaseActivity{
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
         if (intent == null){
@@ -408,8 +416,8 @@ public class TeacherAddEventActivity extends BaseActivity{
                    ArrayList<EventAboutPeople> list = (ArrayList<EventAboutPeople>) intent.getSerializableExtra(AddEventZxingActivity.ZXING_LIST);
                    if (list != null && list.size() > 0) {
                        for (int i = 0; i < list.size(); i++) {
-                           mDutyType = "1";
-                          opraterList(list);
+//                           mDutyType = "1";
+                          opraterList(list,true);
                        }
                    }
                }
@@ -492,11 +500,11 @@ public class TeacherAddEventActivity extends BaseActivity{
     }
 
     private void startSpeech(){
-        SpeechUtil.g(this).createDialog(this, new SpeechUtil.SpeechResultCallBack() {
+        new SpeechUtil(this).createDialog(this, new SpeechUtil.SpeechResultCallBack() {
             @Override
             public void result(String s) {
 
-                mDesEditText.setText(s);
+                mDesEditText.append(s);
             }
         });
     }

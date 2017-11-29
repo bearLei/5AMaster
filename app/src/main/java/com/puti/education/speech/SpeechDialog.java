@@ -54,8 +54,7 @@ public class SpeechDialog extends Dialog implements View.OnClickListener {
     }
 
     public void setEdit(String s){
-        String lastText = mEdit.getText().toString();
-        mEdit.setText(lastText+s);
+        mEdit.append(s);
     }
 
     public void showDialog(){

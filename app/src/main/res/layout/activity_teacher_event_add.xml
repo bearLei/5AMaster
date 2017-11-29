@@ -120,14 +120,13 @@
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="15dp"
-                        android:background="@color/base_4577dc"
                         >
                         <ImageView
                             android:id="@+id/right_img"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
-                            android:src="@mipmap/ic_add" />
+                            android:src="@drawable/scan_black" />
                     </FrameLayout>
                 </RelativeLayout>
 

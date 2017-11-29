@@ -59,6 +59,8 @@ public class EventDutyChooseActivity extends BaseActivity {
 
     private int mEventTyPeId = -1;
     private String mEventTypeName;
+
+    private int refer;// 1 是普通进入   2 教师端新建事件重新选人进入
     @Override
     public int getLayoutResourceId() {
         return R.layout.activity_event_duty_choose;
@@ -68,7 +70,7 @@ public class EventDutyChooseActivity extends BaseActivity {
     public void initVariables() {
         mContext = this;
         mType = this.getIntent().getIntExtra("type", 0);
-
+        refer = this.getIntent().getIntExtra("refer",1);
         if (mType == REFER_TEACHER_ADD) {
             mAbnormal = this.getIntent().getBooleanExtra(Key.EVENT_ABNORMOL, false);
         }else if (mType == REFER_ZXING){
@@ -148,14 +150,23 @@ public class EventDutyChooseActivity extends BaseActivity {
             Intent intent = new Intent();
 
           if (mType == REFER_ZXING) {
-                intent.putExtra("eventtypeid", mEventTyPeId);
-                intent.putExtra("eventtypename", mEventTypeName);
-                intent.putExtra("isabnormal", mAbnormal);
-                opearteLDutyist(et.key,et.value);
-                if (mInvolvePeopleList != null && mInvolvePeopleList.size() > 0) {
-                    intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mInvolvePeopleList);
-                }
-                intent.setClass(this, TeacherAddEventActivity.class);
+              if (refer == 2){
+//                  intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mInvolvePeopleList);
+                  opearteLDutyist(et.key, et.value);
+                  intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mInvolvePeopleList);
+                  setResult(TeacherAddEventActivity.CODE_ZXING,intent);
+                  finish();
+                  return;
+              }else {
+                  intent.putExtra("eventtypeid", mEventTyPeId);
+                  intent.putExtra("eventtypename", mEventTypeName);
+                  intent.putExtra("isabnormal", mAbnormal);
+                  opearteLDutyist(et.key, et.value);
+                  if (mInvolvePeopleList != null && mInvolvePeopleList.size() > 0) {
+                      intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mInvolvePeopleList);
+                  }
+                  intent.setClass(this, TeacherAddEventActivity.class);
+              }
             }  else  {
                 intent.putExtra(Key.EVENT_ABNORMOL, mAbnormal);
                 intent.putExtra(Key.DUTY_TYPE, et.key);
@@ -171,7 +182,7 @@ public class EventDutyChooseActivity extends BaseActivity {
                 intent.putExtra(Key.BEAN, mInvolvePeopleList);
                 intent.setClass(this, ChoosePersonListActivity.class);
             }
-                startActivity(intent);
+            startActivity(intent);
             this.finish();
         }
     }

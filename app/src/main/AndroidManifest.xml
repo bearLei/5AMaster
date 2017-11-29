@@ -121,6 +121,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.uiCommon.EventDutyChooseActivity"
+            android:launchMode="standard"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.uiCommon.EventParentChooseActivity"
@@ -183,6 +184,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.uiTeacher.AddEventZxingActivity"
+            android:launchMode="standard"
             android:screenOrientation="portrait" />
 
         <!-- 教师端 结束 -->

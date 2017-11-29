@@ -16,7 +16,9 @@ import com.alibaba.fastjson.JSONException;
 import com.puti.education.R;
 import com.puti.education.adapter.EventAboutPeopleAdapter;
 import com.puti.education.bean.EventAboutPeople;
+import com.puti.education.speech.SpeechUtil;
 import com.puti.education.ui.BaseActivity;
+import com.puti.education.ui.uiCommon.EventDutyChooseActivity;
 import com.puti.education.ui.uiCommon.EventTypeChooseActivity;
 import com.puti.education.util.LogUtil;
 import com.puti.education.widget.GridViewForScrollView;
@@ -64,6 +66,12 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
             refer = getIntent().getIntExtra("refer",1);
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     @Override
     public void initViews() {
         mGridView.setVisibility(View.GONE);
@@ -110,15 +118,17 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.ok:
                 if (refer == 2){
-                    Intent intent = new Intent();
+                    Intent intent = new Intent(this, EventDutyChooseActivity.class);
                     intent.putExtra(ZXING_LIST, (Serializable) mList);
-                    setResult(TeacherAddEventActivity.CODE_ZXING,intent);
+                    intent.putExtra("refer",2);
+                    intent.putExtra("type",3);
+                    startActivityForResult(intent,TeacherAddEventActivity.CODE_ZXING);
                 }else {
                     Intent intent = new Intent(this, EventTypeChooseActivity.class);
                     intent.putExtra(ZXING_LIST, (Serializable) mList);
                     startActivity(intent);
+                    finish();
                 }
-                finish();
                 break;
             case R.id.zxing_sao:
                 starZxing();
@@ -154,32 +164,40 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        ZxingUtil.g().onActivityResult(requestCode, resultCode, data, new ZxingUtil.ZxingCallBack() {
-            @Override
-            public void result(String result) {
-                try {
-                    ZxingUserInfo info = JSON.parseObject(result, ZxingUserInfo.class);
+        switch (requestCode){
+            case ZxingUtil.REQUEST_CODE:
+                ZxingUtil.g().onActivityResult(requestCode, resultCode, data, new ZxingUtil.ZxingCallBack() {
+                    @Override
+                    public void result(String result) {
+                        try {
+                            ZxingUserInfo info = JSON.parseObject(result, ZxingUserInfo.class);
 //                    //不是学生就不处理了
-                    if (info.Personnel_type != 2){
-                        return;
+                            if (info.Personnel_type != 2){
+                                return;
+                            }
+                            EventAboutPeople eventAboutPeople = opearateInfo(info);
+                            for (int i = 0; i < mList.size(); i++) {
+                                EventAboutPeople tempPeople = mList.get(i);
+                                if (tempPeople.uid.equals(eventAboutPeople.uid)) return;
+                            }
+                            mList.add(eventAboutPeople);
+                            refresh();
+                        }catch (JSONException e){
+                            LogUtil.d("lei","二维码解析错误");
+                        }
                     }
-                    EventAboutPeople eventAboutPeople = opearateInfo(info);
-                    for (int i = 0; i < mList.size(); i++) {
-                        EventAboutPeople tempPeople = mList.get(i);
-                        if (tempPeople.uid.equals(eventAboutPeople.uid)) return;
+
+                    @Override
+                    public void fail() {
+
                     }
-                    mList.add(eventAboutPeople);
-                    refresh();
-                }catch (JSONException e){
-                    LogUtil.d("lei","二维码解析错误");
-                }
-            }
-
-            @Override
-            public void fail() {
-
-            }
-        });
+                });
+                break;
+            case TeacherAddEventActivity.CODE_ZXING:
+                setResult(TeacherAddEventActivity.CODE_ZXING,data);
+                finish();
+                break;
+        }
     }
 
 

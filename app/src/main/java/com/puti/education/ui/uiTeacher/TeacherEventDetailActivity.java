@@ -8,10 +8,12 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -889,13 +891,19 @@ public class TeacherEventDetailActivity extends BaseActivity {
     }
 
     public void startPlayVideo(File videofile){
+        String absolutePath = videofile.getAbsolutePath();
+        //调用系统自带的播放器
+        Intent intent = new Intent(Intent.ACTION_VIEW);
         try {
-            Uri uri = Uri.parse("file://" + videofile.getAbsolutePath());
-             //调用系统自带的播放器
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            Log.v("video URI:::::::::", uri.toString());
+            Uri uri;
+            if (Build.VERSION.SDK_INT >= 24) {
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                uri= FileProvider.getUriForFile(this, this.getPackageName()+".fileprovider", new File(videofile.getAbsolutePath()));
+            }else {
+                uri = Uri.parse("file://" + videofile.getAbsolutePath());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            }
             intent.setDataAndType(uri, "video/mp4");
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();

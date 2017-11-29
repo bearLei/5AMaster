@@ -50,6 +50,7 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
     private EventAboutPeopleAdapter mInvolvePeopleAdapter;
     private ArrayList<EventAboutPeople> mList  ;//知情人列表
     private int refer;// 1 是普通进入   2 教师端新建事件重新选人进入
+    private boolean mbAbnormal ;//事件是否异常
     @Override
     public int getLayoutResourceId() {
         return R.layout.add_event_zxing_activity;
@@ -64,6 +65,7 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
     private void parseIntent(){
         if (getIntent() != null){
             refer = getIntent().getIntExtra("refer",1);
+            mbAbnormal = getIntent().getBooleanExtra("eventType",false);
         }
     }
 
@@ -118,11 +120,19 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.ok:
                 if (refer == 2){
-                    Intent intent = new Intent(this, EventDutyChooseActivity.class);
-                    intent.putExtra(ZXING_LIST, (Serializable) mList);
-                    intent.putExtra("refer",2);
-                    intent.putExtra("type",3);
-                    startActivityForResult(intent,TeacherAddEventActivity.CODE_ZXING);
+                    if (mbAbnormal) {
+                        Intent intent = new Intent(this, EventDutyChooseActivity.class);
+                        intent.putExtra(ZXING_LIST, (Serializable) mList);
+                        intent.putExtra("refer", 2);
+                        intent.putExtra("type", 3);
+                        startActivityForResult(intent, TeacherAddEventActivity.CODE_ZXING);
+                    }else {
+                        Intent intent = new Intent();
+                        opearteLDutyist("1", "主要责任人");
+                        intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mList);
+                        setResult(TeacherAddEventActivity.CODE_ZXING,intent);
+                        finish();
+                    }
                 }else {
                     Intent intent = new Intent(this, EventTypeChooseActivity.class);
                     intent.putExtra(ZXING_LIST, (Serializable) mList);
@@ -135,7 +145,15 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
                 break;
         }
     }
-
+    private void opearteLDutyist(String duty,String dutyName){
+        if (mList != null && mList.size() > 0){
+            for (int i = 0; i < mList.size(); i++) {
+                EventAboutPeople eventAboutPeople =mList.get(i);
+                eventAboutPeople.dutyType = duty;
+                eventAboutPeople.involveType = dutyName;
+            }
+        }
+    }
     /**
      *
      * @param info 二维码扫描结果

@@ -465,6 +465,7 @@ public class TeacherAddEventActivity extends BaseActivity{
     public void chooseFormZxing(){
         Intent intent = new Intent(this,AddEventZxingActivity.class);
         intent.putExtra("refer",2);
+        intent.putExtra("eventType",mbAbnormal);
         startActivityForResult(intent,CODE_ZXING);
     }
 

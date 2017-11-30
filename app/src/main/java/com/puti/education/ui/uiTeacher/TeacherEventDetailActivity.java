@@ -1036,14 +1036,14 @@ public class TeacherEventDetailActivity extends BaseActivity {
         }
 
         PunishData punishdata  = mEventBean.deal;
-        if (punishdata == null){
+
             mLayoutPunishType.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     getDealstandard();
                 }
             });
-        }
+
 
         mIvSampleDetail.setOnClickListener(new View.OnClickListener() {
             @Override

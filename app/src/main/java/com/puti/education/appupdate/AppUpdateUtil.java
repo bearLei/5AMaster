@@ -47,6 +47,7 @@ public class AppUpdateUtil {
         Uri uri;
         if (Build.VERSION.SDK_INT >= 24) {
             uri= FileProvider.getUriForFile(context, context.getPackageName()+".fileprovider", new File(StrFile));
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         }else {
             uri = Uri.fromFile(new File(StrFile));
         }

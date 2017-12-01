@@ -21,13 +21,18 @@ import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.PatriarchModel;
 import com.puti.education.ui.BaseActivity;
 import com.puti.education.ui.uiTeacher.ChoosePersonListActivity;
+import com.puti.education.ui.uiTeacher.TeacherPersonalInfoActivity;
 import com.puti.education.util.Constant;
 import com.puti.education.util.Key;
 import com.puti.education.util.ListViewMeasureUtil;
 import com.puti.education.util.LogUtil;
 import com.puti.education.util.ToastUtil;
+import com.puti.education.widget.CommonDropView;
 import com.puti.education.widget.ListViewForScrollView;
 
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -90,7 +95,9 @@ public class ParentInfoActivity extends BaseActivity{
     ChildInfoListAdapter childInfoListAdapter;
     ParentInfo parentInfo = null;
 
-
+    private List<String> mSexList = new ArrayList<>();
+    private List<String> mAddressList = new ArrayList<>();
+    private CommonDropView mDropViewSex, mDropViewMarry,mDropViewAddress;
     @Override
     public int getLayoutResourceId() {
         return R.layout.parent_info_activity;
@@ -113,11 +120,58 @@ public class ParentInfoActivity extends BaseActivity{
             mCommitBtn.setVisibility(View.GONE);
         }
         setEnableStyle(false);
-
+        setViewListener();
 
     }
 
-
+    private void setViewListener(){
+        mSexList.clear();
+        mSexList.add("男");
+        mSexList.add("女");
+        mSexTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mIsEdit){
+                    return;
+                }
+                if (mDropViewSex == null){
+                    mDropViewSex = new CommonDropView(ParentInfoActivity.this, mSexTv, mSexList);
+                    mDropViewSex.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            String sexname = mSexList.get(position);
+                            mSexTv.setText(sexname);
+                            mDropViewSex.dismiss();
+                        }
+                    });
+                }
+                mDropViewSex.showAsDropDown(mSexTv);
+            }
+        });
+        mAddressList.clear();
+        mAddressList.add("农村");
+        mAddressList.add("城镇");
+        mRegisterTypeTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mIsEdit){
+                    return;
+                }
+                if (mDropViewAddress == null){
+                    mDropViewAddress = new CommonDropView(ParentInfoActivity.this, mRegisterTypeTv, mAddressList);
+                    mDropViewAddress.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            String sexname = mAddressList.get(position);
+                            mRegisterTypeTv.setText(sexname);
+                            mDropViewAddress.dismiss();
+                        }
+                    });
+                }
+                mDropViewAddress.showAsDropDown(mRegisterTypeTv);
+            }
+        });
+    }
     @OnClick(R.id.info_commint_btn)
     public void commitBtnClick(){
         modifyParentInfo();

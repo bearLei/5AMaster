@@ -221,8 +221,8 @@ public class StudentInofActivity extends BaseActivity{
         setViewsEnable(false);
 
         mSexList.clear();
-        mSexList.add("M");
-        mSexList.add("F");
+        mSexList.add("男");
+        mSexList.add("女");
 
         mSexTv.setOnClickListener(new View.OnClickListener() {
             @Override

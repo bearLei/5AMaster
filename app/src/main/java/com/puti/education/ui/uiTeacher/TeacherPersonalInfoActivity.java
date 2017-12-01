@@ -76,7 +76,7 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
     @BindView(R.id.personnal_info_age_tv)
     EditText mAgeEdit;
     @BindView(R.id.personnal_info_address_tv)
-    EditText mAddressEdit;
+    TextView mAddressEdit;
     @BindView(R.id.personnal_info_contry_tv)
     EditText mcontryEdit;
     @BindView(R.id.personnal_info_is_married_tv)
@@ -85,7 +85,8 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
     private TeacherPersonInfo mTeacherInfo = null;
     private List<String> mSexList = new ArrayList<>();
     private List<String> mMarryList = new ArrayList<>();
-    private CommonDropView mDropViewSex, mDropViewMarry;
+    private List<String> mAddressList = new ArrayList<>();
+    private CommonDropView mDropViewSex, mDropViewMarry,mDropViewAddress;
 
     private void setWidgetListEnable(boolean enable){
         if (!enable) {
@@ -156,8 +157,8 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
         }
 
         mSexList.clear();
-        mSexList.add("M");
-        mSexList.add("F");
+        mSexList.add("男");
+        mSexList.add("女");
 
         mSexTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,8 +182,8 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
         });
 
         mMarryList.clear();
-        mMarryList.add("已婚");
         mMarryList.add("未婚");
+        mMarryList.add("已婚");
         mMarriedTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -201,6 +202,30 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
                     });
                 }
                 mDropViewMarry.showAsDropDown(mMarriedTv);
+            }
+        });
+
+        mAddressList.clear();
+        mAddressList.add("农村");
+        mAddressList.add("城镇");
+        mAddressEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mIsEdit){
+                    return;
+                }
+                if (mDropViewAddress == null){
+                    mDropViewAddress = new CommonDropView(TeacherPersonalInfoActivity.this, mAddressEdit, mAddressList);
+                    mDropViewAddress.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            String sexname = mAddressList.get(position);
+                            mAddressEdit.setText(sexname);
+                            mDropViewAddress.dismiss();
+                        }
+                    });
+                }
+                mDropViewAddress.showAsDropDown(mAddressEdit);
             }
         });
     }
@@ -322,7 +347,7 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
 
     }
 
-    private boolean isEmptyStr(EditText editText){
+    private boolean isEmptyStr(TextView editText){
         if (TextUtils.isEmpty(editText.getText().toString())){
             return true;
         }else{

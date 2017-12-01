@@ -165,7 +165,7 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
         eventAboutPeople.uid = info.Personnel_UID;
         eventAboutPeople.name = info.Name;
         eventAboutPeople.isPeople = true;
-
+        eventAboutPeople.type = info.Personnel_type;
         return eventAboutPeople;
     }
     private void refresh(){

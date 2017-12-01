@@ -168,16 +168,17 @@ public class TeacherAddEventActivity extends BaseActivity{
                 break;
             }
         }
-        ArrayList<EventAboutPeople> tempList = involvePeoples;
-        for (int i = 0; i < tempList.size(); i++) {
-            if (mInvolvePeopleList.size() > i){
+        ArrayList<EventAboutPeople> tempList = new ArrayList<>();
+        tempList.addAll(involvePeoples);
+        for (int i = 0; i <involvePeoples.size(); i++) {
+            EventAboutPeople people = involvePeoples.get(i);
                 for (int j = 0; j < mInvolvePeopleList.size(); j++) {
                     EventAboutPeople eventAboutPeople = mInvolvePeopleList.get(j);
-                        if (tempList.size() > i && tempList.get(i).uid.equals(eventAboutPeople.uid)) {
-                            tempList.remove(i);
+                        if ( people.uid.equals(eventAboutPeople.uid)) {
+                            tempList.remove(people);
                     }
                 }
-            }
+
         }
         mInvolvePeopleList.addAll(tempList);
         if (!resetType){
@@ -415,10 +416,8 @@ public class TeacherAddEventActivity extends BaseActivity{
                        && mInvolvePeopleList != null){
                    ArrayList<EventAboutPeople> list = (ArrayList<EventAboutPeople>) intent.getSerializableExtra(AddEventZxingActivity.ZXING_LIST);
                    if (list != null && list.size() > 0) {
-                       for (int i = 0; i < list.size(); i++) {
 //                           mDutyType = "1";
                           opraterList(list,true);
-                       }
                    }
                }
                 break;

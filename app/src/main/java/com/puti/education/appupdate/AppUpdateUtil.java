@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -42,7 +44,13 @@ public class AppUpdateUtil {
     public static void update(Context context, String StrFile) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setDataAndType(Uri.fromFile(new File(StrFile)),
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= 24) {
+            uri= FileProvider.getUriForFile(context, context.getPackageName()+".fileprovider", new File(StrFile));
+        }else {
+            uri = Uri.fromFile(new File(StrFile));
+        }
+        intent.setDataAndType(uri,
                 "application/vnd.android.package-archive");
         context.startActivity(intent);
     }

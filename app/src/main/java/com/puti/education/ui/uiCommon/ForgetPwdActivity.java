@@ -128,7 +128,7 @@ public class ForgetPwdActivity extends BaseActivity {
             @Override
             public void requestFailed(boolean status, int code, String errorMessage) {
                 super.requestFailed(status, code, errorMessage);
-                ToastUtil.show("修改密码出错 " + (TextUtils.isEmpty(errorMessage)?"":errorMessage));
+                ToastUtil.show((TextUtils.isEmpty(errorMessage)?"":errorMessage));
             }
         });
     }

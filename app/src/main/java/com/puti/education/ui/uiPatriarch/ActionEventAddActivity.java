@@ -41,6 +41,7 @@ import com.puti.education.util.DisPlayUtil;
 import com.puti.education.util.ImgLoadUtil;
 import com.puti.education.util.Key;
 import com.puti.education.util.LogUtil;
+import com.puti.education.util.TimeUtils;
 import com.puti.education.util.ToastUtil;
 import com.puti.education.widget.DropWithBackView;
 import com.puti.education.widget.EventAddressListDialog;
@@ -198,6 +199,18 @@ public class ActionEventAddActivity extends BaseActivity {
         if (timeDialog == null){
             timeDialog = new TimeDialog(this,mTvTime);
         }
+        timeDialog.setMyOnItemClickListener(new TimeDialog.OnTimeItemClickListener() {
+            @Override
+            public void onItemClick(String timeStr) {
+                if (!TextUtils.isEmpty(timeStr)){
+                    String nowTime = TimeUtils.getCurrentTime();
+                    if (TimeUtils.compareDate(timeStr, nowTime) > 0){
+                        ToastUtil.show("事件时间大于当前时间");
+                    }
+                }
+
+            }
+        });
         timeDialog.show();
     }
 

@@ -246,7 +246,8 @@ public class ParentInfoActivity extends BaseActivity{
     public void editClick(){
         if (style == 1){
             style = 2;
-            mOperImg.setImageResource(R.mipmap.ic_add);
+//            mOperImg.setImageResource(R.mipmap.ic_add);
+            mOperImg.setVisibility(View.GONE);
             mIsEdit = true;
             if (childInfoListAdapter != null){
                 childInfoListAdapter.setEdit(mIsEdit);
@@ -254,12 +255,8 @@ public class ParentInfoActivity extends BaseActivity{
             }
             mCommitBtn.setVisibility(View.VISIBLE);
             setEnableStyle(true);
-        }else{
-            Intent intent = new Intent(this, ChoosePersonListActivity.class);
-            intent.putExtra(Key.CHOOSE_STUDENT,1);
-            intent.putExtra(Key.TO_CHOOSE_CHILD,true);
-            startActivityForResult(intent,CHOOSE_CHILD_REQUET);
         }
+
     }
 
     @Override

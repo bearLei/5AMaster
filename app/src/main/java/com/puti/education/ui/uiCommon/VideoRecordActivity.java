@@ -241,7 +241,7 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
                 return;
             }
             try {
-                //mMediaRecorder.reset();
+                mMediaRecorder.reset();
                 mCamera.unlock();
                 mMediaRecorder.setCamera(mCamera);
                 //从相机采集视频
@@ -328,6 +328,7 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
             //不保存直接删掉
             mTargetFile.delete();
         }
+//        mCamera.lock();
 //        if (isRecording) {
 //            isRunning = false;
 //            try {

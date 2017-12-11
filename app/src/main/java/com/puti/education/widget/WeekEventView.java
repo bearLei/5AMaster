@@ -181,8 +181,8 @@ public class WeekEventView extends View {
         //buildPath(canvas,mUnDealPath,mUnDealEventDataList,mUnDealPaint);
         //buildPath(canvas,mDealPath,mHasDealEventDataList,mDealPaint);
 
-        drawCurveAndPoints(canvas,mUnDealPath,mUnDealPointList,mUnDealPaint);
         drawCurveAndPoints(canvas,mDealPath,mHasDealPointList,mDealPaint);
+        drawCurveAndPoints(canvas,mUnDealPath,mUnDealPointList,mUnDealPaint);
 
         drawValueHint(canvas);
     }

@@ -324,31 +324,35 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
      * 停止录制, 不保存
      */
     private void stopRecordUnSave() {
-        if (isRecording) {
-            isRunning = false;
-            try {
-                mMediaRecorder.setOnErrorListener(null);
-                mMediaRecorder.setOnInfoListener(null);
-                mMediaRecorder.setPreviewDisplay(null);
-                mMediaRecorder.stop();
-            } catch (IllegalStateException e) {
-                // TODO: handle exception
-                Log.i("Exception", Log.getStackTraceString(e));
-            }catch (RuntimeException e) {
-                // TODO: handle exception
-                Log.i("Exception", Log.getStackTraceString(e));
-            }catch (Exception e) {
-                // TODO: handle exception
-                Log.i("Exception", Log.getStackTraceString(e));
-            }
-
-            isRecording = false;
-            if (mTargetFile.exists()) {
-                //不保存直接删掉
-                mTargetFile.delete();
-            }
-
+        if (mTargetFile.exists()) {
+            //不保存直接删掉
+            mTargetFile.delete();
         }
+//        if (isRecording) {
+//            isRunning = false;
+//            try {
+////                mMediaRecorder.setOnErrorListener(null);
+////                mMediaRecorder.setOnInfoListener(null);
+////                mMediaRecorder.setPreviewDisplay(null);
+////                mMediaRecorder.stop();
+//            } catch (IllegalStateException e) {
+//                // TODO: handle exception
+//                Log.i("Exception", Log.getStackTraceString(e));
+//            }catch (RuntimeException e) {
+//                // TODO: handle exception
+//                Log.i("Exception", Log.getStackTraceString(e));
+//            }catch (Exception e) {
+//                // TODO: handle exception
+//                Log.i("Exception", Log.getStackTraceString(e));
+//            }
+//
+//            isRecording = false;
+//            if (mTargetFile.exists()) {
+//                //不保存直接删掉
+//                mTargetFile.delete();
+//            }
+//
+//        }
     }
 
     /**
@@ -434,25 +438,25 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
                             //开始录制
                             Toast.makeText(this, "开始录制", Toast.LENGTH_SHORT).show();
                             startRecord();
-
-                            mProgressThread = new Thread() {
-                                @Override
-                                public void run() {
-                                    super.run();
-                                    try {
-                                        mProgress = 0;
-                                        isRunning = true;
-                                        while (isRunning) {
-                                            mProgress++;
-                                            mHandler.obtainMessage(0).sendToTarget();
-                                            Thread.sleep(20);
+                            if (mProgressThread == null) {
+                                mProgressThread = new Thread() {
+                                    @Override
+                                    public void run() {
+                                        super.run();
+                                        try {
+                                            mProgress = 0;
+                                            isRunning = true;
+                                            while (isRunning) {
+                                                mProgress++;
+                                                mHandler.obtainMessage(0).sendToTarget();
+                                                Thread.sleep(20);
+                                            }
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
                                         }
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
                                     }
-                                }
-                            };
-
+                                };
+                            }
                             mProgressThread.start();
                             ret = true;
                         }
@@ -468,6 +472,10 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
                                 if (mProgress < 50) {
                                     //时间太短不保存
                                     stopRecordUnSave();
+                                    if (mProgressThread != null && mProgressThread.isAlive()) {
+                                        mProgressThread.interrupt();
+                                        mProgressThread = null;
+                                    }
                                     Toast.makeText(this, "时间太短", Toast.LENGTH_SHORT).show();
                                     break;
                                 }
@@ -476,6 +484,10 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
                             } else {
                                 //现在是取消状态,不保存
                                 stopRecordUnSave();
+                                if (mProgressThread != null && mProgressThread.isAlive()) {
+                                    mProgressThread.interrupt();
+                                    mProgressThread = null;
+                                }
                                 isCancel = false;
                                 Toast.makeText(this, "取消录制", Toast.LENGTH_SHORT).show();
                                 mProgressBar.setCancel(false);

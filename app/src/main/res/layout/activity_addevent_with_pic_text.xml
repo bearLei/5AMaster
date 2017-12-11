@@ -7,18 +7,6 @@
 
     <include layout="@layout/two_element_titlebar_layout" />
 
-    <EditText
-        android:id="@+id/text_input_tv"
-        android:layout_width="match_parent"
-        android:layout_height="150dip"
-        android:layout_margin="5dip"
-        android:background="@drawable/gray_border_bg"
-        android:gravity="left"
-        android:hint="输入"
-        android:padding="10dip"
-        android:textColor="@color/dark_font"
-        android:textSize="13sp" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/pic_rv"
         android:layout_gravity="center_horizontal"

@@ -40,8 +40,7 @@ public class AddEventWithPictrueTextActivity extends BaseActivity{
     Button sureBtn;
     @BindView(R.id.pic_rv)
     RecyclerView mRv;
-    @BindView(R.id.text_input_tv)
-    EditText mInputEdit;
+
 
     private ArrayList<String> mImagePaths;
     private UploadFileListAdapter mUploadListAdapter;
@@ -61,10 +60,9 @@ public class AddEventWithPictrueTextActivity extends BaseActivity{
 
     @Override
     public void initViews() {
-        mTitleTv.setText("图文");
+        mTitleTv.setText("图片");
         mRightTv.setVisibility(View.VISIBLE);
         mRightTv.setText("添加图片");
-        mInputEdit.setText(mText);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
         mRv.setLayoutManager(gridLayoutManager);
         mUploadListAdapter = new UploadFileListAdapter(this);
@@ -114,7 +112,6 @@ public class AddEventWithPictrueTextActivity extends BaseActivity{
     public void sureBtnClick(){
         Intent intent = new Intent();
         intent.putStringArrayListExtra(Key.BEAN,mImagePaths);
-        intent.putExtra(Key.RECORD_IMG_TEXT,TextUtils.isEmpty(mInputEdit.getText().toString()) ? "":mInputEdit.getText().toString());
         setResult(Constant.CODE_RESULT_IMG_TEXT,intent);
         finish();
     }

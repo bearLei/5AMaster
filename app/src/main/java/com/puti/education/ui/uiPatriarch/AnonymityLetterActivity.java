@@ -1,6 +1,9 @@
 package com.puti.education.ui.uiPatriarch;
 
+import android.text.Editable;
+import android.text.Selection;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -51,6 +54,7 @@ public class AnonymityLetterActivity extends BaseActivity{
 
     @Override
     public void initViews() {
+        mContentEdit.addTextChangedListener(textWatcher);
         mTitleTv.setText("匿名书信");
     }
 
@@ -64,6 +68,10 @@ public class AnonymityLetterActivity extends BaseActivity{
         String strTitle = mTitleEdit.getText().toString();
         if (TextUtils.isEmpty(strTitle)){
             ToastUtil.show("标题不能为空");
+            return;
+        }
+        if (len > 255){
+            ToastUtil.show("您输入的字符数超出限制");
             return;
         }
         String strContent = mContentEdit.getText().toString();
@@ -107,5 +115,37 @@ public class AnonymityLetterActivity extends BaseActivity{
 
     }
 
+    private int len = 0;
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            len = 0;
+            int count = s.length();
+            Editable editable = mContentEdit.getText();
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == ' '){
+                    len = len+1;
+                }else if (s.charAt(i) < 128){
+                    len = len + 2;
+                }else {
+                    len = len + 2;
+                }
+            }
+
+            if (len > 255){
+                ToastUtil.show("您输入的字符数已经超出限制");
+            }
+        }
+    };
 
 }

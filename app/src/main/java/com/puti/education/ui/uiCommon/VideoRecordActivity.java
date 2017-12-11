@@ -560,4 +560,12 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
         }
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mProgressThread != null){
+            mProgressThread = null;
+        }
+    }
 }

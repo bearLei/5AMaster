@@ -16,6 +16,7 @@ import com.puti.education.bean.StudentResponseInfo;
 import com.puti.education.bean.VersionInfo;
 import com.puti.education.common.BingPhoneListener;
 import com.puti.education.common.PassWordUtil;
+import com.puti.education.event.UpdateUserInfoEvent;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.StudentModel;
@@ -30,6 +31,10 @@ import com.puti.education.util.ConfigUtil;
 import com.puti.education.util.Constant;
 import com.puti.education.util.ImgLoadUtil;
 import com.puti.education.util.ToastUtil;
+
+import org.bushe.swing.event.annotation.EventSubscriber;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -77,6 +82,7 @@ public class StudentMineFragment extends BaseFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -187,5 +193,13 @@ public class StudentMineFragment extends BaseFragment{
                 getActivity().finish();
             }
         });
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void on3EventMainThread(UpdateUserInfoEvent event){
+        if (event != null){
+            getStudentInfo();
+        }
     }
 }

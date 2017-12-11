@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.puti.education.bean.ClassInfo;
 import com.puti.education.bean.EditTeacherInofResponse;
 import com.puti.education.bean.TeacherPersonInfo;
+import com.puti.education.event.UpdateUserInfoEvent;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.TeacherModel;
 import com.puti.education.ui.BaseActivity;
@@ -23,6 +24,8 @@ import com.puti.education.util.Constant;
 import com.puti.education.util.Key;
 import com.puti.education.util.ToastUtil;
 import com.puti.education.widget.CommonDropView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -369,6 +372,7 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 hideLoading();
                 ToastUtil.show("编辑成功");
+                EventBus.getDefault().post(new UpdateUserInfoEvent());
                 finish();
             }
 

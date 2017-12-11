@@ -10,6 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.puti.education.event.EmptyEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment{
@@ -30,6 +36,9 @@ public abstract class BaseFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContext = getActivity();
         if (rootView == null){
+            if (!EventBus.getDefault().isRegistered(this)){
+                EventBus.getDefault().register(this);
+            }
             rootView = inflater.inflate(getLayoutResourceId(),container,false);
             ButterKnife.bind(this, rootView);//视图绑定
             initVariables();
@@ -44,6 +53,14 @@ public abstract class BaseFragment extends Fragment{
 
 
         return rootView;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
     }
 
     public void disLoading(){
@@ -64,5 +81,8 @@ public abstract class BaseFragment extends Fragment{
             mProgressDialog = null;
         }
     }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void on3EventMainThread(EmptyEvent event){
 
+    }
 }

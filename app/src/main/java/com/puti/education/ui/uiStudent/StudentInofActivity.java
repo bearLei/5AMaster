@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baidu.mapapi.map.Text;
 import com.puti.education.R;
 import com.puti.education.bean.StudentResponseInfo;
+import com.puti.education.event.UpdateUserInfoEvent;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.StudentModel;
@@ -22,6 +23,8 @@ import com.puti.education.ui.fragment.TeacherEventListFragment;
 import com.puti.education.util.Constant;
 import com.puti.education.util.ToastUtil;
 import com.puti.education.widget.CommonDropView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -289,6 +292,7 @@ public class StudentInofActivity extends BaseActivity{
                 super.responseResult(infoObj, listObj, code, status);
                 hideLoading();
                 ToastUtil.show("修改成功");
+                EventBus.getDefault().post(new UpdateUserInfoEvent());
                 finish();
             }
 

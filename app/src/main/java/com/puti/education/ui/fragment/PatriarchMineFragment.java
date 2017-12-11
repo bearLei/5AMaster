@@ -16,6 +16,7 @@ import com.puti.education.bean.ParentInfo;
 import com.puti.education.bean.TeacherPersonInfo;
 import com.puti.education.common.BingPhoneListener;
 import com.puti.education.common.PassWordUtil;
+import com.puti.education.event.UpdateUserInfoEvent;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.PatriarchModel;
@@ -31,6 +32,9 @@ import com.puti.education.util.ConfigUtil;
 import com.puti.education.util.Constant;
 import com.puti.education.util.Key;
 import com.puti.education.util.ToastUtil;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -189,5 +193,12 @@ public class PatriarchMineFragment extends BaseFragment{
                 getActivity().finish();
             }
         });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void on3EventMainThread(UpdateUserInfoEvent event){
+        if (event != null){
+            getParentInfo();
+        }
     }
 }

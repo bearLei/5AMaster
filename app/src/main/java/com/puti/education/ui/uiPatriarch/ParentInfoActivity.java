@@ -17,6 +17,7 @@ import com.puti.education.R;
 import com.puti.education.adapter.ChildInfoListAdapter;
 import com.puti.education.bean.ParentInfo;
 import com.puti.education.bean.Student;
+import com.puti.education.event.UpdateUserInfoEvent;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.PatriarchModel;
 import com.puti.education.ui.BaseActivity;
@@ -30,6 +31,8 @@ import com.puti.education.util.ToastUtil;
 import com.puti.education.widget.CommonDropView;
 import com.puti.education.widget.ListViewForScrollView;
 
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -289,6 +292,7 @@ public class ParentInfoActivity extends BaseActivity{
                 hideLoading();
                 if (infoObj != null){
                     ToastUtil.show("编辑成功");
+                    EventBus.getDefault().post(new UpdateUserInfoEvent());
                     finish();
                 }else{
                     ToastUtil.show("编辑失败，请重试");

@@ -22,8 +22,7 @@
             android:id="@+id/lv_parents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
-
+            >
         </com.puti.education.widget.ListViewForScrollView>
     </LinearLayout>
     <LinearLayout
@@ -41,7 +40,6 @@
             android:id="@+id/lv_expert"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
         </com.puti.education.widget.ListViewForScrollView>
     </LinearLayout>
     <LinearLayout

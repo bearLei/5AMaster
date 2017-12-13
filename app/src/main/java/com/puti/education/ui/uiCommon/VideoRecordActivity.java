@@ -28,6 +28,7 @@ import com.puti.education.ui.BaseActivity;
 import com.puti.education.util.Constant;
 import com.puti.education.util.Key;
 import com.puti.education.util.ToastUtil;
+import com.puti.education.util.ViewUtils;
 import com.puti.education.widget.VideoProgressBar;
 
 import java.io.File;
@@ -418,8 +419,8 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
         float ex = event.getX();
         //只监听中间的按钮处
         int vW = v.getWidth();
-        int left = LISTENER_START;
-        int right = vW - LISTENER_START;
+        int left = vW/2 - ViewUtils.dip2px(this,72);
+        int right = vW/2 + ViewUtils.dip2px(this,72);
 
         float downY = 0;
 
@@ -496,7 +497,15 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
                             }
 
                             ret = false;
+                        }{
+                        stopRecordUnSave();
+                        if (mProgressThread != null && mProgressThread.isAlive()) {
+                            mProgressThread.interrupt();
+                            mProgressThread = null;
                         }
+                        mProgressBar.setVisibility(View.GONE);
+                        Toast.makeText(this, "取消录制", Toast.LENGTH_SHORT).show();
+                    }
                         break;
                     case MotionEvent.ACTION_MOVE:
                         if (ex > left && ex < right) {

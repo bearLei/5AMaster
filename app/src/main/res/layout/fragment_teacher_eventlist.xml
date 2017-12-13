@@ -5,36 +5,37 @@
     android:background="@color/window_bg"
     android:orientation="vertical">
 
-    <include layout="@layout/three_element_title_layout" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="@color/white">
+
         <FrameLayout
             android:id="@+id/layout_event_status"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
+
             <TextView
                 android:id="@+id/id_event_status"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:drawableRight="@mipmap/ic_down_choose"
                 android:drawablePadding="10dp"
+                android:drawableRight="@mipmap/ic_down_choose"
                 android:gravity="center"
-                android:textSize="14dp"
+                android:text="处理状态"
                 android:textColor="@color/dark_font"
-                android:text="处理状态"/>
+                android:textSize="14dp" />
         </FrameLayout>
 
         <View
             android:layout_width="1px"
             android:layout_height="match_parent"
-            android:layout_marginTop="3dp"
             android:layout_marginBottom="3dp"
-            android:background="@color/window_bg"/>
+            android:layout_marginTop="3dp"
+            android:background="@color/window_bg" />
+
         <FrameLayout
             android:id="@+id/layout_event_type"
             android:layout_width="0dp"
@@ -42,19 +43,23 @@
             android:layout_weight="1"
             android:paddingLeft="5dp"
             android:paddingRight="5dp">
+
             <TextView
                 android:id="@+id/id_event_type"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:drawableRight="@mipmap/ic_down_choose"
-                android:drawablePadding="10dp"
                 android:layout_gravity="center"
+                android:drawablePadding="10dp"
+                android:drawableRight="@mipmap/ic_down_choose"
                 android:gravity="center"
-                android:textSize="14dp"
+                android:text="事件类型"
                 android:textColor="@color/dark_font"
-                android:text="事件类型"/>
+                android:textSize="14dp" />
         </FrameLayout>
     </LinearLayout>
+
+    <include layout="@layout/three_element_title_layout" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

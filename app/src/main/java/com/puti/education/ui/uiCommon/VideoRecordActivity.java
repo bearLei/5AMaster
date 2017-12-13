@@ -492,6 +492,7 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
                                 isCancel = false;
                                 Toast.makeText(this, "取消录制", Toast.LENGTH_SHORT).show();
                                 mProgressBar.setCancel(false);
+                                finish();
                             }
 
                             ret = false;

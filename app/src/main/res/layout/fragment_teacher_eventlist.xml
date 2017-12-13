@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/window_bg"
     android:orientation="vertical">
-
+    <include layout="@layout/three_element_title_layout" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
@@ -58,7 +58,7 @@
         </FrameLayout>
     </LinearLayout>
 
-    <include layout="@layout/three_element_title_layout" />
+
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -49,7 +49,20 @@
                 android:src="@mipmap/ic_add_event" />
 
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/add_event_sao"
+            android:layout_width="@dimen/topbar_height"
+            android:layout_height="@dimen/topbar_height"
+            android:layout_alignParentLeft="true"
+            >
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/credit_scan" />
+
+        </RelativeLayout>
     </RelativeLayout>
 
     <com.puti.education.widget.AppSwipeRefreshLayout

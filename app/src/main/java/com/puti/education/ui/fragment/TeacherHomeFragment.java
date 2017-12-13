@@ -40,6 +40,7 @@ import com.puti.education.ui.uiPatriarch.ActionEventDetailActivity;
 import com.puti.education.ui.uiPatriarch.GrowthTrackDetailActivity;
 import com.puti.education.ui.uiPatriarch.TrainPracticeDetailActivity;
 import com.puti.education.ui.uiStudent.PracticeDetailActivity;
+import com.puti.education.ui.uiTeacher.AddEventZxingActivity;
 import com.puti.education.ui.uiTeacher.TeacherAddEventActivity;
 import com.puti.education.ui.uiTeacher.TeacherEventDetailActivity;
 import com.puti.education.ui.uiTeacher.TeacherMainActivity;
@@ -56,6 +57,7 @@ import com.puti.education.widget.MultiBarChartView;
 import com.puti.education.widget.WeekEventView;
 import com.puti.education.widget.YearEventView;
 import com.puti.education.R;
+import com.puti.education.zxing.ZxingUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -320,7 +322,10 @@ public class TeacherHomeFragment extends BaseFragment {
         startActivity(intent);
 
     }
-
+    @OnClick(R.id.add_event_sao)
+    public void addSao(){
+        startActivity(new Intent(getActivity(), AddEventZxingActivity.class));
+    }
     //查看系统通知消息
     @OnClick(R.id.newnotice_rel)
     public void lookNetNoticeClick() {
@@ -435,5 +440,18 @@ public class TeacherHomeFragment extends BaseFragment {
             }
         });
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ZxingUtil.g().onActivityResult(requestCode, resultCode, data, new ZxingUtil.ZxingCallBack() {
+            @Override
+            public void result(String result) {
+                LogUtil.d("lei","扫描结果-->"+result);
+            }
 
+            @Override
+            public void fail() {
+
+            }
+        });
+    }
 }

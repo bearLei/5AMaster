@@ -135,7 +135,8 @@ public class TeacherEventListFragment extends BaseListFragment implements LRecyc
 
     @Override
     public void initViews(View view) {
-        mImgBack.setImageResource(R.drawable.credit_scan);
+//        mImgBack.setImageResource(R.drawable.credit_scan);
+        mImgBack.setVisibility(View.GONE);
         mImgNew.setImageResource(R.mipmap.ic_add);
         mTitleTv.setText("事件列表");
         mFrameNew.setOnClickListener(new View.OnClickListener() {
@@ -147,14 +148,6 @@ public class TeacherEventListFragment extends BaseListFragment implements LRecyc
             }
         });
 
-        mFrameZxing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), AddEventZxingActivity.class));
-//                ZxingUtil.g().startZxing(getActivity());
-//                ZxingUtil.g().createImage("");
-            }
-        });
 
         mEventAdapter = new EventListAdapter(mContext);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
@@ -401,20 +394,5 @@ public class TeacherEventListFragment extends BaseListFragment implements LRecyc
         }
         mDropViewType.showAsDropDown(mLayoutType);
 
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        ZxingUtil.g().onActivityResult(requestCode, resultCode, data, new ZxingUtil.ZxingCallBack() {
-            @Override
-            public void result(String result) {
-                LogUtil.d("lei","扫描结果-->"+result);
-            }
-
-            @Override
-            public void fail() {
-
-            }
-        });
     }
 }

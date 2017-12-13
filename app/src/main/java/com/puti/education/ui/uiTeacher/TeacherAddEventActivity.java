@@ -268,6 +268,10 @@ public class TeacherAddEventActivity extends BaseActivity{
         }
 
         mInvolvePeopleList.add(mAddSign);
+
+        //时间默认当前时间
+        String nowTime = TimeUtils.getCurrentTime();
+        mChooseTimeTv.setText(nowTime);
     }
 
     @Override

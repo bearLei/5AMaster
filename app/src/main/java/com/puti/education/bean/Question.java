@@ -17,4 +17,6 @@ public class Question {
     public String answerd;   //[1],[2,3],[1/0]["你好啊"]
     public String answerd2;   //铺佑显示作用
 
+    public boolean isRequired;//是否必答
+    public  boolean isSurveyTitle;//是否题头
 }

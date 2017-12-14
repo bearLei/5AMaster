@@ -16,4 +16,8 @@ public class Questionnaire {
     public String desc;
     public String result;
     public ArrayList<Question> items;
+
+    public String courseName;
+    public String teacherName;
+    public int targetType;
 }

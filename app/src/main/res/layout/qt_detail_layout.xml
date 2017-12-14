@@ -33,6 +33,62 @@
             android:layout_marginTop="15dp"
             android:id="@+id/tv_content"
             android:textSize="11sp" />
+        <LinearLayout
+            android:id="@+id/question_object"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:visibility="gone"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="left|center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="课程名字"
+                    android:textSize="18sp"
+                    android:textColor="@color/base_666666"
+                    />
+                <TextView
+                    android:id="@+id/courseName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/status_red"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="right|center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="评价对象"
+                    android:textSize="18sp"
+                    android:textColor="@color/base_666666"
+                    />
+                <TextView
+                    android:id="@+id/teacherName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/status_red"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

@@ -221,6 +221,8 @@ public class QuestionnaireEtDetailAdapter extends BasicRecylerAdapter<Question>{
 
             Question qt = mList.get(position);
             viewHolder.setText(R.id.tv_question, (position + 1) + ". " + qt.question);
+            TextView tv_questionRequired = viewHolder.obtainView(R.id.tv_question_required);
+            tv_questionRequired.setVisibility(qt.isRequired ? View.VISIBLE: View.GONE);
             if (qt.type == Constant.TYPE_RADIO) {
                 //单选
                 LinearLayout answerlayout = viewHolder.obtainView(R.id.answer_layout);

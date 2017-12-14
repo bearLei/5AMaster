@@ -22,6 +22,7 @@ import com.puti.education.netFrame.netModel.StudentModel;
 import com.puti.education.ui.BaseActivity;
 import com.puti.education.ui.fragment.TeacherEventListFragment;
 import com.puti.education.util.Constant;
+import com.puti.education.util.TimeChooseUtil;
 import com.puti.education.util.ToastUtil;
 import com.puti.education.util.citychoose.CityChooseDialog;
 import com.puti.education.widget.CommonDropView;
@@ -74,8 +75,11 @@ public class StudentInofActivity extends BaseActivity{
     EditText mStuNationTv;
     @BindView(R.id.personnal_info_stu_connact_tv)
     EditText mStuPhoneTv;
+
+    @BindView(R.id.birth_layout_gp)
+    RelativeLayout VBirthLayoutGp;//生日
     @BindView(R.id.personnal_info_stu_birth_date_tv)
-    EditText mBirthTv;
+    TextView mBirthTv;
     @BindView(R.id.personnal_info_stu_age_tv)
     EditText mStuAgeTv;
     @BindView(R.id.personnal_info_stu_address_tv)
@@ -182,9 +186,11 @@ public class StudentInofActivity extends BaseActivity{
         if (enable){
             VAddressLayoutGp.setClickable(true);
             VCensusRegisterGp.setClickable(true);
+            VBirthLayoutGp.setClickable(true);
         }else {
             VAddressLayoutGp.setClickable(false);
             VCensusRegisterGp.setClickable(false);
+            VBirthLayoutGp.setClickable(false);
         }
 
     }
@@ -299,6 +305,13 @@ public class StudentInofActivity extends BaseActivity{
         rightFrame.setVisibility(View.GONE);
         setViewsEnable(true);
     }
+    //出生日期选择
+    @OnClick(R.id.birth_layout_gp)
+    public void onBirthChoose(){
+        TimeChooseUtil timeChooseUtil = new TimeChooseUtil();
+        timeChooseUtil.showTimeDialog(this,mBirthTv);
+    }
+
     //户籍点击
     @OnClick(R.id.census_register_gp)
     public void censusRegister(){
@@ -311,7 +324,7 @@ public class StudentInofActivity extends BaseActivity{
             });
         }
     }
-    //户籍点击
+    //地址点击
     @OnClick(R.id.address_layout_gp)
     public void addressChoose(){
         if (cityChooseDialog != null){

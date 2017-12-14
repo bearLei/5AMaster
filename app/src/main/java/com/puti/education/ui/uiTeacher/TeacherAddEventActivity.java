@@ -43,6 +43,7 @@ import com.puti.education.ui.uiStudent.StudentReportAddActivity;
 import com.puti.education.util.Constant;
 import com.puti.education.util.Key;
 import com.puti.education.util.LogUtil;
+import com.puti.education.util.TimeChooseUtil;
 import com.puti.education.util.TimeUtils;
 import com.puti.education.util.ToastUtil;
 import com.puti.education.widget.DropWithBackView;
@@ -543,25 +544,26 @@ public class TeacherAddEventActivity extends BaseActivity{
     //选择时间
     @OnClick(R.id.event_time_tv)
     public void chooseEventTimeClick(){
-
-        TimeDialog timeDialog = null;
-        if (timeDialog == null){
-            timeDialog = new TimeDialog(this,mChooseTimeTv);
-            timeDialog.setMyOnItemClickListener(new TimeDialog.OnTimeItemClickListener() {
-                @Override
-                public void onItemClick(String timeStr) {
-                    if (!TextUtils.isEmpty(timeStr)){
-                        String nowTime = TimeUtils.getCurrentTime();
-                        if (TimeUtils.compareDate(timeStr, nowTime) > 0){
-                            ToastUtil.show("事件时间大于当前时间");
-                        }
-                    }
-
-                }
-
-            });
-        }
-        timeDialog.show();
+        TimeChooseUtil chooseUtil = new TimeChooseUtil();
+        chooseUtil.showTimeDialog(this,mChooseTimeTv);
+//        TimeDialog timeDialog = null;
+//        if (timeDialog == null){
+//            timeDialog = new TimeDialog(this,mChooseTimeTv);
+//            timeDialog.setMyOnItemClickListener(new TimeDialog.OnTimeItemClickListener() {
+//                @Override
+//                public void onItemClick(String timeStr) {
+//                    if (!TextUtils.isEmpty(timeStr)){
+//                        String nowTime = TimeUtils.getCurrentTime();
+//                        if (TimeUtils.compareDate(timeStr, nowTime) > 0){
+//                            ToastUtil.show("事件时间大于当前时间");
+//                        }
+//                    }
+//
+//                }
+//
+//            });
+//        }
+//        timeDialog.show();
     }
 
 

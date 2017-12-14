@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
@@ -22,6 +23,7 @@ import com.puti.education.ui.BaseActivity;
 import com.puti.education.ui.fragment.TeacherEventListFragment;
 import com.puti.education.util.Constant;
 import com.puti.education.util.ToastUtil;
+import com.puti.education.util.citychoose.CityChooseDialog;
 import com.puti.education.widget.CommonDropView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -84,10 +86,16 @@ public class StudentInofActivity extends BaseActivity{
     EditText mGuarDianPeopleTv;
     @BindView(R.id.relation_tv)
     EditText mRelationShipTv;
+    @BindView(R.id.census_register_gp)
+    RelativeLayout VCensusRegisterGp;//户籍
     @BindView(R.id.register_tv)
-    EditText mFamilyTv;
+    TextView mFamilyTv;
+    @BindView(R.id.address_layout_gp)
+    RelativeLayout VAddressLayoutGp;//地址
     @BindView(R.id.now_address_tv)
-    EditText mNowAddressTv;
+    TextView mNowAddressTv;
+    @BindView(R.id.now_address_detetail)
+    EditText mNowAddressDetailTv;//详细地址
     @BindView(R.id.father_name_tv)
     EditText mFatherNameTv;
     @BindView(R.id.father_education_tv)
@@ -121,6 +129,8 @@ public class StudentInofActivity extends BaseActivity{
 
     private List<String> mSexList = new ArrayList<>();
 
+    private CityChooseDialog cityChooseDialog ;  // 选择户籍的选择窗口
+
 
     private void setNoChangeView(boolean enable){
         mStuIsStayTv.setFocusable(false);
@@ -150,6 +160,7 @@ public class StudentInofActivity extends BaseActivity{
             mMotherEducationTv.setEnabled(enable);
             mMotherJobTv.setEnabled(enable);
             mMotherYgNumberTv.setEnabled(enable);
+            ;
         }
         mStuNameTv.setEnabled(enable);
         mIdTv.setEnabled(enable);
@@ -163,8 +174,19 @@ public class StudentInofActivity extends BaseActivity{
 
         mGuarDianPeopleTv.setEnabled(enable);
         mRelationShipTv.setEnabled(enable);
-        mFamilyTv.setEnabled(enable);
+//        mFamilyTv.setEnabled(enable);
+        mNowAddressDetailTv.setEnabled(enable);
         mNowAddressTv.setEnabled(enable);
+
+
+        if (enable){
+            VAddressLayoutGp.setClickable(true);
+            VCensusRegisterGp.setClickable(true);
+        }else {
+            VAddressLayoutGp.setClickable(false);
+            VCensusRegisterGp.setClickable(false);
+        }
+
     }
 
     private void showStuInfo(StudentResponseInfo info){
@@ -188,6 +210,7 @@ public class StudentInofActivity extends BaseActivity{
         mRelationShipTv.setText(info.relativeWith);
         mFamilyTv.setText(info.register);
         mNowAddressTv.setText(info.familyAddress);
+        mNowAddressDetailTv.setText(info.familyAddress);
         mFatherNameTv.setText(info.fatherName);
         mFatherEducationTv.setText(info.fatherEdu);
         mFatherJobTv.setText(info.fatherTitle);
@@ -214,6 +237,11 @@ public class StudentInofActivity extends BaseActivity{
 
     @Override
     public void initViews() {
+        if (cityChooseDialog == null){
+            cityChooseDialog = new CityChooseDialog();
+            cityChooseDialog.init(this);
+        }
+
         mTitleTv.setText("个人资料");
         mOperImg.setImageResource(R.mipmap.ic_edit);
         if (!mIsEdit){
@@ -270,6 +298,31 @@ public class StudentInofActivity extends BaseActivity{
         mCommitBtn.setVisibility(View.VISIBLE);
         rightFrame.setVisibility(View.GONE);
         setViewsEnable(true);
+    }
+    //户籍点击
+    @OnClick(R.id.census_register_gp)
+    public void censusRegister(){
+        if (cityChooseDialog != null){
+            cityChooseDialog.showPickerView(this, new CityChooseDialog.ChooseResultCallBack() {
+                @Override
+                public void result(String s,String detail) {
+                    mFamilyTv.setText(s);
+                }
+            });
+        }
+    }
+    //户籍点击
+    @OnClick(R.id.address_layout_gp)
+    public void addressChoose(){
+        if (cityChooseDialog != null){
+            cityChooseDialog.showPickerView(this, new CityChooseDialog.ChooseResultCallBack() {
+                @Override
+                public void result(String s, String detail) {
+                    mNowAddressTv.setText(s);
+                    mNowAddressDetailTv.setText(detail);
+                }
+            });
+        }
     }
 
     @OnClick(R.id.info_commint_btn)
@@ -366,7 +419,7 @@ public class StudentInofActivity extends BaseActivity{
         jsonObject.put("guardian",TextUtils.isEmpty(mGuarDianPeopleTv.getText().toString()) ? "":mGuarDianPeopleTv.getText().toString());
         jsonObject.put("relativeWith",TextUtils.isEmpty(mRelationShipTv.getText().toString()) ? "":mRelationShipTv.getText().toString());
         jsonObject.put("register",TextUtils.isEmpty(mFamilyTv.getText().toString()) ? "":mFamilyTv.getText().toString());
-        jsonObject.put("familyAddress",TextUtils.isEmpty(mNowAddressTv.getText().toString()) ? "":mNowAddressTv.getText().toString());
+        jsonObject.put("familyAddress",TextUtils.isEmpty(mNowAddressDetailTv.getText().toString()) ? "":mNowAddressDetailTv.getText().toString());
 
         jsonObject.put("fatherName",TextUtils.isEmpty(mFatherNameTv.getText().toString()) ? "":mFatherNameTv.getText().toString());
         jsonObject.put("fatherEdu",TextUtils.isEmpty(mFatherEducationTv.getText().toString()) ? "" : mFatherEducationTv.getText().toString());

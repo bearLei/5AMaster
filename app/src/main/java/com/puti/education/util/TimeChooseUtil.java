@@ -14,10 +14,10 @@ public class TimeChooseUtil {
     public TimeChooseUtil() {
     }
 
-    public void showTimeDialog(Context context, TextView textView) {
+    public void showTimeDialog(Context context, TextView textView,boolean hide) {
         TimeDialog timeDialog = null;
         if (timeDialog == null){
-            timeDialog = new TimeDialog(context,textView);
+            timeDialog = new TimeDialog(context,textView,hide);
             timeDialog.setMyOnItemClickListener(new TimeDialog.OnTimeItemClickListener() {
                 @Override
                 public void onItemClick(String timeStr) {

@@ -309,7 +309,7 @@ public class StudentInofActivity extends BaseActivity{
     @OnClick(R.id.birth_layout_gp)
     public void onBirthChoose(){
         TimeChooseUtil timeChooseUtil = new TimeChooseUtil();
-        timeChooseUtil.showTimeDialog(this,mBirthTv);
+        timeChooseUtil.showTimeDialog(this,mBirthTv,true);
     }
 
     //户籍点击

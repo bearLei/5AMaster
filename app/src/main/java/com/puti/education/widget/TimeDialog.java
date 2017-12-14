@@ -31,6 +31,7 @@ public class TimeDialog extends Dialog {
 
     Context mCtx;
 
+    private boolean hide;//是否隐藏时间和分钟
     public interface OnTimeItemClickListener {
         void onItemClick(String timeStr);
     }
@@ -41,8 +42,9 @@ public class TimeDialog extends Dialog {
         this.myOnItemClickListener = myOnItemClickListener;
     }
 
-    public TimeDialog(Context context, int theme) {
+    public TimeDialog(Context context, int theme,boolean hideHour) {
         super(context, theme);
+        this.hide = hideHour;
         mCtx = context;
 
         OnWheelScrollListener scrollListener = new OnWheelScrollListener() {
@@ -72,6 +74,7 @@ public class TimeDialog extends Dialog {
 
                 int hour = hourWheelView.getCurrentItem();
                 int min = minWheelView.getCurrentItem();
+
                 chooseTime = polishingTimeStr(n_year, n_month, n_monday, hour, min);
             }
         };
@@ -160,10 +163,14 @@ public class TimeDialog extends Dialog {
 
 
     public TimeDialog(Context context, TextView showTimeView) {
-        this(context, R.style.timechoosedialog);
+        this(context, R.style.timechoosedialog,false);
         this.showTimeView = showTimeView;
     }
-
+    public TimeDialog(Context context, TextView showTimeView,boolean hideHour) {
+        this(context, R.style.timechoosedialog,hideHour);
+        this.showTimeView = showTimeView;
+        hideHourAndSecondView(hideHour);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -251,12 +258,25 @@ public class TimeDialog extends Dialog {
         stringBuilder.append(monthStr);
         stringBuilder.append("-");
         stringBuilder.append(mondayStr);
-        stringBuilder.append(" ");
-        stringBuilder.append(hourStr);
-        stringBuilder.append(":");
-        stringBuilder.append(minStr);
-        stringBuilder.append(":00");
-
+        if (!hide){
+            stringBuilder.append(" ");
+            stringBuilder.append(hourStr);
+            stringBuilder.append(":");
+            stringBuilder.append(minStr);
+            stringBuilder.append(":00");
+        }
         return stringBuilder.toString();
+    }
+
+
+    public void hideHourAndSecondView(boolean hideHour) {
+        this.hide = hideHour;
+        if (hideHour) {
+            hourWheelView.setVisibility(View.GONE);
+            minWheelView.setVisibility(View.GONE);
+        }else {
+            hourWheelView.setVisibility(View.VISIBLE);
+            minWheelView.setVisibility(View.VISIBLE);
+        }
     }
 }

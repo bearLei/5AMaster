@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
@@ -21,16 +22,13 @@ import com.puti.education.event.UpdateUserInfoEvent;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.PatriarchModel;
 import com.puti.education.ui.BaseActivity;
-import com.puti.education.ui.uiTeacher.ChoosePersonListActivity;
-import com.puti.education.ui.uiTeacher.TeacherPersonalInfoActivity;
 import com.puti.education.util.Constant;
 import com.puti.education.util.Key;
 import com.puti.education.util.ListViewMeasureUtil;
 import com.puti.education.util.LogUtil;
+import com.puti.education.util.TimeChooseUtil;
 import com.puti.education.util.ToastUtil;
 import com.puti.education.widget.CommonDropView;
-import com.puti.education.widget.ListViewForScrollView;
-
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -41,15 +39,15 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- *  Created by xjbin on 2017/5/13 0013.
- *
- *  家长个人信息
+ * Created by xjbin on 2017/5/13 0013.
+ * <p>
+ * 家长个人信息
  */
 
-public class ParentInfoActivity extends BaseActivity{
+public class ParentInfoActivity extends BaseActivity {
 
-    private final static  int CHOOSE_CHILD_REQUET = 1;
-    private final static  int CHOOSE_CHILD_RESULT = 2;
+    private final static int CHOOSE_CHILD_REQUET = 1;
+    private final static int CHOOSE_CHILD_RESULT = 2;
 
     @BindView(R.id.title_textview)
     TextView mTitleTv;
@@ -91,6 +89,8 @@ public class ParentInfoActivity extends BaseActivity{
 
     @BindView(R.id.lv)
     ListView mLv;
+    @BindView(R.id.birth_layout_gp)
+    RelativeLayout birthLayoutGp;
 
     private int style = 1;
     private boolean mIsEdit = false;
@@ -100,7 +100,8 @@ public class ParentInfoActivity extends BaseActivity{
 
     private List<String> mSexList = new ArrayList<>();
     private List<String> mAddressList = new ArrayList<>();
-    private CommonDropView mDropViewSex, mDropViewMarry,mDropViewAddress;
+    private CommonDropView mDropViewSex, mDropViewMarry, mDropViewAddress;
+
     @Override
     public int getLayoutResourceId() {
         return R.layout.parent_info_activity;
@@ -112,14 +113,14 @@ public class ParentInfoActivity extends BaseActivity{
     }
 
     @OnClick(R.id.back_frame)
-    public void finishActivity(View v){
+    public void finishActivity(View v) {
         this.finish();
     }
 
     @Override
     public void initViews() {
         mTitleTv.setText("个人信息");
-        if (!mIsEdit){
+        if (!mIsEdit) {
             mCommitBtn.setVisibility(View.GONE);
         }
         setEnableStyle(false);
@@ -127,17 +128,17 @@ public class ParentInfoActivity extends BaseActivity{
 
     }
 
-    private void setViewListener(){
+    private void setViewListener() {
         mSexList.clear();
         mSexList.add("男");
         mSexList.add("女");
         mSexTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mIsEdit){
+                if (!mIsEdit) {
                     return;
                 }
-                if (mDropViewSex == null){
+                if (mDropViewSex == null) {
                     mDropViewSex = new CommonDropView(ParentInfoActivity.this, mSexTv, mSexList);
                     mDropViewSex.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
                         @Override
@@ -157,10 +158,10 @@ public class ParentInfoActivity extends BaseActivity{
         mRegisterTypeTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mIsEdit){
+                if (!mIsEdit) {
                     return;
                 }
-                if (mDropViewAddress == null){
+                if (mDropViewAddress == null) {
                     mDropViewAddress = new CommonDropView(ParentInfoActivity.this, mRegisterTypeTv, mAddressList);
                     mDropViewAddress.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
                         @Override
@@ -175,12 +176,13 @@ public class ParentInfoActivity extends BaseActivity{
             }
         });
     }
+
     @OnClick(R.id.info_commint_btn)
-    public void commitBtnClick(){
+    public void commitBtnClick() {
         modifyParentInfo();
     }
 
-    private void showParentInfo(ParentInfo parentInfo){
+    private void showParentInfo(ParentInfo parentInfo) {
         mNameTv.setText(parentInfo.name);
         mIdTv.setText(parentInfo.idCard);
         mNationTv.setText(parentInfo.nation);
@@ -196,9 +198,9 @@ public class ParentInfoActivity extends BaseActivity{
         mVolunteerTv.setText(parentInfo.volunteerNumber);
     }
 
-    private void setEnableStyle(boolean isEnable){
+    private void setEnableStyle(boolean isEnable) {
 
-        if (!isEnable){
+        if (!isEnable) {
             mVolunteerTv.setEnabled(isEnable);
         }
 
@@ -216,13 +218,17 @@ public class ParentInfoActivity extends BaseActivity{
         mEducationTv.setEnabled(isEnable);
         mJobTv.setEnabled(isEnable);
 
-
+        if (isEnable){
+            birthLayoutGp.setClickable(true);
+        }else {
+            birthLayoutGp.setClickable(false);
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (data == null){
+        if (data == null) {
             return;
         }
 
@@ -230,26 +236,26 @@ public class ParentInfoActivity extends BaseActivity{
         String className = data.getStringExtra(Key.CHILD_CLASS_NAME);
         student.className = className;
 
-        if (parentInfo != null && parentInfo.childList != null){
+        if (parentInfo != null && parentInfo.childList != null) {
             parentInfo.childList.add(student);
             childInfoListAdapter = new ChildInfoListAdapter(ParentInfoActivity.this);
             childInfoListAdapter.setmList(parentInfo.childList);
             mLv.setAdapter(childInfoListAdapter);
             ListViewMeasureUtil.measureListViewWrongHeight(mLv);
-            childsNumtv.setText(parentInfo.childList.size()+"");
+            childsNumtv.setText(parentInfo.childList.size() + "");
         }
 
         super.onActivityResult(requestCode, resultCode, data);
     }
 
     @OnClick(R.id.frame_img)
-    public void editClick(){
-        if (style == 1){
+    public void editClick() {
+        if (style == 1) {
             style = 2;
 //            mOperImg.setImageResource(R.mipmap.ic_add);
             mOperImg.setVisibility(View.GONE);
             mIsEdit = true;
-            if (childInfoListAdapter != null){
+            if (childInfoListAdapter != null) {
                 childInfoListAdapter.setEdit(mIsEdit);
                 childInfoListAdapter.notifyDataSetChanged();
             }
@@ -271,27 +277,27 @@ public class ParentInfoActivity extends BaseActivity{
 
     }
 
-    private void modifyParentInfo(){
+    private void modifyParentInfo() {
 
         String params = createParams();
-        if (params == null){
+        if (params == null) {
             return;
         }
 
         disLoading();
 
-        PatriarchModel.getInstance().modifyParentInfo(params,new BaseListener(){
+        PatriarchModel.getInstance().modifyParentInfo(params, new BaseListener() {
 
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 super.responseResult(infoObj, listObj, code, status);
 
                 hideLoading();
-                if (infoObj != null){
+                if (infoObj != null) {
                     ToastUtil.show("编辑成功");
                     EventBus.getDefault().post(new UpdateUserInfoEvent());
                     finish();
-                }else{
+                } else {
                     ToastUtil.show("编辑失败，请重试");
                 }
 
@@ -300,7 +306,7 @@ public class ParentInfoActivity extends BaseActivity{
             @Override
             public void requestFailed(boolean status, int code, String errorMessage) {
                 hideLoading();
-                ToastUtil.show(TextUtils.isEmpty(errorMessage) ? Constant.REQUEST_FAILED_STR:errorMessage);
+                ToastUtil.show(TextUtils.isEmpty(errorMessage) ? Constant.REQUEST_FAILED_STR : errorMessage);
 
                 super.requestFailed(status, code, errorMessage);
             }
@@ -308,10 +314,10 @@ public class ParentInfoActivity extends BaseActivity{
 
     }
 
-    private void getParentInfo(){
+    private void getParentInfo() {
 
         disLoading();
-        PatriarchModel.getInstance().getParnetInfo(new BaseListener(ParentInfo.class){
+        PatriarchModel.getInstance().getParnetInfo(new BaseListener(ParentInfo.class) {
 
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
@@ -319,19 +325,19 @@ public class ParentInfoActivity extends BaseActivity{
 
                 hideLoading();
 
-                if (infoObj != null){
-                    parentInfo = (ParentInfo)infoObj;
+                if (infoObj != null) {
+                    parentInfo = (ParentInfo) infoObj;
                     showParentInfo(parentInfo);
                     childsNumtv.setText("0");
-                    if (parentInfo.childList != null && parentInfo.childList.size() > 0){
+                    if (parentInfo.childList != null && parentInfo.childList.size() > 0) {
 
-                        childsNumtv.setText(parentInfo.childList.size()+"");
+                        childsNumtv.setText(parentInfo.childList.size() + "");
                         childInfoListAdapter = new ChildInfoListAdapter(ParentInfoActivity.this);
                         childInfoListAdapter.setEdit(mIsEdit);
                         mLv.setAdapter(childInfoListAdapter);
                         childInfoListAdapter.setmList(parentInfo.childList);
                         ListViewMeasureUtil.measureListViewWrongHeight(mLv);
-                        if (parentInfo.childList != null && parentInfo.childList.size() > 0){
+                        if (parentInfo.childList != null && parentInfo.childList.size() > 0) {
                             childInfoListAdapter.setmList(parentInfo.childList);
                             childInfoListAdapter.notifyDataSetChanged();
                         }
@@ -360,45 +366,52 @@ public class ParentInfoActivity extends BaseActivity{
         });
     }
 
-    private String createParams(){
+    private String createParams() {
 
-        if (TextUtils.isEmpty(mNameTv.getText().toString())){
+        if (TextUtils.isEmpty(mNameTv.getText().toString())) {
             ToastUtil.show("输入名字");
             return null;
         }
 
-        if (TextUtils.isEmpty(mIdTv.getText().toString())){
+        if (TextUtils.isEmpty(mIdTv.getText().toString())) {
             ToastUtil.show("输入身份证");
             return null;
         }
 
-        if (TextUtils.isEmpty(mConnactTv.getText().toString())){
+        if (TextUtils.isEmpty(mConnactTv.getText().toString())) {
             ToastUtil.show("输入电话");
             return null;
         }
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name",mNameTv.getText().toString());
-        jsonObject.put("idcard",mIdTv.getText().toString());
-        jsonObject.put("sex",mSexTv.getText().toString());
-        jsonObject.put("nation",mNationTv.getText().toString());
-        jsonObject.put("mobile",mConnactTv.getText().toString());
-        jsonObject.put("birthday",mBirthDateTv.getText().toString());
-        jsonObject.put("age",mAgeTv.getText().toString());
-        jsonObject.put("accountNature",mRegisterTypeTv.getText().toString());
-        jsonObject.put("register",mRegisterTv.getText().toString());
-        jsonObject.put("address",mHouseAddressTv.getText().toString());
-        jsonObject.put("education",mEducationTv.getText().toString());
-        jsonObject.put("job",mJobTv.getText().toString());
+        jsonObject.put("name", mNameTv.getText().toString());
+        jsonObject.put("idcard", mIdTv.getText().toString());
+        jsonObject.put("sex", mSexTv.getText().toString());
+        jsonObject.put("nation", mNationTv.getText().toString());
+        jsonObject.put("mobile", mConnactTv.getText().toString());
+        jsonObject.put("birthday", mBirthDateTv.getText().toString());
+        jsonObject.put("age", mAgeTv.getText().toString());
+        jsonObject.put("accountNature", mRegisterTypeTv.getText().toString());
+        jsonObject.put("register", mRegisterTv.getText().toString());
+        jsonObject.put("address", mHouseAddressTv.getText().toString());
+        jsonObject.put("education", mEducationTv.getText().toString());
+        jsonObject.put("job", mJobTv.getText().toString());
 
         JSONArray childJsonArray = new JSONArray();
 
-        for (Student stu:parentInfo.childList){
+        for (Student stu : parentInfo.childList) {
             childJsonArray.add(stu.uid);
         }
-        jsonObject.put("childList",childJsonArray);
+        jsonObject.put("childList", childJsonArray);
 
-        LogUtil.i("params",jsonObject.toString());
+        LogUtil.i("params", jsonObject.toString());
         return jsonObject.toString();
+    }
+
+    //出生日期
+    @OnClick(R.id.birth_layout_gp)
+    public void onClick() {
+        TimeChooseUtil timeChooseUtil = new TimeChooseUtil();
+        timeChooseUtil.showTimeDialog(this, mBirthDateTv,true);
     }
 }

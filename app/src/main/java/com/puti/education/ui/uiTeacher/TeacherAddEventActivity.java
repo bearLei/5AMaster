@@ -545,7 +545,7 @@ public class TeacherAddEventActivity extends BaseActivity{
     @OnClick(R.id.event_time_tv)
     public void chooseEventTimeClick(){
         TimeChooseUtil chooseUtil = new TimeChooseUtil();
-        chooseUtil.showTimeDialog(this,mChooseTimeTv);
+        chooseUtil.showTimeDialog(this,mChooseTimeTv,false);
 //        TimeDialog timeDialog = null;
 //        if (timeDialog == null){
 //            timeDialog = new TimeDialog(this,mChooseTimeTv);

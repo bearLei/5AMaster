@@ -8,9 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.puti.education.R;
 import com.puti.education.bean.ClassInfo;
 import com.puti.education.bean.EditTeacherInofResponse;
 import com.puti.education.bean.TeacherPersonInfo;
@@ -18,10 +20,8 @@ import com.puti.education.event.UpdateUserInfoEvent;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.TeacherModel;
 import com.puti.education.ui.BaseActivity;
-import com.puti.education.R;
-import com.puti.education.ui.uiStudent.StudentInofActivity;
 import com.puti.education.util.Constant;
-import com.puti.education.util.Key;
+import com.puti.education.util.TimeChooseUtil;
 import com.puti.education.util.ToastUtil;
 import com.puti.education.widget.CommonDropView;
 
@@ -35,11 +35,11 @@ import butterknife.OnClick;
 
 /**
  * Created by xjbin on 2017/4/20 0020.
- *
+ * <p>
  * 教师端 个人信息 查看，编辑
  */
 
-public class TeacherPersonalInfoActivity extends BaseActivity{
+public class TeacherPersonalInfoActivity extends BaseActivity {
 
     @BindView(R.id.title_textview)
     TextView mTitleTv;
@@ -63,7 +63,7 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
     @BindView(R.id.personnal_info_workage_tv)
     EditText mWorkAgeEdit;
     @BindView(R.id.personnal_info_worktime_tv)
-    EditText mStartWorkTimeEdit;
+    TextView mStartWorkTimeTV;
     @BindView(R.id.personnal_info_name_tv)
     EditText mNamEdit;
     @BindView(R.id.personnal_info_id_tv)
@@ -75,7 +75,7 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
     @BindView(R.id.personnal_info_connact_tv)
     EditText mConnactEdit;
     @BindView(R.id.personnal_info_birth_date_tv)
-    EditText mBirthEdit;
+    TextView mBirthTV;
     @BindView(R.id.personnal_info_age_tv)
     EditText mAgeEdit;
     @BindView(R.id.personnal_info_address_tv)
@@ -84,14 +84,18 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
     EditText mcontryEdit;
     @BindView(R.id.personnal_info_is_married_tv)
     TextView mMarriedTv;
+    @BindView(R.id.work_time_layout)
+    RelativeLayout VWorkTimeLayout;//入职时间GP
+    @BindView(R.id.birth_layout_gp)
+    RelativeLayout VBirthLayoutGp;//出生日期GP
     private boolean mIsEdit;
     private TeacherPersonInfo mTeacherInfo = null;
     private List<String> mSexList = new ArrayList<>();
     private List<String> mMarryList = new ArrayList<>();
     private List<String> mAddressList = new ArrayList<>();
-    private CommonDropView mDropViewSex, mDropViewMarry,mDropViewAddress;
+    private CommonDropView mDropViewSex, mDropViewMarry, mDropViewAddress;
 
-    private void setWidgetListEnable(boolean enable){
+    private void setWidgetListEnable(boolean enable) {
         if (!enable) {
             mTeacherNumEdit.setEnabled(enable);
             mSchoolEdit.setEnabled(enable);
@@ -99,39 +103,47 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
             mProfessionalEdit.setEnabled(enable);
             mClassEdit.setEnabled(enable);
             mWorkAgeEdit.setEnabled(enable);
-            mStartWorkTimeEdit.setEnabled(enable);
+            mStartWorkTimeTV.setEnabled(enable);
             mAgeEdit.setEnabled(enable);
         }
 
         mNamEdit.setEnabled(enable);
         mSexTv.setEnabled(enable);
         mIdCardEdit.setEnabled(enable);
-        mBirthEdit.setEnabled(enable);
+        mBirthTV.setEnabled(enable);
         mConnactEdit.setEnabled(enable);
         mAddressEdit.setEnabled(enable);
         mcontryEdit.setEnabled(enable);
         mMarriedTv.setEnabled(enable);
         mNationalEdit.setEnabled(enable);
+
+        if (enable){
+            VWorkTimeLayout.setClickable(true);
+            VBirthLayoutGp.setClickable(true);
+        }else {
+            VWorkTimeLayout.setClickable(false);
+            VBirthLayoutGp.setClickable(false);
+        }
     }
 
-    private void setWidgetValue(TeacherPersonInfo teacherPersonInfo){
+    private void setWidgetValue(TeacherPersonInfo teacherPersonInfo) {
         mTeacherNumEdit.setText(teacherPersonInfo.code);
         mSchoolEdit.setText(teacherPersonInfo.school);
         mProfessionalEdit.setText(teacherPersonInfo.professional);
-        if (teacherPersonInfo.classList != null && teacherPersonInfo.classList.size() > 0){
+        if (teacherPersonInfo.classList != null && teacherPersonInfo.classList.size() > 0) {
             String classlist = "";
-            for (ClassInfo claainfo: teacherPersonInfo.classList){
-                classlist += claainfo.name +" ";
+            for (ClassInfo claainfo : teacherPersonInfo.classList) {
+                classlist += claainfo.name + " ";
             }
-             mClassEdit.setText(classlist);
+            mClassEdit.setText(classlist);
         }
 
         mWorkAgeEdit.setText(teacherPersonInfo.workingAge);
-        mStartWorkTimeEdit.setText(teacherPersonInfo.startYear);
+        mStartWorkTimeTV.setText(teacherPersonInfo.startYear);
         mNamEdit.setText(teacherPersonInfo.name);
         mIdCardEdit.setText(teacherPersonInfo.idcard);
         mSexTv.setText(teacherPersonInfo.sex);
-        mBirthEdit.setText(teacherPersonInfo.birthday);
+        mBirthTV.setText(teacherPersonInfo.birthday);
         mConnactEdit.setText(teacherPersonInfo.phone);
         //mAgeEdit.setText(teacherPersonInfo.age+"");
         mAddressEdit.setText(teacherPersonInfo.nature);
@@ -155,7 +167,7 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
     public void initViews() {
         mTitleTv.setText("个人资料");
         mOperImg.setImageResource(R.mipmap.ic_edit);
-        if (!mIsEdit){
+        if (!mIsEdit) {
             mCommitBtn.setVisibility(View.GONE);
         }
 
@@ -166,10 +178,10 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
         mSexTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mIsEdit){
+                if (!mIsEdit) {
                     return;
                 }
-                if (mDropViewSex == null){
+                if (mDropViewSex == null) {
                     mDropViewSex = new CommonDropView(TeacherPersonalInfoActivity.this, mSexTv, mSexList);
                     mDropViewSex.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
                         @Override
@@ -190,10 +202,10 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
         mMarriedTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mIsEdit){
+                if (!mIsEdit) {
                     return;
                 }
-                if (mDropViewMarry == null){
+                if (mDropViewMarry == null) {
                     mDropViewMarry = new CommonDropView(TeacherPersonalInfoActivity.this, mMarriedTv, mMarryList);
                     mDropViewMarry.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
                         @Override
@@ -214,10 +226,10 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
         mAddressEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mIsEdit){
+                if (!mIsEdit) {
                     return;
                 }
-                if (mDropViewAddress == null){
+                if (mDropViewAddress == null) {
                     mDropViewAddress = new CommonDropView(TeacherPersonalInfoActivity.this, mAddressEdit, mAddressList);
                     mDropViewAddress.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
                         @Override
@@ -247,7 +259,7 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
 
     //编辑
     @OnClick(R.id.frame_img)
-    public void operateClick(View view){
+    public void operateClick(View view) {
         mIsEdit = true;
         setWidgetListEnable(true);
         rightFrame.setVisibility(View.GONE);
@@ -255,24 +267,24 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
     }
 
     @OnClick(R.id.info_commint_btn)
-    public void commitInfoClick(){
+    public void commitInfoClick() {
         modifyTeacherInfo();
     }
 
 
-    private void getTeacherInfo(){
+    private void getTeacherInfo() {
         disLoading();
-        TeacherModel.getInstance().getTeacherInfo(new BaseListener(TeacherPersonInfo.class){
+        TeacherModel.getInstance().getTeacherInfo(new BaseListener(TeacherPersonInfo.class) {
 
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 hideLoading();
-                if (infoObj != null){
+                if (infoObj != null) {
                     TeacherPersonInfo teacherPersonInfo = (TeacherPersonInfo) infoObj;
                     setWidgetValue(teacherPersonInfo);
-                }else{
+                } else {
                     ToastUtil.show(Constant.REQUEST_FAILED_STR);
-            }
+                }
             }
 
             @Override
@@ -283,90 +295,90 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
         });
     }
 
-    private String createParamStr(){
+    private String createParamStr() {
 
         JSONObject jsonObject = new JSONObject();
-        if (!isEmptyStr(mNamEdit)){
-            jsonObject.put("name",mNamEdit.getText().toString());
-        }else{
+        if (!isEmptyStr(mNamEdit)) {
+            jsonObject.put("name", mNamEdit.getText().toString());
+        } else {
             jsonObject.put("name", "");
         }
 
         String strSex = mSexTv.getText().toString();
-        if (TextUtils.isEmpty(strSex)){
+        if (TextUtils.isEmpty(strSex)) {
             strSex = "";
-        }else if (strSex.equals("男")){
+        } else if (strSex.equals("男")) {
             strSex = "M";
-        }else if (strSex.equals("女")){
+        } else if (strSex.equals("女")) {
             strSex = "F";
         }
-        jsonObject.put("sex",strSex);
+        jsonObject.put("sex", strSex);
 
-        if (!isEmptyStr(mIdCardEdit)){
-            jsonObject.put("idcard",mIdCardEdit.getText().toString());
-        }else{
+        if (!isEmptyStr(mIdCardEdit)) {
+            jsonObject.put("idcard", mIdCardEdit.getText().toString());
+        } else {
             jsonObject.put("idcard", "");
         }
 
-        if (!isEmptyStr(mNationalEdit)){
-            jsonObject.put("nation",mNationalEdit.getText().toString());
-        }else{
+        if (!isEmptyStr(mNationalEdit)) {
+            jsonObject.put("nation", mNationalEdit.getText().toString());
+        } else {
             jsonObject.put("nation", "");
         }
 
-        if (!isEmptyStr(mConnactEdit)){
-            jsonObject.put("mobile",mConnactEdit.getText().toString());
-        }else{
+        if (!isEmptyStr(mConnactEdit)) {
+            jsonObject.put("mobile", mConnactEdit.getText().toString());
+        } else {
             jsonObject.put("mobile", "");
         }
 
-        if (!isEmptyStr(mBirthEdit)){
-            jsonObject.put("birthday",mBirthEdit.getText().toString());
-        }else{
+        if (!isEmptyStr(mBirthTV)) {
+            jsonObject.put("birthday", mBirthTV.getText().toString());
+        } else {
             jsonObject.put("birthday", "");
         }
 
-        if (!isEmptyStr(mcontryEdit)){
-            jsonObject.put("stateless",mcontryEdit.getText().toString());
-        }else{
+        if (!isEmptyStr(mcontryEdit)) {
+            jsonObject.put("stateless", mcontryEdit.getText().toString());
+        } else {
             jsonObject.put("stateless", "");
         }
 
 
         String strMarry = mMarriedTv.getText().toString();
-        if (strMarry != null && strMarry.equals("已婚")){
-            jsonObject.put("maritalStatus",true);
-        }else {
-            jsonObject.put("maritalStatus",false);
+        if (strMarry != null && strMarry.equals("已婚")) {
+            jsonObject.put("maritalStatus", true);
+        } else {
+            jsonObject.put("maritalStatus", false);
         }
 
-        if (!isEmptyStr(mAddressEdit)){
-            jsonObject.put("registerType",mAddressEdit.getText().toString());
-        }else{
-            jsonObject.put("registerType","");
+        if (!isEmptyStr(mAddressEdit)) {
+            jsonObject.put("registerType", mAddressEdit.getText().toString());
+        } else {
+            jsonObject.put("registerType", "");
         }
 
         return jsonObject.toString();
 
     }
 
-    private boolean isEmptyStr(TextView editText){
-        if (TextUtils.isEmpty(editText.getText().toString())){
+    private boolean isEmptyStr(TextView editText) {
+        if (TextUtils.isEmpty(editText.getText().toString())) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    private void modifyTeacherInfo(){
+    private void modifyTeacherInfo() {
 
         String paramsStr = createParamStr();
-        if (paramsStr == null){
+        if (paramsStr == null) {
             return;
         }
 
         disLoading();
-        TeacherModel.getInstance().modifyTeacherInfo(paramsStr,new BaseListener(EditTeacherInofResponse.class){
+        TeacherModel.getInstance().modifyTeacherInfo(paramsStr, new BaseListener(EditTeacherInofResponse.class) {
 
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
@@ -387,7 +399,23 @@ public class TeacherPersonalInfoActivity extends BaseActivity{
 
 
     @OnClick(R.id.back_frame)
-    public void finishActivityClick(){
+    public void finishActivityClick() {
         finish();
+    }
+
+    //日期选择
+    @OnClick({R.id.work_time_layout, R.id.birth_layout_gp})
+    public void onClick(View view) {
+        TimeChooseUtil timeChooseUtil;
+        switch (view.getId()) {
+            case R.id.work_time_layout:
+                timeChooseUtil = new TimeChooseUtil();
+                timeChooseUtil.showTimeDialog(this, mStartWorkTimeTV,true);
+                break;
+            case R.id.birth_layout_gp:
+                timeChooseUtil = new TimeChooseUtil();
+                timeChooseUtil.showTimeDialog(this, mBirthTV,true);
+                break;
+        }
     }
 }

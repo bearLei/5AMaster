@@ -137,6 +137,7 @@ public class TeacherEventListFragment extends BaseListFragment implements LRecyc
     public void initViews(View view) {
 //        mImgBack.setImageResource(R.drawable.credit_scan);
         mImgBack.setVisibility(View.GONE);
+        mImgNew.setVisibility(View.GONE);
         mImgNew.setImageResource(R.mipmap.ic_add);
         mTitleTv.setText("事件列表");
         mFrameNew.setOnClickListener(new View.OnClickListener() {

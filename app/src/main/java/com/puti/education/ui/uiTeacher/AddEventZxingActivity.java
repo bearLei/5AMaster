@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -216,6 +217,9 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
                 finish();
                 break;
         }
+        if (mList == null || mList.size() == 0) {
+            finish();
+        }
     }
 
 
@@ -238,5 +242,14 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
                 finish();
             }
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

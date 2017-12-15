@@ -429,6 +429,7 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
                         if (ex > left && ex < right) {
+                            isCancel = false;
                             mProgressBar.setCancel(false);
                             //显示上滑取消
                             mTvTip.setVisibility(View.VISIBLE);
@@ -458,8 +459,8 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
                                         }
                                     }
                                 };
+                                mProgressThread.start();
                             }
-                            mProgressThread.start();
                             ret = true;
                         }
 
@@ -495,16 +496,19 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
                                 mProgressBar.setCancel(false);
                                 finish();
                             }
-
                             ret = false;
-                        }{
-                        stopRecordUnSave();
-                        if (mProgressThread != null && mProgressThread.isAlive()) {
-                            mProgressThread.interrupt();
-                            mProgressThread = null;
                         }
-                        mProgressBar.setVisibility(View.GONE);
-                        Toast.makeText(this, "取消录制", Toast.LENGTH_SHORT).show();
+                    {
+//                        stopRecordUnSave();
+                        if (isCancel) {
+                            if (mProgressThread != null && mProgressThread.isAlive()) {
+                                mProgressThread.interrupt();
+                                mProgressThread = null;
+                            }
+                            mProgressBar.setCancel(true);
+                            mProgressBar.setVisibility(View.GONE);
+                            Toast.makeText(this, "取消录制", Toast.LENGTH_SHORT).show();
+                        }
                     }
                         break;
                     case MotionEvent.ACTION_MOVE:
@@ -514,6 +518,9 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
                                 isCancel = true;
                                 mProgressBar.setCancel(true);
                             }
+                        }else {
+                            isCancel = true;
+                            mProgressBar.setCancel(true);
                         }
                         break;
                 }

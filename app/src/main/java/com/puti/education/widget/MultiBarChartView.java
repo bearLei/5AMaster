@@ -342,7 +342,7 @@ public class MultiBarChartView extends View{
         return maxValue;
     }
 
-    private int getTeacherPowerMaxValue(List<TeacherPower> list){
+    private float getTeacherPowerMaxValue(List<TeacherPower> list){
 
         if (list== null || list.size() == 0){
             return 0;
@@ -350,7 +350,7 @@ public class MultiBarChartView extends View{
 
         int size = list.size();
         TeacherPower teacherPower = null;
-        int maxValue = 0;
+        float maxValue = 0;
         for (int i =0 ;i< 4  && (size >= 4);i++){
             teacherPower = list.get(size - 4 + i);
             if (teacherPower.value > maxValue){

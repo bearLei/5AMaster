@@ -11,7 +11,7 @@ package com.puti.education.bean;
 public class TeacherPower {
 
     public String data;
-    public int value;
+    public float value;
 
     public TeacherPower(String date, int value) {
         this.data = date;

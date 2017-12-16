@@ -8,8 +8,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Selection;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -27,6 +31,8 @@ import com.puti.education.util.DisPlayUtil;
 import com.puti.education.util.LogUtil;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -220,9 +226,20 @@ public class QuestionnaireEtDetailAdapter extends BasicRecylerAdapter<Question>{
             }
 
             Question qt = mList.get(position);
-            viewHolder.setText(R.id.tv_question, (position + 1) + ". " + qt.question);
-            TextView tv_questionRequired = viewHolder.obtainView(R.id.tv_question_required);
-            tv_questionRequired.setVisibility(qt.isRequired ? View.VISIBLE: View.GONE);
+            StringBuilder builder = new StringBuilder();
+            builder.append(qt.question);
+            if (qt.isRequired){
+                builder.append("*");
+            }
+            String question = (position+1)+"."+qt.question;
+
+            TextView tv_question = viewHolder.obtainView(R.id.tv_question);
+            tv_question.setText(question);
+            if (qt.isRequired){
+                tv_question.append(operateQuestion());
+            }
+//            TextView tv_questionRequired = viewHolder.obtainView(R.id.tv_question_required);
+//            tv_questionRequired.setVisibility(qt.isRequired ? View.VISIBLE: View.GONE);
             if (qt.type == Constant.TYPE_RADIO) {
                 //单选
                 LinearLayout answerlayout = viewHolder.obtainView(R.id.answer_layout);
@@ -257,6 +274,12 @@ public class QuestionnaireEtDetailAdapter extends BasicRecylerAdapter<Question>{
 
     }
 
+    private SpannableString operateQuestion(){
+        String brief = "*";
+        SpannableString s = new SpannableString(brief);
+        s.setSpan(new ForegroundColorSpan(Color.RED), 0, brief.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+       return s;
+    }
 
     private boolean haveHeaderView() {
         return VIEW_HEADER != null;

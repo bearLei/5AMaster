@@ -3,6 +3,7 @@ package com.puti.education.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.text.SpannableString;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -97,7 +98,11 @@ public abstract class BasicRecylerAdapter<T> extends RecyclerView.Adapter{
 			tv.setText(text);
 			return this;
 		}
-
+		public CommonViewHolder append(int viewId, SpannableString text) {
+			TextView tv = obtainView(viewId);
+			tv.append(text);
+			return this;
+		}
 
 	}
 	

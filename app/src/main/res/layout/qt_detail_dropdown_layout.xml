@@ -20,17 +20,6 @@
             android:id="@+id/tv_question"
             android:textSize="12sp"
             android:textColor="@color/dark_font" />
-        <TextView
-            android:text="*"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_question_required"
-            android:textSize="12sp"
-            android:layout_marginTop="-3dp"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/status_red"
-            android:visibility="gone"
-            />
     </LinearLayout>
 
     <TextView

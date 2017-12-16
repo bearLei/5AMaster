@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -23,13 +24,13 @@ import com.puti.education.listener.BaseListener;
 import com.puti.education.nation.NationChooseActivity;
 import com.puti.education.netFrame.netModel.PatriarchModel;
 import com.puti.education.ui.BaseActivity;
-import com.puti.education.ui.uiStudent.StudentInofActivity;
 import com.puti.education.util.Constant;
 import com.puti.education.util.Key;
 import com.puti.education.util.ListViewMeasureUtil;
 import com.puti.education.util.LogUtil;
 import com.puti.education.util.TimeChooseUtil;
 import com.puti.education.util.ToastUtil;
+import com.puti.education.util.citychoose.CityChooseDialog;
 import com.puti.education.widget.CommonDropView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -96,6 +97,12 @@ public class ParentInfoActivity extends BaseActivity {
     ListView mLv;
     @BindView(R.id.birth_layout_gp)
     RelativeLayout birthLayoutGp;
+    @BindView(R.id.census_register_gp)
+    RelativeLayout VCensusRegisterGp;//户籍
+    @BindView(R.id.address_layout_gp)
+    RelativeLayout VAddressLayoutGp;//地址
+    @BindView(R.id.now_address_detetail)
+    EditText nowAddressDetetail;//详细地址
 
     private int style = 1;
     private boolean mIsEdit = false;
@@ -225,8 +232,10 @@ public class ParentInfoActivity extends BaseActivity {
 
         if (isEnable) {
             birthLayoutGp.setClickable(true);
+            VCensusRegisterGp.setClickable(true);
         } else {
             birthLayoutGp.setClickable(false);
+            VAddressLayoutGp.setClickable(false);
         }
     }
 
@@ -236,10 +245,10 @@ public class ParentInfoActivity extends BaseActivity {
         if (data == null) {
             return;
         }
-        if (requestCode == NATION_CHOOSE_CODE  && resultCode == RESULT_OK && data != null){
+        if (requestCode == NATION_CHOOSE_CODE && resultCode == RESULT_OK && data != null) {
             String result = data.getStringExtra("result");
             mNationTv.setText(result);
-        }else {
+        } else {
             Student student = (Student) data.getSerializableExtra(Key.BEAN);
             String className = data.getStringExtra(Key.CHILD_CLASS_NAME);
             student.className = className;
@@ -421,9 +430,39 @@ public class ParentInfoActivity extends BaseActivity {
         TimeChooseUtil timeChooseUtil = new TimeChooseUtil();
         timeChooseUtil.showTimeDialog(this, mBirthDateTv, true);
     }
+
     //民族选择
     @OnClick(R.id.nation_choose_layout)
     public void onNationChoose() {
-        startActivityForResult(new Intent(ParentInfoActivity.this, NationChooseActivity.class),NATION_CHOOSE_CODE);
+        startActivityForResult(new Intent(ParentInfoActivity.this, NationChooseActivity.class), NATION_CHOOSE_CODE);
+    }
+
+    private CityChooseDialog cityChooseDialog;  // 选择户籍的选择窗口
+
+    @OnClick({R.id.census_register_gp, R.id.address_layout_gp})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.census_register_gp:
+                if (cityChooseDialog != null) {
+                    cityChooseDialog.showPickerView(this, new CityChooseDialog.ChooseResultCallBack() {
+                        @Override
+                        public void result(String s, String detail) {
+                            mRegisterTv.setText(s);
+                        }
+                    });
+                }
+                break;
+            case R.id.address_layout_gp:
+                if (cityChooseDialog != null) {
+                    cityChooseDialog.showPickerView(this, new CityChooseDialog.ChooseResultCallBack() {
+                        @Override
+                        public void result(String s, String detail) {
+                            mHouseAddressTv.setText(s);
+                            nowAddressDetetail.setText(detail);
+                        }
+                    });
+                }
+                break;
+        }
     }
 }

@@ -263,6 +263,11 @@
             android:name="com.lidong.photopicker.PhotoPreviewActivity"
             android:theme="@style/PhotoPickerTheme" />
 
+        <!--选择民族-->
+        <activity android:name=".nation.NationChooseActivity"
+            android:configChanges="orientation|screenSize"
+            />
+
         <!-- 百度地图相关的service -->
         <service
             android:name="com.baidu.location.f"

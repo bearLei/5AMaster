@@ -200,13 +200,15 @@
 
             <View style="@style/line_style" />
 
-            <RelativeLayout style="@style/personal_info_textparent_style">
+            <RelativeLayout
+                android:id="@+id/nation_choose_layout"
+                style="@style/personal_info_textparent_style">
 
                 <TextView
                     style="@style/personal_info_text_style"
                     android:text="民族" />
 
-                <EditText
+                <TextView
                     android:id="@+id/personnal_info_national_tv"
                     style="@style/personal_info_right_text_style"
                     android:text="" />

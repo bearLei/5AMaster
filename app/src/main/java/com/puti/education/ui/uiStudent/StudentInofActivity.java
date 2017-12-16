@@ -1,5 +1,6 @@
 package com.puti.education.ui.uiStudent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -12,15 +13,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baidu.mapapi.map.Text;
 import com.puti.education.R;
 import com.puti.education.bean.StudentResponseInfo;
 import com.puti.education.event.UpdateUserInfoEvent;
 import com.puti.education.listener.BaseListener;
-import com.puti.education.netFrame.netModel.CommonModel;
+import com.puti.education.nation.NationChooseActivity;
 import com.puti.education.netFrame.netModel.StudentModel;
 import com.puti.education.ui.BaseActivity;
-import com.puti.education.ui.fragment.TeacherEventListFragment;
+import com.puti.education.ui.uiTeacher.TeacherPersonalInfoActivity;
 import com.puti.education.util.Constant;
 import com.puti.education.util.TimeChooseUtil;
 import com.puti.education.util.ToastUtil;
@@ -37,12 +37,13 @@ import butterknife.OnClick;
 
 /**
  * Created by xjbin on 2017/5/13 0013.
- *
- *  学生信息
+ * <p>
+ * 学生信息
  */
 
-public class StudentInofActivity extends BaseActivity{
+public class StudentInofActivity extends BaseActivity {
 
+    private static final int NATION_CHOOSE_CODE = 111;
     @BindView(R.id.title_textview)
     TextView mTitleTv;
     @BindView(R.id.right_img)
@@ -71,8 +72,10 @@ public class StudentInofActivity extends BaseActivity{
     EditText mIdTv;
     @BindView(R.id.personnal_info_stu_sex_tv)
     TextView mSexTv;
+    @BindView(R.id.nation_choose_layout)
+    RelativeLayout VNationChooseLayout;
     @BindView(R.id.personnal_info_stu_national_tv)
-    EditText mStuNationTv;
+    TextView mStuNationTv;
     @BindView(R.id.personnal_info_stu_connact_tv)
     EditText mStuPhoneTv;
 
@@ -133,10 +136,10 @@ public class StudentInofActivity extends BaseActivity{
 
     private List<String> mSexList = new ArrayList<>();
 
-    private CityChooseDialog cityChooseDialog ;  // 选择户籍的选择窗口
+    private CityChooseDialog cityChooseDialog;  // 选择户籍的选择窗口
 
 
-    private void setNoChangeView(boolean enable){
+    private void setNoChangeView(boolean enable) {
         mStuIsStayTv.setFocusable(false);
         mStuIsStayTv.setFocusableInTouchMode(false);
         mRoomNumberTv.setFocusable(enable);
@@ -147,7 +150,7 @@ public class StudentInofActivity extends BaseActivity{
         mHouseNumTv.setFocusableInTouchMode(false);
     }
 
-    private void setViewsEnable(boolean enable){
+    private void setViewsEnable(boolean enable) {
 
         if (!enable) {
             mStuSchoolTv.setEnabled(enable);
@@ -183,19 +186,21 @@ public class StudentInofActivity extends BaseActivity{
         mNowAddressTv.setEnabled(enable);
 
 
-        if (enable){
+        if (enable) {
             VAddressLayoutGp.setClickable(true);
             VCensusRegisterGp.setClickable(true);
             VBirthLayoutGp.setClickable(true);
-        }else {
+            VNationChooseLayout.setClickable(true);
+        } else {
             VAddressLayoutGp.setClickable(false);
             VCensusRegisterGp.setClickable(false);
             VBirthLayoutGp.setClickable(false);
+            VNationChooseLayout.setClickable(false);
         }
 
     }
 
-    private void showStuInfo(StudentResponseInfo info){
+    private void showStuInfo(StudentResponseInfo info) {
 
         mStuNumTv.setText(info.number);
         mStuSchoolTv.setText(info.school);
@@ -225,7 +230,7 @@ public class StudentInofActivity extends BaseActivity{
         mMotherEducationTv.setText(info.motherEdu);
         mMotherJobTv.setText(info.motherTitle);
         mMotherYgNumberTv.setText(info.motherNumber);
-        mStuIsStayTv.setText(info.isBoarding == true ?"是" :"否");
+        mStuIsStayTv.setText(info.isBoarding == true ? "是" : "否");
         mRoomNumberTv.setText(info.boardingName);
         mRoomStyleTv.setText(info.boardingSize);
         mHouseNumTv.setText(info.boardingHouse);
@@ -243,14 +248,14 @@ public class StudentInofActivity extends BaseActivity{
 
     @Override
     public void initViews() {
-        if (cityChooseDialog == null){
+        if (cityChooseDialog == null) {
             cityChooseDialog = new CityChooseDialog();
             cityChooseDialog.init(this);
         }
 
         mTitleTv.setText("个人资料");
         mOperImg.setImageResource(R.mipmap.ic_edit);
-        if (!mIsEdit){
+        if (!mIsEdit) {
             mCommitBtn.setVisibility(View.GONE);
         }
 
@@ -264,10 +269,10 @@ public class StudentInofActivity extends BaseActivity{
         mSexTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!mIsEdit){
+                if (!mIsEdit) {
                     return;
                 }
-                if (mDropViewSex == null){
+                if (mDropViewSex == null) {
                     mDropViewSex = new CommonDropView(StudentInofActivity.this, mSexTv, mSexList);
                     mDropViewSex.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
                         @Override
@@ -285,7 +290,6 @@ public class StudentInofActivity extends BaseActivity{
     }
 
 
-
     @Override
     public void loadData() {
         getStudentInfo();
@@ -299,35 +303,37 @@ public class StudentInofActivity extends BaseActivity{
     }
 
     @OnClick(R.id.frame_img)
-    public void editInfoClick(){
+    public void editInfoClick() {
         mIsEdit = true;
         mCommitBtn.setVisibility(View.VISIBLE);
         rightFrame.setVisibility(View.GONE);
         setViewsEnable(true);
     }
+
     //出生日期选择
     @OnClick(R.id.birth_layout_gp)
-    public void onBirthChoose(){
+    public void onBirthChoose() {
         TimeChooseUtil timeChooseUtil = new TimeChooseUtil();
-        timeChooseUtil.showTimeDialog(this,mBirthTv,true);
+        timeChooseUtil.showTimeDialog(this, mBirthTv, true);
     }
 
     //户籍点击
     @OnClick(R.id.census_register_gp)
-    public void censusRegister(){
-        if (cityChooseDialog != null){
+    public void censusRegister() {
+        if (cityChooseDialog != null) {
             cityChooseDialog.showPickerView(this, new CityChooseDialog.ChooseResultCallBack() {
                 @Override
-                public void result(String s,String detail) {
+                public void result(String s, String detail) {
                     mFamilyTv.setText(s);
                 }
             });
         }
     }
+
     //地址点击
     @OnClick(R.id.address_layout_gp)
-    public void addressChoose(){
-        if (cityChooseDialog != null){
+    public void addressChoose() {
+        if (cityChooseDialog != null) {
             cityChooseDialog.showPickerView(this, new CityChooseDialog.ChooseResultCallBack() {
                 @Override
                 public void result(String s, String detail) {
@@ -339,19 +345,19 @@ public class StudentInofActivity extends BaseActivity{
     }
 
     @OnClick(R.id.info_commint_btn)
-    public void commitClick(){
+    public void commitClick() {
         modifyStudentInfo();
     }
 
     //修改信息
-    private void modifyStudentInfo(){
+    private void modifyStudentInfo() {
         String str = params();
-        if (str == null){
+        if (str == null) {
             return;
         }
 
         disLoading();
-        StudentModel.getInstance().modifyStudentInfo(str,new BaseListener(){
+        StudentModel.getInstance().modifyStudentInfo(str, new BaseListener() {
 
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
@@ -372,20 +378,20 @@ public class StudentInofActivity extends BaseActivity{
 
     }
 
-    private void getStudentInfo(){
+    private void getStudentInfo() {
 
         disLoading();
-        StudentModel.getInstance().getStudentDetail(new BaseListener(StudentResponseInfo.class){
+        StudentModel.getInstance().getStudentDetail(new BaseListener(StudentResponseInfo.class) {
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 super.responseResult(infoObj, listObj, code, status);
 
                 hideLoading();
 
-                if (infoObj != null){
-                    StudentResponseInfo studentResponseInfo  = (StudentResponseInfo) infoObj;
+                if (infoObj != null) {
+                    StudentResponseInfo studentResponseInfo = (StudentResponseInfo) infoObj;
                     showStuInfo(studentResponseInfo);
-                }else{
+                } else {
                     ToastUtil.show("请求失败");
                 }
             }
@@ -400,70 +406,85 @@ public class StudentInofActivity extends BaseActivity{
     }
 
     //修改学生信息
-    private String params(){
+    private String params() {
 
         JSONObject jsonObject = new JSONObject();
 
-        jsonObject.put("name",TextUtils.isEmpty(mStuNameTv.getText().toString()) ? "":mStuNameTv.getText().toString());
-        jsonObject.put("num",TextUtils.isEmpty(mStuNumTv.getText().toString()) ? "":mStuNumTv.getText().toString());
-        jsonObject.put("idcard",TextUtils.isEmpty(mIdTv.getText().toString()) ? "":mIdTv.getText().toString());
+        jsonObject.put("name", TextUtils.isEmpty(mStuNameTv.getText().toString()) ? "" : mStuNameTv.getText().toString());
+        jsonObject.put("num", TextUtils.isEmpty(mStuNumTv.getText().toString()) ? "" : mStuNumTv.getText().toString());
+        jsonObject.put("idcard", TextUtils.isEmpty(mIdTv.getText().toString()) ? "" : mIdTv.getText().toString());
 
         String strSex = mSexTv.getText().toString();
-        if (TextUtils.isEmpty(strSex)){
+        if (TextUtils.isEmpty(strSex)) {
             strSex = "";
-        }else if (strSex.equals("男")){
+        } else if (strSex.equals("男")) {
             strSex = "M";
-        }else if (strSex.equals("女")){
+        } else if (strSex.equals("女")) {
             strSex = "F";
         }
-        jsonObject.put("sex",strSex);
-        jsonObject.put("nation",TextUtils.isEmpty(mStuNationTv.getText().toString()) ? "":mStuNationTv.getText().toString());
-        jsonObject.put("mobile",TextUtils.isEmpty(mStuPhoneTv.getText().toString()) ? "":mStuPhoneTv.getText().toString());
-        jsonObject.put("birthday",TextUtils.isEmpty(mBirthTv.getText().toString()) ? "":mBirthTv.getText().toString());
+        jsonObject.put("sex", strSex);
+        jsonObject.put("nation", TextUtils.isEmpty(mStuNationTv.getText().toString()) ? "" : mStuNationTv.getText().toString());
+        jsonObject.put("mobile", TextUtils.isEmpty(mStuPhoneTv.getText().toString()) ? "" : mStuPhoneTv.getText().toString());
+        jsonObject.put("birthday", TextUtils.isEmpty(mBirthTv.getText().toString()) ? "" : mBirthTv.getText().toString());
 
         String strAge = mStuAgeTv.getText().toString();
-        if (!TextUtils.isEmpty(strAge)){
-            jsonObject.put("age",Integer.parseInt(strAge));
-        }else{
-            jsonObject.put("age",0);
+        if (!TextUtils.isEmpty(strAge)) {
+            jsonObject.put("age", Integer.parseInt(strAge));
+        } else {
+            jsonObject.put("age", 0);
         }
 
-        jsonObject.put("accountNature",TextUtils.isEmpty(mStuRegisterTv.getText().toString()) ? "":mStuRegisterTv.getText().toString());
-        jsonObject.put("guardian",TextUtils.isEmpty(mGuarDianPeopleTv.getText().toString()) ? "":mGuarDianPeopleTv.getText().toString());
-        jsonObject.put("relativeWith",TextUtils.isEmpty(mRelationShipTv.getText().toString()) ? "":mRelationShipTv.getText().toString());
-        jsonObject.put("register",TextUtils.isEmpty(mFamilyTv.getText().toString()) ? "":mFamilyTv.getText().toString());
-        jsonObject.put("familyAddress",TextUtils.isEmpty(mNowAddressDetailTv.getText().toString()) ? "":mNowAddressDetailTv.getText().toString());
+        jsonObject.put("accountNature", TextUtils.isEmpty(mStuRegisterTv.getText().toString()) ? "" : mStuRegisterTv.getText().toString());
+        jsonObject.put("guardian", TextUtils.isEmpty(mGuarDianPeopleTv.getText().toString()) ? "" : mGuarDianPeopleTv.getText().toString());
+        jsonObject.put("relativeWith", TextUtils.isEmpty(mRelationShipTv.getText().toString()) ? "" : mRelationShipTv.getText().toString());
+        jsonObject.put("register", TextUtils.isEmpty(mFamilyTv.getText().toString()) ? "" : mFamilyTv.getText().toString());
+        jsonObject.put("familyAddress", TextUtils.isEmpty(mNowAddressDetailTv.getText().toString()) ? "" : mNowAddressDetailTv.getText().toString());
 
-        jsonObject.put("fatherName",TextUtils.isEmpty(mFatherNameTv.getText().toString()) ? "":mFatherNameTv.getText().toString());
-        jsonObject.put("fatherEdu",TextUtils.isEmpty(mFatherEducationTv.getText().toString()) ? "" : mFatherEducationTv.getText().toString());
-        jsonObject.put("fatherTitle",TextUtils.isEmpty(mFatherJobTv.getText().toString()) ? "" : mFatherJobTv.getText().toString());
-        jsonObject.put("fatherNumber",TextUtils.isEmpty(mFatherYgNumberTv.getText().toString()) ? "" : mFatherYgNumberTv.getText().toString());
-        jsonObject.put("motherName",TextUtils.isEmpty(mMotherNameTv.getText().toString()) ? "" : mMotherNameTv.getText().toString());
-        jsonObject.put("motherEdu",TextUtils.isEmpty(mMotherEducationTv.getText().toString()) ? "" : mMotherEducationTv.getText().toString());
-        jsonObject.put("motherTitle",TextUtils.isEmpty(mMotherJobTv.getText().toString()) ? "" : mMotherJobTv.getText().toString());
-        jsonObject.put("motherNumber",TextUtils.isEmpty(mMotherYgNumberTv.getText().toString()) ? "" : mMotherYgNumberTv.getText().toString());
+        jsonObject.put("fatherName", TextUtils.isEmpty(mFatherNameTv.getText().toString()) ? "" : mFatherNameTv.getText().toString());
+        jsonObject.put("fatherEdu", TextUtils.isEmpty(mFatherEducationTv.getText().toString()) ? "" : mFatherEducationTv.getText().toString());
+        jsonObject.put("fatherTitle", TextUtils.isEmpty(mFatherJobTv.getText().toString()) ? "" : mFatherJobTv.getText().toString());
+        jsonObject.put("fatherNumber", TextUtils.isEmpty(mFatherYgNumberTv.getText().toString()) ? "" : mFatherYgNumberTv.getText().toString());
+        jsonObject.put("motherName", TextUtils.isEmpty(mMotherNameTv.getText().toString()) ? "" : mMotherNameTv.getText().toString());
+        jsonObject.put("motherEdu", TextUtils.isEmpty(mMotherEducationTv.getText().toString()) ? "" : mMotherEducationTv.getText().toString());
+        jsonObject.put("motherTitle", TextUtils.isEmpty(mMotherJobTv.getText().toString()) ? "" : mMotherJobTv.getText().toString());
+        jsonObject.put("motherNumber", TextUtils.isEmpty(mMotherYgNumberTv.getText().toString()) ? "" : mMotherYgNumberTv.getText().toString());
 
-        jsonObject.put("isBoarding",TextUtils.isEmpty(mStuIsStayTv.getText().toString()) ? "" : mStuIsStayTv.getText().toString());
+        jsonObject.put("isBoarding", TextUtils.isEmpty(mStuIsStayTv.getText().toString()) ? "" : mStuIsStayTv.getText().toString());
 
         String stuIsStay = mStuIsStayTv.getText().toString();
-        if (!TextUtils.isEmpty(stuIsStay)){
+        if (!TextUtils.isEmpty(stuIsStay)) {
             boolean isStaySchool = false;
-            if (stuIsStay.equals("是")){
+            if (stuIsStay.equals("是")) {
                 isStaySchool = true;
             }
             jsonObject.put("isBoarding", isStaySchool);
-        }else{
-            jsonObject.put("isBoarding",false);
+        } else {
+            jsonObject.put("isBoarding", false);
         }
-        jsonObject.put("boardingNumber",TextUtils.isEmpty(mRoomNumberTv.getText().toString()) ? "" : mRoomNumberTv.getText().toString());
-        jsonObject.put("boardingSize",TextUtils.isEmpty(mRoomStyleTv.getText().toString()) ? "" : mRoomStyleTv.getText().toString());
-        jsonObject.put("bedNumber",TextUtils.isEmpty(mHouseNumTv.getText().toString()) ? "" : mHouseNumTv.getText().toString());
+        jsonObject.put("boardingNumber", TextUtils.isEmpty(mRoomNumberTv.getText().toString()) ? "" : mRoomNumberTv.getText().toString());
+        jsonObject.put("boardingSize", TextUtils.isEmpty(mRoomStyleTv.getText().toString()) ? "" : mRoomStyleTv.getText().toString());
+        jsonObject.put("bedNumber", TextUtils.isEmpty(mHouseNumTv.getText().toString()) ? "" : mHouseNumTv.getText().toString());
 
         return jsonObject.toString();
     }
 
     @OnClick(R.id.back_frame)
-    public void finishActivityClick(){
+    public void finishActivityClick() {
         finish();
+    }
+
+
+    //民族选择
+    @OnClick(R.id.nation_choose_layout)
+    public void onNationChoose() {
+        startActivityForResult(new Intent(StudentInofActivity.this, NationChooseActivity.class),NATION_CHOOSE_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == NATION_CHOOSE_CODE  && resultCode == RESULT_OK && data != null){
+            String result = data.getStringExtra("result");
+            mStuNationTv.setText(result);
+        }
     }
 }

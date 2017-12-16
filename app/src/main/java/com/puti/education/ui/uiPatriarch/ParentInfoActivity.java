@@ -20,8 +20,10 @@ import com.puti.education.bean.ParentInfo;
 import com.puti.education.bean.Student;
 import com.puti.education.event.UpdateUserInfoEvent;
 import com.puti.education.listener.BaseListener;
+import com.puti.education.nation.NationChooseActivity;
 import com.puti.education.netFrame.netModel.PatriarchModel;
 import com.puti.education.ui.BaseActivity;
+import com.puti.education.ui.uiStudent.StudentInofActivity;
 import com.puti.education.util.Constant;
 import com.puti.education.util.Key;
 import com.puti.education.util.ListViewMeasureUtil;
@@ -48,6 +50,7 @@ public class ParentInfoActivity extends BaseActivity {
 
     private final static int CHOOSE_CHILD_REQUET = 1;
     private final static int CHOOSE_CHILD_RESULT = 2;
+    private static final int NATION_CHOOSE_CODE = 111;
 
     @BindView(R.id.title_textview)
     TextView mTitleTv;
@@ -62,6 +65,8 @@ public class ParentInfoActivity extends BaseActivity {
     TextView mNameTv;
     @BindView(R.id.parent_id_tv)
     TextView mIdTv;
+    @BindView(R.id.nation_choose_layout)
+    RelativeLayout VNationChooseLayout;//民族选择
     @BindView(R.id.parent_nation_tv)
     TextView mNationTv;
     @BindView(R.id.parent_sex_tv)
@@ -218,9 +223,9 @@ public class ParentInfoActivity extends BaseActivity {
         mEducationTv.setEnabled(isEnable);
         mJobTv.setEnabled(isEnable);
 
-        if (isEnable){
+        if (isEnable) {
             birthLayoutGp.setClickable(true);
-        }else {
+        } else {
             birthLayoutGp.setClickable(false);
         }
     }
@@ -231,21 +236,23 @@ public class ParentInfoActivity extends BaseActivity {
         if (data == null) {
             return;
         }
+        if (requestCode == NATION_CHOOSE_CODE  && resultCode == RESULT_OK && data != null){
+            String result = data.getStringExtra("result");
+            mNationTv.setText(result);
+        }else {
+            Student student = (Student) data.getSerializableExtra(Key.BEAN);
+            String className = data.getStringExtra(Key.CHILD_CLASS_NAME);
+            student.className = className;
 
-        Student student = (Student) data.getSerializableExtra(Key.BEAN);
-        String className = data.getStringExtra(Key.CHILD_CLASS_NAME);
-        student.className = className;
-
-        if (parentInfo != null && parentInfo.childList != null) {
-            parentInfo.childList.add(student);
-            childInfoListAdapter = new ChildInfoListAdapter(ParentInfoActivity.this);
-            childInfoListAdapter.setmList(parentInfo.childList);
-            mLv.setAdapter(childInfoListAdapter);
-            ListViewMeasureUtil.measureListViewWrongHeight(mLv);
-            childsNumtv.setText(parentInfo.childList.size() + "");
+            if (parentInfo != null && parentInfo.childList != null) {
+                parentInfo.childList.add(student);
+                childInfoListAdapter = new ChildInfoListAdapter(ParentInfoActivity.this);
+                childInfoListAdapter.setmList(parentInfo.childList);
+                mLv.setAdapter(childInfoListAdapter);
+                ListViewMeasureUtil.measureListViewWrongHeight(mLv);
+                childsNumtv.setText(parentInfo.childList.size() + "");
+            }
         }
-
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @OnClick(R.id.frame_img)
@@ -412,6 +419,11 @@ public class ParentInfoActivity extends BaseActivity {
     @OnClick(R.id.birth_layout_gp)
     public void onClick() {
         TimeChooseUtil timeChooseUtil = new TimeChooseUtil();
-        timeChooseUtil.showTimeDialog(this, mBirthDateTv,true);
+        timeChooseUtil.showTimeDialog(this, mBirthDateTv, true);
+    }
+    //民族选择
+    @OnClick(R.id.nation_choose_layout)
+    public void onNationChoose() {
+        startActivityForResult(new Intent(ParentInfoActivity.this, NationChooseActivity.class),NATION_CHOOSE_CODE);
     }
 }

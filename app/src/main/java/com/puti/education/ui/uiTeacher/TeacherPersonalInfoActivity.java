@@ -1,5 +1,6 @@
 package com.puti.education.ui.uiTeacher;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -18,6 +19,7 @@ import com.puti.education.bean.EditTeacherInofResponse;
 import com.puti.education.bean.TeacherPersonInfo;
 import com.puti.education.event.UpdateUserInfoEvent;
 import com.puti.education.listener.BaseListener;
+import com.puti.education.nation.NationChooseActivity;
 import com.puti.education.netFrame.netModel.TeacherModel;
 import com.puti.education.ui.BaseActivity;
 import com.puti.education.util.Constant;
@@ -40,6 +42,9 @@ import butterknife.OnClick;
  */
 
 public class TeacherPersonalInfoActivity extends BaseActivity {
+
+    private static final int NATION_CHOOSE_CODE = 111;
+
 
     @BindView(R.id.title_textview)
     TextView mTitleTv;
@@ -71,7 +76,9 @@ public class TeacherPersonalInfoActivity extends BaseActivity {
     @BindView(R.id.personnal_info_sex_tv)
     TextView mSexTv;
     @BindView(R.id.personnal_info_national_tv)
-    EditText mNationalEdit;
+    TextView mNationalTV;
+    @BindView(R.id.nation_choose_layout)
+    RelativeLayout VNationChooseLayout;//民族选择
     @BindView(R.id.personnal_info_connact_tv)
     EditText mConnactEdit;
     @BindView(R.id.personnal_info_birth_date_tv)
@@ -115,7 +122,7 @@ public class TeacherPersonalInfoActivity extends BaseActivity {
         mAddressEdit.setEnabled(enable);
         mcontryEdit.setEnabled(enable);
         mMarriedTv.setEnabled(enable);
-        mNationalEdit.setEnabled(enable);
+        mNationalTV.setEnabled(enable);
 
         if (enable){
             VWorkTimeLayout.setClickable(true);
@@ -149,7 +156,7 @@ public class TeacherPersonalInfoActivity extends BaseActivity {
         mAddressEdit.setText(teacherPersonInfo.nature);
         mcontryEdit.setText(teacherPersonInfo.nationality);
         mMarriedTv.setText(teacherPersonInfo.maritalStatus);
-        mNationalEdit.setText(teacherPersonInfo.national);
+        mNationalTV.setText(teacherPersonInfo.national);
     }
 
     @Override
@@ -320,8 +327,8 @@ public class TeacherPersonalInfoActivity extends BaseActivity {
             jsonObject.put("idcard", "");
         }
 
-        if (!isEmptyStr(mNationalEdit)) {
-            jsonObject.put("nation", mNationalEdit.getText().toString());
+        if (!isEmptyStr(mNationalTV)) {
+            jsonObject.put("nation", mNationalTV.getText().toString());
         } else {
             jsonObject.put("nation", "");
         }
@@ -404,7 +411,7 @@ public class TeacherPersonalInfoActivity extends BaseActivity {
     }
 
     //日期选择
-    @OnClick({R.id.work_time_layout, R.id.birth_layout_gp})
+    @OnClick({R.id.work_time_layout, R.id.birth_layout_gp,R.id.nation_choose_layout})
     public void onClick(View view) {
         TimeChooseUtil timeChooseUtil;
         switch (view.getId()) {
@@ -416,6 +423,18 @@ public class TeacherPersonalInfoActivity extends BaseActivity {
                 timeChooseUtil = new TimeChooseUtil();
                 timeChooseUtil.showTimeDialog(this, mBirthTV,true);
                 break;
+            case R.id.nation_choose_layout:
+                startActivityForResult(new Intent(TeacherPersonalInfoActivity.this, NationChooseActivity.class),NATION_CHOOSE_CODE);
+                break;
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == NATION_CHOOSE_CODE  && resultCode == RESULT_OK && data != null){
+            String result = data.getStringExtra("result");
+            mNationalTV.setText(result);
         }
     }
 }

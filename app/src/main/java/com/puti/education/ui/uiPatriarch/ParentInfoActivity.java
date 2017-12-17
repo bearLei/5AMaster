@@ -137,7 +137,10 @@ public class ParentInfoActivity extends BaseActivity {
         }
         setEnableStyle(false);
         setViewListener();
-
+        if (cityChooseDialog == null) {
+            cityChooseDialog = new CityChooseDialog();
+            cityChooseDialog.init(this);
+        }
     }
 
     private void setViewListener() {
@@ -229,15 +232,18 @@ public class ParentInfoActivity extends BaseActivity {
         mHouseAddressTv.setEnabled(isEnable);
         mEducationTv.setEnabled(isEnable);
         mJobTv.setEnabled(isEnable);
+        nowAddressDetetail.setEnabled(isEnable);
 
         if (isEnable) {
             birthLayoutGp.setClickable(true);
             VCensusRegisterGp.setClickable(true);
             VAddressLayoutGp.setClickable(true);
+            VNationChooseLayout.setClickable(true);
         } else {
             birthLayoutGp.setClickable(false);
             VCensusRegisterGp.setClickable(false);
             VAddressLayoutGp.setClickable(false);
+            VNationChooseLayout.setClickable(false);
         }
     }
 

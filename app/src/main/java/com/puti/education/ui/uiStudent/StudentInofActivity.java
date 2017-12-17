@@ -167,7 +167,7 @@ public class StudentInofActivity extends BaseActivity {
             mMotherEducationTv.setEnabled(enable);
             mMotherJobTv.setEnabled(enable);
             mMotherYgNumberTv.setEnabled(enable);
-            ;
+            mNowAddressDetailTv.setEnabled(enable);
         }
         mStuNameTv.setEnabled(enable);
         mIdTv.setEnabled(enable);

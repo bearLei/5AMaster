@@ -226,12 +226,8 @@ public class QuestionnaireEtDetailAdapter extends BasicRecylerAdapter<Question>{
             }
 
             Question qt = mList.get(position);
-            StringBuilder builder = new StringBuilder();
-            builder.append(qt.question);
-            if (qt.isRequired){
-                builder.append("*");
-            }
-            String question = (position+1)+"."+qt.question;
+
+            String question = operateQuestionType(position,qt.question,qt.type);
 
             TextView tv_question = viewHolder.obtainView(R.id.tv_question);
             tv_question.setText(question);
@@ -281,6 +277,31 @@ public class QuestionnaireEtDetailAdapter extends BasicRecylerAdapter<Question>{
        return s;
     }
 
+    private String operateQuestionType(int position,String question,int type){
+        StringBuilder builder = new StringBuilder();
+        builder.append(position+1).append(".").append(question);
+        switch (type){
+            case Constant.TYPE_RADIO:
+                //单选
+                builder.append("(单选)");
+                break;
+            case Constant.TYPE_MULTI:
+                //多选
+                builder.append("(多选)");
+                break;
+            case Constant.TYPE_CLOZE:
+            case Constant.TYPE_TEXTAREA:
+            case Constant.TYPE_NUMBERTAREA:
+                //填空
+                builder.append("(填空)");
+                break;
+            case Constant.TYPE_JUDGE:
+                //判断
+                builder.append("(判断)");
+                break;
+        }
+        return builder.toString();
+    }
     private boolean haveHeaderView() {
         return VIEW_HEADER != null;
     }

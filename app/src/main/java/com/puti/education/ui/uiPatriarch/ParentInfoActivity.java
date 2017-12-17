@@ -233,8 +233,10 @@ public class ParentInfoActivity extends BaseActivity {
         if (isEnable) {
             birthLayoutGp.setClickable(true);
             VCensusRegisterGp.setClickable(true);
+            VAddressLayoutGp.setClickable(true);
         } else {
             birthLayoutGp.setClickable(false);
+            VCensusRegisterGp.setClickable(false);
             VAddressLayoutGp.setClickable(false);
         }
     }

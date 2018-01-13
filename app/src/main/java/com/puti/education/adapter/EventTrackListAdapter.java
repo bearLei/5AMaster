@@ -53,7 +53,7 @@ public class EventTrackListAdapter extends ABaseAdapter<EventTrackData> implemen
         layoutVideo.setTag(position);
 
         EventTrackData track = mList.get(position);
-        desTv.setText(!TextUtils.isEmpty(track.content) ? track.content:"暂无");
+        desTv.setText(!TextUtils.isEmpty(track.content) ? track.content:"");
 
         desTv.setFocusable(false);
         desTv.setFocusableInTouchMode(false);

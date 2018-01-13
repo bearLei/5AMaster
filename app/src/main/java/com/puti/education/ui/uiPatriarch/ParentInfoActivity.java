@@ -81,9 +81,9 @@ public class ParentInfoActivity extends BaseActivity {
     @BindView(R.id.parent_register_type_tv)
     TextView mRegisterTypeTv;
     @BindView(R.id.parent_register_tv)
-    TextView mRegisterTv;
+    EditText mRegisterTv;
     @BindView(R.id.parent_now_house_address_tv)
-    TextView mHouseAddressTv;
+    EditText mHouseAddressTv;
     @BindView(R.id.parent_education_tv)
     TextView mEducationTv;
     @BindView(R.id.parent_job_tv)
@@ -101,8 +101,7 @@ public class ParentInfoActivity extends BaseActivity {
     RelativeLayout VCensusRegisterGp;//户籍
     @BindView(R.id.address_layout_gp)
     RelativeLayout VAddressLayoutGp;//地址
-    @BindView(R.id.now_address_detetail)
-    EditText nowAddressDetetail;//详细地址
+
 
     private int style = 1;
     private boolean mIsEdit = false;
@@ -232,7 +231,6 @@ public class ParentInfoActivity extends BaseActivity {
         mHouseAddressTv.setEnabled(isEnable);
         mEducationTv.setEnabled(isEnable);
         mJobTv.setEnabled(isEnable);
-        nowAddressDetetail.setEnabled(isEnable);
 
         if (isEnable) {
             birthLayoutGp.setClickable(true);
@@ -466,7 +464,6 @@ public class ParentInfoActivity extends BaseActivity {
                         @Override
                         public void result(String s, String detail) {
                             mHouseAddressTv.setText(s);
-                            nowAddressDetetail.setText(detail);
                         }
                     });
                 }

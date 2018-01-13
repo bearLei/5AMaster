@@ -96,13 +96,12 @@ public class StudentInofActivity extends BaseActivity {
     @BindView(R.id.census_register_gp)
     RelativeLayout VCensusRegisterGp;//户籍
     @BindView(R.id.register_tv)
-    TextView mFamilyTv;
+    EditText mFamilyTv;
     @BindView(R.id.address_layout_gp)
     RelativeLayout VAddressLayoutGp;//地址
     @BindView(R.id.now_address_tv)
-    TextView mNowAddressTv;
-    @BindView(R.id.now_address_detetail)
-    EditText mNowAddressDetailTv;//详细地址
+    EditText mNowAddressTv;
+
     @BindView(R.id.father_name_tv)
     EditText mFatherNameTv;
     @BindView(R.id.father_education_tv)
@@ -167,7 +166,6 @@ public class StudentInofActivity extends BaseActivity {
             mMotherEducationTv.setEnabled(enable);
             mMotherJobTv.setEnabled(enable);
             mMotherYgNumberTv.setEnabled(enable);
-            mNowAddressDetailTv.setEnabled(enable);
         }
         mStuNameTv.setEnabled(enable);
         mIdTv.setEnabled(enable);
@@ -182,7 +180,6 @@ public class StudentInofActivity extends BaseActivity {
         mGuarDianPeopleTv.setEnabled(enable);
         mRelationShipTv.setEnabled(enable);
 //        mFamilyTv.setEnabled(enable);
-        mNowAddressDetailTv.setEnabled(enable);
         mNowAddressTv.setEnabled(enable);
 
 
@@ -221,7 +218,6 @@ public class StudentInofActivity extends BaseActivity {
         mRelationShipTv.setText(info.relativeWith);
         mFamilyTv.setText(info.register);
         mNowAddressTv.setText(info.familyAddress);
-        mNowAddressDetailTv.setText(info.familyAddress);
         mFatherNameTv.setText(info.fatherName);
         mFatherEducationTv.setText(info.fatherEdu);
         mFatherJobTv.setText(info.fatherTitle);
@@ -338,7 +334,6 @@ public class StudentInofActivity extends BaseActivity {
                 @Override
                 public void result(String s, String detail) {
                     mNowAddressTv.setText(s);
-                    mNowAddressDetailTv.setText(detail);
                 }
             });
         }
@@ -438,7 +433,7 @@ public class StudentInofActivity extends BaseActivity {
         jsonObject.put("guardian", TextUtils.isEmpty(mGuarDianPeopleTv.getText().toString()) ? "" : mGuarDianPeopleTv.getText().toString());
         jsonObject.put("relativeWith", TextUtils.isEmpty(mRelationShipTv.getText().toString()) ? "" : mRelationShipTv.getText().toString());
         jsonObject.put("register", TextUtils.isEmpty(mFamilyTv.getText().toString()) ? "" : mFamilyTv.getText().toString());
-        jsonObject.put("familyAddress", TextUtils.isEmpty(mNowAddressDetailTv.getText().toString()) ? "" : mNowAddressDetailTv.getText().toString());
+        jsonObject.put("familyAddress", TextUtils.isEmpty(mNowAddressTv.getText().toString()) ? "" : mNowAddressTv.getText().toString());
 
         jsonObject.put("fatherName", TextUtils.isEmpty(mFatherNameTv.getText().toString()) ? "" : mFatherNameTv.getText().toString());
         jsonObject.put("fatherEdu", TextUtils.isEmpty(mFatherEducationTv.getText().toString()) ? "" : mFatherEducationTv.getText().toString());

@@ -284,9 +284,12 @@
 
                 <TextView
                     style="@style/personal_info_text_style"
-                    android:text="户籍" />
+                    android:text="户籍"
+                    android:drawableRight="@mipmap/ic_down_arrow"
+                    android:drawablePadding="3dp"
+                    />
 
-                <TextView
+                <EditText
                     android:id="@+id/register_tv"
                     style="@style/personal_info_right_text_style"
                     android:text="" />
@@ -301,27 +304,18 @@
 
                 <TextView
                     style="@style/personal_info_text_style"
-                    android:text="现家庭住址" />
+                    android:text="现家庭住址"
+                    android:drawableRight="@mipmap/ic_down_arrow"
+                    android:drawablePadding="3dp"
+                    />
 
-                <TextView
+                <EditText
                     android:id="@+id/now_address_tv"
                     style="@style/personal_info_right_text_style"
                     android:text="" />
 
             </RelativeLayout>
-            <RelativeLayout
-                style="@style/personal_info_textparent_style">
 
-                <TextView
-                    style="@style/personal_info_text_style"
-                    android:text="详细地址" />
-
-                <EditText
-                    android:id="@+id/now_address_detetail"
-                    style="@style/personal_info_right_text_style"
-                    android:text="" />
-
-            </RelativeLayout>
             <View style="@style/line_style" />
 
             <RelativeLayout style="@style/personal_info_textparent_style">

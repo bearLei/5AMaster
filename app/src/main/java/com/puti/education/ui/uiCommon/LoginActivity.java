@@ -39,7 +39,6 @@ import com.puti.education.ui.BaseActivity;
 import com.puti.education.ui.fragment.StudentSosFragment;
 import com.puti.education.ui.uiPatriarch.PatriarchMainActivity;
 import com.puti.education.ui.uiStudent.StudentMainActivity;
-import com.puti.education.ui.uiTeacher.ChoosePersonListActivity;
 import com.puti.education.ui.uiTeacher.TeacherMainActivity;
 import com.puti.education.util.ConfigUtil;
 import com.puti.education.util.Constant;

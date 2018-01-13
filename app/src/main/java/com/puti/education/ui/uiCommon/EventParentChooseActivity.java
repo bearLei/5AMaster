@@ -20,7 +20,6 @@ import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.TeacherModel;
 import com.puti.education.ui.BaseActivity;
-import com.puti.education.ui.uiTeacher.ChoosePersonListActivity;
 import com.puti.education.util.Constant;
 import com.puti.education.util.ImgLoadUtil;
 import com.puti.education.util.Key;

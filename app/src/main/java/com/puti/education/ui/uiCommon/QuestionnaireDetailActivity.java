@@ -26,13 +26,18 @@ import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.TeacherModel;
 import com.puti.education.netFrame.response.PageInfo;
 import com.puti.education.ui.BaseActivity;
-import com.puti.education.ui.uiTeacher.ChoosePersonListActivity;
 import com.puti.education.ui.uiTeacher.TeacherAddEventActivity;
+import com.puti.education.ui.uiTeacher.chooseperson.ChoosePersonListActivityNew;
+import com.puti.education.ui.uiTeacher.chooseperson.ChoosePersonParameter;
+import com.puti.education.ui.uiTeacher.chooseperson.event.ChooseCompleteEvent;
 import com.puti.education.util.ConfigUtil;
 import com.puti.education.util.Constant;
 import com.puti.education.util.Key;
 import com.puti.education.util.ToastUtil;
 import com.puti.education.widget.CommonDropView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -71,7 +76,7 @@ public class QuestionnaireDetailActivity extends BaseActivity {
     private ArrayList<EventCourse> mCourseList;
     private ArrayList<String> mSchoolCourseList;
 
-
+    private int mPosition;//位置
     @Override
     public int getLayoutResourceId() {
         return R.layout.qt_detail_layout;
@@ -212,13 +217,14 @@ public class QuestionnaireDetailActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             int pos = (int) v.getTag(R.id.position_key);
+            mPosition = pos;
             Question qt = mQtDetail.items.get(pos);
             switch (qt.type) {
                 case Constant.TYPE_TEACHER_UID:
-                    chooseTeacher(pos);
+                    chooseTeacher();
                     break;
                 case Constant.TYPE_STUDENT_UID:
-                    chooseStudent(pos);
+                    chooseStudent();
                     break;
                 case Constant.TYPE_PARENT_UID:
                     chooseParent(pos);
@@ -232,24 +238,18 @@ public class QuestionnaireDetailActivity extends BaseActivity {
     };
 
 
-    private void chooseTeacher(int position) {
+    private void chooseTeacher() {
         Intent intent = new Intent();
-        intent.putExtra(Key.CHOOSE_TEACHER, 1);
-        intent.putExtra(Key.INDEX, position);
-        intent.putExtra(Key.NUMBER_TO_NEED, 1);
-        intent.putExtra(Key.NUMBER_IS_CHOOSED, 0);
-        intent.setClass(this, ChoosePersonListActivity.class);
-        startActivityForResult(intent, 3000);
+        intent.putExtra(ChoosePersonParameter.REFER,ChoosePersonParameter.REFER_QS_TEA);
+        intent.setClass(this, ChoosePersonListActivityNew.class);
+       startActivity(intent);
     }
 
-    private void chooseStudent(int position) {
+    private void chooseStudent() {
         Intent intent = new Intent();
-        intent.putExtra(Key.CHOOSE_STUDENT, 1);
-        intent.putExtra(Key.INDEX, position);
-        intent.putExtra(Key.NUMBER_TO_NEED, 1);
-        intent.putExtra(Key.NUMBER_IS_CHOOSED, 0);
-        intent.setClass(this, ChoosePersonListActivity.class);
-        startActivityForResult(intent, 3001);
+        intent.putExtra(ChoosePersonParameter.REFER,ChoosePersonParameter.REFER_QS_STU);
+        intent.setClass(this, ChoosePersonListActivityNew.class);
+        startActivity(intent);
     }
 
     private void chooseParent(int position) {
@@ -351,7 +351,6 @@ public class QuestionnaireDetailActivity extends BaseActivity {
         if (intent == null) {
             return;
         }
-
         switch (resultCode) {
 
             //曹 这里引用是什么意思
@@ -386,15 +385,19 @@ public class QuestionnaireDetailActivity extends BaseActivity {
             }
 
         }
-
-
         super.onActivityResult(requestCode, resultCode, intent);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    //接收选择学生或者选择老师后的事件
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void on3EventMainThread(ChooseCompleteEvent event){
+        if (event != null){
+            ArrayList<EventAboutPeople> peoples = event.getmList();
+            if (mPosition >= 0 && peoples != null && peoples.size() > 0) {
+                mQtDetail.items.get(mPosition).answerd = peoples.get(0).uid;
+                mQtDetail.items.get(mPosition).answerd2 = peoples.get(0).name;
+                mDetailAdapter.update(mPosition);
+            }
+        }
     }
 }

@@ -38,7 +38,6 @@ import com.puti.education.netFrame.netModel.StudentModel;
 import com.puti.education.ui.BaseActivity;
 import com.puti.education.ui.uiCommon.ChooseHeadListActivity;
 import com.puti.education.ui.uiCommon.LoginActivity;
-import com.puti.education.ui.uiTeacher.ChoosePersonListActivity;
 import com.puti.education.util.ConfigUtil;
 import com.puti.education.util.Constant;
 import com.puti.education.util.DisPlayUtil;

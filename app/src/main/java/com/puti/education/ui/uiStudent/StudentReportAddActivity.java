@@ -26,8 +26,9 @@ import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.StudentModel;
 import com.puti.education.ui.BaseActivity;
-import com.puti.education.ui.BaseFragment;
-import com.puti.education.ui.uiTeacher.ChoosePersonListActivity;
+import com.puti.education.ui.uiTeacher.chooseperson.ChoosePersonListActivityNew;
+import com.puti.education.ui.uiTeacher.chooseperson.ChoosePersonParameter;
+import com.puti.education.ui.uiTeacher.chooseperson.event.ChooseCompleteEvent;
 import com.puti.education.util.ConfigUtil;
 import com.puti.education.util.Constant;
 import com.puti.education.util.DisPlayUtil;
@@ -36,6 +37,9 @@ import com.puti.education.util.Key;
 import com.puti.education.util.LogUtil;
 import com.puti.education.util.ToastUtil;
 import com.puti.education.widget.DropWithBackView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -306,7 +310,7 @@ public class StudentReportAddActivity extends BaseActivity {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    chooseStudentTeacher(Constant.REQUEST_CODE_STUDENT);
+                    chooseStudentTeacher(ChoosePersonParameter.REFER_STU_REPORT_ADD_STU);
                 }
             });
         }
@@ -351,7 +355,7 @@ public class StudentReportAddActivity extends BaseActivity {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    chooseStudentTeacher(Constant.REQUEST_CODE_BOTH);
+                    chooseStudentTeacher(ChoosePersonParameter.REFER_STU_REPORT_ADD_TEA);
                 }
             });
         }
@@ -496,15 +500,10 @@ public class StudentReportAddActivity extends BaseActivity {
     }
 
 
-    private void chooseStudentTeacher(int requestType){
-        Intent intent = new Intent(this,ChoosePersonListActivity.class);
-        intent.putExtra(Key.FROM_SOURCE_WINDOW, Constant.REPORT_EVENT_ACTIVITY);
-        intent.putExtra(Key.CHOOSE_STUDENT, 2);
-
-        intent.putExtra(Key.NUMBER_TO_NEED, 1);
-        intent.putExtra(Key.NUMBER_IS_CHOOSED, 0);
-
-        startActivityForResult(intent, requestType);
+    private void chooseStudentTeacher(int type){
+        Intent intent = new Intent(this,ChoosePersonListActivityNew.class);
+        intent.putExtra(ChoosePersonParameter.REFER,type);
+        startActivity(intent);
     }
 
 
@@ -529,25 +528,6 @@ public class StudentReportAddActivity extends BaseActivity {
                 }
 
             }
-        }else if (requestCode == Constant.REQUEST_CODE_STUDENT && data != null){
-            ArrayList<EventAboutPeople> involvePeoples = (ArrayList<EventAboutPeople>)data.getSerializableExtra(Key.BEAN);
-            if (involvePeoples == null || involvePeoples.size() <= 0){
-                return;
-            }
-            boolean isFound = false;
-            if (mReportPeopleList != null && mReportPeopleList.size() > 0){
-                for (EventAboutPeople people1: mReportPeopleList){
-                    if (people1 != null && people1.uid.equals(involvePeoples.get(0).uid) && people1.type == involvePeoples.get(0).type){
-                        isFound = true;
-                    }
-                }
-            }
-
-            if (!isFound){
-                mReportPeopleList.add(involvePeoples.get(0));
-                refreshReportPeople();
-            }
-
         }else if (requestCode == Constant.REQUEST_CODE_BOTH_INVOLOVER && data != null){
             EventAboutPeople people = (EventAboutPeople)data.getSerializableExtra(Key.BEAN);
             boolean isFound = false;
@@ -576,5 +556,26 @@ public class StudentReportAddActivity extends BaseActivity {
         }
     }
 
-
+    //接收选择学生或者选择老师后的事件
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void on3EventMainThread(ChooseCompleteEvent event){
+        if (event != null){
+            ArrayList<EventAboutPeople> involvePeoples = event.getmList();
+            if (involvePeoples == null || involvePeoples.size() <= 0){
+                return;
+            }
+            boolean isFound = false;
+            if (mReportPeopleList != null && mReportPeopleList.size() > 0){
+                for (EventAboutPeople people1: mReportPeopleList){
+                    if (people1 != null && people1.uid.equals(involvePeoples.get(0).uid) && people1.type == involvePeoples.get(0).type){
+                        isFound = true;
+                    }
+                }
+            }
+            if (!isFound){
+                mReportPeopleList.add(involvePeoples.get(0));
+                refreshReportPeople();
+            }
+        }
+    }
 }

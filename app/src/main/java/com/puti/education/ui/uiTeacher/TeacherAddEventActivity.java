@@ -40,6 +40,9 @@ import com.puti.education.ui.BaseActivity;
 import com.puti.education.ui.uiCommon.EventDutyChooseActivity;
 import com.puti.education.ui.uiCommon.VideoRecordActivity;
 import com.puti.education.ui.uiStudent.StudentReportAddActivity;
+import com.puti.education.ui.uiTeacher.chooseperson.ChoosePersonListActivityNew;
+import com.puti.education.ui.uiTeacher.chooseperson.ChoosePersonParameter;
+import com.puti.education.ui.uiTeacher.chooseperson.event.ChooseCompleteEvent;
 import com.puti.education.util.Constant;
 import com.puti.education.util.Key;
 import com.puti.education.util.LogUtil;
@@ -52,6 +55,9 @@ import com.puti.education.widget.GridViewForScrollView;
 import com.puti.education.widget.RatingBarView;
 import com.puti.education.widget.RatingSmallBarView;
 import com.puti.education.widget.TimeDialog;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -133,33 +139,10 @@ public class TeacherAddEventActivity extends BaseActivity{
     private ArrayList<String> mImagePaths;
     private ArrayList<LocalFile> mAudioLocalFileList;
     private String mVideoPaths;
-
     private ArrayList<UploadFileBean> mUploadedImages;
     private ArrayList<UploadFileBean> mUploadAudios;
     private ArrayList<UploadFileBean> mUploadVideos;
-
-
     private EventAddressListDialog mEventAddressListDialog = null;
-    private EventAddReceiver mEventReceiver = null;
-
-
-
-    public class EventAddReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            LogUtil.d("EventAddReceiver"," onReceive ");
-            if(action.equals(Constant.BROADCAST_ADD_INVOLVER)) {
-                mDutyType = intent.getStringExtra(Key.DUTY_TYPE);
-                //选择完传递回来的学生列表
-                ArrayList<EventAboutPeople> involvePeoples = (ArrayList<EventAboutPeople>)intent.getSerializableExtra(Key.DUTY_PEOPLE);
-                if  (involvePeoples != null && involvePeoples.size() > 0){
-                   opraterList(involvePeoples,false);
-                }
-            }
-        }
-    }
     //处理选择完学生后的列表组合，过滤下相同的  mmp的 一个列表的身份类型 你保存个成员变量？？？？ 待优化
     private void opraterList(ArrayList<EventAboutPeople> involvePeoples,boolean resetType){
         for (int i = 0; i < mInvolvePeopleList.size(); i++) {
@@ -187,24 +170,6 @@ public class TeacherAddEventActivity extends BaseActivity{
         }
         mInvolvePeopleList.add(mAddSign);
         mInvolvePeopleAdapter.notifyDataSetChanged();
-    }
-    public void setReceiver()
-    {
-        mEventReceiver = new EventAddReceiver();
-
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(Constant.BROADCAST_ADD_INVOLVER);
-        this.registerReceiver(mEventReceiver, intentFilter);
-    }
-
-    public void cancelReceiver()
-    {
-        if (mEventReceiver != null)
-        {
-            LogUtil.d("", "cancelReceiver");
-            this.unregisterReceiver(mEventReceiver);
-            mEventReceiver = null;
-        }
     }
 
     private void setDutyTypeExt(ArrayList<EventAboutPeople> peoples, String dutytype){
@@ -288,35 +253,31 @@ public class TeacherAddEventActivity extends BaseActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 EventAboutPeople people = mInvolvePeopleList.get(position);
-                if (!people.isPeople){
+                if (!people.isPeople) {
                     Intent intent = new Intent();
-                    if (mbAbnormal){
+                    if (mbAbnormal) {
                         //当为异常事件的时候, 需跳选择责任类型界面
                         intent.putExtra("type", 0);
                         intent.putExtra(Key.EVENT_ABNORMOL, mbAbnormal);
-                        intent.setClass(TeacherAddEventActivity.this,EventDutyChooseActivity.class);
+                        intent.setClass(TeacherAddEventActivity.this, EventDutyChooseActivity.class);
                         startActivity(intent);
-                    }else{
+                    } else {
                         //当为普通事件的时候, 不选择责任类型, 因为都默认是主要事件人, 故直接跳到人物选择界面
-                        intent.putExtra("type", 1);
-                        intent.putExtra(Key.EVENT_ABNORMOL, mbAbnormal);
-                        intent.putExtra(Key.DUTY_TYPE, Constant.EVENT_DUTY_MAJOR);
-                        intent.putExtra(Key.CHOOSE_STUDENT,1);
-                        intent.putExtra(Key.NUMBER_TO_NEED, Constant.CHOOSE_PEOPLE_MAX);
-                        intent.putExtra(Key.NUMBER_IS_CHOOSED, 0);
-                        intent.putExtra(Key.BEAN, (Serializable) mInvolvePeopleList);
-                        intent.setClass(TeacherAddEventActivity.this, ChoosePersonListActivity.class);
+                        intent.putExtra(ChoosePersonParameter.EVENT_ABNORMOL, mbAbnormal);
+                        intent.putExtra(ChoosePersonParameter.DUTY_TYPE, Constant.EVENT_DUTY_MAJOR);
+                        intent.putExtra(ChoosePersonParameter.REFER, ChoosePersonParameter.REFER_DUTY_STUDENGT);
+                        intent.setClass(TeacherAddEventActivity.this, ChoosePersonListActivityNew.class);
                         startActivity(intent);
                     }
 
-                }else{
+                } else {
                     mInvolvePeopleList.remove(position);
                     mInvolvePeopleAdapter.notifyDataSetChanged();
                 }
             }
         });
 
-        if (!mbAbnormal){
+        if (!mbAbnormal) {
             mRbvEventLevel.setStarCount(2);
             //mRbvEventLevel.postInvalidate();
             mRbvEventLevel.requestLayout();
@@ -330,32 +291,27 @@ public class TeacherAddEventActivity extends BaseActivity{
         });
 
         //是否发送至学生处
-        if (!mbAbnormal){
+        if (!mbAbnormal) {
             mLayoutPush.setVisibility(View.GONE);
-        }else{
+        } else {
             mPushRaidoGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    if (checkedId == R.id.push_yes_radio){
+                    if (checkedId == R.id.push_yes_radio) {
                         mIsPushOffice = true;
 
-                    }else{
+                    } else {
                         mIsPushOffice = false;
                     }
                 }
             });
             mPushRaidoGroup.check(R.id.push_no_radio);
         }
-
-
-
-        setReceiver();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        cancelReceiver();
     }
 
     @Override
@@ -372,17 +328,6 @@ public class TeacherAddEventActivity extends BaseActivity{
 
         switch (resultCode){
 
-            case CODE_RESULT_ADD_EVENT_CHOOSE_STU:
-            {
-                EventAboutPeople people = (EventAboutPeople)intent.getSerializableExtra(Key.BEAN);
-                if (isHasSameEelement(mInvolvePeopleList,people)){
-                    return;
-                }
-                mInvolvePeopleList.add(mInvolvePeopleList.size()-1,people);
-                mInvolvePeopleAdapter.notifyDataSetChanged();
-                getStudentDetail(people.uid);
-            }
-                break;
             case CODE_RESULT_ADD_EVENT_CHOOSE_KNOW_EVENT_PEOPLE:
             {
                 EventAboutPeople people = (EventAboutPeople)intent.getSerializableExtra(Key.BEAN);
@@ -421,7 +366,6 @@ public class TeacherAddEventActivity extends BaseActivity{
                        && mInvolvePeopleList != null){
                    ArrayList<EventAboutPeople> list = (ArrayList<EventAboutPeople>) intent.getSerializableExtra(AddEventZxingActivity.ZXING_LIST);
                    if (list != null && list.size() > 0) {
-//                           mDutyType = "1";
                           opraterList(list,true);
                    }
                }
@@ -1040,5 +984,19 @@ public class TeacherAddEventActivity extends BaseActivity{
             Toast.makeText(this,"用户拒绝了权限",Toast.LENGTH_SHORT).show();
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+
+    //接收选择学生或者选择老师后的事件
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void on3EventMainThread(ChooseCompleteEvent event) {
+        if (event != null) {
+            ArrayList<EventAboutPeople> involvePeoples = event.getmList();
+            mDutyType = event.getDuty();
+            //选择完传递回来的学生列表
+            if  (involvePeoples != null && involvePeoples.size() > 0){
+                opraterList(involvePeoples,false);
+            }
+        }
     }
 }

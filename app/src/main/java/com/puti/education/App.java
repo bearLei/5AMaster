@@ -1,5 +1,6 @@
 package com.puti.education;
 
+import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
@@ -32,6 +33,9 @@ public class App extends MultiDexApplication{
 
     }
 
+    public static Context getContext(){
+        return getContext();
+    }
     public ArrayList<ClassInfo> mClassList;
     public synchronized void setClassList(ArrayList<ClassInfo> classlist){
         mClassList = classlist;

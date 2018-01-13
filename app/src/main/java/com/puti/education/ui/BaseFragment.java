@@ -63,12 +63,13 @@ public abstract class BaseFragment extends Fragment{
         }
     }
 
-    public void disLoading(){
-        mProgressDialog = new ProgressDialog(getActivity());
-        mProgressDialog.setMessage("加载中…");
-        mProgressDialog.show();
+    public void disLoading() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(getActivity());
+            mProgressDialog.setMessage("加载中…");
+            mProgressDialog.show();
+        }
     }
-
     public void disLoading(String msg){
         mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage(msg);

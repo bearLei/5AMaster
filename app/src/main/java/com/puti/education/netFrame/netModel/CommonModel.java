@@ -177,7 +177,17 @@ public class CommonModel extends BaseModel{
                     }
                 });
     }
-
+    //教师端获取所有用户
+    public void getAllUserList( String keyWord,final BaseListener baseListener){
+        mCommonApi.userList(keyWord).subscribeOn(Schedulers.io())//请求在子线程
+                .observeOn(AndroidSchedulers.mainThread())//回调在主线程
+                .subscribe(new CommonSubscriber(baseListener){
+                    @Override
+                    public void onNext(ResponseInfo responseInfo) {
+                        dealJsonStr(responseInfo, baseListener);
+                    }
+                });
+    }
     public void getStudentList(String classId,String keyword,final BaseListener baseListener){
 
         mCommonApi.studentList(classId, keyword).subscribeOn(Schedulers.io())

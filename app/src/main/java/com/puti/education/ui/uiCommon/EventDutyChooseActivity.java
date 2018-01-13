@@ -2,7 +2,6 @@ package com.puti.education.ui.uiCommon;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -16,14 +15,13 @@ import com.puti.education.bean.Duty;
 import com.puti.education.bean.EventAboutPeople;
 import com.puti.education.bean.EventType;
 import com.puti.education.listener.BaseListener;
-import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.TeacherModel;
 import com.puti.education.ui.BaseActivity;
 import com.puti.education.ui.uiTeacher.AddEventZxingActivity;
-import com.puti.education.ui.uiTeacher.ChoosePersonListActivity;
 import com.puti.education.ui.uiTeacher.TeacherAddEventActivity;
+import com.puti.education.ui.uiTeacher.chooseperson.ChoosePersonListActivityNew;
+import com.puti.education.ui.uiTeacher.chooseperson.ChoosePersonParameter;
 import com.puti.education.util.Constant;
-import com.puti.education.util.DisPlayUtil;
 import com.puti.education.util.Key;
 import com.puti.education.util.ToastUtil;
 
@@ -168,19 +166,16 @@ public class EventDutyChooseActivity extends BaseActivity {
                   intent.setClass(this, TeacherAddEventActivity.class);
               }
             }  else  {
-                intent.putExtra(Key.EVENT_ABNORMOL, mAbnormal);
-                intent.putExtra(Key.DUTY_TYPE, et.key);
+                intent.putExtra(ChoosePersonParameter.EVENT_ABNORMOL, mAbnormal);
+                intent.putExtra(ChoosePersonParameter.DUTY_TYPE, et.key);
                 if (et.key.equals(Constant.EVENT_DUTY_MAJOR) || et.key.equals(Constant.EVENT_DUTY_MINOR) ||
                         et.key.equals(Constant.EVENT_DUTY_REPORT)) {
-                    intent.putExtra(Key.CHOOSE_STUDENT, 1);
+                    intent.putExtra(ChoosePersonParameter.REFER, ChoosePersonParameter.REFER_DUTY_STUDENGT);
                 } else {
-                    intent.putExtra(Key.CHOOSE_BOTH, 1);
+                    intent.putExtra(ChoosePersonParameter.REFER, ChoosePersonParameter.REFER_DUTY_ALL);
                 }
 
-                intent.putExtra(Key.NUMBER_TO_NEED, Constant.CHOOSE_PEOPLE_MAX);
-                intent.putExtra(Key.NUMBER_IS_CHOOSED, 0);
-                intent.putExtra(Key.BEAN, mInvolvePeopleList);
-                intent.setClass(this, ChoosePersonListActivity.class);
+                intent.setClass(this, ChoosePersonListActivityNew.class);
             }
             startActivity(intent);
             this.finish();

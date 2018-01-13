@@ -59,6 +59,9 @@ public interface CommonApi {
 
     @GET("base/teacherlist")
     Observable<ResponseInfo> teacherList(@Query("schoolUid") String schoolId, @Query("keyword") String keyword);
+    @GET("teacher/users")
+    Observable<ResponseInfo> userList(@Query("keyword")String keyword);
+
     @GET("base/studentlist")
     Observable<ResponseInfo> studentList(@Query("classUid") String classId,@Query("keyword") String keyword);
     //班级列表

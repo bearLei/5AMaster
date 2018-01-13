@@ -282,12 +282,13 @@ public class MultiBarChartView extends View{
         int offset = rect.width()/2;
 
         int len = monthList.size();
-        for (int i = 0;i< 4;i++){
-            x = mYlableWidth + xPartValue/2 + i* xPartValue - offset;
-            y = xCoordiLineHieght + (mCharViewHeight - mXlableHeight) + DisPlayUtil.dip2px(mContext,10);
-            canvas.drawText(monthList.get(len-4+i),x,y,mXScaleLablePaint);
+        if (len >= 4) {
+            for (int i = 0; i < 4; i++) {
+                x = mYlableWidth + xPartValue / 2 + i * xPartValue - offset;
+                y = xCoordiLineHieght + (mCharViewHeight - mXlableHeight) + DisPlayUtil.dip2px(mContext, 10);
+                canvas.drawText(monthList.get(len - 4 + i), x, y, mXScaleLablePaint);
+            }
         }
-
         for (int i = 0 ; i < 5;i++){
             x1 = mYlableWidth + i*xPartValue;
             y1 = mCharViewHeight - mXlableHeight - lineWidth;

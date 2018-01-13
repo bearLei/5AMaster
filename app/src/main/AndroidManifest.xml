@@ -146,10 +146,6 @@
             android:name=".ui.uiTeacher.TeacherPersonalInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.uiTeacher.ChoosePersonListActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"/>
-        <activity
             android:name=".ui.uiTeacher.ProofListActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -268,6 +264,10 @@
             android:configChanges="orientation|screenSize"
             />
 
+        <activity android:name=".ui.uiTeacher.chooseperson.ChoosePersonListActivityNew"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
+            />
         <!-- 百度地图相关的service -->
         <service
             android:name="com.baidu.location.f"

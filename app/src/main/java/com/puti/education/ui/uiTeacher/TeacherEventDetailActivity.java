@@ -515,12 +515,14 @@ public class TeacherEventDetailActivity extends BaseActivity {
             mTvCourse.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent5 = new Intent();
-                    intent5.putExtra("type", 3);
-                    intent5.putExtra("msg_title", "推荐课程");
-                    intent5.putExtra("weburl", mEventBean.deal.tutoringUrl);
-                    intent5.setClass(TeacherEventDetailActivity.this, WebViewActivity.class);
-                    startActivity(intent5);
+                    if (!TextUtils.isEmpty(mEventBean.deal.tutoringUrl)) {
+                        Intent intent5 = new Intent();
+                        intent5.putExtra("type", 3);
+                        intent5.putExtra("msg_title", "推荐课程");
+                        intent5.putExtra("weburl", mEventBean.deal.tutoringUrl);
+                        intent5.setClass(TeacherEventDetailActivity.this, WebViewActivity.class);
+                        startActivity(intent5);
+                    }
                 }
             });
 

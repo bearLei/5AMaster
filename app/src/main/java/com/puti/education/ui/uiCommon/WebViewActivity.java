@@ -1,8 +1,10 @@
 package com.puti.education.ui.uiCommon;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.text.TextUtils;
+import android.webkit.DownloadListener;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -70,6 +72,25 @@ public class WebViewActivity extends BaseActivity {
                 //handler.cancel(); 默认的处理方式，WebView变成空白页
                 handler.proceed();//接受证书
                 //handleMessage(Message msg); 其他处理
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return false;
+            }
+        });
+
+        webView.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }catch (Exception e){
+
+                }
             }
         });
 

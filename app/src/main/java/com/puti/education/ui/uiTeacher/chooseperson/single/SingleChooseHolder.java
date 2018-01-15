@@ -72,7 +72,10 @@ public class SingleChooseHolder extends BaseHolder<SingleChooseBean> implements 
                 name.setText(data.getName());
             }
             if (!TextUtils.isEmpty(data.getMajor())){
+                TDesc.setVisibility(View.VISIBLE);
                 TDesc.setText(data.getMajor());
+            }else {
+                TDesc.setVisibility(View.GONE);
             }
             ISelect.setVisibility(View.VISIBLE);
             if (isSeleted){

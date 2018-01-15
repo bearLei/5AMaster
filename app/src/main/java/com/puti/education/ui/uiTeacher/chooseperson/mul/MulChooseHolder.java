@@ -72,7 +72,10 @@ public class MulChooseHolder extends BaseHolder<MulPersonBean> implements View.O
                 name.setText(data.getRealName());
             }
             if (!TextUtils.isEmpty(data.getPhone())){
+                TDesc.setVisibility(View.VISIBLE);
                 TDesc.setText(data.getPhone());
+            }else {
+                TDesc.setVisibility(View.GONE);
             }
             ISelect.setVisibility(View.VISIBLE);
             if (isSeleted){

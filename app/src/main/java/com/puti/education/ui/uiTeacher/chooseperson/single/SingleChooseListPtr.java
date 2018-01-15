@@ -93,7 +93,7 @@ public class SingleChooseListPtr implements BaseMvpPtr {
                 //如果是异常事件，则教师去选择学生,则只能选择所任课的学生; 如果是学生处教师，则可以选择所有班级
                 //如果是普通事件，则都可以选择
                 boolean isAffairs = ConfigUtil.getInstance(context).get(Constant.KEY_IS_STUDENT_AFFAIRS, false);
-                if (mView.isAbnormal()){
+                if (!mView.isAbnormal()){
                    if (isAffairs){
                        mClassList.addAll(allClasses);
                    }else {

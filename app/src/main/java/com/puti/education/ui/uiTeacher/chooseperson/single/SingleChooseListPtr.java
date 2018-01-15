@@ -36,6 +36,9 @@ public class SingleChooseListPtr implements BaseMvpPtr {
     private ArrayList<ClassInfo> mClassList;//班级集合
     private ArrayList<String> mClassNameList;//班级名字集合
 
+    private boolean initClassFlag;//设置个标签位来区分是否拉取过班级
+
+
     public SingleChooseListPtr(Activity context) {
         this.context = context;
         mData = new ArrayList<>();
@@ -85,6 +88,7 @@ public class SingleChooseListPtr implements BaseMvpPtr {
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 List<ClassInfo> allClasses = (List<ClassInfo>) listObj;
+                initClassFlag = true;
                 mClassList.clear();
                 //如果是异常事件，则教师去选择学生,则只能选择所任课的学生; 如果是学生处教师，则可以选择所有班级
                 //如果是普通事件，则都可以选择
@@ -135,6 +139,7 @@ public class SingleChooseListPtr implements BaseMvpPtr {
      * @param keyWord  搜索关键字
      */
     public void getStudentList(String classId,String keyWord){
+        if (!initClassFlag) return;
         LogUtil.d(TAG,"getStudent");
         mView.showLoading(true);
         CommonModel.getInstance().getStudentList(classId,keyWord,new BaseListener(SingleChooseBean.class){

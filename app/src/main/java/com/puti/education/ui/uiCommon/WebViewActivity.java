@@ -3,9 +3,13 @@ package com.puti.education.ui.uiCommon;
 import android.content.Intent;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.webkit.DownloadListener;
 import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -58,6 +62,7 @@ public class WebViewActivity extends BaseActivity {
         return R.layout.activity_helpercenter;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void initVariables() {
         Intent intent = getIntent();
@@ -72,12 +77,6 @@ public class WebViewActivity extends BaseActivity {
                 //handler.cancel(); 默认的处理方式，WebView变成空白页
                 handler.proceed();//接受证书
                 //handleMessage(Message msg); 其他处理
-            }
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return false;
             }
         });
 
@@ -97,9 +96,8 @@ public class WebViewActivity extends BaseActivity {
         //webView.loadUrl(NetOper.HTTP_PREFIX + "/setting/help");
         //titleTv.setText("帮助中心");
 
-        webView.getSettings().setDefaultTextEncodingName("UTF-8");
-        webView.getSettings().setJavaScriptEnabled(true);
-
+       initWebViewSetting();
+        webView.setWebChromeClient(new WebChromeClient());
         msgTitle = intent.getStringExtra("msg_title");
         if (TextUtils.isEmpty(msgTitle))
         {
@@ -130,7 +128,27 @@ public class WebViewActivity extends BaseActivity {
 
 
     }
+    private void initWebViewSetting(){
+        WebSettings ws = webView.getSettings();
 
+        ws.setJavaScriptEnabled(true);
+
+        ws.setAllowFileAccess(true);
+
+        ws.setDatabaseEnabled(true);
+
+        ws.setDomStorageEnabled(true);
+
+        ws.setSaveFormData(false);
+
+        ws.setAppCacheEnabled(true);
+
+        ws.setCacheMode(WebSettings.LOAD_DEFAULT);
+
+        ws.setLoadWithOverviewMode(false);//<==== 一定要设置为false，不然有声音没图像
+
+        ws.setUseWideViewPort(true);
+    }
     @Override
     public void initViews() {
         // TODO Auto-generated method stub

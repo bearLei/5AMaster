@@ -15,7 +15,7 @@ import com.puti.education.ui.uiTeacher.chooseperson.single.SingleChooseFragment;
 
 public class ChoosePersonListActivityNew extends BaseActivity  {
 
-    private boolean mbAbnormal = false;  //是否异常事件，默认为普通事件
+    private boolean mbAbnormal = true;  //是否异常事件，默认为普通事件
     private int refer;//页面启动来源
     private String mDutyType; //主要责任人，次要责任人，证人，知情人，举报人，
 
@@ -45,7 +45,7 @@ public class ChoosePersonListActivityNew extends BaseActivity  {
     public void parseIntent() {
         Intent intent = getIntent();
         if (intent != null) {
-            mbAbnormal = intent.getBooleanExtra(ChoosePersonParameter.EVENT_ABNORMOL, false);
+            mbAbnormal = intent.getBooleanExtra(ChoosePersonParameter.EVENT_ABNORMOL, true);
             //判断是否从责任等级处转入
             if (intent.hasExtra(ChoosePersonParameter.DUTY_TYPE)) {
                 mDutyType = intent.getStringExtra(ChoosePersonParameter.DUTY_TYPE);

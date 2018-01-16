@@ -50,7 +50,6 @@ public class MulChooseListPtr implements BaseMvpPtr {
         mView.updateAllList(mData);
     }
 
-
     //为列表设置拼音 并且按照拼音排序
     private void spellList(){
         CharacterParser characterParser = new CharacterParser();
@@ -63,31 +62,6 @@ public class MulChooseListPtr implements BaseMvpPtr {
         }
         MulChoosePinyinComparator comparator = new MulChoosePinyinComparator();
         Collections.sort(mData,comparator);
-    }
-
-    //如果是教师,则只显示所任课的班级
-    private List<ClassInfo> setLeadClasses(List<ClassInfo> allClass){
-        ArrayList<ClassInfo> mClassInfoList = new ArrayList<ClassInfo>();
-        if (allClass == null || allClass.size() <= 0){
-            return mClassInfoList;
-        }
-        List<ClassInfo> tempClass = null;
-        App mApp = (App)context.getApplication();
-        if (mApp != null){
-            tempClass = mApp.getClassList();
-            if (tempClass == null || tempClass.size() <= 0){
-                return mClassInfoList;
-            }
-            for (ClassInfo tempOne: tempClass){
-                for (ClassInfo allOne: allClass){
-                    if (tempOne.uid.equals(allOne.uid)){
-                        mClassInfoList.add(allOne);
-                        break;
-                    }
-                }
-            }
-        }
-        return mClassInfoList;
     }
 
     /**

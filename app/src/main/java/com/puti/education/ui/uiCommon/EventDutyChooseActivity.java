@@ -168,8 +168,7 @@ public class EventDutyChooseActivity extends BaseActivity {
             }  else  {
                 intent.putExtra(ChoosePersonParameter.EVENT_ABNORMOL, mAbnormal);
                 intent.putExtra(ChoosePersonParameter.DUTY_TYPE, et.key);
-                if (et.key.equals(Constant.EVENT_DUTY_MAJOR) || et.key.equals(Constant.EVENT_DUTY_MINOR) ||
-                        et.key.equals(Constant.EVENT_DUTY_REPORT)) {
+                if (et.key.equals(Constant.EVENT_DUTY_MAJOR) || et.key.equals(Constant.EVENT_DUTY_MINOR)) {
                     intent.putExtra(ChoosePersonParameter.REFER, ChoosePersonParameter.REFER_DUTY_STUDENGT);
                 } else {
                     intent.putExtra(ChoosePersonParameter.REFER, ChoosePersonParameter.REFER_DUTY_ALL);

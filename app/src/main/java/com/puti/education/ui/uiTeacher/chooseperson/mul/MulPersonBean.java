@@ -12,6 +12,7 @@ public class MulPersonBean {
     private boolean isSelected;
     private String pinyin;
     private int type;
+    private String avater;
     public String getPersonnelUid() {
         return personnelUid;
     }
@@ -66,5 +67,13 @@ public class MulPersonBean {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getAvater() {
+        return avater;
+    }
+
+    public void setAvater(String avater) {
+        this.avater = avater;
     }
 }

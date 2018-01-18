@@ -50,7 +50,7 @@ public class WeekEventView extends View {
     private List<Point> mUnDealPointList = new ArrayList<>();
 
     private int mChartLineRangeHeight;//绘制曲线的整体高度，排除标题
-    private int mChartTitleRangeHeight = 120;//标题栏高度
+    private int mChartTitleRangeHeight = 80;//标题栏高度
     private  int  mChartXscaleRangeHeigth;// x轴刻度的高度
     private int mYlableWidth ;//Y轴水平宽度
 

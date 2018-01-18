@@ -14,6 +14,7 @@ import com.puti.education.R;
 import com.puti.education.base.InflateService;
 import com.puti.education.base.holder.BaseHolder;
 import com.puti.education.ui.uiTeacher.chooseperson.ChoosePersonParameter;
+import com.puti.education.util.ImgLoadUtil;
 import com.puti.education.util.ToastUtil;
 
 import butterknife.BindView;
@@ -67,7 +68,7 @@ public class MulChooseHolder extends BaseHolder<MulPersonBean> implements View.O
             mInfo = data;
             isSeleted = data.isSelected();
 //            icon.setVisibility(View.GONE);
-//            ImgLoadUtil.displayCirclePic(R.mipmap.ic_avatar_default,data.getAvatar(),icon);
+            ImgLoadUtil.displayCirclePic(R.mipmap.ic_avatar_default,data.getAvater(),icon);
             if (!TextUtils.isEmpty(data.getRealName())){
                 name.setText(data.getRealName());
             }

@@ -69,7 +69,7 @@ public class MutualReviewDetailActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        mUiTitle.setText("问卷详情");
+        mUiTitle.setText("定期互评");
         mTvName1.setText("学习评价");
         mTvName2.setText("关系评价");
         mBtnCommit.setEnabled(false);

@@ -303,7 +303,7 @@ public class MulChooseFragment extends BaseFragment implements ChoosePersonView 
         for (int i = 0; i < mSelectedList.size(); i++) {
             MulPersonBean bean = mSelectedList.get(i);
             EventAboutPeople people = new EventAboutPeople();
-            people.avatar = "";
+            people.avatar = bean.getAvater();
             people.uid = bean.getPersonnelUid();
             people.name = bean.getRealName();
             people.type = bean.getType();

@@ -53,26 +53,16 @@ import butterknife.OnClick;
 
 public class ParentHomeFragment extends BaseFragment{
 
-    @BindView(R.id.tv_notice_title)
-    TextView mNoticeTitleView;
-    @BindView(R.id.tv_notice_time)
-    TextView mNoticeTimeTv;
     @BindView(R.id.parent_viewpager)
     ViewPager mViewPager;
     @BindView(R.id.dot_frame)
     LinearLayout mDotFrame;
     @BindView(R.id.relation_des_view)
     RelationDesBarView mRelationBarView;
-    @BindView(R.id.newnotice_rel)
-    RelativeLayout mLatestNotice;
     @BindView(R.id.refresh_layout)
     AppSwipeRefreshLayout mSwipeRefreshLayout;
 
-    private ImageView emptyImg;
-
     private int lastSelectIndex = 0;
-    private NewNotice mNewNotice;
-
     ViewStub emptyViewStup=null;
 
     @Override
@@ -94,14 +84,12 @@ public class ParentHomeFragment extends BaseFragment{
 
     @Override
     public void initViews(View view) {
-        mLatestNotice.setVisibility(View.GONE);
         emptyViewStup = (ViewStub) view.findViewById(R.id.empty_viewstup);
 
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.swipe_refresh_progress));
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //getNewNotice();
                 getParentHomeData();
             }
         });
@@ -109,7 +97,6 @@ public class ParentHomeFragment extends BaseFragment{
 
     @Override
     public void loadData() {
-        getNewNotice();
         getParentHomeData();
     }
 
@@ -292,91 +279,5 @@ public class ParentHomeFragment extends BaseFragment{
 
         });
 
-    }
-
-
-    //查看系统通知消息
-    @OnClick(R.id.newnotice_rel)
-    public void lookNetNoticeClick(){
-        if (mNewNotice == null || mNewNotice.extContent == null){
-            return;
-        }
-        switch (mNewNotice.extContent.subType){
-            case PushData.TARGET_QUESTIONNAIRE: //在线调查
-                Intent intent = new Intent();
-                intent.putExtra("id", mNewNotice.extContent.value);
-                intent.setClass(this.getActivity(), QuestionnaireDetailActivity.class);
-                startActivity(intent);
-                break;
-            case PushData.TARGET_MUTUAL_REVIEW: //互评
-                PatriarchMainActivity tMainAy = (PatriarchMainActivity)this.getActivity();
-                tMainAy.gotoReview();
-                break;
-            case PushData.TARGET_EVENT_UNTRACK:
-            case PushData.TARGET_EVENT_PUSH_PARENT:
-                openEventDetail(mNewNotice.extContent.value, mNewNotice.extContent.valueExt);
-                break;
-            case PushData.TARGET_SYS_MESSAGE://通知消息
-                Intent intent3 = new Intent();
-                intent3.putExtra("type", 1);
-                intent3.putExtra("msg_id", mNewNotice.uid);
-                intent3.setClass(this.getActivity(), WebViewActivity.class);
-                startActivity(intent3);
-                break;
-            default:
-                Intent intent5 = new Intent();
-                intent5.putExtra("type", 2);
-                intent5.putExtra("msg_title", mNewNotice.alertMsg);
-                intent5.putExtra("content", mNewNotice.alertMsg);
-                intent5.setClass(this.getActivity(), WebViewActivity.class);
-                startActivity(intent5);
-                break;
-        }
-
-    }
-
-    private void openEventDetail(String eventId, String peopleuid)
-    {
-        Intent intent4 = new Intent();
-        intent4.putExtra("type", 4);
-        intent4.putExtra(Key.EVENT_KEY, eventId);
-        intent4.putExtra(Key.KEY_PEOPLE_UID, peopleuid);
-        intent4.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-        intent4.setClass(this.getContext(), TeacherEventDetailActivity.class);
-        this.getContext().startActivity(intent4);
-    }
-
-
-    private void openGrowthTrack(int id){
-        Intent intent4 = new Intent();
-        intent4.putExtra("id", id + "");
-        intent4.setClass(this.getActivity(), GrowthTrackDetailActivity.class);
-        startActivity(intent4);
-    }
-
-    private void getNewNotice(){
-        CommonModel.getInstance().getLatestNotice(new BaseListener(NewNotice.class){
-
-            @Override
-            public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
-                super.responseResult(infoObj, listObj, code, status);
-                NewNotice tempObj = (NewNotice)infoObj;
-                if (tempObj != null && tempObj.extContent != null){
-                    mLatestNotice.setVisibility(View.VISIBLE);
-                    mNewNotice = tempObj;
-                    mNoticeTitleView.setText(mNewNotice.alertMsg);
-                    mNoticeTimeTv.setText(mNewNotice.bizTime);
-                }else{
-                    mLatestNotice.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void requestFailed(boolean status, int code, String errorMessage) {
-                super.requestFailed(status, code, errorMessage);
-                mLatestNotice.setVisibility(View.GONE);
-                ToastUtil.show("获取最新消息出错 " + (TextUtils.isEmpty(errorMessage)?"":errorMessage));
-            }
-        });
     }
 }

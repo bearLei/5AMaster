@@ -59,12 +59,6 @@ public class StudentHomeFragment extends BaseFragment {
     TextView mTvViolation;
     @BindView(R.id.tv_daily_value)
     TextView mTvDailyValue;
-    @BindView(R.id.tv_notice_title)
-    TextView mTvNoticeTitle;
-    @BindView(R.id.tv_notice_time)
-    TextView mTvNoticeTime;
-    @BindView(R.id.newnotice_rel)
-    RelativeLayout mLatestNotice;
     @BindView(R.id.refresh_layout)
     AppSwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -99,13 +93,10 @@ public class StudentHomeFragment extends BaseFragment {
         mRadarView.setCenterValue("0%");
         mRadarView.startDraw();
 
-        mLatestNotice.setVisibility(View.GONE);
-
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.swipe_refresh_progress));
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getNewNotice();
                 getIndexData();
             }
         });
@@ -141,8 +132,6 @@ public class StudentHomeFragment extends BaseFragment {
     @Override
     public void loadData() {
         getIndexData();
-        getNewNotice();
-
     }
 
 
@@ -177,69 +166,6 @@ public class StudentHomeFragment extends BaseFragment {
                 super.requestFailed(status, code, errorMessage);
                 mSwipeRefreshLayout.setRefreshing(false);
                 ToastUtil.show("获取学生首页数据出错 "  + (TextUtils.isEmpty(errorMessage)?"":errorMessage));
-            }
-        });
-    }
-
-    //查看系统通知消息
-    @OnClick(R.id.newnotice_rel)
-    public void lookNetNoticeClick(){
-        if (mNewNotice == null || mNewNotice.extContent == null){
-            return;
-        }
-        switch (mNewNotice.extContent.subType){
-            case PushData.TARGET_QUESTIONNAIRE: //在线调查
-                Intent intent = new Intent();
-                intent.putExtra("id", mNewNotice.extContent.value);
-                intent.setClass(this.getActivity(), QuestionnaireDetailActivity.class);
-                startActivity(intent);
-                break;
-            case PushData.TARGET_MUTUAL_REVIEW: //互评
-                StudentMainActivity tMainAy = (StudentMainActivity)this.getActivity();
-                tMainAy.gotoReview();
-                break;
-            case PushData.TARGET_SYS_MESSAGE://通知消息
-                Intent intent3 = new Intent();
-                intent3.putExtra("type", 1);
-                intent3.putExtra("msg_id", mNewNotice.uid);
-                intent3.setClass(this.getActivity(), WebViewActivity.class);
-                startActivity(intent3);
-                break;
-            default:
-                Intent intent5 = new Intent();
-                intent5.putExtra("type", 2);
-                intent5.putExtra("msg_title", mNewNotice.alertMsg);
-                intent5.putExtra("content", mNewNotice.alertMsg);
-                intent5.setClass(this.getActivity(), WebViewActivity.class);
-                startActivity(intent5);
-                break;
-        }
-
-    }
-
-    private void getNewNotice(){
-        CommonModel.getInstance().getLatestNotice(new BaseListener(NewNotice.class){
-
-            @Override
-            public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
-                super.responseResult(infoObj, listObj, code, status);
-                NewNotice tempObj = (NewNotice)infoObj;
-                if (tempObj != null && tempObj.extContent != null){
-                    mLatestNotice.setVisibility(View.VISIBLE);
-                    mNewNotice = tempObj;
-                    mTvNoticeTitle.setText(mNewNotice.alertMsg);
-                    mTvNoticeTime.setText(mNewNotice.bizTime);
-                }else{
-                    mLatestNotice.setVisibility(View.GONE);
-                }
-
-            }
-
-            @Override
-            public void requestFailed(boolean status, int code, String errorMessage) {
-                super.requestFailed(status, code, errorMessage);
-                mLatestNotice.setVisibility(View.GONE);
-                ToastUtil.show("获取最新消息出错" + (TextUtils.isEmpty(errorMessage)?"":errorMessage));
             }
         });
     }

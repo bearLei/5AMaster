@@ -11,6 +11,7 @@ public class MulPersonBean {
     private boolean isVolunteer;
     private boolean isSelected;
     private String pinyin;
+    private int type;
     public String getPersonnelUid() {
         return personnelUid;
     }
@@ -57,5 +58,13 @@ public class MulPersonBean {
 
     public void setPinyin(String pinyin) {
         this.pinyin = pinyin;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

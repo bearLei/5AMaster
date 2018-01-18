@@ -96,6 +96,9 @@ public class MulChooseListPtr implements BaseMvpPtr {
                if (type == bean.getPersonnelType()){
                    mData.clear();
                    mData.addAll(bean.getList());
+                   for (MulPersonBean info:mData) {
+                       info.setType(type);
+                   }
                    break;
                }
            }

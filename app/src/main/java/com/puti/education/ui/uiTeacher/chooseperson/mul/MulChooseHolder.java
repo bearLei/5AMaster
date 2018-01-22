@@ -93,7 +93,7 @@ public class MulChooseHolder extends BaseHolder<MulPersonBean> implements View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.item_container:
-                if (ChoosePersonParameter.LIMIT <= 0){
+                if (ChoosePersonParameter.LIMIT < 0){
                     ToastUtil.show("您的选择已达上限");
                     return;
                 }

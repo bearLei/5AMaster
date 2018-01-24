@@ -201,7 +201,7 @@ public class MultiBarChartView extends View{
 
                 //教师能力
                 len = teacherPowerList.size();
-                if (teacherPowerList != null && len > 4){
+                if (teacherPowerList != null && len >= 4){
                     mTeacherPowerPointList.clear();
                     for (int i =0;i< 4;i++){
                         teacherPower = teacherPowerList.get(len-4+i);

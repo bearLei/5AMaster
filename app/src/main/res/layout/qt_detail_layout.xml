@@ -36,7 +36,7 @@
         <LinearLayout
             android:id="@+id/question_object"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="100dp"
             android:orientation="horizontal"
             android:gravity="center"
             android:visibility="gone"
@@ -45,7 +45,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:gravity="left|center"
                 >
                 <TextView
@@ -61,14 +61,14 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textColor="@color/status_red"
-                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
                     />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:gravity="right|center"
                 >
                 <TextView
@@ -77,6 +77,7 @@
                     android:text="评价对象"
                     android:textSize="18sp"
                     android:textColor="@color/base_666666"
+                    android:layout_marginTop="@dimen/dp_10"
                     />
                 <TextView
                     android:id="@+id/teacherName"

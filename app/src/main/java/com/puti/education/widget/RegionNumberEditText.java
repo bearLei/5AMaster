@@ -47,7 +47,7 @@ public class RegionNumberEditText extends EditText {
         this.min = minNum;
     }
     public void setInputNormal(){
-        setInputType(InputType.TYPE_NULL);
+        setInputType(InputType.TYPE_CLASS_TEXT);
     }
     public void setTextWatcher() {
         addTextChangedListener(new TextWatcher() {

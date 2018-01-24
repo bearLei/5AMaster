@@ -92,11 +92,12 @@ public class SingleChooseHolder extends BaseHolder<SingleChooseBean> implements 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.item_container:
-                if (ChoosePersonParameter.LIMIT < 0){
+                if (ChoosePersonParameter.LIMIT <= 0 && !isSeleted){
                     ToastUtil.show("您的选择已达上限");
                     return;
                 }
                 if (isSeleted){
+
                     ISelect.setImageResource(R.mipmap.ic_item_unselected);
                 }else{
                     ISelect.setImageResource(R.mipmap.ic_item_selected);

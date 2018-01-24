@@ -428,7 +428,6 @@ public class QuestionnaireEtDetailAdapter extends BasicRecylerAdapter<Question>{
     //处理填空题
     public void processCloze(Question qt, int position, CommonViewHolder vholder){
         RegionNumberEditText answerEt = vholder.obtainView(R.id.et_content);
-
         if (qt.type == Constant.TYPE_NUMBERTAREA){
             answerEt.setRegion(0,100);
             answerEt.setTextWatcher();

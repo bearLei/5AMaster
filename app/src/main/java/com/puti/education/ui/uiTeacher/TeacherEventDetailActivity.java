@@ -1660,7 +1660,10 @@ public class TeacherEventDetailActivity extends BaseActivity {
         jsonObject.put("studentUID", mPeopleUid);
 
         String trackDes = mEtTrackDesc.getText().toString();
-        if (TextUtils.isEmpty(trackDes)){
+        if (TextUtils.isEmpty(trackDes)
+                && mUploadAudios.size() == 0
+                && mUploadedImages.size() == 0
+                && mUploadVideos.size() == 0){
             ToastUtil.show("追踪内容不能为空,请重新输入");
             return null;
         }

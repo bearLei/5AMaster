@@ -1418,6 +1418,8 @@ public class TeacherEventDetailActivity extends BaseActivity {
 
         if (mEventStatus == Constant.EVENT_STATUS_REFUSE){
             mTvReviewName.setText("拒绝理由");
+        }else {
+            mTvReviewName.setText("结案陈词");
         }
         mEtReviewInput.setText(mEventDetail.overReason);
         mEtReviewInput.setFocusable(false);
@@ -1496,6 +1498,12 @@ public class TeacherEventDetailActivity extends BaseActivity {
                     mCurentType = EVENT_TYPE.NORMAL;
                     mEventStatus= mEventDetail.status;
                     mEventType  = mEventDetail.type;
+
+                        if ("1".equals(mEventDetail.categoriesName)){
+                            mTvReviewName.setText("处理意见");
+                        }else {
+                            mTvReviewName.setText("结案陈词");
+                    }
                     switch (mEventDetail.status){
                         case Constant.EVENT_STATUS_REFUSE:
                             statusFinish();

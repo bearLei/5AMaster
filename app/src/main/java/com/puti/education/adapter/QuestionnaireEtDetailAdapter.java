@@ -7,12 +7,15 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.text.Selection;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Gravity;
@@ -29,6 +32,7 @@ import com.puti.education.bean.Questionnaire;
 import com.puti.education.util.Constant;
 import com.puti.education.util.DisPlayUtil;
 import com.puti.education.util.LogUtil;
+import com.puti.education.widget.RegionNumberEditText;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -423,7 +427,15 @@ public class QuestionnaireEtDetailAdapter extends BasicRecylerAdapter<Question>{
 
     //处理填空题
     public void processCloze(Question qt, int position, CommonViewHolder vholder){
-        EditText answerEt = vholder.obtainView(R.id.et_content);
+        RegionNumberEditText answerEt = vholder.obtainView(R.id.et_content);
+
+        if (qt.type == Constant.TYPE_NUMBERTAREA){
+            answerEt.setRegion(0,100);
+            answerEt.setTextWatcher();
+        }else {
+            answerEt.setInputNormal();
+        }
+
         answerEt.setOnTouchListener(null);
         //answerEt.addTextChangedListener(null);
         answerEt.setText("");

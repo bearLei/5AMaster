@@ -23,6 +23,7 @@ import com.puti.education.R;
 import com.puti.education.bean.Questionnaire;
 import com.puti.education.util.DisPlayUtil;
 import com.puti.education.util.LogUtil;
+import com.puti.education.widget.RegionNumberEditText;
 
 import java.util.List;
 
@@ -234,7 +235,7 @@ public class QuestionnaireDetailAdapter extends BasicRecylerAdapter<Question>{
 
     //处理填空题
     public void processCloze(Question qt, int position, CommonViewHolder vholder){
-        EditText answerEt = vholder.obtainView(R.id.et_content);
+        RegionNumberEditText answerEt = vholder.obtainView(R.id.et_content);
         answerEt.setText(null);
         String value = qt.answerd;
         Log.d("", "user msg: " + value);

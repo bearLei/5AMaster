@@ -17,6 +17,7 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.puti.education.adapter.BasicRecylerAdapter;
 import com.puti.education.adapter.QuestionnaireListAdapter;
 import com.puti.education.bean.Questionnaire;
+import com.puti.education.event.QuestionRefreshEvent;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.TeacherModel;
@@ -29,7 +30,11 @@ import com.puti.education.ui.uiCommon.MutualReviewParentActivity;
 import com.puti.education.ui.uiCommon.MutualReviewTeacherActivity;
 import com.puti.education.ui.uiCommon.QtExceptionEventDetailActivity;
 import com.puti.education.ui.uiCommon.QuestionnaireDetailActivity;
+import com.puti.education.ui.uiTeacher.chooseperson.event.ChooseCompleteEvent;
 import com.puti.education.util.Constant;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -218,5 +223,10 @@ public class SurveyFragment extends BaseFragment implements LRecyclerView.LScrol
     @Override
     public void onScrolled(int distanceX, int distanceY) {
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void on3EventMainThread(QuestionRefreshEvent event) {
+        getQtList();
     }
 }

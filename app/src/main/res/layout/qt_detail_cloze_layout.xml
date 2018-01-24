@@ -22,7 +22,7 @@
             android:textColor="@color/dark_font" />
     </LinearLayout>
 
-    <EditText
+    <com.puti.education.widget.RegionNumberEditText
         android:id="@+id/et_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         android:textSize="12sp"
         android:gravity="top"
         android:hint="请输入">
-    </EditText>
+    </com.puti.education.widget.RegionNumberEditText>
 
 
 

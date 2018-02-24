@@ -592,6 +592,7 @@ public class StudentSosFragment extends BaseFragment {
             intent.putExtra("lat", mMyLocation.getLatitude());
             intent.putExtra("lng", mMyLocation.getLongitude());
             intent.putExtra("address", mLocAddress);
+            intent.putExtra("refer",1);
         }
 
         intent.setClass(StudentSosFragment.this.getActivity(), BlueBoundActivity.class);
@@ -599,7 +600,16 @@ public class StudentSosFragment extends BaseFragment {
     }
 
     private void unBlueBound(){
+        Intent intent = new Intent();
+        if (mMyLocation != null){
+            intent.putExtra("lat", mMyLocation.getLatitude());
+            intent.putExtra("lng", mMyLocation.getLongitude());
+            intent.putExtra("address", mLocAddress);
+            intent.putExtra("refer",2);
+        }
 
+        intent.setClass(StudentSosFragment.this.getActivity(), BlueBoundActivity.class);
+        startActivity(intent);
     }
 
 

@@ -260,8 +260,9 @@ public class BtManager {
     public void disConnect() {
         if(mBluetoothGatt != null) {
             mBluetoothGatt.disconnect();
+//            mBluetoothGatt.close();
         }
-        mUiCallback.uiDeviceDisconnected(mBluetoothGatt, mBluetoothDevice);
+//        mUiCallback.uiDeviceDisconnected(mBluetoothGatt, mBluetoothDevice);
     }
 
 
@@ -380,6 +381,7 @@ public class BtManager {
             else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 mConnected = false;
                 mUiCallback.uiDeviceDisconnected(mBluetoothGatt, mBluetoothDevice);
+                mBluetoothGatt.close();
             }
         }
 

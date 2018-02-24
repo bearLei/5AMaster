@@ -285,6 +285,7 @@ public class SosService extends Service {
                     cb.uiDeviceDisconnected(gatt,device);
                 }
             }
+            mConnectedDevice = null;
         }
 
         @Override

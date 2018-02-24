@@ -88,6 +88,8 @@ public class BlueBoundActivity extends BaseActivity {
 
     private ArrayList<BtDeviceBean> mDeviceList  = new ArrayList<BtDeviceBean>();
 
+    private int refer;//1 绑定 2 解绑
+
     @Override
     public int getLayoutResourceId() {
         return R.layout.activity_blue_bound_layout;
@@ -99,7 +101,7 @@ public class BlueBoundActivity extends BaseActivity {
         mLng =  this.getIntent().getDoubleExtra("lng", 0);
         mAddress= this.getIntent().getStringExtra("address");
         mIsSelfSos = this.getIntent().getBooleanExtra("isSelfSos", false);
-
+        refer = getIntent().getIntExtra("refer",0);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             //TODO
         }
@@ -109,6 +111,11 @@ public class BlueBoundActivity extends BaseActivity {
         initRecord();
     }
 
+    private void operateBind(){
+        if (refer == 2){
+            mBtBinder.disConnect();
+        }
+    }
 
     public void bindBlueService(){
         if (mConn == null){
@@ -159,7 +166,6 @@ public class BlueBoundActivity extends BaseActivity {
             }else{
                 LogUtil.d("", "open blue failed! please retry!!");
             }
-
         }
 
         @Override
@@ -182,11 +188,13 @@ public class BlueBoundActivity extends BaseActivity {
 
         btdevice.deviceMac  = device.getAddress();
         btdevice.deviceRssi = 0;
-        btdevice.deviceStatus = 1;
+        if (refer == 2) {
+            btdevice.deviceStatus = 2;
+        }else {
+            btdevice.deviceStatus = 1;
+        }
         mDeviceList.add(btdevice);
-
         mConnectDevice = btdevice;
-
         mDeviceAdapter.setDataList(mDeviceList);
         if (mDeviceAdapter.mList.size() > 0) {
             if (mEmptyRealtive.getVisibility() == View.VISIBLE) {
@@ -198,6 +206,10 @@ public class BlueBoundActivity extends BaseActivity {
             }
         }
         mDeviceAdapter.notifyDataSetChanged();
+
+        if (refer == 2){
+            mBtBinder.disConnect();
+        }
     }
 
 
@@ -426,12 +438,17 @@ public class BlueBoundActivity extends BaseActivity {
         }
 
         @Override
-        public void uiDeviceDisconnected(BluetoothGatt gatt, final BluetoothDevice device) {
+        public void uiDeviceDisconnected(final BluetoothGatt gatt, final BluetoothDevice device) {
             super.uiDeviceDisconnected(gatt, device);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (device.getAddress().equals(mConnectDevice.deviceMac)){
+                    BluetoothGatt bluetoothGatt = gatt;
+                    BluetoothDevice bluetoothDevice = device;
+                    LogUtil.d("lei","解除绑定");
+                    if (null != device
+                            &&null != mConnectDevice
+                            && device.getAddress().equals(mConnectDevice.deviceMac)){
                         mConnectDevice.deviceStatus = 0;
                         mDeviceAdapter.notifyDataSetChanged();
                     }

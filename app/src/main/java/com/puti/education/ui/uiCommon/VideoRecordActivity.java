@@ -256,7 +256,7 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
 //                mMediaRecorder.setVideoFrameRate(24);
                 //编码格式
                 mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.DEFAULT);
-                mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
                 // 设置帧频率，然后就清晰了
                 mMediaRecorder.setVideoEncodingBitRate(1 * 1024 * 1024 * 100);
                 // TODO: 临时写个文件地址, 稍候该!!!

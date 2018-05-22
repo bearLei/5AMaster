@@ -86,7 +86,7 @@ public class ConfigUtil {
 	}
 
 	public void clearSearchParams(){
-		putLoginName(null);
+//		putLoginName(null);
 		putPwd(null);
 		clearToken();
 

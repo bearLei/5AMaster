@@ -340,11 +340,13 @@ public class TeacherAddEventActivity extends BaseActivity{
                 break;
             case Constant.CODE_RESULT_VIDEO:
             {
+                ToastUtil.show("成功添加视频");
                 mVideoPaths = intent.getStringExtra(Key.RECORD_VIDEO);
             }
                 break;
             case Constant.CODE_RESULT_IMG_TEXT:
             {
+                ToastUtil.show("成功添加图片");
                 mImagePaths.clear();
                 mImageTextStr = intent.getStringExtra(Key.RECORD_IMG_TEXT);
                 List<String> tempImgList = intent.getStringArrayListExtra(Key.BEAN);
@@ -354,6 +356,7 @@ public class TeacherAddEventActivity extends BaseActivity{
                 break;
             case Constant.CODE_RESULT_MEDIA:
             {
+                ToastUtil.show("成功添加音频");
                 mAudioLocalFileList.clear();
                 List<LocalFile> temImgList =intent.getParcelableArrayListExtra(Key.BEAN);
                 mAudioLocalFileList.addAll(temImgList);
@@ -679,6 +682,10 @@ public class TeacherAddEventActivity extends BaseActivity{
 
         if (TextUtils.isEmpty(mDesEditText.getText().toString())){
             ToastUtil.show("请输入事件描述");
+            return null;
+        }
+        if (mEventLevel == 0){
+            ToastUtil.show("请选择事件等级");
             return null;
         }
 

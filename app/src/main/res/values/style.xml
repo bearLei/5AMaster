@@ -184,4 +184,23 @@
         <item name="android:windowEnterAnimation">@anim/pickerview_dialog_scale_in</item>
         <item name="android:windowExitAnimation">@anim/pickerview_dialog_scale_out</item>
     </style>
+
+    <style name="FilterDialogTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- activity  true变暗 -->
+    </style>
+    <style name="common_round_white_btn">
+        <item name="android:textColor">#c1ab79</item>
+        <item name="android:background">@drawable/common_round_white_btn_selector</item>
+    </style>
+
+    <style name="common_round_yellow_btn">
+        <item name="android:textColor">@color/base_ffffff</item>
+        <item name="android:background">@drawable/common_round_yellow_btn_selector</item>
+        <item name="android:borderlessButtonStyle">?android:attr/borderlessButtonStyle</item>
+    </style>
 </resources>

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.puti.education.appupdate.PopUpDialog;
 import com.puti.education.bean.TeacherPersonInfo;
 import com.puti.education.common.BingPhoneListener;
 import com.puti.education.common.PassWordUtil;
@@ -32,6 +33,7 @@ import com.puti.education.util.ConfigUtil;
 import com.puti.education.util.Constant;
 import com.puti.education.util.Key;
 import com.puti.education.util.ToastUtil;
+import com.puti.education.widget.EduDialog;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -132,7 +134,7 @@ public class TeacherMineFragment extends BaseFragment{
 
     @OnClick(R.id.mine_loginout_btn)
     public void loginOutClick(){
-        loginOutRequest();
+        ReqlogoutDialog();
     }
 
     //修改密码
@@ -189,6 +191,23 @@ public class TeacherMineFragment extends BaseFragment{
                 ToastUtil.show(errorMessage == null ? Constant.REQUEST_FAILED_STR : errorMessage);
             }
         });
+    }
+
+    private void ReqlogoutDialog(){
+        final EduDialog dialog = new EduDialog(getActivity(),"确定退出登录吗？");
+       dialog.setOnButtonClickListener(new EduDialog.OnButtonClickListener() {
+           @Override
+           public void onNegativeButtonClick(View view) {
+               loginOutRequest();
+               dialog.dismiss();
+           }
+
+           @Override
+           public void onPositiveButtonClick(View view) {
+                dialog.dismiss();
+           }
+       },"确定","取消");
+        dialog.show();
     }
 
     //注销

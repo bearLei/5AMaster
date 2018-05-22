@@ -32,6 +32,7 @@ import com.puti.education.util.ConfigUtil;
 import com.puti.education.util.Constant;
 import com.puti.education.util.Key;
 import com.puti.education.util.ToastUtil;
+import com.puti.education.widget.EduDialog;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -111,7 +112,7 @@ public class PatriarchMineFragment extends BaseFragment{
 
     @OnClick(R.id.mine_loginout_btn)
     public void logout(){
-        loginOutRequest();
+        ReqlogoutDialog();
     }
     //修改密码
     @OnClick(R.id.layout_change_pwd)
@@ -163,7 +164,22 @@ public class PatriarchMineFragment extends BaseFragment{
             }
         });
     }
+    private void ReqlogoutDialog(){
+        final EduDialog dialog = new EduDialog(getActivity(),"确定退出登录吗？");
+        dialog.setOnButtonClickListener(new EduDialog.OnButtonClickListener() {
+            @Override
+            public void onNegativeButtonClick(View view) {
+                loginOutRequest();
+                dialog.dismiss();
+            }
 
+            @Override
+            public void onPositiveButtonClick(View view) {
+                dialog.dismiss();
+            }
+        },"确定","取消");
+        dialog.show();
+    }
     //注销
     private void loginOutRequest(){
 

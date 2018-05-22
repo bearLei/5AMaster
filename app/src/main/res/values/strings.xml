@@ -13,5 +13,5 @@
     <string name="navi_survey_online">在线调查</string>
     <string name="navi_cooperation">家校协同</string>
     <string name="title_activity_record_only">RecordOnlyActivity</string>
-
+    <string name="ok">确定</string>
 </resources>

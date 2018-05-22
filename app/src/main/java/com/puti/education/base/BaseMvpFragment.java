@@ -9,6 +9,7 @@ import com.puti.education.ui.BaseFragment;
  */
 
 public abstract class BaseMvpFragment  extends BaseFragment{
+
     @Override
     public int getLayoutResourceId() {
         return 0;

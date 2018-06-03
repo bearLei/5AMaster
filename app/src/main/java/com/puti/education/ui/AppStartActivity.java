@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.puti.education.ui.uiCommon.LoginActivity;
+import unit.login.LoginActivity;
 
 /**
  *  App 启动页

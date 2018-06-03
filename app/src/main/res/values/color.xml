@@ -56,12 +56,4 @@
     <color name="status_blue">#008FFF</color>
     <color name="status_dark">#999999</color>
 
-
-    <color name="base_333333">#333333</color>
-    <color name="base_666666">#666666</color>
-    <color name="base_4577dc">#4577dc</color>
-    <color name="base_ffffff">#ffffff</color>
-    <color name="base_acb2c1">#acb2c1</color>
-    <color name="base_ededed">#ededed</color>
-    <color name="base_f0f0f0">#f0f0f0</color>
 </resources>

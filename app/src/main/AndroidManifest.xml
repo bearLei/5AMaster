@@ -270,6 +270,10 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
             />
+
+        <!--新APP开始-->
+        <activity android:name="unit.login.LoginActivity"/>
+
         <!-- 百度地图相关的service -->
         <service
             android:name="com.baidu.location.f"

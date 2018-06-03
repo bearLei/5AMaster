@@ -27,7 +27,4 @@
     <dimen name="title_value_distance">10dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-
-    <dimen name="dp_30">30dp</dimen>
-
 </resources>

@@ -229,4 +229,14 @@ public class SingleChooseListPtr implements BaseMvpPtr {
         }
         return mClassInfoList;
     }
+
+    @Override
+    public void star() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
 }

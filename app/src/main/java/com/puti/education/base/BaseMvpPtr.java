@@ -5,5 +5,6 @@ package com.puti.education.base;
  */
 
 public  interface BaseMvpPtr {
-
+    void star();
+    void stop();
 }

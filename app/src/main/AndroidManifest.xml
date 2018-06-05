@@ -272,6 +272,8 @@
             />
 
         <!--新APP开始-->
+
+        <!--登录-->
         <activity android:name="unit.login.LoginActivity"/>
 
         <!-- 百度地图相关的service -->

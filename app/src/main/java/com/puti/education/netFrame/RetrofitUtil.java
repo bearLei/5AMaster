@@ -24,14 +24,15 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.fastjson.FastJsonConverterFactory;
+import unit.api.PutiCommonModel;
 
 public class RetrofitUtil {
 
     //正式环境
-    public static String BASE_URL = "http://54.223.26.249:925/swagger/";
+    public static String BASE_URL = "http://54.223.26.249:8083";
     //测试环境
     //public static String BASE_URL  = "http://54.223.26.249:8090/ms/api/";
-    public static String PHOTO_URL = "http://54.223.26.249:925";
+    public static String PHOTO_URL = "http://54.223.26.249:8083";
 
     //113.98.235.212
     public final static int DEFAULT_ITMEOUT = 30;
@@ -54,6 +55,7 @@ public class RetrofitUtil {
         TeacherModel.clearInstance();
         StudentModel.clearInstance();
         UploadModel.clearInstance();
+        PutiCommonModel.clearInstance();
     }
 
     public static Retrofit initRetrofit() {

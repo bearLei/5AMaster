@@ -46,7 +46,7 @@ import top.zibin.luban.OnCompressListener;
  */
 public class CommonModel extends BaseModel{
 
-    private CommonApi mCommonApi = null;
+    private CommonApi  mCommonApi = null;
     private static CommonModel gCommonModel = null;
     private MediaType mMediaType;
 
@@ -92,7 +92,6 @@ public class CommonModel extends BaseModel{
              sb.append("\"pushId\":\"" + App.mJPushRegId + "\",");
              sb.append("\"deviceToken\":\" \"}}");
 
-
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),sb.toString());
         mCommonApi.loginEx(body).subscribeOn(Schedulers.io())//请求在子线程
                 .observeOn(AndroidSchedulers.mainThread())//回调在主线程
@@ -102,7 +101,6 @@ public class CommonModel extends BaseModel{
                         dealJsonStr(responseInfo, baseListener);
                     }
                 });
-
     }
 
     public void checkVersion(int code,final BaseListener baseListener){

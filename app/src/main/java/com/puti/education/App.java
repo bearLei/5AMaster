@@ -1,5 +1,6 @@
 package com.puti.education;
 
+import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
@@ -19,6 +20,7 @@ public class App extends MultiDexApplication{
 
     public static String mJPushRegId = "";
     public static BDLocation mMyLocation;
+    private static Application application;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -30,11 +32,11 @@ public class App extends MultiDexApplication{
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
         mJPushRegId =JPushInterface.getRegistrationID(this);
-
+        application = this;
     }
 
     public static Context getContext(){
-        return getContext();
+        return application;
     }
     public ArrayList<ClassInfo> mClassList;
     public synchronized void setClassList(ArrayList<ClassInfo> classlist){

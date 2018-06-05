@@ -1,5 +1,6 @@
 package unit.login;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -118,11 +119,42 @@ public class LoginActivity extends PutiActivity implements LoginView, View.OnCli
     }
 
     @OnFocusChange({R.id.edit_account,R.id.edit_psw,R.id.edit_verify})
-    public void onFocusChange(View view,boolean hasFoucus){
-        if (!isFinishing() && hasFoucus){
-            view.setBackground(getResources().getDrawable(R.drawable.puti_login_edit_selected_bg));
-        }else {
-            view.setBackground(getResources().getDrawable(R.drawable.puti_login_edit_unselected_bg));
+    public void onFocusChange(View view,boolean hasFoucus) {
+        Drawable drawable = null;
+        if (!isFinishing() && hasFoucus) {
+            switch (view.getId()) {
+                case R.id.edit_account:
+                    drawable = getResources().getDrawable(R.drawable.puti_login_account_selected);
+                    break;
+                case R.id.edit_psw:
+                    drawable = getResources().getDrawable(R.drawable.puti_login_psw_selected);
+                    break;
+                case R.id.edit_verify:
+                    drawable = getResources().getDrawable(R.drawable.puti_login_verify_selected);
+                    break;
+            }
+        } else {
+            switch (view.getId()) {
+                case R.id.edit_account:
+                    drawable = getResources().getDrawable(R.drawable.puti_login_account_unselected);
+                    break;
+                case R.id.edit_psw:
+                    drawable = getResources().getDrawable(R.drawable.puti_login_psw_unselected);
+                    break;
+                case R.id.edit_verify:
+                    drawable = getResources().getDrawable(R.drawable.puti_login_verify_unselected);
+                    break;
+            }
+
+        }
+
+        view.setBackground(hasFoucus ? getResources().getDrawable(R.drawable.puti_login_edit_selected_bg)
+                : getResources().getDrawable(R.drawable.puti_login_edit_unselected_bg));
+
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        if (view instanceof EditText) {
+            ((EditText)view).setCompoundDrawables(drawable, null, null, null);
+            ((EditText)view).setCompoundDrawablePadding(10);
         }
     }
 

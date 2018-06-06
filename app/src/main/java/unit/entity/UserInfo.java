@@ -105,4 +105,20 @@ public class UserInfo implements Serializable{
     public void setToken(String token) {
         Token = token;
     }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "UserName='" + UserName + '\'' +
+                ", RealName='" + RealName + '\'' +
+                ", CurrentRole='" + CurrentRole + '\'' +
+                ", CurrentPersonType=" + CurrentPersonType +
+                ", Photo='" + Photo + '\'' +
+                ", DomainUID='" + DomainUID + '\'' +
+                ", DomainName='" + DomainName + '\'' +
+                ", SchoolLogo='" + SchoolLogo + '\'' +
+                ", RolePowers=" + RolePowers +
+                ", Token='" + Token + '\'' +
+                '}';
+    }
 }

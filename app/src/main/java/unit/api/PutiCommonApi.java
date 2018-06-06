@@ -20,5 +20,11 @@ public interface PutiCommonApi {
     Observable<BaseResponseInfo> login(@Body RequestBody route);
 
     @GET("Common/verify")
-    Observable<BaseResponseInfo> queryVerify(@Query("Refer")int refer);
+    Observable<BaseResponseInfo> queryVerify(@Query("refer")int refer);
+
+    @GET("Common/getConfig")
+    Observable<BaseResponseInfo> getAppConfig(@Query("Uid") String uid);
+
+    @GET("Teacher/queryCount")
+    Observable<BaseResponseInfo>getHomeCOuntInfo(@Query("Uid") String uid);
 }

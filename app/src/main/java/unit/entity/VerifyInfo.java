@@ -8,20 +8,12 @@ import com.puti.education.speech.SpeechUtil;
  */
 
 public class VerifyInfo {
-    private boolean needVerify;
     private String uuidKey;
     private String verifyPic;
 
     public VerifyInfo() {
     }
 
-    public boolean isNeedVerify() {
-        return needVerify;
-    }
-
-    public void setNeedVerify(boolean needVerify) {
-        this.needVerify = needVerify;
-    }
 
     public String getUuidKey() {
         return uuidKey;

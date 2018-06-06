@@ -2,6 +2,7 @@ package unit.login;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import com.baidu.location.BDLocation;
 import com.puti.education.base.BaseMvpPtr;
@@ -13,8 +14,10 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import unit.api.PutiCommonModel;
+import unit.entity.UserBaseInfo;
 import unit.entity.VerifyInfo;
 import unit.entity.VerifyPostInfo;
+import unit.home.HomeActivity;
 import unit.location.LocationManager;
 import unit.location.MapEvent;
 import unit.entity.UserInfo;
@@ -86,10 +89,27 @@ public class LoginPtr implements BaseMvpPtr {
     //登录成功后的操作
     private void handleResult(UserInfo userInfo){
         //sp存储
-        UserInfoUtils.setUserInfo(userInfo);
+        saveUserInfo(userInfo);
         //跳转首页
+        Intent intent = new Intent(mContext, HomeActivity.class);
+        mContext.startActivity(intent);
     }
 
+    private void saveUserInfo(UserInfo userInfo){
+        UserBaseInfo baseInfo = new UserBaseInfo();
+        baseInfo.setAvatar(userInfo.getPhoto());
+        baseInfo.setNickName(userInfo.getUserName());
+        baseInfo.setPersonType(userInfo.getCurrentPersonType());
+        baseInfo.setRealName(userInfo.getRealName());
+        baseInfo.setToken(userInfo.getToken());
+        baseInfo.setSchoolName(userInfo.getDomainName());
+        baseInfo.setSchoolId(userInfo.getDomainUID());
+        if (userInfo.getRolePowers() != null &&userInfo.getRolePowers().size() > 0) {
+            baseInfo.setRoleId(userInfo.getRolePowers().get(0).getRoleUID());
+            baseInfo.setRole(userInfo.getRolePowers().get(0).getRoleName());
+        }
+        UserInfoUtils.setUserInfo(baseInfo);
+    }
     private void queryVerify(){
         PutiCommonModel.getInstance().queryVerify(1,new BaseListener(){
             @Override

@@ -275,6 +275,10 @@
 
         <!--登录-->
         <activity android:name="unit.login.LoginActivity"/>
+        <activity android:name="unit.home.HomeActivity"
+            />
+
+        <!--新APP结束-->
 
         <!-- 百度地图相关的service -->
         <service

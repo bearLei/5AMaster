@@ -1,5 +1,6 @@
 package unit.util;
 
+import unit.entity.UserBaseInfo;
 import unit.entity.UserInfo;
 import unit.sp.DataStorage;
 
@@ -10,11 +11,11 @@ import unit.sp.DataStorage;
 
 public class UserInfoUtils {
 
-    public static UserInfo getUserInfo(){
-        return (UserInfo) DataStorage.getComObject(DataStorage.User_info);
+    public static UserBaseInfo getUserInfo(){
+        return (UserBaseInfo) DataStorage.getComObject(DataStorage.User_info);
     }
 
-    public static void setUserInfo(UserInfo userInfo){
+    public static void setUserInfo(UserBaseInfo userInfo){
         DataStorage.saveComObject(DataStorage.User_info,userInfo);
     }
 

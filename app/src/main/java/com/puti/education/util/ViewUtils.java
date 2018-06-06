@@ -298,4 +298,15 @@ public class ViewUtils {
         // 如果焦点不是EditText则忽略，这个发生在视图刚绘制完，第一个焦点不在EditText上，和用户用轨迹球选择其他的焦点
         return false;
     }
+
+    public static int getScreenWid(Context context){
+        int widthPixels = context.getResources().getDisplayMetrics().widthPixels;
+        return widthPixels;
+    }
+
+    public static int getScreeenHeight(Context context){
+        int heightPixels = context.getResources().getDisplayMetrics().heightPixels;
+        return heightPixels;
+    }
+
 }

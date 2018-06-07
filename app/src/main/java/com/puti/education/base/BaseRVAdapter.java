@@ -10,7 +10,7 @@ import com.puti.education.base.holder.ViewHolder;
 
 
 /**
- * Created by cai on 2016-05-18.<br/>
+ * Created by lei on 2018-05-18.<br/>
  */
 public abstract class BaseRVAdapter extends RecyclerView.Adapter<BaseRVAdapter.ListHolder> {
 

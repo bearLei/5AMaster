@@ -9,9 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import com.puti.education.util.LogUtil;
 
 import unit.entity.UserBaseInfo;
-import unit.entity.UserInfo;
-import unit.home.HomeActivity;
-import unit.login.LoginActivity;
+import unit.moudle.home.HomeActivity;
+import unit.moudle.login.LoginActivity;
 import unit.util.UserInfoUtils;
 
 

@@ -98,4 +98,40 @@ public class PutiCommonModel extends PutiBaseModel{
                 });
     }
 
+    /**
+     * 教师端查询消息列表
+     * @param uid 查询的id
+     * @param pageIndex 查询下标
+     * @param pageSize 查询个数
+     * @param listener 回调
+     */
+    public void queryMessageList(String uid,int pageIndex,int pageSize,final BaseListener listener){
+        mCommonApi.getMessageList(uid, pageIndex, pageSize)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJsonStr(responseInfo,listener);
+                    }
+                });
+    }
+
+    /**
+     * 教师端查询首页统计信息
+     * @param uid 查询id
+     * @param listener 回调
+     */
+    public void queryCountInfo(String uid,final BaseListener listener){
+        mCommonApi.getHomeCountInfo(uid)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJsonStr(responseInfo,listener);
+                    }
+                });
+    }
+
 }

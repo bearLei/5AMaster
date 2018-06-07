@@ -1,4 +1,4 @@
-package unit.login;
+package unit.moudle.login;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,7 +17,7 @@ import unit.api.PutiCommonModel;
 import unit.entity.UserBaseInfo;
 import unit.entity.VerifyInfo;
 import unit.entity.VerifyPostInfo;
-import unit.home.HomeActivity;
+import unit.moudle.home.HomeActivity;
 import unit.location.LocationManager;
 import unit.location.MapEvent;
 import unit.entity.UserInfo;

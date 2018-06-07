@@ -33,4 +33,12 @@ public class UserInfoUtils {
             return true;
         }
     }
+
+    public static String getUid(){
+        if (getUserInfo() == null){
+            return "";
+        }else {
+            return getUserInfo().getRoleId();
+        }
+    }
 }

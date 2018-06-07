@@ -1,4 +1,4 @@
-package unit.home;
+package unit.moudle.home;
 
 import android.content.Context;
 import android.view.View;
@@ -9,11 +9,11 @@ import com.puti.education.base.BaseMvpPtr;
 import com.puti.education.base.holder.BaseHolder;
 import com.puti.education.util.ViewUtils;
 
-import unit.home.holder.HomeCountHolder;
-import unit.home.holder.HomeFeedBackHolder;
-import unit.home.holder.HomeHeadHolder;
-import unit.home.holder.HomePowerHolder;
-import unit.home.holder.HomeToolHolder;
+import unit.moudle.home.holder.HomeCountHolder;
+import unit.moudle.home.holder.HomeFeedBackHolder;
+import unit.moudle.home.holder.HomeHeadHolder;
+import unit.moudle.home.holder.HomePowerHolder;
+import unit.moudle.home.holder.HomeToolHolder;
 
 /**
  * Created by lei on 2018/6/5.

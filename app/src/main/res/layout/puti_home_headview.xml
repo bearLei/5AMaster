@@ -59,6 +59,7 @@
             />
         <!--红点-->
         <FrameLayout
+            android:id="@+id/forward_msg_list"
             android:layout_width="@dimen/dp_48"
             android:layout_height="@dimen/dp_48"
             android:layout_alignParentRight="true"
@@ -67,12 +68,18 @@
                 android:layout_width="@dimen/dp_48"
                 android:layout_height="@dimen/dp_48"
                 android:scaleType="center"
+                android:src="@drawable/puti_home_msg"
                 />
             <ImageView
                 android:id="@+id/red_dog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
                 android:scaleType="center"
+                android:src="@drawable/puti_red_dog"
+                android:layout_marginRight="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_gravity="right"
+                android:visibility="gone"
                 />
         </FrameLayout>
 

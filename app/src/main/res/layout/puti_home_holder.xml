@@ -30,9 +30,11 @@
         >
         <ImageView
             android:id="@+id/red_dog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:scaleType="center"
+            android:src="@drawable/puti_red_dog"
+            android:visibility="gone"
             />
         <TextView
             android:id="@+id/title"

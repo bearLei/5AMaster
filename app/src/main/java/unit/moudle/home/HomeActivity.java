@@ -1,7 +1,5 @@
-package unit.home;
+package unit.moudle.home;
 
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;

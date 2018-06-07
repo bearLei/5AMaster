@@ -26,5 +26,11 @@ public interface PutiCommonApi {
     Observable<BaseResponseInfo> getAppConfig(@Query("Uid") String uid);
 
     @GET("Teacher/queryCount")
-    Observable<BaseResponseInfo>getHomeCOuntInfo(@Query("Uid") String uid);
+    Observable<BaseResponseInfo>getHomeCountInfo(@Query("Uid") String uid);
+
+    @GET("Teacher/getMessageList")
+    Observable<BaseResponseInfo>getMessageList(
+            @Query("Uid") String uid,
+            @Query("pageIndex") int pageIndex,
+            @Query("pageSize") int pageSize);
 }

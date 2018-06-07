@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="本周新增"
+            android:text="@string/puti_home_week_increase"
             android:textColor="@color/base_ffffff"
             android:textSize="@dimen/sp_16"
             android:gravity="center"
@@ -25,7 +25,6 @@
             android:id="@+id/week_new_event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="185件"
             android:textColor="@color/base_ffffff"
             android:textSize="@dimen/sp_20"
             android:gravity="center"
@@ -59,7 +58,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="我发起的"
+                android:text="@string/puti_home_my_post"
                 android:textColor="@color/base_ffffff"
                 android:textSize="@dimen/sp_16"
                 android:gravity="center"
@@ -68,7 +67,6 @@
                 android:id="@+id/my_post"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="112件"
                 android:textColor="@color/base_ffffff"
                 android:textSize="@dimen/sp_20"
                 android:gravity="center"

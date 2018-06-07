@@ -9,10 +9,14 @@ import android.widget.TextView;
 import com.puti.education.R;
 import com.puti.education.base.InflateService;
 import com.puti.education.base.holder.BaseHolder;
+import com.puti.education.listener.BaseListener;
+import com.puti.education.util.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import unit.api.PutiCommonModel;
 import unit.entity.HomeCountEntity;
+import unit.util.UserInfoUtils;
 
 /**
  * Created by lei on 2018/6/6.
@@ -58,6 +62,27 @@ public class HomeCountHolder extends BaseHolder<HomeCountEntity> implements View
             case R.id.forward_personal_info:
                 // TODO: 2018/6/6 跳转个人信息
                 break;
+        }
+    }
+
+    //教师端查询统计信息
+    public void queryData() {
+        if (UserInfoUtils.isInLoginStata()) {
+            PutiCommonModel.getInstance().queryCountInfo(UserInfoUtils.getUid(),
+                    new BaseListener(HomeCountEntity.class){
+                        @Override
+                        public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
+                            super.responseResult(infoObj, listObj, code, status);
+                            HomeCountEntity entity = (HomeCountEntity) infoObj;
+                            updateUI(mContext,entity);
+                        }
+
+                        @Override
+                        public void requestFailed(boolean status, int code, String errorMessage) {
+                            super.requestFailed(status, code, errorMessage);
+                            ToastUtil.show(errorMessage);
+                        }
+                    });
         }
     }
 }

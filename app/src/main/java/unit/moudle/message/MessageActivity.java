@@ -138,13 +138,6 @@ public class MessageActivity extends PutiActivity {
         mData.addAll(messageList);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
     @OnClick(R.id.back)
     public void onClick() {
         finish();

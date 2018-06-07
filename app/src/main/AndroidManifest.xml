@@ -285,7 +285,10 @@
         <activity android:name="unit.moudle.message.MessageActivity"
                   android:configChanges="orientation|screenSize"
             />
-
+        <!--个人中心-->
+        <activity android:name="unit.moudle.personal.PersonalActivity"
+            android:configChanges="orientation|screenSize"
+            />
         <!--新APP结束-->
 
         <!-- 百度地图相关的service -->

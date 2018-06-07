@@ -1,6 +1,7 @@
 package unit.moudle.home.holder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -16,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import unit.api.PutiCommonModel;
 import unit.entity.HomeCountEntity;
+import unit.moudle.personal.PersonalActivity;
 import unit.util.UserInfoUtils;
 
 /**
@@ -23,7 +25,7 @@ import unit.util.UserInfoUtils;
  * 首页用户统计信息
  */
 
-public class HomeCountHolder extends BaseHolder<HomeCountEntity> implements View.OnClickListener {
+public class HomeCountHolder extends BaseHolder<HomeCountEntity>{
 
     @BindView(R.id.week_new_event)
     TextView weekNewEvent;
@@ -41,7 +43,13 @@ public class HomeCountHolder extends BaseHolder<HomeCountEntity> implements View
     protected View initView(Context context) {
         mRootView = InflateService.g().inflate(R.layout.puti_home_count_holder);
         ButterKnife.bind(this,mRootView);
-        VForwardPersonalInfo.setOnClickListener(this);
+        VForwardPersonalInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, PersonalActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
         return mRootView;
     }
 
@@ -56,14 +64,6 @@ public class HomeCountHolder extends BaseHolder<HomeCountEntity> implements View
 
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.forward_personal_info:
-                // TODO: 2018/6/6 跳转个人信息
-                break;
-        }
-    }
 
     //教师端查询统计信息
     public void queryData() {

@@ -35,4 +35,16 @@
     <string name="puti_home_parent_phone_book">家长通讯录</string>
     <string name="puti_home_class_schedule">班级课表</string>
     <string name="puti_home_my_schedule">我的课表</string>
+    
+    
+    <!--个人信息-->
+    <string name="puti_person_qr_code">我的二维码</string>
+    <string name="puti_person_invite_use">邀请使用</string>
+    <string name="puti_person_suggestion_feedback">意见反馈</string>
+    <string name="puti_person_good_evaluate">去赏个好评</string>
+    <string name="puti_person_update_psw">修改密码</string>
+    <string name="puti_person_trouble_help">故障帮助</string>
+    <string name="puti_person_current_version_code">当前版本号</string>
+    <string name="puti_person_logout">退 出</string>
+    <string name="puti_person_trouble_phone">0755 23501191</string>
 </resources>

@@ -60,4 +60,10 @@
         <item>不详</item>
     </string-array>
 
+    <declare-styleable name="SettingItem">
+        <attr name="title" format="string"/>
+        <attr name="showIcon" format="boolean"/>
+        <attr name="brief" format="string"/>
+    </declare-styleable>
+
 </resources>

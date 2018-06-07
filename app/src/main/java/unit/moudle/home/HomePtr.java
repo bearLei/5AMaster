@@ -66,7 +66,7 @@ public class HomePtr implements BaseMvpPtr {
     private void initCountHolder(){
         if (mCountHolder == null){
             mCountHolder = new HomeCountHolder(mContext);
-            mCountHolder.queryData();
+//            mCountHolder.queryData();
         }
         mView.addCountLayout(operateSize(mCountHolder));
     }

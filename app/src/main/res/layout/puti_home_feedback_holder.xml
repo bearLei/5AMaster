@@ -24,7 +24,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/puti_next_ededed"
+            android:src="@drawable/puti_next_cdcdcd"
             android:layout_centerVertical="true"
             />
     </RelativeLayout>

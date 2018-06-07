@@ -8,8 +8,8 @@ android {
         applicationId "com.puti.education"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 85
-        versionName "2.0.0"
+        versionCode 86
+        versionName "V3.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

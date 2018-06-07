@@ -38,8 +38,8 @@ public class HomePowerHolder extends BaseHolder<Object>{
         mParentView.removeAllViews();
         //事件登记
         mParentView.addView(getItem(
-                R.drawable.puti_login_account_selected,
-                R.string.navi_survey_online,
+                R.drawable.puti_home_add_event,
+                R.string.puti_home_add_event,
                 new HomeBaseItemHolder.ItemClickListener() {
             @Override
             public void itemClick() {
@@ -48,8 +48,9 @@ public class HomePowerHolder extends BaseHolder<Object>{
         }));
         //事件确认
         mParentView.addView(getItem(
-                R.drawable.puti_login_account_selected,
-                R.string.navi_survey_online, new HomeBaseItemHolder.ItemClickListener() {
+                R.drawable.puti_home_event_sure,
+                R.string.puti_home_event_sure,
+                new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
                         ToastUtil.show("事件确认");
@@ -57,8 +58,9 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 }));
         //班级事件
         mParentView.addView(getItem(
-                R.drawable.puti_login_account_selected,
-                R.string.navi_survey_online, new HomeBaseItemHolder.ItemClickListener() {
+                R.drawable.puti_home_event_manager,
+                R.string.puti_home_event_manager,
+                new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
                         ToastUtil.show("班级事件");
@@ -66,8 +68,9 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 }));
         //家长举报
         mParentView.addView(getItem(
-                R.drawable.puti_login_account_selected,
-                R.string.navi_survey_online, new HomeBaseItemHolder.ItemClickListener() {
+                R.drawable.puti_home_parent_report,
+                R.string.puti_home_parent_report,
+                new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
                         ToastUtil.show("家长举报");
@@ -75,8 +78,9 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 }));
         //学生档案
         mParentView.addView(getItem(
-                R.drawable.puti_login_account_selected,
-                R.string.navi_survey_online, new HomeBaseItemHolder.ItemClickListener() {
+                R.drawable.puti_home_stu_record,
+                R.string.puti_home_stu_record,
+                new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
                         ToastUtil.show("学生档案");
@@ -84,8 +88,9 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 }));
         //我的档案
         mParentView.addView(getItem(
-                R.drawable.puti_login_account_selected,
-                R.string.navi_survey_online, new HomeBaseItemHolder.ItemClickListener() {
+                R.drawable.puti_home_my_record,
+                R.string.puti_home_my_record,
+                new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
                         ToastUtil.show("我的档案");
@@ -93,8 +98,9 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 }));
         //我的问卷
         mParentView.addView(getItem(
-                R.drawable.puti_login_account_selected,
-                R.string.navi_survey_online, new HomeBaseItemHolder.ItemClickListener() {
+                R.drawable.puti_home_my_psq,
+                R.string.puti_home_my_question,
+                new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
                         ToastUtil.show("我的问卷");
@@ -102,8 +108,9 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 }));
         //工作检查
         mParentView.addView(getItem(
-                R.drawable.puti_login_account_selected,
-                R.string.navi_survey_online, new HomeBaseItemHolder.ItemClickListener() {
+                R.drawable.puti_home_work_check,
+                R.string.puti_home_work_check,
+                new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
                         ToastUtil.show("工作检查");

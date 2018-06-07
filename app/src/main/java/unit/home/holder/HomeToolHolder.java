@@ -45,8 +45,9 @@ public class HomeToolHolder extends BaseHolder<Object> {
         VToolContainer.removeAllViews();
         //校园通讯录
         VToolContainer.addView(getItem(
-                R.drawable.puti_login_account_selected,
-                R.string.navi_survey_online, new HomeBaseItemHolder.ItemClickListener() {
+                R.drawable.puti_home_school_phone_book,
+                R.string.puti_home_school_phone_book,
+                new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
                         ToastUtil.show("校园通讯录");
@@ -55,8 +56,9 @@ public class HomeToolHolder extends BaseHolder<Object> {
 
         //家长通讯录
         VToolContainer.addView(getItem(
-                R.drawable.puti_login_account_selected,
-                R.string.navi_survey_online, new HomeBaseItemHolder.ItemClickListener() {
+                R.drawable.puti_home_parent_phone_book,
+                R.string.puti_home_parent_phone_book,
+                new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
                         ToastUtil.show("家长通讯录");
@@ -65,8 +67,9 @@ public class HomeToolHolder extends BaseHolder<Object> {
 
         //班级课表
         VToolContainer.addView(getItem(
-                R.drawable.puti_login_account_selected,
-                R.string.navi_survey_online, new HomeBaseItemHolder.ItemClickListener() {
+                R.drawable.puti_home_class_schedule,
+                R.string.puti_home_class_schedule,
+                new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
                         ToastUtil.show("班级课表");
@@ -75,8 +78,9 @@ public class HomeToolHolder extends BaseHolder<Object> {
 
         //我的课表
         VToolContainer.addView(getItem(
-                R.drawable.puti_login_account_selected,
-                R.string.navi_survey_online, new HomeBaseItemHolder.ItemClickListener() {
+                R.drawable.puti_home_my_schedule,
+                R.string.puti_home_my_schedule,
+                new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
                         ToastUtil.show("我的课表");

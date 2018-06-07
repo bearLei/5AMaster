@@ -14,4 +14,25 @@
     <string name="navi_cooperation">家校协同</string>
     <string name="title_activity_record_only">RecordOnlyActivity</string>
     <string name="ok">确定</string>
+    
+    <!--新APP开始-->
+    
+    <!--登录-->
+    
+    
+    <!--首页-->
+    <string name="puti_home_week_increase">本周新增</string>
+    <string name="puti_home_my_post">我发起的</string>
+    <string name="puti_home_add_event">事件登记</string>
+    <string name="puti_home_event_manager">班级事件</string>
+    <string name="puti_home_event_sure">事件确认</string>
+    <string name="puti_home_parent_report">家长举报</string>
+    <string name="puti_home_stu_record">学生档案</string>
+    <string name="puti_home_my_record">我的档案</string>
+    <string name="puti_home_my_question">我的问卷</string>
+    <string name="puti_home_work_check">工作检查</string>
+    <string name="puti_home_school_phone_book">校园通讯录</string>
+    <string name="puti_home_parent_phone_book">家长通讯录</string>
+    <string name="puti_home_class_schedule">班级课表</string>
+    <string name="puti_home_my_schedule">我的课表</string>
 </resources>

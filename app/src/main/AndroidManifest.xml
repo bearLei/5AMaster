@@ -274,8 +274,16 @@
         <!--新APP开始-->
 
         <!--登录-->
-        <activity android:name="unit.login.LoginActivity"/>
-        <activity android:name="unit.home.HomeActivity"
+        <activity android:name="unit.moudle.login.LoginActivity"
+                  android:configChanges="orientation|screenSize"
+            />
+        <!--首页-->
+        <activity android:name="unit.moudle.home.HomeActivity"
+                  android:configChanges="orientation|screenSize"
+            />
+        <!--消息列表-->
+        <activity android:name="unit.moudle.message.MessageActivity"
+                  android:configChanges="orientation|screenSize"
             />
 
         <!--新APP结束-->

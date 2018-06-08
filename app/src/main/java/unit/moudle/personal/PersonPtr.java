@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import unit.eventbus.LogoutEvent;
 import unit.eventbus.PutiEventBus;
 import unit.moudle.personal.qrcode.MyQrCodeActivity;
+import unit.moudle.personal.updatepsw.UpdatePswDialog;
+import unit.util.MarketUtils;
 import unit.util.UserInfoUtils;
 
 /**
@@ -92,21 +94,22 @@ public class PersonPtr implements BaseMvpPtr {
      * 意见反馈
      */
     public void feedBack(){
-
+        // TODO: 2018/6/8 反馈页面
     }
 
     /**
      * 去赏个好评
      */
     public void  evaluate(){
-
+        MarketUtils.goScore(mContext);
     }
 
     /**
      * 修改密码
      */
     public void updatePsw(){
-
+        UpdatePswDialog dialog = new UpdatePswDialog(mContext);
+        dialog.show();
     }
 
     /**

@@ -51,4 +51,10 @@
     <!--相册-->
     <string name="puti_album">从相册中选择</string>
     <string name="puti_camera">拍照</string>
+    <!--修改密码-->
+    <string name="puti_update_old_psw">请输入旧密码</string>
+    <string name="puti_update_new_psw">请输入新密码</string>
+    <string name="puti_update_new_psw_again">请再次输入新密码</string>
+    <string name="puti_update_comparison_psw">2次输入的新密码不一致，请重新输入</string>
+    <string name="puti_update_success">修改密码成功</string>
 </resources>

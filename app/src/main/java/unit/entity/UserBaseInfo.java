@@ -18,6 +18,7 @@ public class UserBaseInfo implements Serializable {
     private String schoolName;
     private String schoolId;
     private String qrCode;//二维码 协议待补充
+    private String AreaUID;
     public UserBaseInfo() {
     }
 
@@ -99,5 +100,13 @@ public class UserBaseInfo implements Serializable {
 
     public void setQrCode(String qrCode) {
         this.qrCode = qrCode;
+    }
+
+    public String getAreaUID() {
+        return AreaUID;
+    }
+
+    public void setAreaUID(String areaUID) {
+        AreaUID = areaUID;
     }
 }

@@ -105,6 +105,7 @@ public class LoginPtr implements BaseMvpPtr {
         baseInfo.setToken(userInfo.getToken());
         baseInfo.setSchoolName(userInfo.getDomainName());
         baseInfo.setSchoolId(userInfo.getDomainUID());
+        baseInfo.setAreaUID(userInfo.getAreaUID());
         if (userInfo.getRolePowers() != null &&userInfo.getRolePowers().size() > 0) {
             baseInfo.setRoleId(userInfo.getRolePowers().get(0).getRoleUID());
             baseInfo.setRole(userInfo.getRolePowers().get(0).getRoleName());

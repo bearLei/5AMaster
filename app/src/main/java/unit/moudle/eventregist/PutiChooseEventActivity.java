@@ -1,6 +1,7 @@
 package unit.moudle.eventregist;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.widget.EditText;
 
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
@@ -9,6 +10,8 @@ import com.puti.education.base.PutiActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import unit.moudle.eventregist.ptr.ChooseEventPtr;
+import unit.moudle.eventregist.view.ChooseEventView;
 import unit.widget.HeadView;
 
 /**
@@ -16,7 +19,7 @@ import unit.widget.HeadView;
  * 事件登记-事件选择页面
  */
 
-public class PutiChooseEventActivity extends PutiActivity {
+public class PutiChooseEventActivity extends PutiActivity implements ChooseEventView {
 
     @BindView(R.id.search)
     EditText search;
@@ -25,6 +28,9 @@ public class PutiChooseEventActivity extends PutiActivity {
     @BindView(R.id.headview)
     HeadView headview;
 
+    private ChooseEventPtr mPtr;
+
+
     @Override
     public int getContentView() {
         return R.layout.puti_choose_event_activity;
@@ -32,7 +38,9 @@ public class PutiChooseEventActivity extends PutiActivity {
 
     @Override
     public void BindPtr() {
-
+        if (mPtr == null){
+            mPtr = new ChooseEventPtr(this,this);
+        }
     }
 
     @Override
@@ -58,6 +66,9 @@ public class PutiChooseEventActivity extends PutiActivity {
                 finish();
             }
         });
+
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        recyclerview.setLayoutManager(manager);
     }
 
     @Override
@@ -65,10 +76,4 @@ public class PutiChooseEventActivity extends PutiActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

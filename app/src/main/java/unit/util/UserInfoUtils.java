@@ -41,4 +41,11 @@ public class UserInfoUtils {
             return getUserInfo().getRoleId();
         }
     }
+
+    public static String getAreaUid(){
+        if (getUserInfo() == null){
+            return "";
+        }
+        return getUserInfo().getAreaUID();
+    }
 }

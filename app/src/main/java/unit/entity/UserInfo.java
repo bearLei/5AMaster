@@ -22,7 +22,7 @@ public class UserInfo implements Serializable{
     private String SchoolLogo;
     private ArrayList<RolePower> RolePowers;
     private String Token;
-
+    private String AreaUID;
     public UserInfo() {
     }
 
@@ -104,6 +104,14 @@ public class UserInfo implements Serializable{
 
     public void setToken(String token) {
         Token = token;
+    }
+
+    public String getAreaUID() {
+        return AreaUID;
+    }
+
+    public void setAreaUID(String areaUID) {
+        AreaUID = areaUID;
     }
 
     @Override

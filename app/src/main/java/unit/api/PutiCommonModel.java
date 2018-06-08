@@ -60,8 +60,8 @@ public class PutiCommonModel extends PutiBaseModel{
     public void login(String userName, String psd, VerifyPostInfo verifyInfo, String deviceInfo, final BaseListener baseListener){
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        sb.append("\"loginName\":\"").append(userName).append("\"");
-        sb.append(",\"password\":\"").append(psd).append("\"");
+        sb.append("\"LoginName\":\"").append(userName).append("\"");
+        sb.append(",\"PassWord\":\"").append(psd).append("\"");
         sb.append("}");
 //        sb.append(",\"verifyCode\":{").append("\"uuidKey\":\"").append(verifyInfo.getUuidKey());
 //        sb.append(",\"vericode\":\""+verifyInfo.getVericode()+"}");
@@ -165,6 +165,29 @@ public class PutiCommonModel extends PutiBaseModel{
     //退出登录
     public void logout(final BaseListener listener){
         mCommonApi.logout()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJsonStr(responseInfo,listener);
+                    }
+                });
+    }
+
+    /**
+     * 提交有奖反馈
+     * @param suggestion 意见
+     * @param listener
+     */
+    public void commitSuggestion(String suggestion,final  BaseListener listener){
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        sb.append("\"Suggestion\":\"").append(suggestion).append("\"");
+        sb.append("}");
+        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),sb.toString());
+
+        mCommonApi.commitSuggestion(body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new PutiCommonSubscriber(listener){

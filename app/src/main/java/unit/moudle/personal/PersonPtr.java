@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import unit.api.PutiCommonModel;
 import unit.eventbus.LogoutEvent;
 import unit.eventbus.PutiEventBus;
+import unit.moudle.personal.feedback.FeedBackActivity;
 import unit.moudle.personal.qrcode.MyQrCodeActivity;
 import unit.moudle.personal.updatepsw.UpdatePswDialog;
 import unit.util.MarketUtils;
@@ -99,6 +100,8 @@ public class PersonPtr implements BaseMvpPtr {
      */
     public void feedBack(){
         // TODO: 2018/6/8 反馈页面
+        Intent intent = new Intent(mContext, FeedBackActivity.class);
+        mContext.startActivity(intent);
     }
 
     /**

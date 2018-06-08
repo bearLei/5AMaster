@@ -153,6 +153,10 @@ public class LoginActivity extends PutiActivity implements LoginView, View.OnCli
 
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         if (view instanceof EditText) {
+            ((EditText) view).setTextColor(hasFoucus ? getResources().getColor(R.color.base_39BCA1)
+                    :getResources().getColor(R.color.base_acb2c1));
+            ((EditText) view).setHintTextColor(hasFoucus ? getResources().getColor(R.color.base_39BCA1)
+                    :getResources().getColor(R.color.base_acb2c1));
             ((EditText)view).setCompoundDrawables(drawable, null, null, null);
             ((EditText)view).setCompoundDrawablePadding(10);
         }

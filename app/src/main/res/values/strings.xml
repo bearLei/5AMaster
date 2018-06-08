@@ -47,6 +47,8 @@
     <string name="puti_person_current_version_code">当前版本号</string>
     <string name="puti_person_logout">退 出</string>
     <string name="puti_person_trouble_phone">0755 23501191</string>
+    <string name="puti_feedback">反馈有奖</string>
+    <string name="puti_feedback_hint">请留下您的宝贵意见，我们将努力改进，同时我们将在每月抽取三个用户进行奖励！</string>
     
     <!--相册-->
     <string name="puti_album">从相册中选择</string>

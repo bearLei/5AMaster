@@ -1,6 +1,7 @@
 package unit.moudle.home.holder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import com.puti.education.util.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import unit.moudle.personal.feedback.FeedBackActivity;
 
 /**
  * Created by lei on 2018/6/6.
@@ -36,7 +38,8 @@ public class HomeFeedBackHolder extends BaseHolder<Object> {
         feedBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.show("有奖反馈");
+                Intent intent = new Intent(mContext, FeedBackActivity.class);
+                mContext.startActivity(intent);
             }
         });
         return mRootView;

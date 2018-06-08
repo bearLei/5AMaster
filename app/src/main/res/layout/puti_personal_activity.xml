@@ -60,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_60"
             app:title="@string/puti_person_qr_code"
+            android:background="@color/base_ffffff"
             ></unit.widget.SettingItem>
 
         <!--邀请使用-->
@@ -68,6 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_60"
             app:title="@string/puti_person_invite_use"
+            android:background="@color/base_ffffff"
             ></unit.widget.SettingItem>
 
         <!--意见反馈-->
@@ -76,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_60"
             app:title="@string/puti_person_suggestion_feedback"
+            android:background="@color/base_ffffff"
             ></unit.widget.SettingItem>
 
         <!--去赏个好评-->
@@ -84,6 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_60"
             app:title="@string/puti_person_good_evaluate"
+            android:background="@color/base_ffffff"
             ></unit.widget.SettingItem>
 
         <!--修改密码-->
@@ -92,6 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_60"
             app:title="@string/puti_person_update_psw"
+            android:background="@color/base_ffffff"
             ></unit.widget.SettingItem>
 
         <!--故障帮助-->
@@ -101,6 +106,7 @@
             android:layout_height="@dimen/dp_60"
             app:title="@string/puti_person_trouble_help"
             app:showIcon="false"
+            android:background="@color/base_ffffff"
             ></unit.widget.SettingItem>
 
         <!--当前版本号-->
@@ -110,6 +116,7 @@
             android:layout_height="@dimen/dp_60"
             app:title="@string/puti_person_current_version_code"
             app:showIcon="false"
+            android:background="@color/base_ffffff"
             ></unit.widget.SettingItem>
         <!--退出登录-->
         <TextView

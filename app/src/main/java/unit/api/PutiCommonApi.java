@@ -37,7 +37,10 @@ public interface PutiCommonApi {
     @POST("Common/updatePassword")//修改密码
     Observable<BaseResponseInfo> updatePsw(@Body RequestBody route );
 
-    @GET("/Common/Logout")//退出登录
+    @GET("Common/Logout")//退出登录
     Observable<BaseResponseInfo> logout();
+
+    @GET("Common/commitSuggestion")//提交有奖反馈
+    Observable<BaseResponseInfo> commitSuggestion (@Body RequestBody route);
 
 }

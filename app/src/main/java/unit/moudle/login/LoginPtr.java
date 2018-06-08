@@ -77,6 +77,7 @@ public class LoginPtr implements BaseMvpPtr {
             public void requestFailed(boolean status, int code, String errorMessage) {
                 super.requestFailed(status, code, errorMessage);
                 //处理下验证码的逻辑
+                ToastUtil.show(errorMessage);
                 switch (code){
                     case Need_verify:
                         queryVerify();

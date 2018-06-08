@@ -294,6 +294,11 @@
         <activity android:name="unit.moudle.personal.qrcode.MyQrCodeActivity"
             android:configChanges="orientation|screenSize"
             />
+
+        <!--反馈有奖-->
+        <activity android:name="unit.moudle.personal.feedback.FeedBackActivity"
+            android:configChanges="orientation|screenSize"
+            />
         <!--新APP结束-->
 
         <!-- 百度地图相关的service -->

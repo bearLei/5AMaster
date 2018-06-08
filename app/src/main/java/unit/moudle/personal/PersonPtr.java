@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import unit.eventbus.LogoutEvent;
 import unit.eventbus.PutiEventBus;
+import unit.moudle.personal.qrcode.MyQrCodeActivity;
 import unit.util.UserInfoUtils;
 
 /**
@@ -76,7 +77,8 @@ public class PersonPtr implements BaseMvpPtr {
      * 获取我的二维码
      */
     public void getQrCode(){
-
+        Intent intent = new Intent(mContext, MyQrCodeActivity.class);
+        mContext.startActivity(intent);
     }
 
     /**

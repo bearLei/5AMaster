@@ -5,5 +5,5 @@
     android:layout_height="@dimen/dp_55"
     android:minHeight="@dimen/dp_55"
     android:gravity="center"
-    android:textColor="@color/base_585858"
+    android:textColor="@color/base_4577dc"
     android:textSize="@dimen/sp_16" />

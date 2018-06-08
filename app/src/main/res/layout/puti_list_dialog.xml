@@ -41,7 +41,7 @@
         android:id="@+id/text_cancel"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_55"
-        android:textColor="#c1ab79"
+        android:textColor="#4577dc"
         android:gravity="center"
         android:textSize="@dimen/sp_17"
         android:text="@string/cancel"/>

@@ -9,10 +9,14 @@ import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import com.puti.education.base.BaseMvpPtr;
+import com.puti.education.listener.BaseListener;
+import com.puti.education.ui.uiCommon.LoginActivity;
 import com.puti.education.util.FileUtils;
+import com.puti.education.util.ToastUtil;
 
 import java.util.ArrayList;
 
+import unit.api.PutiCommonModel;
 import unit.eventbus.LogoutEvent;
 import unit.eventbus.PutiEventBus;
 import unit.moudle.personal.qrcode.MyQrCodeActivity;
@@ -130,12 +134,22 @@ public class PersonPtr implements BaseMvpPtr {
      * 退出登录
      */
     public void logOut(){
-        // TODO: 2018/6/7 登出登录请求
+            PutiCommonModel.getInstance().logout(new BaseListener(){
+                @Override
+                public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
+                    super.responseResult(infoObj, listObj, code, status);
+                    UserInfoUtils.setUserInfo(null);
+                    Intent intent = new Intent(mContext, LoginActivity.class);
+                    mContext.startActivity(intent);
+                }
 
-        //清除个人信息
-        UserInfoUtils.setUserInfo(null);
+                @Override
+                public void requestFailed(boolean status, int code, String errorMessage) {
+                    super.requestFailed(status, code, errorMessage);
+                    ToastUtil.show(errorMessage);
+                }
+            });
         PutiEventBus.post(new LogoutEvent());
-
     }
 
     /**

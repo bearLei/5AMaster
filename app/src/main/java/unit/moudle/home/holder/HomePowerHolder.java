@@ -1,6 +1,7 @@
 package unit.moudle.home.holder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import com.puti.education.base.InflateService;
 import com.puti.education.base.holder.BaseHolder;
 import com.puti.education.util.ToastUtil;
 import com.puti.education.util.ViewUtils;
+
+import unit.moudle.eventregist.PutiChooseEventActivity;
 
 /**
  * Created by lei on 2018/6/6.
@@ -44,6 +47,8 @@ public class HomePowerHolder extends BaseHolder<Object>{
             @Override
             public void itemClick() {
                 ToastUtil.show("事件登记");
+                Intent intent = new Intent(mContext, PutiChooseEventActivity.class);
+                mContext.startActivity(intent);
             }
         }));
         //事件确认

@@ -59,4 +59,8 @@
     <string name="puti_update_new_psw_again">请再次输入新密码</string>
     <string name="puti_update_comparison_psw">2次输入的新密码不一致，请重新输入</string>
     <string name="puti_update_success">修改密码成功</string>
+
+
+    <!--选择事件-->
+    <string name="puti_choose_event_type">选择事件类型</string>
 </resources>

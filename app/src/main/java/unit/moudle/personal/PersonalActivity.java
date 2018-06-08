@@ -1,11 +1,11 @@
 package unit.moudle.personal;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.baidu.platform.comapi.map.F;
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
 import com.puti.education.util.ImgLoadUtil;
@@ -13,9 +13,11 @@ import com.puti.education.util.ImgLoadUtil;
 import java.io.File;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unit.entity.UserBaseInfo;
 import unit.util.UserInfoUtils;
+import unit.widget.HeadView;
 import unit.widget.SettingItem;
 
 /**
@@ -27,15 +29,16 @@ public class PersonalActivity extends PutiActivity implements PersonView {
 
     @BindView(R.id.head_icon)
     ImageView headIcon;
-    @BindView(R.id.name)
-    TextView name;
     @BindView(R.id.trouble_help)
     SettingItem troubleHelp;
     @BindView(R.id.current_version)
     SettingItem currentVersion;
+    @BindView(R.id.headview)
+    HeadView headview;
 
 
     private PersonPtr mPtr;
+
     @Override
     public int getContentView() {
         return R.layout.puti_personal_activity;
@@ -43,8 +46,8 @@ public class PersonalActivity extends PutiActivity implements PersonView {
 
     @Override
     public void BindPtr() {
-        if (mPtr == null){
-            mPtr = new PersonPtr(this,this);
+        if (mPtr == null) {
+            mPtr = new PersonPtr(this, this);
         }
     }
 
@@ -77,20 +80,23 @@ public class PersonalActivity extends PutiActivity implements PersonView {
                         R.mipmap.ic_avatar_default,
                         userInfo.getAvatar(),
                         headIcon);
-                name.setText(userInfo.getRealName());
+                headview.setTitle(userInfo.getRealName());
             }
         }
+        headview.setCallBack(new HeadView.HeadViewCallBack() {
+            @Override
+            public void backClick() {
+                finish();
+            }
+        });
         currentVersion.updateBrief(mPtr.getVersionName());
         troubleHelp.updateBrief(getString(R.string.puti_person_trouble_phone));
     }
 
 
-    @OnClick({R.id.back, R.id.head_icon, R.id.qr_code, R.id.invite_use, R.id.feed_back, R.id.evaluate, R.id.update_psw, R.id.trouble_help, R.id.current_version, R.id.lgout})
+    @OnClick({ R.id.head_icon, R.id.qr_code, R.id.invite_use, R.id.feed_back, R.id.evaluate, R.id.update_psw, R.id.trouble_help, R.id.current_version, R.id.lgout})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.back:
-                finish();
-                break;
             case R.id.head_icon:
                 mPtr.updateAvatar();
                 break;
@@ -122,16 +128,16 @@ public class PersonalActivity extends PutiActivity implements PersonView {
     }
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mPtr.onActivityResult(requestCode,resultCode,data,headIcon);
+        mPtr.onActivityResult(requestCode, resultCode, data, headIcon);
     }
 
     @Override
     public void updateAvatar(String path) {
-        ImgLoadUtil.displayLocalPictrue(this,R.mipmap.ic_avatar_default,
+        ImgLoadUtil.displayLocalPictrue(this, R.mipmap.ic_avatar_default,
                 new File(path),
                 headIcon);
     }
+
 }

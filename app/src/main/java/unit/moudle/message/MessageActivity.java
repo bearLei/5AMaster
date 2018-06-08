@@ -18,6 +18,7 @@ import butterknife.OnClick;
 import unit.api.PutiCommonModel;
 import unit.entity.MessageEntity;
 import unit.util.UserInfoUtils;
+import unit.widget.HeadView;
 
 /**
  * Created by lei on 2018/6/7.
@@ -31,6 +32,8 @@ public class MessageActivity extends PutiActivity {
 
     @BindView(R.id.list)
     LRecyclerView VList;
+    @BindView(R.id.headview)
+    HeadView headview;
 
 
     private MessageAdapter mAdapter;
@@ -61,9 +64,14 @@ public class MessageActivity extends PutiActivity {
     public void DettachPtrView() {
 
     }
-
     @Override
     public void InitView() {
+        headview.setCallBack(new HeadView.HeadViewCallBack() {
+            @Override
+            public void backClick() {
+                finish();
+            }
+        });
 
         if (mData == null) {
             mData = new ArrayList<>();
@@ -138,8 +146,4 @@ public class MessageActivity extends PutiActivity {
         mData.addAll(messageList);
     }
 
-    @OnClick(R.id.back)
-    public void onClick() {
-        finish();
-    }
 }

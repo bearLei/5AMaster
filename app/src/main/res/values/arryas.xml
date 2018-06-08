@@ -65,5 +65,8 @@
         <attr name="showIcon" format="boolean"/>
         <attr name="brief" format="string"/>
     </declare-styleable>
-
+    <declare-styleable name="PutiHeadView">
+        <attr name="head_title" format="string"/>
+        <attr name="showBackIcon" format="boolean"/>
+    </declare-styleable>
 </resources>

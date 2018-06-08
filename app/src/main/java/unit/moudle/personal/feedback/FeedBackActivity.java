@@ -1,16 +1,21 @@
 package unit.moudle.personal.feedback;
+
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.util.ToastUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import unit.api.PutiCommonModel;
+import unit.widget.HeadView;
 
 /**
  * Created by lei on 2018/6/8.
@@ -21,14 +26,14 @@ public class FeedBackActivity extends PutiActivity implements View.OnClickListen
 
     private static final int Max = 500;
 
-    @BindView(R.id.back)
-    TextView back;
     @BindView(R.id.edit_tv)
     EditText editTv;
     @BindView(R.id.count)
     TextView count;
     @BindView(R.id.commit)
     TextView commit;
+    @BindView(R.id.headview)
+    HeadView headview;
 
     @Override
     public int getContentView() {
@@ -57,7 +62,12 @@ public class FeedBackActivity extends PutiActivity implements View.OnClickListen
 
     @Override
     public void InitView() {
-        back.setOnClickListener(this);
+        headview.setCallBack(new HeadView.HeadViewCallBack() {
+            @Override
+            public void backClick() {
+                finish();
+            }
+        });
         commit.setOnClickListener(this);
         editTv.addTextChangedListener(new TextWatcher() {
             @Override
@@ -85,12 +95,9 @@ public class FeedBackActivity extends PutiActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.back:
-                finish();
-                break;
+        switch (v.getId()) {
             case R.id.commit:
-                PutiCommonModel.getInstance().commitSuggestion(editTv.getText().toString(),new BaseListener(){
+                PutiCommonModel.getInstance().commitSuggestion(editTv.getText().toString(), new BaseListener() {
                     @Override
                     public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                         super.responseResult(infoObj, listObj, code, status);

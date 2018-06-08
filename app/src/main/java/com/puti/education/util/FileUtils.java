@@ -1,6 +1,7 @@
 package com.puti.education.util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -12,7 +13,10 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.media.ThumbnailUtils;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -934,6 +938,29 @@ public class FileUtils {
 
     public static String getFolderSizeStr(File file) {
         return getFormatSize(getFolderSize(file));
+    }
+
+
+    public static Uri toUri(Context context,File file){
+
+        if (context == null || file == null){
+            return null;
+        }
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= 24){
+            uri = FileProvider.getUriForFile(context,context.getPackageName()+".fileprovider",file);
+        }else {
+            uri = Uri.fromFile(file);
+        }
+        return uri;
+
+    }
+
+    public static Uri toUri(Context context,String path){
+        if (context == null || TextUtils.isEmpty(path)){
+            return null;
+        }
+        return toUri(context,new File(path));
     }
 
 }

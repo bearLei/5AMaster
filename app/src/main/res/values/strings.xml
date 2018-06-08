@@ -47,4 +47,8 @@
     <string name="puti_person_current_version_code">当前版本号</string>
     <string name="puti_person_logout">退 出</string>
     <string name="puti_person_trouble_phone">0755 23501191</string>
+    
+    <!--相册-->
+    <string name="puti_album">从相册中选择</string>
+    <string name="puti_camera">拍照</string>
 </resources>

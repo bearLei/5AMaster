@@ -1,10 +1,17 @@
 package unit.moudle.personal;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.widget.ImageView;
 
 import com.puti.education.base.BaseMvpPtr;
+import com.puti.education.util.FileUtils;
+
+import java.util.ArrayList;
 
 import unit.eventbus.LogoutEvent;
 import unit.eventbus.PutiEventBus;
@@ -18,9 +25,13 @@ import unit.util.UserInfoUtils;
 public class PersonPtr implements BaseMvpPtr {
 
     private Context mContext;
+    private PersonView mView;
+    private PhotoChooser chooser;
 
-    public PersonPtr(Context mContext) {
+
+    public PersonPtr(Context mContext, PersonView mView) {
         this.mContext = mContext;
+        this.mView = mView;
     }
 
     @Override
@@ -30,14 +41,35 @@ public class PersonPtr implements BaseMvpPtr {
 
     @Override
     public void stop() {
-
+        if (chooser != null){
+            chooser = null;
+        }
     }
 
+    private Bitmap getTempBitmap(String path){
+       Bitmap bitmap = FileUtils.getImageThumbnail(path, 720, 1280);
+        return bitmap;
+    }
     /**
      * 更换头像
      */
-    public void updateAvatar(){
+    public void updateAvatar() {
+            chooser = new PhotoChooser((Activity) mContext,1);
+            chooser.chooseDialog(new PhotoChooser.ChooseCallBack() {
+                @Override
+                public void chooseCamer(String path) {
+                    // TODO: 2018/6/7 上传头像
+                    mView.updateAvatar(path);
+                }
 
+                @Override
+                public void chooseAlbum(ArrayList<String> list) {
+                    // TODO: 2018/6/7 上传头像
+                    if (list != null && list.size() > 0){
+                        mView.updateAvatar(list.get(0));
+                    }
+                }
+            });
     }
 
     /**
@@ -116,6 +148,12 @@ public class PersonPtr implements BaseMvpPtr {
             e.printStackTrace();
         }
        return versionName;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data, ImageView imageView) {
+        if (chooser != null){
+            chooser.onActivityResult((Activity) mContext, requestCode, resultCode, data, imageView);
+        }
     }
 
 }

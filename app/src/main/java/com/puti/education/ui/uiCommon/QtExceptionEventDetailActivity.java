@@ -228,7 +228,6 @@ public class QtExceptionEventDetailActivity extends BaseActivity {
 
                 LogUtil.d("", "photo size: " + size);
             }
-
         }
     }
 

@@ -1,5 +1,7 @@
 package unit.moudle.personal;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -7,6 +9,8 @@ import android.widget.TextView;
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
 import com.puti.education.util.ImgLoadUtil;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -19,7 +23,7 @@ import unit.widget.SettingItem;
  * 个人信息页面
  */
 
-public class PersonalActivity extends PutiActivity {
+public class PersonalActivity extends PutiActivity implements PersonView {
 
     @BindView(R.id.head_icon)
     ImageView headIcon;
@@ -40,7 +44,7 @@ public class PersonalActivity extends PutiActivity {
     @Override
     public void BindPtr() {
         if (mPtr == null){
-            mPtr = new PersonPtr(this);
+            mPtr = new PersonPtr(this,this);
         }
     }
 
@@ -117,4 +121,17 @@ public class PersonalActivity extends PutiActivity {
         }
     }
 
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mPtr.onActivityResult(requestCode,resultCode,data,headIcon);
+    }
+
+    @Override
+    public void updateAvatar(String path) {
+        ImgLoadUtil.displayLocalPictrue(this,R.mipmap.ic_avatar_default,
+                new File(path),
+                headIcon);
+    }
 }

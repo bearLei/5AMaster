@@ -22,12 +22,7 @@ import unit.entity.EventMainTier;
  * Created by lei on 2018/6/9.
  */
 
-public class EventBaseHolder extends BaseHolder<EventMainTier> {
-    private static final int Moral  = 1;//思想品德
-    private static final int Study  = 2;//学习
-    private static final int Body   = 3;//身心健康
-    private static final int Action = 4;//实践
-
+public class EventBaseHolder<T> extends BaseHolder<EventMainTier> {
     @BindView(R.id.title)
     TextView title;
     @BindView(R.id.count)
@@ -39,48 +34,62 @@ public class EventBaseHolder extends BaseHolder<EventMainTier> {
     @BindView(R.id.event_list)
     RecyclerView eventList;
 
-    private boolean isPullDown;
     private EventDetailAdapter mAdapter;
     private List<EventDetail> mList;
+    private boolean isPullDown;
+    private PullCallBack pullCallBack;
+
     public EventBaseHolder(Context context) {
         super(context);
     }
-
 
     @NonNull
     @Override
     protected View initView(Context context) {
         mRootView = InflateService.g().inflate(R.layout.puti_event_holder);
         ButterKnife.bind(this, mRootView);
-        isPullDown = false;
+        return mRootView;
+    }
+
+    public void setData(EventMainTier data,boolean pullDown,PullCallBack pullCallBack){
+        isPullDown = pullDown;
+        this.pullCallBack = pullCallBack;
+        updateUI(mContext,data);
+    }
+
+    public void updateUI(Context context, EventMainTier data) {
+        if (data == null) return;
+        eventList.setVisibility(isPullDown
+                ? View.VISIBLE
+                : View.GONE);
+        pullDown.setImageResource(isPullDown
+                ? R.drawable.puti_up :
+                R.drawable.puti_down);
         pullDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isPullDown =  ! isPullDown;
+                if (pullCallBack != null){
+                    if (isPullDown){
+                        pullCallBack.pullUp();
+                    }else {
+                        pullCallBack.pullDown();
+                    }
+                }
+                isPullDown = ! isPullDown;
                 eventList.setVisibility(isPullDown
                         ? View.VISIBLE
                         : View.GONE);
                 pullDown.setImageResource(isPullDown
                         ? R.drawable.puti_up :
                         R.drawable.puti_down);
+
             }
         });
-        if (mList == null){
-            mList = new ArrayList<>();
-        }
-        if (mAdapter == null){
-            mAdapter = new EventDetailAdapter(mContext,mList);
-        }
+        mList = new ArrayList<>();
+        mAdapter = new EventDetailAdapter(mContext,mList);
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         eventList.setLayoutManager(manager);
         eventList.setAdapter(mAdapter);
-        return mRootView;
-    }
-
-    @Override
-    protected void updateUI(Context context, EventMainTier data) {
-        if (data == null) return;
-
         String name = data.getGroupName().getGroupName();
         count.setText(String.valueOf(data.getTypes().size()));
         StringBuilder builder = new StringBuilder();
@@ -113,5 +122,11 @@ public class EventBaseHolder extends BaseHolder<EventMainTier> {
         mAdapter.setType(data.getIndexType());
         mAdapter.notifyDataSetChanged();
     }
+
+    public interface PullCallBack{
+        void pullDown();
+        void pullUp();
+    }
+
 
 }

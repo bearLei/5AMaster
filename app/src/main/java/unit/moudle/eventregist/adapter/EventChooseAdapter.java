@@ -9,7 +9,9 @@ import com.puti.education.base.holder.BaseHolder;
 import com.puti.education.base.holder.ViewHolder;
 import com.puti.education.bean.Practice;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import unit.entity.EventMainTier;
 import unit.entity.EventTypeEntity;
@@ -23,6 +25,8 @@ public class EventChooseAdapter extends BaseRVAdapter {
 
     private List<EventMainTier> mList;
     private BaseHolder mHolder;
+
+    private Map<Integer,Boolean> pullStatusMap = new HashMap<>();
     public EventChooseAdapter(Context context) {
         super(context);
     }
@@ -47,9 +51,42 @@ public class EventChooseAdapter extends BaseRVAdapter {
     }
 
     @Override
+    public void onBindViewHolder(ListHolder holder, final int position) {
+        View itemView = holder.getView();
+        BaseHolder itemHolder = ViewHolder.getHolderTag(itemView);
+        itemHolder.setSysTemHolder(holder);
+        onBindItemHolder(itemHolder, position);
+        if (itemHolder instanceof EventBaseHolder) {
+            ((EventBaseHolder) itemHolder).setData(
+                    (EventMainTier) getItem(position),
+                   getValue(position),
+                    new EventBaseHolder.PullCallBack() {
+                        @Override
+                        public void pullDown() {
+                            pullStatusMap.put(position,true);
+                        }
+
+                        @Override
+                        public void pullUp() {
+                            pullStatusMap.remove(position);
+                        }
+                    });
+        } else {
+            itemHolder.setData(getItem(position));
+        }
+    }
+    @Override
     protected BaseHolder getViewHolder(Context context, ViewGroup parent, int viewType) {
         mHolder = new EventBaseHolder(context);
         return mHolder;
+    }
+
+    private boolean getValue(int position){
+        if (pullStatusMap.containsKey(position)){
+            return pullStatusMap.get(position);
+        }else {
+            return false;
+        }
     }
 
 }

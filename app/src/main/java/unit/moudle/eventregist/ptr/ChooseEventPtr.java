@@ -72,7 +72,7 @@ public class ChooseEventPtr implements BaseMvpPtr {
             List<EventMainTier> types = list.get(i).getTypes();
             int i1 = types.size();
             for (int j = 0; j < i1; j++) {
-                types.get(0).setIndexType(indexType);
+                types.get(j).setIndexType(indexType);
             }
             data.addAll(types);
         }

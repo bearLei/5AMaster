@@ -1,5 +1,6 @@
 package unit.api;
 
+import com.puti.education.bean.EventType;
 import com.puti.education.netFrame.response.ResponseInfo;
 
 import okhttp3.RequestBody;
@@ -10,6 +11,7 @@ import retrofit2.http.Query;
 import rx.Observable;
 import unit.base.BaseResponseInfo;
 import unit.base.PutiBaseModel;
+import unit.entity.EventBase;
 
 /**
  * Created by lei on 2018/6/4.
@@ -43,4 +45,6 @@ public interface PutiCommonApi {
     @GET("Common/commitSuggestion")//提交有奖反馈
     Observable<BaseResponseInfo> commitSuggestion (@Body RequestBody route);
 
+    @GET("Common/EventType")//获取事件类型
+    Observable<BaseResponseInfo> getEventType(@Query("areaUID") String areaUid);
 }

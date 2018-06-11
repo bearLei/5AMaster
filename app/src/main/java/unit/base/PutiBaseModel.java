@@ -32,22 +32,34 @@ public class PutiBaseModel {
 
     }
 
-    public void dealJsonArrayStr(ResponseInfo responseInfo, BaseListener baseListener){
+    public void dealJsonArrayStr(BaseResponseInfo responseInfo, BaseListener baseListener){
 
-        if (responseInfo.status){
-            if (responseInfo.data != null){
-                Object infoObj = responseInfo.data.parseInfo(baseListener.getSubClass());
-                List<Object> listObj = responseInfo.data.parseList(baseListener.getSubClass());
-                baseListener.responseListResult(infoObj,listObj, responseInfo.data.pageinfo,responseInfo.code,responseInfo.status);
+        if (responseInfo.isSuccess()){
+            if (responseInfo.getData() != null){
+                List<Object> listObj = responseInfo.parseList(baseListener.getSubClass());
+                baseListener.responseListResult(null,listObj, null,responseInfo.getCode(),responseInfo.isSuccess());
             }else{
-                baseListener.responseListResult(null, null,null,responseInfo.code, responseInfo.status);
+                baseListener.responseListResult(null, null,null, responseInfo.getCode(), responseInfo.isSuccess());
             }
         }else{
-            baseListener.requestFailed(responseInfo.status,responseInfo.code, responseInfo.error);
+            baseListener.requestFailed(responseInfo.isSuccess(),responseInfo.getCode(), responseInfo.getMsg());
         }
-
     }
-
+    public void dealJson(BaseResponseInfo responseInfo, BaseListener baseListener){
+        if (responseInfo.isSuccess()){
+            if (responseInfo.getData() != null){
+                if (responseInfo.getData().startsWith("{")){
+                    dealJsonStr(responseInfo, baseListener);
+                }else if (responseInfo.getData().startsWith("[")){
+                    dealJsonArrayStr(responseInfo,baseListener);
+                }
+            }else {
+                baseListener.responseResult(null, null,responseInfo.getCode(), responseInfo.isSuccess());
+            }
+        }else {
+            baseListener.requestFailed(responseInfo.isSuccess(),responseInfo.getCode(), responseInfo.getMsg());
+        }
+    }
     /**
      * 处理比较简单的响应数据，例如 注销，信息修改保存等接口放回的数据.避免创建类
      *

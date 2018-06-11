@@ -13,12 +13,15 @@ import com.puti.education.netFrame.response.ResponseInfo;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import unit.base.BaseResponseInfo;
 import unit.base.PutiBaseModel;
 import unit.base.PutiCommonSubscriber;
+import unit.entity.EventBase;
 import unit.entity.VerifyPostInfo;
+import unit.util.UserInfoUtils;
 
 /**
  * Created by lei on 2018/6/4.
@@ -77,7 +80,7 @@ public class PutiCommonModel extends PutiBaseModel{
                 .subscribe(new PutiCommonSubscriber(baseListener){
                     @Override
                     public void onNext(BaseResponseInfo responseInfo) {
-                        dealJsonStr(responseInfo, baseListener);
+                        dealJson(responseInfo,baseListener);
                     }
                 });
     }
@@ -93,7 +96,7 @@ public class PutiCommonModel extends PutiBaseModel{
                 .subscribe(new PutiCommonSubscriber(listener){
                     @Override
                     public void onNext(BaseResponseInfo responseInfo) {
-                        dealJsonStr(responseInfo,listener);
+                        dealJson(responseInfo,listener);
                     }
                 });
     }
@@ -112,7 +115,7 @@ public class PutiCommonModel extends PutiBaseModel{
                 .subscribe(new PutiCommonSubscriber(listener){
                     @Override
                     public void onNext(BaseResponseInfo responseInfo) {
-                        dealJsonStr(responseInfo,listener);
+                        dealJson(responseInfo,listener);
                     }
                 });
     }
@@ -129,7 +132,7 @@ public class PutiCommonModel extends PutiBaseModel{
                 .subscribe(new PutiCommonSubscriber(listener){
                     @Override
                     public void onNext(BaseResponseInfo responseInfo) {
-                        dealJsonStr(responseInfo,listener);
+                        dealJson(responseInfo,listener);
                     }
                 });
     }
@@ -157,7 +160,7 @@ public class PutiCommonModel extends PutiBaseModel{
                 .subscribe(new PutiCommonSubscriber(listener){
                     @Override
                     public void onNext(BaseResponseInfo responseInfo) {
-                        dealJsonStr(responseInfo,listener);
+                        dealJson(responseInfo,listener);
                     }
                 });
     }
@@ -170,7 +173,7 @@ public class PutiCommonModel extends PutiBaseModel{
                 .subscribe(new PutiCommonSubscriber(listener){
                     @Override
                     public void onNext(BaseResponseInfo responseInfo) {
-                        dealJsonStr(responseInfo,listener);
+                        dealJson(responseInfo,listener);
                     }
                 });
     }
@@ -193,9 +196,29 @@ public class PutiCommonModel extends PutiBaseModel{
                 .subscribe(new PutiCommonSubscriber(listener){
                     @Override
                     public void onNext(BaseResponseInfo responseInfo) {
-                        dealJsonStr(responseInfo,listener);
+                        dealJson(responseInfo,listener);
                     }
                 });
+    }
+
+    /**
+     * 获取事件类型
+     * @param listener
+     */
+    public void getEventType(final BaseListener listener){
+        if (UserInfoUtils.isInLoginStata()){
+            String areaUid = UserInfoUtils.getAreaUid();
+
+            mCommonApi.getEventType(areaUid)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new PutiCommonSubscriber(listener){
+                        @Override
+                        public void onNext(BaseResponseInfo responseInfo) {
+                            dealJson(responseInfo,listener);
+                        }
+                    });
+        }
     }
 
 }

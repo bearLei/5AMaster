@@ -2,14 +2,21 @@ package unit.moudle.eventregist;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import unit.entity.EventMainTier;
+import unit.entity.EventTypeEntity;
+import unit.moudle.eventregist.adapter.EventChooseAdapter;
 import unit.moudle.eventregist.ptr.ChooseEventPtr;
 import unit.moudle.eventregist.view.ChooseEventView;
 import unit.widget.HeadView;
@@ -24,13 +31,15 @@ public class PutiChooseEventActivity extends PutiActivity implements ChooseEvent
     @BindView(R.id.search)
     EditText search;
     @BindView(R.id.recyclerview)
-    LRecyclerView recyclerview;
+    RecyclerView recyclerview;
     @BindView(R.id.headview)
     HeadView headview;
 
     private ChooseEventPtr mPtr;
 
 
+    private List<EventMainTier> mData;
+    private EventChooseAdapter mAdapter;
     @Override
     public int getContentView() {
         return R.layout.puti_choose_event_activity;
@@ -69,11 +78,24 @@ public class PutiChooseEventActivity extends PutiActivity implements ChooseEvent
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerview.setLayoutManager(manager);
+        if (mData == null){
+            mData = new ArrayList<>();
+        }
+        if (mAdapter == null){
+            mAdapter = new EventChooseAdapter(this,mData);
+        }
+        recyclerview.setAdapter(mAdapter);
     }
 
     @Override
     public void Star() {
-
+        mPtr.star();
     }
 
+    @Override
+    public void handleResult(ArrayList<EventMainTier> list) {
+        mData.clear();
+        mData.addAll(list);
+        mAdapter.notifyDataSetChanged();
+    }
 }

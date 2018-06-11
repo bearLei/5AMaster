@@ -89,4 +89,11 @@ public class EventChooseAdapter extends BaseRVAdapter {
         }
     }
 
+    public void putPullStatus(int position){
+        pullStatusMap.put(position,true);
+    }
+
+    public void removePullStatus(int position){
+        pullStatusMap.remove(position);
+    }
 }

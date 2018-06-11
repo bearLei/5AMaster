@@ -11,6 +11,7 @@ import com.puti.education.base.PutiActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,7 +39,7 @@ public class PutiChooseEventActivity extends PutiActivity implements ChooseEvent
     private ChooseEventPtr mPtr;
 
 
-    private List<EventMainTier> mData;
+    private ArrayList<EventMainTier> mData;
     private EventChooseAdapter mAdapter;
     @Override
     public int getContentView() {
@@ -97,5 +98,30 @@ public class PutiChooseEventActivity extends PutiActivity implements ChooseEvent
         mData.clear();
         mData.addAll(list);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public ArrayList<EventMainTier> getList() {
+        return mData;
+    }
+
+    @Override
+    public void putPullStatus(int position) {
+
+    }
+
+    @Override
+    public void removePullStatus(int position) {
+
+    }
+
+    @Override
+    public void setJumpMainPosition(int position) {
+
+    }
+
+    @Override
+    public void setJumpSecondPosition(int position) {
+
     }
 }

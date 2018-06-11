@@ -14,4 +14,9 @@ import unit.entity.EventTypeEntity;
 
 public interface ChooseEventView extends BaseMvpView {
     void handleResult(ArrayList<EventMainTier> list);
+    ArrayList<EventMainTier> getList();
+    void putPullStatus(int position);
+    void removePullStatus(int position);
+    void setJumpMainPosition(int position);
+    void setJumpSecondPosition(int position);
 }

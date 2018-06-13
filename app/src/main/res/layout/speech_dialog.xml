@@ -1,58 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <EditText
-        android:id="@+id/edit_tv"
+    android:layout_height="match_parent"
+    >
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="100dp"
+        android:background="#e0000000"
+        >
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/base_ffffff"
+        android:text="请按住麦克风"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_30"
+        />
+    <ImageView
+        android:id="@+id/voice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/title"
+        android:src="@drawable/puti_input_voice"
+        android:visibility="gone"
         />
     <LinearLayout
         android:id="@+id/speech_gp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="200dp"
-        android:layout_below="@+id/edit_tv"
+        android:layout_below="@+id/voice"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_30"
         android:gravity="center"
+
         >
         <ImageView
             android:id="@+id/speech"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:background="@drawable/selector_speech_state"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/puti_selecter_voice"
             />
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/btn_gp"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:layout_below="@+id/speech_gp"
-        android:layout_alignParentStart="true">
-        <TextView
-            android:id="@+id/cancel"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="取消"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:background="#ededed"
-            />
-        <TextView
-            android:id="@+id/sure"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="确定"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:background="#4577dc"
-            />
-    </LinearLayout>
-
-
-
+    </RelativeLayout>
 </RelativeLayout>

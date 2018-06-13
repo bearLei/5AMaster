@@ -2,44 +2,56 @@ package com.puti.education.speech;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.StyleRes;
 import android.text.Editable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.puti.education.R;
 import com.puti.education.util.LogUtil;
+import com.puti.education.util.ViewUtils;
 
 /**
  * Created by lenovo on 2017/11/15.
  */
 
-public class SpeechDialog extends Dialog implements View.OnClickListener {
+public class SpeechDialog extends Dialog  {
 
     private  Context mContext;
-
-    private TextView mSure;
-    private TextView mCancle;
     private ImageView mSpeech;
-    private EditText  mEdit;
+    private TextView title;
+    private ImageView mVoice;
     public SpeechDialog(Context context) {
         super(context);
         this.mContext = context;
         initView();
     }
+
+    public SpeechDialog( Context context, int themeResId) {
+        super(context, themeResId);
+        this.mContext = context;
+        initView();
+    }
+
     private void initView(){
         View contentView = LayoutInflater.from(mContext).inflate(
                 R.layout.speech_dialog, null);
-        mSure = (TextView) contentView.findViewById(R.id.sure);
-        mCancle = (TextView) contentView.findViewById(R.id.cancel);
-        mSpeech = (ImageView) contentView.findViewById(R.id.speech);
-        mEdit = (EditText) contentView.findViewById(R.id.edit_tv);
 
-        mSpeech.setOnClickListener(this);
-        mSure.setOnClickListener(this);
-        mCancle.setOnClickListener(this);
+        mSpeech = (ImageView) contentView.findViewById(R.id.speech);
+        title = (TextView) contentView.findViewById(R.id.title);
+        mVoice = (ImageView) contentView.findViewById(R.id.voice);
+
+
 
         mSpeech.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -47,43 +59,29 @@ public class SpeechDialog extends Dialog implements View.OnClickListener {
                 if (onSpeechListener != null){
                     onSpeechListener.speech();
                 }
+                mVoice.setVisibility(View.VISIBLE);
+                title.setText("正在语音输入");
                 return true;
             }
         });
-        setContentView(contentView);
+
+        getWindow().setGravity(Gravity.CENTER);
+
+//        getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00000000")));
+        int screenWidth = ViewUtils.getScreenWid(mContext);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
+                screenWidth-ViewUtils.dip2px(mContext,30),
+                ViewUtils.dip2px(mContext,200));
+        super.setContentView(contentView,params);
     }
 
-    public void setEdit(String s){
-        mEdit.append(s);
-    }
 
     public void showDialog(){
         super.show();
-        mEdit.setText("");
     }
 
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.sure:
-                if (onSpeechListener != null){
-                    onSpeechListener.sure(mEdit.getText().toString());
-                }
-                break;
-            case R.id.cancel:
-                if (onSpeechListener != null){
-                    onSpeechListener.cancle();
-                }
-                break;
-            case R.id.speech:
-                LogUtil.d("lei","点击录音");
-                if (onSpeechListener != null){
-                    onSpeechListener.speech();
-                }
-                break;
-        }
-    }
+
 
     private SpeechOnClickListener onSpeechListener;
 

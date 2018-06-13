@@ -74,5 +74,11 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/base_ededed"
+            android:layout_alignParentBottom="true"
+            />
     </RelativeLayout>
 </LinearLayout>

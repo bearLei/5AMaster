@@ -49,13 +49,8 @@ public class SpeechUtil {
     }
     private SpeechDialog dialog ;
     public void createDialog(final Context context, final SpeechResultCallBack speechResultCallBack){
-//        if (!CheckAudioPermission.isHasPermission(context)){
-//            ToastUtil.show("您已拒绝录音权限，请在设置在打开录音权限");
-//            return;
-//        }
-        if (dialog == null) {
-            dialog = new SpeechDialog(context);
-        }
+
+            dialog = new SpeechDialog(context,R.style.DialogBoBack);
         dialog.setOnSpeechListener(new SpeechDialog.SpeechOnClickListener() {
             @Override
             public void sure(String s) {
@@ -77,18 +72,19 @@ public class SpeechUtil {
 
                     @Override
                     public void endSpeech() {
-
+                        dialog.dismiss();
                     }
 
                     @Override
                     public void result(String s) {
+                        speechResultCallBack.result(s);
+                        dialog.dismiss();
 
-                        dialog.setEdit(s);
                     }
 
                     @Override
                     public void error() {
-
+                        dialog.dismiss();
                     }
                 });
             }

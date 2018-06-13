@@ -47,4 +47,7 @@ public interface PutiCommonApi {
 
     @GET("Common/EventType")//获取事件类型
     Observable<BaseResponseInfo> getEventType(@Query("areaUID") String areaUid);
+
+    @GET("Common/School/Places")//获取地点
+    Observable<BaseResponseInfo> getAddress(@Query("type") int type);
 }

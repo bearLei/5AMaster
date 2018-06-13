@@ -21,7 +21,7 @@ public class UserInfoUtils {
 
     public static String getToken(){
         if (getUserInfo() != null){
-            return getUserInfo().getToken();
+            return "Basic "+getUserInfo().getToken();
         }else
             return "";
     }

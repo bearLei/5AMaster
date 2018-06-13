@@ -7,6 +7,7 @@ import android.content.Intent;
 import com.baidu.location.BDLocation;
 import com.puti.education.base.BaseMvpPtr;
 import com.puti.education.listener.BaseListener;
+import com.puti.education.netFrame.NetWorkInterceptor;
 import com.puti.education.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -91,6 +92,7 @@ public class LoginPtr implements BaseMvpPtr {
     private void handleResult(UserInfo userInfo){
         //sp存储
         saveUserInfo(userInfo);
+        NetWorkInterceptor.setToken(userInfo.getToken());
         //跳转首页
         Intent intent = new Intent(mContext, HomeActivity.class);
         mContext.startActivity(intent);

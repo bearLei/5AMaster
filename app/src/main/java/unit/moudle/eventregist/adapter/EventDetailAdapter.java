@@ -9,6 +9,7 @@ import com.puti.education.base.holder.BaseHolder;
 import java.util.List;
 
 import unit.entity.EventDetail;
+import unit.moudle.eventregist.holder.EventDetailHolder;
 
 /**
  * Created by lei on 2018/6/9.

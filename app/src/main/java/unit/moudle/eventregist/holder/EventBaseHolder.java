@@ -1,4 +1,4 @@
-package unit.moudle.eventregist.adapter;
+package unit.moudle.eventregist.holder;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import unit.entity.EventDetail;
 import unit.entity.EventMainTier;
+import unit.moudle.eventregist.adapter.EventDetailAdapter;
 
 /**
  * Created by lei on 2018/6/9.

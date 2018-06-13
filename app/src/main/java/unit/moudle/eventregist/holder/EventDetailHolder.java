@@ -1,4 +1,4 @@
-package unit.moudle.eventregist.adapter;
+package unit.moudle.eventregist.holder;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import com.puti.education.util.ViewUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import unit.entity.EventDetail;
+import unit.moudle.eventregist.PutiChooseDetailActivity;
 
 /**
  * Created by lei on 2018/6/9.
@@ -76,6 +77,8 @@ public class EventDetailHolder extends BaseHolder<EventDetail> {
             @Override
             public void onClick(View v) {
                 // TODO: 2018/6/11 跳转
+                Intent intent = new Intent(mContext, PutiChooseDetailActivity.class);
+                mContext.startActivity(intent);
             }
         });
 

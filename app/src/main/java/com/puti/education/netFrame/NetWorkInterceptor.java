@@ -16,6 +16,8 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.Buffer;
 import okio.BufferedSource;
+import unit.entity.UserInfo;
+import unit.util.UserInfoUtils;
 
 /**
  *  请求拦截器
@@ -49,11 +51,10 @@ public class NetWorkInterceptor implements Interceptor{
             Log.d("lei", "当前body-->" + body1.toString());
         }
         Request.Builder builder = request.newBuilder();
-
-            if (!TextUtils.isEmpty(gToken)){
+            String token = UserInfoUtils.getToken();
+            if (!TextUtils.isEmpty(token)){
                 //request = builder.addHeader(Key.TOKEN, token).build();
-                request = builder.addHeader(Key.AUTHORIZATION, gToken).build();
-                Log.d("", "gToken:" + gToken);
+                request = builder.addHeader(Key.AUTHORIZATION, token).build();
             }
 
             if (gType == 1) {

@@ -221,4 +221,21 @@ public class PutiCommonModel extends PutiBaseModel{
         }
     }
 
+    /**
+     * 获取地址列表
+     * @param type 0不限 1宿舍 2操场 3办公室 4教师 5食堂
+     * @param listener
+     */
+    public void getAddress(int type,final BaseListener listener){
+        mCommonApi.getAddress(type)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
 }

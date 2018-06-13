@@ -7,14 +7,13 @@ import android.view.ViewGroup;
 import com.puti.education.base.BaseRVAdapter;
 import com.puti.education.base.holder.BaseHolder;
 import com.puti.education.base.holder.ViewHolder;
-import com.puti.education.bean.Practice;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import unit.entity.EventMainTier;
-import unit.entity.EventTypeEntity;
+import unit.moudle.eventregist.holder.EventBaseHolder;
 
 /**
  * Created by lei on 2018/6/9.

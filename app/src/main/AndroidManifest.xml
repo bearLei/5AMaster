@@ -304,6 +304,11 @@
         <activity android:name="unit.moudle.eventregist.PutiChooseEventActivity"
             android:configChanges="orientation|screenSize"
             />
+
+        <!--事件登记详情页面-->
+        <activity android:name="unit.moudle.eventregist.PutiChooseDetailActivity"
+            android:configChanges="orientation|screenSize"
+            />
         <!--新APP结束-->
 
         <!-- 百度地图相关的service -->

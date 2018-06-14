@@ -1,11 +1,13 @@
 package unit.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by lei on 2018/6/8.
  * 事件类型3层次
  */
 
-public class EventDetail {
+public class EventDetail implements Serializable {
     private String TypeUID;
     private String TypeName;
     private String Punishment;

@@ -13,6 +13,8 @@ import com.puti.education.base.InflateService;
 import com.puti.education.base.holder.BaseHolder;
 import com.puti.education.util.ViewUtils;
 
+import java.io.Serializable;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import unit.entity.EventDetail;
@@ -50,7 +52,7 @@ public class EventDetailHolder extends BaseHolder<EventDetail> {
     }
 
     @Override
-    protected void updateUI(Context context, EventDetail data) {
+    protected void updateUI(Context context, final EventDetail data) {
         if (data == null){
             return;
         }
@@ -78,6 +80,7 @@ public class EventDetailHolder extends BaseHolder<EventDetail> {
             public void onClick(View v) {
                 // TODO: 2018/6/11 跳转
                 Intent intent = new Intent(mContext, PutiChooseDetailActivity.class);
+                intent.putExtra(PutiChooseDetailActivity.Parse_Intent, (Serializable) data);
                 mContext.startActivity(intent);
             }
         });

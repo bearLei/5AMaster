@@ -1,6 +1,7 @@
 package unit.moudle.eventregist.ptr;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -100,6 +101,12 @@ public class EventDetailPtr implements BaseMvpPtr {
     private void oprateSize(View view){
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(params);
+    }
+
+    public void evidenceActivityResult(int requestCode, int resultCode, Intent data){
+        if (mEvidenceHolder != null){
+            mEvidenceHolder.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 }

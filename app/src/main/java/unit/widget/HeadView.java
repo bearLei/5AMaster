@@ -17,6 +17,7 @@ import com.puti.education.R;
 public class HeadView extends RelativeLayout {
     private TextView back;
     private TextView title;
+    private TextView rightTv;
 
     private HeadViewCallBack callBack;
 
@@ -33,6 +34,7 @@ public class HeadView extends RelativeLayout {
         View view = LayoutInflater.from(context).inflate(R.layout.puti_head_view, this,true);
         back = (TextView) view.findViewById(R.id.back);
         title = (TextView) view.findViewById(R.id.title);
+        rightTv = (TextView) view.findViewById(R.id.right_tv);
 
         TypedArray ta = context.obtainStyledAttributes(attrs,R.styleable.PutiHeadView);
         if (ta != null){
@@ -41,6 +43,12 @@ public class HeadView extends RelativeLayout {
 
             boolean showBackIcon = ta.getBoolean(R.styleable.PutiHeadView_showBackIcon,true);
             back.setVisibility(showBackIcon ? VISIBLE : GONE);
+
+            boolean showRightTv = ta.getBoolean(R.styleable.PutiHeadView_showRightTv, false);
+            rightTv.setVisibility(showRightTv ? VISIBLE : GONE);
+
+            String rightTitle = ta.getString(R.styleable.PutiHeadView_right_title);
+            rightTv.setText(rightTitle);
             ta.recycle();
         }
 

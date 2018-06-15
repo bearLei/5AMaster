@@ -13,6 +13,7 @@ import com.puti.education.base.holder.BaseHolder;
 import com.puti.education.util.ToastUtil;
 import com.puti.education.util.ViewUtils;
 
+import unit.debug.DebugActivity;
 import unit.moudle.eventregist.PutiChooseEventActivity;
 
 /**
@@ -118,7 +119,8 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
-                        ToastUtil.show("工作检查");
+                        Intent intent = new Intent(mContext, DebugActivity.class);
+                        mContext.startActivity(intent);
                     }
                 }));
     }

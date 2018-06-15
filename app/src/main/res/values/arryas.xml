@@ -68,5 +68,7 @@
     <declare-styleable name="PutiHeadView">
         <attr name="head_title" format="string"/>
         <attr name="showBackIcon" format="boolean"/>
+        <attr name="showRightTv" format="boolean"/>
+        <attr name="right_title" format="string"/>
     </declare-styleable>
 </resources>

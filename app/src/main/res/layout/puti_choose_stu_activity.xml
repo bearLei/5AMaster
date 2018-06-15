@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/base_f3f3f3"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+        <unit.widget.HeadView
+            android:id="@id/headview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_15"
+            app:showRightTv ="true"
+            app:right_title = "完成"
+            ></unit.widget.HeadView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/base_ffffff"
+        android:orientation="horizontal"
+
+        android:gravity="center_vertical"
+        >
+        <LinearLayout
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_10"
+            >
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="搜索"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:minWidth="@dimen/dp_200"
+            android:textColorHint="@color/base_acb2c1"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            android:textSize="@dimen/sp_12"
+            android:drawableLeft="@drawable/puti_search"
+            android:background="@drawable/puti_shape_acb2c1"
+            />
+        </LinearLayout>
+        <View
+            android:layout_width="@dimen/dp_5"
+            android:layout_height="match_parent"
+            android:background="@color/base_f3f3f3"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16年1班"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/base_666666"
+                android:drawableRight="@drawable/puti_down_big"
+                android:drawablePadding="@dimen/dp_10"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.puti.education.widget.QuickIndexBar
+            android:id="@+id/quick_indexbar"
+            android:layout_gravity="right"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip"
+            android:visibility="visible"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_15"
+            android:layout_toLeftOf="@+id/quick_indexbar"
+            />
+    </RelativeLayout>
+</LinearLayout>

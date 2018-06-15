@@ -1,33 +1,52 @@
 package unit.moudle.eventregist.adapter;
 
-import android.view.View;
+import android.content.Context;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+
+import com.puti.education.base.BaseRVAdapter;
+import com.puti.education.base.holder.BaseHolder;
+
+import java.util.ArrayList;
+
+import unit.moudle.eventregist.entity.ChooseStuEntity;
+import unit.moudle.eventregist.holder.ChooseStuDetailHolder;
 
 /**
- * Created by lei on 2018/6/12.
+ * Created by lei on 2018/6/15.
  */
 
-public class ChooseStuAdapter extends BaseAdapter {
+public class ChooseStuAdapter extends BaseRVAdapter {
+    private Context mContext;
+    private ArrayList<ChooseStuEntity> mList;
+    private BaseHolder holder;
 
+    public ChooseStuAdapter(Context context) {
+        super(context);
+    }
 
-    @Override
-    public int getCount() {
-        return 0;
+    public ChooseStuAdapter(Context context,ArrayList<ChooseStuEntity> mData) {
+        super(context);
+        this.mContext = context;
+        this.mList = mData;
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    protected Object getItem(int position) {
+        if (mList == null || mList.size() <= position) return null;
+        return mList.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
-        return 0;
+    protected int getCount() {
+        if (mList  == null){
+            return 0;
+        }
+        return mList.size();
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+    protected BaseHolder getViewHolder(Context context, ViewGroup parent, int viewType) {
+        holder = new ChooseStuDetailHolder(mContext);
+        return holder;
     }
 }

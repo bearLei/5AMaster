@@ -7,6 +7,7 @@ import android.support.multidex.MultiDexApplication;
 
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.SDKInitializer;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.puti.education.bean.ClassInfo;
 import com.puti.education.netFrame.RetrofitUtil;
 import com.puti.education.util.ToastUtil;
@@ -33,6 +34,7 @@ public class App extends MultiDexApplication{
         JPushInterface.init(this);
         mJPushRegId =JPushInterface.getRegistrationID(this);
         application = this;
+        Fresco.initialize(this);
     }
 
     public static Context getContext(){

@@ -309,6 +309,15 @@
         <activity android:name="unit.moudle.eventregist.PutiChooseDetailActivity"
             android:configChanges="orientation|screenSize"
             />
+        <!--选择学生页面-->
+        <activity android:name="unit.moudle.eventregist.PutiChooseStuActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
+            />
+
+        <!--Debug页面-->
+        <activity android:name="unit.debug.DebugActivity"/>
+
         <!--新APP结束-->
 
         <!-- 百度地图相关的service -->

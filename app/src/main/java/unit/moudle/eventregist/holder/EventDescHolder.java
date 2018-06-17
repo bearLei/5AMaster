@@ -81,4 +81,8 @@ public class EventDescHolder extends BaseHolder<Object> {
             }
         });
     }
+
+    public String getDesc(){
+        return editDesc.getText().toString();
+    }
 }

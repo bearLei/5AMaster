@@ -238,4 +238,22 @@ public class PutiCommonModel extends PutiBaseModel{
                 });
     }
 
+    /**
+     * 教师端新增事件
+     * @param eventStr
+     * @param listener
+     */
+    public void addEvent(String eventStr, final BaseListener listener){
+        RequestBody body=RequestBody.create(mMediaType,eventStr);
+        mCommonApi.addEvent(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
 }

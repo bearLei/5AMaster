@@ -2,14 +2,21 @@ package unit.moudle.eventregist.ptr;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.puti.education.base.BaseMvpPtr;
+import com.puti.education.listener.BaseListener;
+import com.puti.education.util.ToastUtil;
 
 import java.util.ArrayList;
 
+import unit.api.PutiCommonModel;
+import unit.base.BaseResponseInfo;
 import unit.entity.Student;
 import unit.moudle.eventregist.holder.ChooseStuHolder;
 import unit.moudle.eventregist.holder.EventDescHolder;
@@ -31,6 +38,8 @@ public class EventDetailPtr implements BaseMvpPtr {
     private EventDescHolder mDescHolder;//描述holder
     private EventEvidenceHolder mEvidenceHolder;//佐证holder
 
+
+    private ArrayList<Student> mChooseStuList;
     public EventDetailPtr(Context mContext, EventDetailView mView) {
         this.mContext = mContext;
         this.mView = mView;
@@ -113,7 +122,85 @@ public class EventDetailPtr implements BaseMvpPtr {
     }
 
     public void setChooseStu(ArrayList<Student> list){
+        if (mChooseStuList == null){
+            mChooseStuList = new ArrayList<>();
+        }
+        mChooseStuList.clear();
+        mChooseStuList.addAll(list);
         mChooseStuHolder.setList(list);
     }
 
+    public void addEvent(){
+        addEvent(mTimeAndSpaceHolder.getTime(),
+                mTimeAndSpaceHolder.getPlaceUid(),
+                mTimeAndSpaceHolder.getAddress(),
+                mDescHolder.getDesc(),mView.getEventType());
+    }
+
+    /**
+     *
+     * @param Time 时间
+     * @param PlaceUID 地点id
+     * @param Address 地点
+     * @param Description 事件描述
+     * @param EventType 事件类型
+     */
+    public void addEvent(String Time,String PlaceUID,
+                         String Address,String Description,
+                         String EventType){
+
+            if (TextUtils.isEmpty(Time)){
+                ToastUtil.show("请输入时间");
+                return;
+            }
+        if (TextUtils.isEmpty(Address)){
+            ToastUtil.show("请输入地点");
+            return;
+        }
+        if (TextUtils.isEmpty(Description)){
+            ToastUtil.show("事件描述不能为空");
+            return;
+        }
+        if (mChooseStuList == null || mChooseStuList.size() == 0){
+            ToastUtil.show("请选择涉事学生");
+            return;
+        }
+        String eventStr = buildJson(Time, PlaceUID, Address, Description, EventType);
+        PutiCommonModel.getInstance().addEvent(eventStr,new BaseListener(BaseResponseInfo.class){
+            @Override
+            public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
+                super.responseResult(infoObj, listObj, code, status);
+            }
+
+            @Override
+            public void requestFailed(boolean status, int code, String errorMessage) {
+                ToastUtil.show("提交失败："+errorMessage);
+            }
+        });
+
+
+    }
+
+
+    private String buildJson(String Time,String PlaceUID,
+                             String Address,String Description,
+                             String EventType){
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Time",Time);
+        jsonObject.put("PlaceUID",PlaceUID);
+        jsonObject.put("Address",Address);
+        jsonObject.put("Description",Description);
+        jsonObject.put("EventType",EventType);
+
+        JSONArray students = new JSONArray();
+        for (Student student :mChooseStuList) {
+            students.add(student.toString());
+        }
+        jsonObject.put("Students",students);
+
+        jsonObject.put("Evidences",mEvidenceHolder.getEvidenceJson());
+
+        return jsonObject.toString();
+    }
 }

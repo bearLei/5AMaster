@@ -106,6 +106,14 @@ public class SpaceChooseDialog extends Dialog{
                 mFloorData.addAll(spaceEnitity.getFloor());
                 mFloorAdapter.notifyDataSetChanged();
                 mChooseBuild = spaceEnitity.getTypeName();
+                if (mFloorData.size() == 0){
+                    StringBuilder builder = new StringBuilder();
+                    builder.append(mChooseBuild);
+                    if (chooseCallBack != null){
+                        chooseCallBack.callBack(builder.toString(),spaceEnitity.getBuild());
+                    }
+                    dismiss();
+                }
             }
 
             @Override
@@ -121,6 +129,14 @@ public class SpaceChooseDialog extends Dialog{
                 mRoomData.addAll(floor.getRoom());
                 mRoomAdapter.notifyDataSetChanged();
                 mChooseFloor = floor.getFloor();
+                if (mRoomData.size() == 0){
+                    StringBuilder builder = new StringBuilder();
+                    builder.append(mChooseBuild).append(mChooseFloor);
+                    if (chooseCallBack != null){
+                        chooseCallBack.callBack(builder.toString(),"");
+                    }
+                    dismiss();
+                }
             }
 
             @Override
@@ -136,7 +152,7 @@ public class SpaceChooseDialog extends Dialog{
                 StringBuilder builder = new StringBuilder();
                 builder.append(mChooseBuild).append(mChooseFloor).append(mChooseRoom);
                 if (chooseCallBack != null){
-                    chooseCallBack.callBack(builder.toString());
+                    chooseCallBack.callBack(builder.toString(),room.getUID());
                 }
                 dismiss();
             }
@@ -158,6 +174,6 @@ public class SpaceChooseDialog extends Dialog{
     }
 
     public interface  ChooseSpaceCallBack{
-        void callBack(String space);
+        void callBack(String space,String id);
     }
 }

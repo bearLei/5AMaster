@@ -130,4 +130,9 @@ public class Student {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return this.getStudentUID();
+    }
 }

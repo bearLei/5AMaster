@@ -1,13 +1,13 @@
 package unit.moudle.eventregist;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
-import com.puti.education.event.EmptyEvent;
 import com.puti.education.util.Constant;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -16,6 +16,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import unit.entity.EventDetail;
 import unit.entity.Student;
 import unit.eventbus.ChooseStuEvent;
@@ -47,6 +49,7 @@ public class PutiChooseDetailActivity extends PutiActivity implements EventDetai
 
     private EventDetailPtr mPtr;
     private EventDetail eventDetail;
+
     @Override
     public int getContentView() {
         return R.layout.puti_event_detail_activity;
@@ -54,14 +57,14 @@ public class PutiChooseDetailActivity extends PutiActivity implements EventDetai
 
     @Override
     public void BindPtr() {
-        if (mPtr == null){
-            mPtr = new EventDetailPtr(this,this);
+        if (mPtr == null) {
+            mPtr = new EventDetailPtr(this, this);
         }
     }
 
     @Override
     public void ParseIntent() {
-        if (getIntent() != null){
+        if (getIntent() != null) {
             eventDetail = (EventDetail) getIntent().getSerializableExtra(Parse_Intent);
         }
     }
@@ -88,7 +91,7 @@ public class PutiChooseDetailActivity extends PutiActivity implements EventDetai
 
     @Override
     public void Star() {
-        if (eventDetail != null){
+        if (eventDetail != null) {
             headview.setTitle(eventDetail.getTypeName());
         }
         mPtr.star();
@@ -120,11 +123,19 @@ public class PutiChooseDetailActivity extends PutiActivity implements EventDetai
     }
 
     @Override
+    public String getEventType() {
+        if (eventDetail != null){
+            return eventDetail.getTypeUID();
+        }
+        return "";
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (resultCode){
+        switch (resultCode) {
             case Constant.CODE_RESULT_VIDEO:
-            case  Constant.CODE_RESULT_IMG_TEXT:
+            case Constant.CODE_RESULT_IMG_TEXT:
             case Constant.CODE_RESULT_MEDIA:
                 mPtr.evidenceActivityResult(requestCode, resultCode, data);
                 break;
@@ -132,11 +143,15 @@ public class PutiChooseDetailActivity extends PutiActivity implements EventDetai
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void on3EventMainThread(ChooseStuEvent event){
-        if (event != null){
+    public void on3EventMainThread(ChooseStuEvent event) {
+        if (event != null) {
             ArrayList<Student> list = event.getList();
             mPtr.setChooseStu(list);
         }
     }
 
+    @OnClick(R.id.commit)
+    public void onClick() {
+        mPtr.addEvent();
+    }
 }

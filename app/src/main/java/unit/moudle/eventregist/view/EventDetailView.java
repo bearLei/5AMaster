@@ -14,4 +14,5 @@ public interface EventDetailView extends BaseMvpView {
     void addTimeAndSpaceView(View view);
     void addDescView(View view);
     void addEvidenceView(View view);
+    String getEventType();
 }

@@ -209,4 +209,8 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
     }
 
 
+    public String getEvidenceJson(){
+        return "";
+    }
+
 }

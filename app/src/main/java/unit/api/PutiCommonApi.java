@@ -50,4 +50,7 @@ public interface PutiCommonApi {
 
     @GET("Common/School/Places")//获取地点
     Observable<BaseResponseInfo> getAddress(@Query("type") int type);
+
+    @POST("Common/Events/Add") //教师新增事件
+    Observable<BaseResponseInfo> addEvent(@Body RequestBody route);
 }

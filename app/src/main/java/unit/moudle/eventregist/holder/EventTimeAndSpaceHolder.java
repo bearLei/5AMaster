@@ -48,6 +48,8 @@ public class EventTimeAndSpaceHolder extends BaseHolder<Object> implements View.
 
     private SpaceChooseDialog dialog ;
     private ArrayList<SpaceEnitity> mData;
+
+    private String spaceUid;
     public EventTimeAndSpaceHolder(Context context) {
         super(context);
     }
@@ -77,7 +79,7 @@ public class EventTimeAndSpaceHolder extends BaseHolder<Object> implements View.
             @Override
             public void responseListResult(Object infoObj, Object listObj, PageInfo pageInfo, int code, boolean status) {
                 super.responseListResult(infoObj, listObj, pageInfo, code, status);
-               mData = (ArrayList<SpaceEnitity>) listObj;
+                mData = (ArrayList<SpaceEnitity>) listObj;
                 handleResult(mData);
             }
 
@@ -90,8 +92,9 @@ public class EventTimeAndSpaceHolder extends BaseHolder<Object> implements View.
     private void handleResult(ArrayList<SpaceEnitity> data){
         dialog.setSpaceData(data, new SpaceChooseDialog.ChooseSpaceCallBack() {
             @Override
-            public void callBack(String space) {
+            public void callBack(String space, String id) {
                 editSpace.setText(space);
+                spaceUid = id;
             }
         });
     }
@@ -110,4 +113,16 @@ public class EventTimeAndSpaceHolder extends BaseHolder<Object> implements View.
                 break;
         }
     }
+    public String getTime(){
+        return timeDesc.getText().toString();
+    }
+
+    public String getAddress(){
+        return editSpace.getText().toString();
+    }
+
+    public String getPlaceUid(){
+        return spaceUid;
+    }
+
 }

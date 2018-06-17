@@ -1,6 +1,5 @@
 package unit.moudle.eventregist;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
@@ -9,15 +8,13 @@ import android.widget.TextView;
 
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
-import com.puti.education.util.ToastUtil;
 import com.puti.education.widget.QuickIndexBar;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import unit.entity.StudentEntity;
+import unit.entity.Student;
 import unit.eventbus.ChooseStuEvent;
 import unit.eventbus.PutiEventBus;
 import unit.moudle.eventregist.adapter.ChooseStuAdapter;
@@ -29,6 +26,7 @@ import unit.widget.HeadView;
 
 /**
  * Created by lei on 2018/6/14.
+ * 涉事人页面
  */
 
 public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView, OprateStuCallBack {
@@ -58,7 +56,6 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ChooseStuManager.students = null;
     }
 
     @Override
@@ -103,7 +100,7 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
 
             }
         });
-        headview.setTitle("选择");
+        setChooseTitle(ChooseStuManager.students.size());
         headview.setRightCallBack(new HeadView.HeadViewRightCallBack() {
             @Override
             public void click() {
@@ -172,13 +169,13 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
     }
 
     @Override
-    public void chooseStu(StudentEntity.Student student) {
+    public void chooseStu(Student student) {
         ChooseStuManager.students.add(student);
         setChooseTitle(ChooseStuManager.students.size());
     }
 
     @Override
-    public void removeStu(StudentEntity.Student student) {
+    public void removeStu(Student student) {
         ChooseStuManager.students.remove(student);
         setChooseTitle(ChooseStuManager.students.size());
     }

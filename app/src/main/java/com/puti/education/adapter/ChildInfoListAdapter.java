@@ -7,9 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.puti.education.R;
-import com.puti.education.bean.Student;
-import com.puti.education.util.ConfigUtil;
-import com.puti.education.util.Constant;
+import com.puti.education.bean.oldStudent;
 
 /**
  *
@@ -17,7 +15,7 @@ import com.puti.education.util.Constant;
  *
  */
 
-public class ChildInfoListAdapter extends ABaseAdapter<Student>{
+public class ChildInfoListAdapter extends ABaseAdapter<oldStudent>{
 
     public interface DelClickLitener{
         void onclick(int position);
@@ -67,7 +65,7 @@ public class ChildInfoListAdapter extends ABaseAdapter<Student>{
             delFrame.setVisibility(View.GONE);
         }
 
-        Student info = mList.get(position);
+        oldStudent info = mList.get(position);
         nameTv.setText(info.name);
         schoolTv.setText(info.school);
         gradeTv.setText("");

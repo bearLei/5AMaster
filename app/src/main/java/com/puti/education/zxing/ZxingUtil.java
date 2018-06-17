@@ -1,20 +1,15 @@
 package com.puti.education.zxing;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.MediaCodec;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.formax.lib_zxing.activity.CaptureActivity;
 import com.formax.lib_zxing.activity.CodeUtils;
 import com.formax.lib_zxing.activity.ZXingLibrary;
-import com.puti.education.bean.Student;
+import com.puti.education.bean.oldStudent;
 import com.puti.education.util.FileUtils;
 
 
@@ -72,7 +67,7 @@ public class ZxingUtil {
     }
 
     public void createImage(String msg){
-        Student student = new Student();
+        oldStudent student = new oldStudent();
         student.setUid("123456789");
         student.setAvatar("");
         student.setClassName("初二十班");

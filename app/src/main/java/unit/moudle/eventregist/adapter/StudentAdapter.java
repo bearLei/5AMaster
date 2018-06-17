@@ -13,7 +13,7 @@ import com.puti.education.util.ViewUtils;
 
 import java.util.ArrayList;
 
-import unit.entity.StudentEntity;
+import unit.entity.Student;
 import unit.moudle.eventregist.ChooseStuManager;
 import unit.moudle.eventregist.callback.OprateStuCallBack;
 
@@ -24,10 +24,10 @@ import unit.moudle.eventregist.callback.OprateStuCallBack;
 public class StudentAdapter extends BaseAdapter {
 
     private Context mContext;
-    private ArrayList<StudentEntity.Student> mData;
+    private ArrayList<Student> mData;
     private OprateStuCallBack mOprateStuCallBack;
 
-    public StudentAdapter(Context mContext, ArrayList<StudentEntity.Student> mData) {
+    public StudentAdapter(Context mContext, ArrayList<Student> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -68,7 +68,7 @@ public class StudentAdapter extends BaseAdapter {
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        final StudentEntity.Student student = mData.get(position);
+        final Student student = mData.get(position);
         if (ChooseStuManager.students.contains(student)){
             holder.checkedIcon.setVisibility(View.VISIBLE);
         }else {

@@ -41,5 +41,5 @@ public class ParentInfo implements Serializable{
     public String education;
     public String job;
     public String volunteerNumber;
-    public List<Student> childList;
+    public List<oldStudent> childList;
 }

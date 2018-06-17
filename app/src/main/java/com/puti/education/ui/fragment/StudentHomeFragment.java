@@ -1,41 +1,23 @@
 package com.puti.education.ui.fragment;
 
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.puti.education.R;
-import com.puti.education.bean.EventBean;
-import com.puti.education.bean.LoginUser;
 import com.puti.education.bean.NewNotice;
-import com.puti.education.bean.PushData;
-import com.puti.education.bean.Student;
 import com.puti.education.bean.StudentIndexData;
-import com.puti.education.bean.UploadFileBean;
 import com.puti.education.listener.BaseListener;
-import com.puti.education.netFrame.netModel.CommonModel;
 import com.puti.education.netFrame.netModel.StudentModel;
-import com.puti.education.netFrame.response.PageInfo;
 import com.puti.education.ui.BaseFragment;
-import com.puti.education.ui.uiCommon.QuestionnaireDetailActivity;
-import com.puti.education.ui.uiCommon.WebViewActivity;
 import com.puti.education.ui.uiPatriarch.ActionEventAddActivity;
 import com.puti.education.ui.uiStudent.ActionEventActivity;
-import com.puti.education.ui.uiStudent.PracticeAddActivity;
-import com.puti.education.ui.uiStudent.StudentMainActivity;
-import com.puti.education.ui.uiTeacher.TeacherMainActivity;
 import com.puti.education.util.NumberUtils;
-import com.puti.education.util.ThreadUtil;
 import com.puti.education.util.ToastUtil;
 import com.puti.education.widget.AppSwipeRefreshLayout;
 import com.puti.education.widget.RadarView;
-
-import java.io.File;
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;

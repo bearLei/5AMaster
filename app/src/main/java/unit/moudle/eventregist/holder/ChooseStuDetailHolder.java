@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import unit.entity.StudentEntity;
+import unit.entity.Student;
 import unit.moudle.eventregist.adapter.StudentAdapter;
 import unit.moudle.eventregist.callback.OprateStuCallBack;
 import unit.moudle.eventregist.entity.ChooseStuEntity;
@@ -53,7 +53,7 @@ public class ChooseStuDetailHolder extends BaseHolder<ChooseStuEntity> {
     protected void updateUI(Context context, ChooseStuEntity data) {
         if (data == null || data.getmStuents() == null) return;
         letter.setText(data.getLetter());
-        ArrayList<StudentEntity.Student> list = data.getmStuents();
+        ArrayList<Student> list = data.getmStuents();
 
         mAdapter = new StudentAdapter(mContext,list);
         mAdapter.setmOprateStuCallBack(oprateStuCallBack);

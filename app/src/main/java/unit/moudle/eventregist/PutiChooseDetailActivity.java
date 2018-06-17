@@ -7,10 +7,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
+import com.puti.education.event.EmptyEvent;
 import com.puti.education.util.Constant;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import unit.entity.EventDetail;
+import unit.entity.Student;
+import unit.eventbus.ChooseStuEvent;
 import unit.moudle.eventregist.ptr.EventDetailPtr;
 import unit.moudle.eventregist.view.EventDetailView;
 import unit.widget.HeadView;
@@ -122,4 +130,13 @@ public class PutiChooseDetailActivity extends PutiActivity implements EventDetai
                 break;
         }
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void on3EventMainThread(ChooseStuEvent event){
+        if (event != null){
+            ArrayList<Student> list = event.getList();
+            mPtr.setChooseStu(list);
+        }
+    }
+
 }

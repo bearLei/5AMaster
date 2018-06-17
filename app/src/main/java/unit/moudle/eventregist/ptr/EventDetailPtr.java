@@ -8,7 +8,9 @@ import android.widget.LinearLayout;
 
 import com.puti.education.base.BaseMvpPtr;
 
-import unit.moudle.eventregist.PutiChooseDetailActivity;
+import java.util.ArrayList;
+
+import unit.entity.Student;
 import unit.moudle.eventregist.holder.ChooseStuHolder;
 import unit.moudle.eventregist.holder.EventDescHolder;
 import unit.moudle.eventregist.holder.EventEvidenceHolder;
@@ -55,6 +57,7 @@ public class EventDetailPtr implements BaseMvpPtr {
     private void initChooseStuHolder(){
         if (mChooseStuHolder == null){
             mChooseStuHolder = new ChooseStuHolder(mContext);
+            mChooseStuHolder.setList(new ArrayList<Student>());
         }
         View view = mChooseStuHolder.getRootView();
         oprateSize(view);
@@ -107,6 +110,10 @@ public class EventDetailPtr implements BaseMvpPtr {
         if (mEvidenceHolder != null){
             mEvidenceHolder.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    public void setChooseStu(ArrayList<Student> list){
+        mChooseStuHolder.setList(list);
     }
 
 }

@@ -1,10 +1,8 @@
 package unit.moudle.eventregist.entity;
 
-import android.app.Activity;
-
 import java.util.ArrayList;
 
-import unit.entity.StudentEntity;
+import unit.entity.Student;
 
 /**
  * Created by lei on 2018/6/15.
@@ -13,7 +11,7 @@ import unit.entity.StudentEntity;
 
 public class ChooseStuEntity {
     private String letter;
-    private ArrayList<StudentEntity.Student> mStuents;
+    private ArrayList<Student> mStuents;
 
     public ChooseStuEntity() {
     }
@@ -26,11 +24,11 @@ public class ChooseStuEntity {
         this.letter = letter;
     }
 
-    public ArrayList<StudentEntity.Student> getmStuents() {
+    public ArrayList<Student> getmStuents() {
         return mStuents;
     }
 
-    public void setmStuents(ArrayList<StudentEntity.Student> mStuents) {
+    public void setmStuents(ArrayList<Student> mStuents) {
         this.mStuents = mStuents;
     }
 }

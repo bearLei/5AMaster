@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.puti.education.R;
-import com.puti.education.bean.Student;
 import com.puti.education.bean.Teacher;
 import com.puti.education.util.ImgLoadUtil;
 

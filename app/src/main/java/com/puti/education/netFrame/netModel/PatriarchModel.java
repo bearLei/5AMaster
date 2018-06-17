@@ -1,23 +1,15 @@
 package com.puti.education.netFrame.netModel;
 
-import android.text.TextUtils;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.puti.education.bean.EventAboutPeople;
-import com.puti.education.bean.Student;
 import com.puti.education.bean.UploadFileBean;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.CommonSubscriber;
 import com.puti.education.netFrame.RetrofitUtil;
 import com.puti.education.netFrame.netApi.PatriarchApi;
 import com.puti.education.netFrame.response.ResponseInfo;
-import com.puti.education.util.ToastUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;

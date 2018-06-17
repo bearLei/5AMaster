@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.puti.education.bean.Student;
+import com.puti.education.bean.oldStudent;
 import com.puti.education.util.ImgLoadUtil;
 import com.puti.education.R;
 
@@ -19,7 +19,7 @@ import com.puti.education.R;
  * 新增事件  老师，学生 列表适配器
  */
 
-public class StudentListAdapter extends BasicRecylerAdapter<Student> implements StickyHeaderAdapter{
+public class StudentListAdapter extends BasicRecylerAdapter<oldStudent> implements StickyHeaderAdapter{
 
     public StudentListAdapter(Context context) {
         super(context);
@@ -72,7 +72,7 @@ public class StudentListAdapter extends BasicRecylerAdapter<Student> implements 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
-        Student student = mList.get(position);
+        oldStudent student = mList.get(position);
 
         CommonViewHolder commonViewHolder = (CommonViewHolder) holder;
 

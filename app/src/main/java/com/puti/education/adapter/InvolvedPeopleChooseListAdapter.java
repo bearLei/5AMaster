@@ -2,18 +2,13 @@ package com.puti.education.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.puti.education.R;
 import com.puti.education.bean.EventDeailInvolvedPeople;
-import com.puti.education.bean.Student;
-import com.puti.education.util.ImgLoadUtil;
 
 /**
  * Created by Administrator on 2017/4/20 0020.

@@ -13,7 +13,7 @@ import java.io.Serializable;
     major	所学专业	字符串
  */
 
-public class Student implements Serializable{
+public class oldStudent implements Serializable{
 
     public String uid;
     public String name;
@@ -28,7 +28,7 @@ public class Student implements Serializable{
     public String className;
     public boolean isSelected;
 
-    public Student(String uid, String name, String number, String avatar, String sex, String major) {
+    public oldStudent(String uid, String name, String number, String avatar, String sex, String major) {
         this.uid = uid;
         this.name = name;
         this.number = number;
@@ -117,7 +117,7 @@ public class Student implements Serializable{
         isSelected = selected;
     }
 
-    public Student(){
+    public oldStudent(){
 
     }
 

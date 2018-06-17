@@ -1,7 +1,6 @@
 package com.puti.education.util;
 
 import com.puti.education.bean.Professor;
-import com.puti.education.bean.Student;
 
 import java.util.Comparator;
 

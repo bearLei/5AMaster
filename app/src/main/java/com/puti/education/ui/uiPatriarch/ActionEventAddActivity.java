@@ -23,7 +23,7 @@ import com.puti.education.bean.EventType;
 import com.puti.education.bean.LocalFile;
 import com.puti.education.bean.ParentInfo;
 import com.puti.education.bean.ResponseBean;
-import com.puti.education.bean.Student;
+import com.puti.education.bean.oldStudent;
 import com.puti.education.bean.UploadFileBean;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.netModel.CommonModel;
@@ -98,7 +98,7 @@ public class ActionEventAddActivity extends BaseActivity {
     private String mTime, mAddress, mLat, mLng, mDesc;
     private int mEventType = -1, mEventLevel = -1;
     private ArrayList<String> mImagePaths = new ArrayList<>();
-    private List<Student> mChildList = null;
+    private List<oldStudent> mChildList = null;
     private int mRole = -1;
 
     private String mImageTextStr;
@@ -158,7 +158,7 @@ public class ActionEventAddActivity extends BaseActivity {
     }
 
     private void getSelfInfo(){
-        Student self = new Student();
+        oldStudent self = new oldStudent();
         self.isSelected = true;
         self.uid = ConfigUtil.getInstance(this).get(Constant.KEY_USER_ID, "");
         self.avatar= ConfigUtil.getInstance(this).get(Constant.KEY_USER_AVATAR, "");
@@ -429,7 +429,7 @@ public class ActionEventAddActivity extends BaseActivity {
         boolean isChooseChild = false;
         int childcount = 0;
         if (mChildList != null && mChildList.size() > 0){
-            for (Student one: mChildList){
+            for (oldStudent one: mChildList){
                 if (one.isSelected){
                     isChooseChild = true;
                     mChildId = one.uid;
@@ -483,7 +483,7 @@ public class ActionEventAddActivity extends BaseActivity {
         boolean isChooseChild = false;
         int childcount = 0;
         if (mChildList != null && mChildList.size() > 0){
-            for (Student one: mChildList){
+            for (oldStudent one: mChildList){
                 if (one.isSelected){
                     isChooseChild = true;
                     mChildId = one.uid;
@@ -574,7 +574,7 @@ public class ActionEventAddActivity extends BaseActivity {
         TextView nameTv = (TextView)itemView.findViewById(R.id.grid_head_name_tv);
         ImageView signImg = (ImageView)itemView.findViewById(R.id.prent_sign_img);
 
-        Student child = mChildList.get(index);
+        oldStudent child = mChildList.get(index);
 
         ImgLoadUtil.displayCirclePic(R.mipmap.ic_avatar_default,child.avatar,headImg);
         nameTv.setText(TextUtils.isEmpty(child.name) ?"暂无":child.name);
@@ -630,7 +630,7 @@ public class ActionEventAddActivity extends BaseActivity {
 
         @Override
         public void onClick(View v) {
-            Student parentChild = mChildList.get(position);
+            oldStudent parentChild = mChildList.get(position);
             if (parentChild.isSelected){
                 parentChild.isSelected = false;
                 checImg.setImageResource(R.mipmap.ic_item_unselected);

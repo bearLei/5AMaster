@@ -7,7 +7,6 @@ import com.puti.education.base.BaseMvpPtr;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.response.PageInfo;
 import com.puti.education.util.CharacterParser;
-import com.puti.education.util.LogUtil;
 import com.puti.education.util.ToastUtil;
 import com.puti.education.widget.CommonDropView;
 
@@ -17,13 +16,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 import unit.api.PutiTeacherModel;
 import unit.entity.ClassSimple;
+import unit.entity.Student;
 import unit.entity.StudentEntity;
 import unit.moudle.eventregist.entity.ChooseStuEntity;
 import unit.moudle.eventregist.view.ChooseStuView;
@@ -40,7 +35,7 @@ public class ChooseStuPtr implements BaseMvpPtr {
     private ArrayList<ClassSimple> mClassList;
     private CharacterParser characterParser;
     private ArrayList<ChooseStuEntity> mStudentList;
-    private Map<String,ArrayList<StudentEntity.Student>> studentMap;
+    private Map<String,ArrayList<Student>> studentMap;
     private  StudentEntity entity;
     public ChooseStuPtr(Context mContext, ChooseStuView mView) {
         this.mContext = mContext;
@@ -103,24 +98,24 @@ public class ChooseStuPtr implements BaseMvpPtr {
     }
 
     public void handleResult() {
-        final List<StudentEntity.Student> students = entity.getStudents();
+        final List<Student> students = entity.getStudents();
         final int size = students.size();
         studentMap.clear();
         mStudentList.clear();
         for (int i = 0; i < size; i++) {
-            StudentEntity.Student student = students.get(i);
+            Student student = students.get(i);
             String s = getSelling(student.getStudentName());
             if (studentMap.containsKey(s)) {
                 studentMap.get(s).add(student);
             } else {
-                ArrayList<StudentEntity.Student> list = new ArrayList<StudentEntity.Student>();
+                ArrayList<Student> list = new ArrayList<Student>();
                 list.add(student);
                 studentMap.put(s, list);
             }
         }
-        Iterator<Map.Entry<String, ArrayList<StudentEntity.Student>>> iterator = studentMap.entrySet().iterator();
+        Iterator<Map.Entry<String, ArrayList<Student>>> iterator = studentMap.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry<String, ArrayList<StudentEntity.Student>> entry = iterator.next();
+            Map.Entry<String, ArrayList<Student>> entry = iterator.next();
             ChooseStuEntity student = new ChooseStuEntity();
             student.setLetter(entry.getKey());
             student.setmStuents(entry.getValue());

@@ -18,7 +18,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.puti.education.R;
 import com.puti.education.adapter.ChildInfoListAdapter;
 import com.puti.education.bean.ParentInfo;
-import com.puti.education.bean.Student;
+import com.puti.education.bean.oldStudent;
 import com.puti.education.event.UpdateUserInfoEvent;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.nation.NationChooseActivity;
@@ -255,7 +255,7 @@ public class ParentInfoActivity extends BaseActivity {
             String result = data.getStringExtra("result");
             mNationTv.setText(result);
         } else {
-            Student student = (Student) data.getSerializableExtra(Key.BEAN);
+            oldStudent student = (oldStudent) data.getSerializableExtra(Key.BEAN);
             String className = data.getStringExtra(Key.CHILD_CLASS_NAME);
             student.className = className;
 
@@ -421,7 +421,7 @@ public class ParentInfoActivity extends BaseActivity {
 
         JSONArray childJsonArray = new JSONArray();
 
-        for (Student stu : parentInfo.childList) {
+        for (oldStudent stu : parentInfo.childList) {
             childJsonArray.add(stu.uid);
         }
         jsonObject.put("childList", childJsonArray);

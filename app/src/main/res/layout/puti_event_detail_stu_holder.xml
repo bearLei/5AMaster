@@ -8,12 +8,12 @@
     android:paddingRight="@dimen/dp_10"
     >
 
-    <GridView
+    <com.puti.education.widget.GridViewForScrollView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="4"
-        ></GridView>
+        ></com.puti.education.widget.GridViewForScrollView>
 
     <ImageView
         android:id="@+id/scan"

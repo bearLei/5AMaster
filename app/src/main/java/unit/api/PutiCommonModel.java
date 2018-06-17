@@ -256,4 +256,28 @@ public class PutiCommonModel extends PutiBaseModel{
                 });
     }
 
+    /**
+     * \
+     * @param classUID 班级主键,为空时代表有权查看的班级（校管取所有班级，教师取所带班级
+//     * @param studentName 学生名称，模糊查询
+//     * @param eventTypeName 事件名称，模糊查询
+     * @param status -1不限 0已拒绝 1处理中 2审核中 3追踪中 4已完结
+     * @param pageIndex
+     * @param pageSize
+     * @param listener
+     */
+    public void queryEvent(String classUID, int status,
+                           int pageIndex,int pageSize,final BaseListener listener
+                           ){
+        mCommonApi.queryEvent(classUID,  status, pageIndex, pageSize)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
 }

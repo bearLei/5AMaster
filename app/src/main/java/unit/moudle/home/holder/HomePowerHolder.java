@@ -14,6 +14,7 @@ import com.puti.education.util.ToastUtil;
 import com.puti.education.util.ViewUtils;
 
 import unit.debug.DebugActivity;
+import unit.moudle.eventdeal.EventListActivity;
 import unit.moudle.eventregist.PutiChooseEventActivity;
 
 /**
@@ -59,7 +60,8 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
-                        ToastUtil.show("事件确认");
+                        Intent intent = new Intent(mContext, EventListActivity.class);
+                        mContext.startActivity(intent);
                     }
                 }));
         //班级事件

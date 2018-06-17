@@ -14,7 +14,7 @@ import unit.base.BaseResponseInfo;
 
 public interface PutiTeacherApi {
 
-    @GET("Teacher/Classes")//登录
+    @GET("Teacher/Classes")//获取班级列表
     Observable<BaseResponseInfo> getClass(@Query("termUID") String termUID);
     @GET("Teacher/MyStudents")//获取学生列表
     Observable<BaseResponseInfo> getStudeng(@Query("classUID") String classUID,

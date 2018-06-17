@@ -53,4 +53,12 @@ public interface PutiCommonApi {
 
     @POST("Common/Events/Add") //教师新增事件
     Observable<BaseResponseInfo> addEvent(@Body RequestBody route);
+
+    @GET("Common/Events/List")//查询事件列表
+    Observable<BaseResponseInfo> queryEvent(@Query("classUID")String classUID,
+//                                            @Query("studentName")String studentName,
+//                                            @Query("eventTypeName")String eventTypeName,
+                                            @Query("status")int status,
+                                            @Query("pageIndex")int pageIndex,
+                                            @Query("pageSize")int pageSize);
 }

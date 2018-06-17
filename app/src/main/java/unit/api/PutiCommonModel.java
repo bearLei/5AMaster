@@ -280,4 +280,39 @@ public class PutiCommonModel extends PutiBaseModel{
                 });
     }
 
+    /**
+     *
+     * @param studentUid
+     * @param termUID termUID
+     * @param listener
+     */
+    public void queryPortrait(String studentUid,String termUID,final BaseListener listener){
+        mCommonApi.queryPortrait(studentUid,termUID)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
+    /**
+     *
+     * @param studentUid
+     * @param termUID termUID
+     * @param listener
+     */
+    public void queryStuInfo(String studentUid,String termUID,final BaseListener listener){
+        mCommonApi.queryStuInfo(studentUid,termUID)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
 }

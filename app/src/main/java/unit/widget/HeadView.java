@@ -74,6 +74,9 @@ public class HeadView extends RelativeLayout {
     public void setTitle(String desc){
         title.setText(desc);
     }
+    public void showRightTV(boolean show){
+        rightTv.setVisibility(show ? VISIBLE : GONE);
+    }
     public void setCallBack(HeadViewCallBack callBack) {
         this.callBack = callBack;
     }

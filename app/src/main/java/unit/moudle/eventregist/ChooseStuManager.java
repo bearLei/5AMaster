@@ -10,6 +10,9 @@ import unit.entity.Student;
  */
 
 public class ChooseStuManager {
+    public static int Event_Choose = 1;//来自事件添加涉事人
+
+    public static int Record_Choose = 2;//来自我的档案
     //选中的学生
     public static  ArrayList<Student> students = new ArrayList<>();
 

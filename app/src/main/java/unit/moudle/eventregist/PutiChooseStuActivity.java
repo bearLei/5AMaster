@@ -100,16 +100,22 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
 
             }
         });
-        setChooseTitle(ChooseStuManager.students.size());
-        headview.setRightCallBack(new HeadView.HeadViewRightCallBack() {
-            @Override
-            public void click() {
-                ChooseStuEvent event = new ChooseStuEvent();
-                event.setList(ChooseStuManager.students);
-                PutiEventBus.post(event);
-                finish();
-            }
-        });
+        if (getRefer() == ChooseStuManager.Event_Choose){
+            headview.showRightTV(true);
+            setChooseTitle(ChooseStuManager.students.size());
+            headview.setRightCallBack(new HeadView.HeadViewRightCallBack() {
+                @Override
+                public void click() {
+                    ChooseStuEvent event = new ChooseStuEvent();
+                    event.setList(ChooseStuManager.students);
+                    PutiEventBus.post(event);
+                    finish();
+                }
+            });
+        }else {
+            headview.showRightTV(false);
+            headview.setTitle("学生档案");
+        }
         //字母滑动回调
         quickIndexbar.setOnLetterChangeListener(new QuickIndexBar.OnLetterChangeListener() {
             @Override
@@ -179,4 +185,9 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
         ChooseStuManager.students.remove(student);
         setChooseTitle(ChooseStuManager.students.size());
     }
+
+    public int getRefer(){
+       return ChooseStuManager.Event_Choose;
+    }
+
 }

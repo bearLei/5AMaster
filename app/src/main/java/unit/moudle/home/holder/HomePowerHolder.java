@@ -16,6 +16,7 @@ import com.puti.education.util.ViewUtils;
 import unit.debug.DebugActivity;
 import unit.moudle.eventdeal.EventListActivity;
 import unit.moudle.eventregist.PutiChooseEventActivity;
+import unit.moudle.record.PutiChooseStuRecordAcitivity;
 
 /**
  * Created by lei on 2018/6/6.
@@ -91,7 +92,7 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
-                        ToastUtil.show("学生档案");
+                     jump(PutiChooseStuRecordAcitivity.class);
                     }
                 }));
         //我的档案
@@ -136,6 +137,11 @@ public class HomePowerHolder extends BaseHolder<Object>{
         params.height = ViewUtils.dip2px(mContext,100);
         rootView.setLayoutParams(params);
         return holder.getRootView();
+    }
+
+    private void jump(Class t){
+        Intent intent = new Intent(mContext,t);
+        mContext.startActivity(intent);
     }
 
 }

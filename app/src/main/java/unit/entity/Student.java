@@ -1,9 +1,11 @@
 package unit.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by lei on 2018/6/17.
  */
-public class Student {
+public class Student implements Serializable{
     private String StudentName;
     private String StudentUID;
     private int Status;

@@ -61,4 +61,12 @@ public interface PutiCommonApi {
                                             @Query("status")int status,
                                             @Query("pageIndex")int pageIndex,
                                             @Query("pageSize")int pageSize);
+
+    @GET("Common/Portrait")//查询学生画像
+    Observable<BaseResponseInfo> queryPortrait(@Query("studentUID")String studentUID,
+                                               @Query("termUID")String termUID);
+
+    @GET("Common/StudentInfo")//查询学生基本信息
+    Observable<BaseResponseInfo> queryStuInfo(@Query("studentUID")String studentUID,
+                                               @Query("termUID")String termUID);
 }

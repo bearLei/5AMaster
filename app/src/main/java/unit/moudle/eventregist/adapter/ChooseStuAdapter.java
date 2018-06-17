@@ -8,6 +8,7 @@ import com.puti.education.base.holder.BaseHolder;
 
 import java.util.ArrayList;
 
+import unit.moudle.eventregist.callback.OprateStuCallBack;
 import unit.moudle.eventregist.entity.ChooseStuEntity;
 import unit.moudle.eventregist.holder.ChooseStuDetailHolder;
 
@@ -19,7 +20,7 @@ public class ChooseStuAdapter extends BaseRVAdapter {
     private Context mContext;
     private ArrayList<ChooseStuEntity> mList;
     private BaseHolder holder;
-
+    private OprateStuCallBack oprateStuCallBack;
     public ChooseStuAdapter(Context context) {
         super(context);
     }
@@ -28,6 +29,10 @@ public class ChooseStuAdapter extends BaseRVAdapter {
         super(context);
         this.mContext = context;
         this.mList = mData;
+    }
+
+    public void setOprateStuCallBack(OprateStuCallBack oprateStuCallBack) {
+        this.oprateStuCallBack = oprateStuCallBack;
     }
 
     @Override
@@ -47,6 +52,9 @@ public class ChooseStuAdapter extends BaseRVAdapter {
     @Override
     protected BaseHolder getViewHolder(Context context, ViewGroup parent, int viewType) {
         holder = new ChooseStuDetailHolder(mContext);
+        if (holder instanceof ChooseStuDetailHolder){
+            ((ChooseStuDetailHolder) holder).setOprateStuCallBack(oprateStuCallBack);
+        }
         return holder;
     }
 }

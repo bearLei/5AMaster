@@ -59,6 +59,7 @@
             android:background="@color/base_f3f3f3"
             />
         <LinearLayout
+            android:id="@+id/filter_class"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -67,9 +68,9 @@
             android:gravity="center"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/class_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="16年1班"
                 android:textSize="@dimen/sp_16"
                 android:textColor="@color/base_666666"
                 android:drawableRight="@drawable/puti_down_big"

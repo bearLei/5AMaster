@@ -20,7 +20,7 @@ public class HeadView extends RelativeLayout {
     private TextView rightTv;
 
     private HeadViewCallBack callBack;
-
+    private HeadViewRightCallBack rightCallBack;
     public HeadView(Context context) {
         this(context,null);
     }
@@ -61,6 +61,15 @@ public class HeadView extends RelativeLayout {
             }
         });
 
+        rightTv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (rightCallBack != null){
+                    rightCallBack.click();
+                }
+            }
+        });
+
     }
     public void setTitle(String desc){
         title.setText(desc);
@@ -71,6 +80,14 @@ public class HeadView extends RelativeLayout {
 
     public interface HeadViewCallBack{
         void backClick();
+    }
+
+    public void setRightCallBack(HeadViewRightCallBack rightCallBack) {
+        this.rightCallBack = rightCallBack;
+    }
+
+    public interface HeadViewRightCallBack{
+        void click();
     }
 
 }

@@ -14,6 +14,8 @@ import com.puti.education.util.ViewUtils;
 import java.util.ArrayList;
 
 import unit.entity.StudentEntity;
+import unit.moudle.eventregist.ChooseStuManager;
+import unit.moudle.eventregist.callback.OprateStuCallBack;
 
 /**
  * Created by lei on 2018/6/15.
@@ -23,11 +25,15 @@ public class StudentAdapter extends BaseAdapter {
 
     private Context mContext;
     private ArrayList<StudentEntity.Student> mData;
-
+    private OprateStuCallBack mOprateStuCallBack;
 
     public StudentAdapter(Context mContext, ArrayList<StudentEntity.Student> mData) {
         this.mContext = mContext;
         this.mData = mData;
+    }
+
+    public void setmOprateStuCallBack(OprateStuCallBack mOprateStuCallBack) {
+        this.mOprateStuCallBack = mOprateStuCallBack;
     }
 
     @Override
@@ -48,7 +54,7 @@ public class StudentAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder ;
+        final ViewHolder holder ;
 
         if (convertView == null){
             convertView = InflateService.g().inflate(R.layout.puti_student_list_adapter);
@@ -62,6 +68,29 @@ public class StudentAdapter extends BaseAdapter {
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
+        final StudentEntity.Student student = mData.get(position);
+        if (ChooseStuManager.students.contains(student)){
+            holder.checkedIcon.setVisibility(View.VISIBLE);
+        }else {
+            holder.checkedIcon.setVisibility(View.GONE);
+        }
+        holder.avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ChooseStuManager.students.contains(student)){
+                    holder.checkedIcon.setVisibility(View.GONE);
+                    if (mOprateStuCallBack != null){
+                        mOprateStuCallBack.removeStu(student);
+                    }
+                }else {
+                    holder.checkedIcon.setVisibility(View.VISIBLE);
+                    if (mOprateStuCallBack != null){
+                        mOprateStuCallBack.chooseStu(student);
+                    }
+                }
+            }
+        });
+
         holder.avatar.setImageURI("");
 
         return convertView;

@@ -1,6 +1,7 @@
 package unit.moudle.eventregist.ptr;
 
 import android.content.Context;
+import android.view.View;
 
 import com.puti.education.base.BaseMvpPtr;
 import com.puti.education.listener.BaseListener;
@@ -8,6 +9,7 @@ import com.puti.education.netFrame.response.PageInfo;
 import com.puti.education.util.CharacterParser;
 import com.puti.education.util.LogUtil;
 import com.puti.education.util.ToastUtil;
+import com.puti.education.widget.CommonDropView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,7 +72,9 @@ public class ChooseStuPtr implements BaseMvpPtr {
             public void responseListResult(Object infoObj, Object listObj, PageInfo pageInfo, int code, boolean status) {
                 super.responseListResult(infoObj, listObj, pageInfo, code, status);
                 mClassList = (ArrayList<ClassSimple>) listObj;
+                //默认拉取第一个班级的学生
                 queryStudent(mClassList.get(0).getUID());
+                mView.setClassName(mClassList.get(0).getName());
             }
 
             @Override
@@ -101,6 +105,8 @@ public class ChooseStuPtr implements BaseMvpPtr {
     public void handleResult() {
         final List<StudentEntity.Student> students = entity.getStudents();
         final int size = students.size();
+        studentMap.clear();
+        mStudentList.clear();
         for (int i = 0; i < size; i++) {
             StudentEntity.Student student = students.get(i);
             String s = getSelling(student.getStudentName());
@@ -133,6 +139,27 @@ public class ChooseStuPtr implements BaseMvpPtr {
             return String.valueOf(s.charAt(0));
         }
         return "";
+    }
+
+    //班级筛选列表
+    public void showClassDialog(View view){
+        ArrayList<String> list = new ArrayList<>();
+        int size = mClassList.size();
+        for (int i = 0; i < size; i++) {
+            list.add(mClassList.get(i).getName());
+        }
+        final CommonDropView dropView = new CommonDropView(mContext,view,list);
+        dropView.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                String uid = mClassList.get(position).getUID();
+                String name = mClassList.get(position).getName();
+                mView.setClassName(name);
+                queryStudent(uid);
+                dropView.dismiss();
+            }
+        });
+        dropView.showAsDropDown(view);
     }
 
 }

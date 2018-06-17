@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import unit.entity.StudentEntity;
 import unit.moudle.eventregist.adapter.StudentAdapter;
+import unit.moudle.eventregist.callback.OprateStuCallBack;
 import unit.moudle.eventregist.entity.ChooseStuEntity;
 
 /**
@@ -31,8 +32,13 @@ public class ChooseStuDetailHolder extends BaseHolder<ChooseStuEntity> {
     GridViewForScrollView stuList;
 
     private StudentAdapter mAdapter;
+    private OprateStuCallBack oprateStuCallBack;
     public ChooseStuDetailHolder(Context context) {
         super(context);
+    }
+
+    public void setOprateStuCallBack(OprateStuCallBack oprateStuCallBack) {
+        this.oprateStuCallBack = oprateStuCallBack;
     }
 
     @NonNull
@@ -48,9 +54,9 @@ public class ChooseStuDetailHolder extends BaseHolder<ChooseStuEntity> {
         if (data == null || data.getmStuents() == null) return;
         letter.setText(data.getLetter());
         ArrayList<StudentEntity.Student> list = data.getmStuents();
-        if (mAdapter == null){
-            mAdapter = new StudentAdapter(mContext,list);
-        }
+
+        mAdapter = new StudentAdapter(mContext,list);
+        mAdapter.setmOprateStuCallBack(oprateStuCallBack);
         stuList.setAdapter(mAdapter);
     }
 }

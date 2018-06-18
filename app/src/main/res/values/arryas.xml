@@ -71,4 +71,10 @@
         <attr name="showRightTv" format="boolean"/>
         <attr name="right_title" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="PutiRecordItem">
+        <attr name="record_title" format="string"/>
+        <attr name="record_desc" format="string"/>
+
+    </declare-styleable>
 </resources>

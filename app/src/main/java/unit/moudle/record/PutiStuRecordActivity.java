@@ -1,6 +1,5 @@
 package unit.moudle.record;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -8,7 +7,6 @@ import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import unit.entity.Student;
 import unit.moudle.record.ptr.PutiStuPtr;
 import unit.moudle.record.view.PutiStuView;
@@ -25,9 +23,9 @@ public class PutiStuRecordActivity extends PutiActivity implements PutiStuView {
     @BindView(R.id.headview)
     HeadView headview;
     @BindView(R.id.stu_likeness)
-    LinearLayout stuLikeness;
+    LinearLayout VStuLikeNessLayout;
     @BindView(R.id.stu_info)
-    LinearLayout stuInfo;
+    LinearLayout VStuInfoLayout;
 
     private Student student;
     private PutiStuPtr mPtr;
@@ -62,7 +60,12 @@ public class PutiStuRecordActivity extends PutiActivity implements PutiStuView {
 
     @Override
     public void InitView() {
-
+        headview.setCallBack(new HeadView.HeadViewCallBack() {
+            @Override
+            public void backClick() {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -77,7 +80,8 @@ public class PutiStuRecordActivity extends PutiActivity implements PutiStuView {
 
     @Override
     public void addBaseInfoView(View view) {
-
+        VStuInfoLayout.removeAllViews();
+        VStuInfoLayout.addView(view);
     }
 
     @Override

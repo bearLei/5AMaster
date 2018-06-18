@@ -7,6 +7,7 @@ import com.puti.education.listener.BaseListener;
 
 import unit.api.PutiCommonModel;
 import unit.entity.StudentInfo;
+import unit.moudle.record.holder.StuBaseInfoHolder;
 import unit.moudle.record.view.PutiStuView;
 
 /**
@@ -18,6 +19,8 @@ public class PutiStuPtr implements BaseMvpPtr {
     private Context mContext;
     private PutiStuView mView;
 
+    private StuBaseInfoHolder stuBaseInfoHolder;
+
     public PutiStuPtr(Context mContext, PutiStuView mView) {
         this.mContext = mContext;
         this.mView = mView;
@@ -25,6 +28,7 @@ public class PutiStuPtr implements BaseMvpPtr {
 
     @Override
     public void star() {
+        initStuBaseInfoHolder();
         queryPortrait();
         queryBaseInfo();
     }
@@ -44,6 +48,10 @@ public class PutiStuPtr implements BaseMvpPtr {
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 super.responseResult(infoObj, listObj, code, status);
+                StudentInfo info = (StudentInfo) infoObj;
+                if (stuBaseInfoHolder != null){
+                    stuBaseInfoHolder.setData(info);
+                }
             }
 
             @Override
@@ -52,4 +60,12 @@ public class PutiStuPtr implements BaseMvpPtr {
             }
         });
     }
+
+    private void initStuBaseInfoHolder(){
+        if (stuBaseInfoHolder == null){
+            stuBaseInfoHolder = new StuBaseInfoHolder(mContext);
+        }
+        mView.addBaseInfoView(stuBaseInfoHolder.getRootView());
+    }
+
 }

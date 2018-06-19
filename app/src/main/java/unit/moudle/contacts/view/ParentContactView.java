@@ -13,5 +13,6 @@ import unit.entity.ParShowContactInfo;
 public interface ParentContactView extends BaseMvpView {
 
     void success(ArrayList<ParShowContactInfo> data);
+    void setClassName(String name);
 
 }

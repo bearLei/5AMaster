@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import unit.entity.ParShowContactInfo;
-import unit.entity.SchoolContactInfo;
 import unit.moudle.contacts.adapter.ParContactAdapter;
 import unit.moudle.contacts.ptr.ParentContactPtr;
 import unit.moudle.contacts.view.ParentContactView;
@@ -44,6 +44,7 @@ public class PutiParentContactsActivity extends PutiActivity implements ParentCo
     private ParentContactPtr mPtr;
     private ArrayList<ParShowContactInfo> mData;
     private ParContactAdapter mAdapter;
+
     @Override
     public int getContentView() {
         return R.layout.puti_parent_contacts_activity;
@@ -51,8 +52,8 @@ public class PutiParentContactsActivity extends PutiActivity implements ParentCo
 
     @Override
     public void BindPtr() {
-        if (mPtr == null){
-            mPtr = new ParentContactPtr(this,this);
+        if (mPtr == null) {
+            mPtr = new ParentContactPtr(this, this);
         }
     }
 
@@ -81,11 +82,11 @@ public class PutiParentContactsActivity extends PutiActivity implements ParentCo
         });
         headview.setTitle("家长通讯录");
 
-        if (mData == null){
+        if (mData == null) {
             mData = new ArrayList<>();
         }
-        if (mAdapter ==null){
-            mAdapter = new ParContactAdapter(this,mData);
+        if (mAdapter == null) {
+            mAdapter = new ParContactAdapter(this, mData);
         }
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
@@ -99,7 +100,7 @@ public class PutiParentContactsActivity extends PutiActivity implements ParentCo
                 int size = mData.size();
                 for (int i = 0; i < size; i++) {
                     ParShowContactInfo info = mData.get(i);
-                    if (letter.equalsIgnoreCase(info.getLetter())){
+                    if (letter.equalsIgnoreCase(info.getLetter())) {
                         recyclerview.scrollToPosition(i);
                         break;
                     }
@@ -119,10 +120,20 @@ public class PutiParentContactsActivity extends PutiActivity implements ParentCo
     }
 
 
-
     @Override
     public void success(ArrayList<ParShowContactInfo> data) {
         mData.clear();
         mData.addAll(data);
+    }
+
+    @Override
+    public void setClassName(String name) {
+        className.setText(name);
+    }
+
+
+    @OnClick(R.id.filter_class)
+    public void onClick() {
+        mPtr.showClassDialog(filterClass);
     }
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <unit.widget.HeadView
+        android:id="@+id/headview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"></unit.widget.HeadView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="@color/base_ffffff"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/week_class"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@color/base_333333"
+            />
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:background="@color/base_ededed"
+            />
+        <TextView
+            android:id="@+id/fillter_class"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@color/base_333333"
+            android:drawableRight="@drawable/puti_down_big"
+            android:drawablePadding="@dimen/dp_5"
+            />
+
+    </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

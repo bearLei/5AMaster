@@ -339,6 +339,19 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
             />
+
+        <!--家长通讯录-->
+        <activity android:name="unit.moudle.contacts.PutiParentContactsActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
+            />
+
+        <!--班级课表-->
+        <activity android:name="unit.moudle.schedule.PutiClassScheduleActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
+            />
+
         <!--Debug页面-->
         <activity android:name="unit.debug.DebugActivity"/>
 

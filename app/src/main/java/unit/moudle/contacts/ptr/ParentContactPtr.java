@@ -53,6 +53,7 @@ public class ParentContactPtr implements BaseMvpPtr {
         if (characterParser == null){
             characterParser = new CharacterParser();
         }
+        queryClass();
     }
 
     @Override

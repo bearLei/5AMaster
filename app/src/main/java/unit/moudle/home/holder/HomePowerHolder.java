@@ -17,6 +17,7 @@ import unit.debug.DebugActivity;
 import unit.moudle.eventdeal.EventListActivity;
 import unit.moudle.eventregist.PutiChooseEventActivity;
 import unit.moudle.record.PutiChooseStuRecordAcitivity;
+import unit.moudle.record.PutiTeacherRecordActivity;
 
 /**
  * Created by lei on 2018/6/6.
@@ -102,7 +103,7 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
-                        ToastUtil.show("我的档案");
+                       jump(PutiTeacherRecordActivity.class);
                     }
                 }));
         //我的问卷

@@ -315,4 +315,22 @@ public class PutiCommonModel extends PutiBaseModel{
                     }
                 });
     }
+
+    /**
+     * 查询教师基础信息
+     * @param teacherUID 教师id
+     * @param listener
+     */
+    public void queryTeaInfo(String teacherUID ,final BaseListener listener){
+        mCommonApi.queryTeacherInfo(teacherUID)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                       dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
 }

@@ -329,6 +329,16 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
             />
+        <!--教师档案详情-->
+        <activity android:name="unit.moudle.record.PutiTeacherRecordActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
+            />
+        <!--校园通讯录-->
+        <activity android:name="unit.moudle.contacts.PutiSchoolContactsActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
+            />
         <!--Debug页面-->
         <activity android:name="unit.debug.DebugActivity"/>
 

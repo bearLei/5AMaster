@@ -1,6 +1,7 @@
 package unit.moudle.home.holder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,9 @@ import com.puti.education.util.ViewUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import unit.moudle.contacts.PutiParentContactsActivity;
+import unit.moudle.contacts.PutiSchoolContactsActivity;
+import unit.moudle.schedule.PutiClassScheduleActivity;
 
 /**
  * Created by lei on 2018/6/6.
@@ -50,7 +54,7 @@ public class HomeToolHolder extends BaseHolder<Object> {
                 new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
-                        ToastUtil.show("校园通讯录");
+                       jump(PutiSchoolContactsActivity.class);
                     }
                 }));
 
@@ -61,7 +65,7 @@ public class HomeToolHolder extends BaseHolder<Object> {
                 new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
-                        ToastUtil.show("家长通讯录");
+                        jump(PutiParentContactsActivity.class);
                     }
                 }));
 
@@ -72,7 +76,7 @@ public class HomeToolHolder extends BaseHolder<Object> {
                 new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
-                        ToastUtil.show("班级课表");
+                        jump(PutiClassScheduleActivity.class);
                     }
                 }));
 
@@ -83,7 +87,7 @@ public class HomeToolHolder extends BaseHolder<Object> {
                 new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
-                        ToastUtil.show("我的课表");
+                        jump(PutiClassScheduleActivity.class);
                     }
                 }));
 
@@ -99,5 +103,8 @@ public class HomeToolHolder extends BaseHolder<Object> {
         rootView.setLayoutParams(params);
         return holder.getRootView();
     }
-
+    private void jump(Class t){
+        Intent intent = new Intent(mContext,t);
+        mContext.startActivity(intent);
+    }
 }

@@ -18,6 +18,7 @@ import unit.moudle.eventdeal.EventListActivity;
 import unit.moudle.eventregist.PutiChooseEventActivity;
 import unit.moudle.record.PutiChooseStuRecordAcitivity;
 import unit.moudle.record.PutiTeacherRecordActivity;
+import unit.moudle.work.PutiWorkCheckActivity;
 
 /**
  * Created by lei on 2018/6/6.
@@ -123,8 +124,7 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
-                        Intent intent = new Intent(mContext, DebugActivity.class);
-                        mContext.startActivity(intent);
+                        jump(PutiWorkCheckActivity.class);
                     }
                 }));
     }

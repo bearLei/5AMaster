@@ -352,6 +352,12 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
             />
 
+        <!--工作检查-->
+        <activity android:name="unit.moudle.work.PutiWorkCheckActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
+            />
+
         <!--Debug页面-->
         <activity android:name="unit.debug.DebugActivity"/>
 

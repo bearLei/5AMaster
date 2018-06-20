@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.puti.education.R;
 import com.puti.education.base.InflateService;
@@ -55,8 +56,11 @@ public class TeacherBaseInfoHolder extends BaseHolder<TeacherBaseInfo> {
     PutiRecordItem heightEducation;
     @BindView(R.id.graduation_time)
     PutiRecordItem graduationTime;
+    @BindView(R.id.content_layout)
+    LinearLayout contentLayout;
 
 
+    private boolean hide;
 
     public TeacherBaseInfoHolder(Context context) {
         super(context);
@@ -67,6 +71,13 @@ public class TeacherBaseInfoHolder extends BaseHolder<TeacherBaseInfo> {
     protected View initView(Context context) {
         mRootView = InflateService.g().inflate(R.layout.puti_teacher_record_base_info_holder);
         ButterKnife.bind(this, mRootView);
+        pullDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hide = !hide;
+                contentLayout.setVisibility(hide ? View.GONE : View.VISIBLE);
+            }
+        });
         return mRootView;
     }
 
@@ -83,9 +94,9 @@ public class TeacherBaseInfoHolder extends BaseHolder<TeacherBaseInfo> {
         country.setTDesc(data.getCountry());
         nation.setTDesc(data.getNation());
         nativePlace.setTDesc(data.getCensusRegister());
-        if (data.getCensusType() == 1){
+        if (data.getCensusType() == 1) {
             category.setTDesc("农村");
-        }else if (data.getCensusType() == 2){
+        } else if (data.getCensusType() == 2) {
             category.setTDesc("城镇");
         }
 

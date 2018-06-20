@@ -3,6 +3,7 @@ package unit.moudle.record.holder;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.puti.education.R;
 import com.puti.education.base.InflateService;
@@ -23,8 +24,12 @@ public class TeacherClassManagerHolder extends BaseHolder<ArrayList<ClaRecordInf
 
     @BindView(R.id.listview)
     ListViewForScrollView listview;
+    @BindView(R.id.pull_down)
+    ImageView pullDown;
 
+    private boolean hide;
     private TeacherRecordAdapter mAdapter;
+
     public TeacherClassManagerHolder(Context context) {
         super(context);
     }
@@ -34,6 +39,13 @@ public class TeacherClassManagerHolder extends BaseHolder<ArrayList<ClaRecordInf
     protected View initView(Context context) {
         mRootView = InflateService.g().inflate(R.layout.puti_tea_class_manager_holder);
         ButterKnife.bind(this, mRootView);
+        pullDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hide = !hide;
+                listview.setVisibility(hide ? View.GONE : View.VISIBLE);
+            }
+        });
         return mRootView;
     }
 
@@ -41,8 +53,8 @@ public class TeacherClassManagerHolder extends BaseHolder<ArrayList<ClaRecordInf
     protected void updateUI(Context context, ArrayList<ClaRecordInfo> data) {
         if (data == null || data.size() == 0) return;
 
-        if (mAdapter == null){
-            mAdapter = new TeacherRecordAdapter(mContext,data);
+        if (mAdapter == null) {
+            mAdapter = new TeacherRecordAdapter(mContext, data);
         }
         listview.setAdapter(mAdapter);
     }

@@ -11,6 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import unit.moudle.record.ptr.PutiTeacherPtr;
 import unit.moudle.record.view.PutiTeacherView;
+import unit.util.UserInfoUtils;
 import unit.widget.HeadView;
 
 /**
@@ -57,6 +58,14 @@ public class PutiTeacherRecordActivity extends PutiActivity implements PutiTeach
     @Override
     public void InitView() {
 
+        headview.setCallBack(new HeadView.HeadViewCallBack() {
+            @Override
+            public void backClick() {
+                finish();
+            }
+        });
+
+        headview.setTitle(UserInfoUtils.getUserInfo().getRealName());
     }
 
     @Override
@@ -66,11 +75,13 @@ public class PutiTeacherRecordActivity extends PutiActivity implements PutiTeach
 
     @Override
     public void addBaseInfoLayout(View view) {
-
+        baseInfoLayout.removeAllViews();
+        baseInfoLayout.addView(view);
     }
 
     @Override
     public void addClassManageLayout(View view) {
-
+        classManagerLayout.removeAllViews();
+        classManagerLayout.addView(view);
     }
 }

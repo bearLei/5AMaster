@@ -15,7 +15,9 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import unit.api.PutiCommonModel;
+import unit.api.PutiTeacherModel;
 import unit.entity.UserBaseInfo;
+import unit.entity.UserIdInfo;
 import unit.entity.VerifyInfo;
 import unit.entity.VerifyPostInfo;
 import unit.moudle.home.HomeActivity;
@@ -87,15 +89,36 @@ public class LoginPtr implements BaseMvpPtr {
             }
         });
     }
+    private void getUid(){
+        PutiTeacherModel.getInstance().getUid(new BaseListener(UserIdInfo.class){
+            @Override
+            public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
+                UserIdInfo info = (UserIdInfo) infoObj;
+                if (info != null) {
+                    UserInfoUtils.setUid(info.getUID());
+                    UserInfoUtils.setUserType(info.getCurrentPersonType());
+                }
+                //跳转首页
+                Intent intent = new Intent(mContext, HomeActivity.class);
+                 mContext.startActivity(intent);
+                    if (mContext instanceof Activity){
+                        ((Activity) mContext).finish();
+                        }
+            }
+            @Override
+            public void requestFailed(boolean status, int code, String errorMessage) {
+                ToastUtil.show(errorMessage);
+            }
+        });
+    }
 
     //登录成功后的操作
     private void handleResult(UserInfo userInfo){
         //sp存储
         saveUserInfo(userInfo);
         NetWorkInterceptor.setToken(userInfo.getToken());
-        //跳转首页
-        Intent intent = new Intent(mContext, HomeActivity.class);
-        mContext.startActivity(intent);
+        //获取uid
+        getUid();
     }
 
     private void saveUserInfo(UserInfo userInfo){

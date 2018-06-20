@@ -12,7 +12,8 @@ import java.io.Serializable;
 public class DataStorage {
 
     public static final String User_info = "UserInfo";
-    public static final String Current_TopicId = "CurrentTopicId";//当前操作的商品id
+    public static final String User_id = "UserId";//用户id
+    public static final String User_Type = "UserType";//用户身份类型
     /**
      * 将一个Serializable对象保存到sp中. <br/>
      * 如果参数key为空, 则直接返回, 不进行任何操作.<br/>
@@ -58,12 +59,18 @@ public class DataStorage {
         }
     }
 
-    public static String getCurrentTopicId(){
-        return DataStorageBase.getString(Current_TopicId,"");
+    public static String getUserId(){
+        return DataStorageBase.getString(User_id,"");
     }
 
-    public static void putCurrentTopicId(String topicId){
-        DataStorageBase.putString(Current_TopicId,topicId);
+    public static void putUserId(String user_id){
+        DataStorageBase.putString(User_id,user_id);
+    }
+    public static int getUserType(){
+        return DataStorageBase.getInt(User_Type,0);
     }
 
+    public static void putUserType(int userType){
+        DataStorageBase.putInt(User_Type,userType);
+    }
 }

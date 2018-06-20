@@ -65,13 +65,43 @@ public class PutiTeacherModel extends PutiBaseModel{
      * @param listener
      */
     public void getStudent( String classUID,String termUID,int status,int pageIndex,int pageSize,final BaseListener listener){
-        mTeacherApi.getStudeng(classUID, termUID, status, pageIndex, pageSize)
+        mTeacherApi.getStudent(classUID, termUID, status, pageIndex, pageSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new PutiCommonSubscriber(listener){
                     @Override
                     public void onNext(BaseResponseInfo responseInfo) {
 
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
+    //获取自己的id
+    public void getUid(final BaseListener listener){
+        mTeacherApi.getUid()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                       dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
+    /**
+     * 获取教师的任课情况
+     * @param teacherUID 教师id
+     * @param listener
+     */
+    public void queryTeacherRecords(String teacherUID,final BaseListener listener){
+        mTeacherApi.getRecords(teacherUID,"")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
                         dealJson(responseInfo,listener);
                     }
                 });

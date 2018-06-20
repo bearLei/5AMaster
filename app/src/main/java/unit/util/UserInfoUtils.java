@@ -35,11 +35,18 @@ public class UserInfoUtils {
     }
 
     public static String getUid(){
-        if (getUserInfo() == null){
-            return "";
-        }else {
-            return getUserInfo().getRoleId();
-        }
+        String userId = DataStorage.getUserId();
+        return userId;
+    }
+    public static void setUid(String uid){
+        DataStorage.putUserId(uid);
+    }
+
+    public static int getUserType(){
+        return DataStorage.getUserType();
+    }
+    public static void setUserType(int type){
+        DataStorage.putUserType(type);
     }
 
     public static String getAreaUid(){

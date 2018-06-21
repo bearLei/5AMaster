@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONArray;
 import com.puti.education.R;
 import com.puti.education.base.InflateService;
 import com.puti.education.base.holder.BaseHolder;
@@ -209,8 +210,9 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
     }
 
 
-    public String getEvidenceJson(){
-        return "";
+    public JSONArray getEvidenceJson(){
+        JSONArray array = new JSONArray();
+        return array;
     }
 
 }

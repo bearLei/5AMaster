@@ -333,4 +333,22 @@ public class PutiCommonModel extends PutiBaseModel{
                 });
     }
 
+    /**
+     *查询某学期的课表
+     * @param classUId 班级Id
+     * @param termUid 学期id
+     */
+    public void queryCoursInfo(String classUId,String termUid,final BaseListener listener){
+        mCommonApi.queryCoursInfo(classUId,termUid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
+
 }

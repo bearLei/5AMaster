@@ -48,7 +48,12 @@ public class PutiStuPtr implements BaseMvpPtr {
         PutiCommonModel.getInstance().queryPortrait(mView.getStudentUid(),"",new BaseListener(StudentPortraitInfo.class){
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
-                super.responseResult(infoObj, listObj, code, status);
+
+                StudentPortraitInfo info = (StudentPortraitInfo) infoObj;
+                stuPortraitHolder.setData(info);
+                if (info != null && info.getStudentInfoms() != null){
+                    mView.setHeadTitle(info.getStudentInfoms().getUserName());
+                }
             }
 
             @Override

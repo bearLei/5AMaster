@@ -40,7 +40,7 @@ public class TimeUtils {
      * @return
      */
     public static String  getCurrentTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return sdf.format(System.currentTimeMillis());
     }
 

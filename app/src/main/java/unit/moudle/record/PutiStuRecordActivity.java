@@ -92,4 +92,11 @@ public class PutiStuRecordActivity extends PutiActivity implements PutiStuView {
         }
         return "";
     }
+
+    @Override
+    public void setHeadTitle(String name) {
+        if (headview != null){
+            headview.setTitle(name);
+        }
+    }
 }

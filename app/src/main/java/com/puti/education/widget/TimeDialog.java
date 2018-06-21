@@ -263,7 +263,6 @@ public class TimeDialog extends Dialog {
             stringBuilder.append(hourStr);
             stringBuilder.append(":");
             stringBuilder.append(minStr);
-            stringBuilder.append(":00");
         }
         return stringBuilder.toString();
     }

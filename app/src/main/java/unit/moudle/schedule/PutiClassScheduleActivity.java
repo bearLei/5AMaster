@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import unit.api.PutiCommonModel;
 import unit.api.PutiTeacherModel;
 import unit.entity.ClassSimple;
 import unit.widget.HeadView;
@@ -90,6 +91,7 @@ public class PutiClassScheduleActivity extends PutiActivity {
                 mClassList = (ArrayList<ClassSimple>) listObj;
                 //默认拉取第一个班级的课表
                 setClassName(mClassList.get(0).getName());
+                queryCoursInfo(mClassList.get(0).getUID());
             }
 
             @Override
@@ -114,13 +116,16 @@ public class PutiClassScheduleActivity extends PutiActivity {
                 String uid = mClassList.get(position).getUID();
                 String name = mClassList.get(position).getName();
                 setClassName(name);
-
+                queryCoursInfo(uid);
                 dropView.dismiss();
             }
         });
         dropView.showAsDropDown(view);
     }
 
+    public void queryCoursInfo(String classId){
+        PutiCommonModel.getInstance().queryCoursInfo(classId,"",new BaseListener());
+    }
 
     @OnClick(R.id.fillter_class)
     public void onClick() {

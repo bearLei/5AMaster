@@ -4,10 +4,13 @@ import android.content.Context;
 
 import com.puti.education.base.BaseMvpPtr;
 import com.puti.education.listener.BaseListener;
+import com.puti.education.util.ToastUtil;
 
 import unit.api.PutiCommonModel;
 import unit.entity.StudentInfo;
+import unit.entity.StudentPortraitInfo;
 import unit.moudle.record.holder.StuBaseInfoHolder;
+import unit.moudle.record.holder.StuPortraitHolder;
 import unit.moudle.record.view.PutiStuView;
 
 /**
@@ -20,6 +23,7 @@ public class PutiStuPtr implements BaseMvpPtr {
     private PutiStuView mView;
 
     private StuBaseInfoHolder stuBaseInfoHolder;
+    private StuPortraitHolder stuPortraitHolder;
 
     public PutiStuPtr(Context mContext, PutiStuView mView) {
         this.mContext = mContext;
@@ -29,6 +33,7 @@ public class PutiStuPtr implements BaseMvpPtr {
     @Override
     public void star() {
         initStuBaseInfoHolder();
+        initStuPortraitHolder();
         queryPortrait();
         queryBaseInfo();
     }
@@ -40,7 +45,17 @@ public class PutiStuPtr implements BaseMvpPtr {
 
     //查询学生画像
     private void queryPortrait(){
-        PutiCommonModel.getInstance().queryPortrait(mView.getStudentUid(),"",new BaseListener());
+        PutiCommonModel.getInstance().queryPortrait(mView.getStudentUid(),"",new BaseListener(StudentPortraitInfo.class){
+            @Override
+            public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
+                super.responseResult(infoObj, listObj, code, status);
+            }
+
+            @Override
+            public void requestFailed(boolean status, int code, String errorMessage) {
+                ToastUtil.show(errorMessage);
+            }
+        });
     }
 
     private void queryBaseInfo(){
@@ -67,5 +82,10 @@ public class PutiStuPtr implements BaseMvpPtr {
         }
         mView.addBaseInfoView(stuBaseInfoHolder.getRootView());
     }
-
+    private void initStuPortraitHolder(){
+        if (stuPortraitHolder == null){
+            stuPortraitHolder = new StuPortraitHolder(mContext);
+        }
+        mView.addLikeNessView(stuPortraitHolder.getRootView());
+    }
 }

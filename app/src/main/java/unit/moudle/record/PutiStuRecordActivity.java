@@ -75,7 +75,8 @@ public class PutiStuRecordActivity extends PutiActivity implements PutiStuView {
 
     @Override
     public void addLikeNessView(View view) {
-
+        VStuLikeNessLayout.removeAllViews();
+        VStuLikeNessLayout.addView(view);
     }
 
     @Override

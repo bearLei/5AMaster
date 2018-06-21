@@ -3,6 +3,8 @@ package unit.moudle.record.holder;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.puti.education.R;
@@ -34,8 +36,6 @@ public class StuBaseInfoHolder extends BaseHolder<StudentInfo> {
     PutiRecordItem category;
     @BindView(R.id.cencus)
     PutiRecordItem cencus;
-    @BindView(R.id.refer_school)
-    PutiRecordItem referSchool;
     @BindView(R.id.mobile)
     PutiRecordItem mobile;
     @BindView(R.id.stu_card)
@@ -54,6 +54,12 @@ public class StuBaseInfoHolder extends BaseHolder<StudentInfo> {
     PutiRecordItem motherMobile;
     @BindView(R.id.mother_card)
     PutiRecordItem motherCard;
+    @BindView(R.id.pull_down)
+    ImageView pullDown;
+    @BindView(R.id.content_layout)
+    LinearLayout contentLayout;
+
+    private boolean hide;
 
     public StuBaseInfoHolder(Context context) {
         super(context);
@@ -64,14 +70,21 @@ public class StuBaseInfoHolder extends BaseHolder<StudentInfo> {
     protected View initView(Context context) {
         mRootView = InflateService.g().inflate(R.layout.puti_stu_record_base_info_holder);
         ButterKnife.bind(this, mRootView);
+        pullDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hide = !hide;
+                contentLayout.setVisibility(hide ? View.GONE : View.VISIBLE);
+            }
+        });
         return mRootView;
     }
 
     @Override
     protected void updateUI(Context context, StudentInfo data) {
-       if (data == null){
-           return;
-       }
+        if (data == null) {
+            return;
+        }
         StudentInfo.StuBasicInfo stuBasicInfo = data.getStuBasicInfo();
         StudentInfo.StuFatherInfo stuFatherInfo = data.getStuFatherInfo();
         StudentInfo.StuMotherInfo stuMotherInfo = data.getStuMotherInfo();
@@ -80,26 +93,25 @@ public class StuBaseInfoHolder extends BaseHolder<StudentInfo> {
         StudentInfo.StuHeadInfo stuHeadInfo = data.getStuHeadInfo();
 
         //基础信息
-        if (stuBasicInfo != null){
+        if (stuBasicInfo != null) {
             name.setTDesc(stuBasicInfo.getUserName());
             sex.setTDesc(stuBasicInfo.getSex());
             // TODO: 2018/6/18 民族
             birth.setTDesc(stuBasicInfo.getBirthday());
-            // TODO: 2018/6/18 户口性质
             cencus.setTDesc(stuBasicInfo.getCensusRegister());
-            // TODO: 2018/6/18 来源学校
+
             mobile.setTDesc(stuBasicInfo.getMobile());
             stuCard.setTDesc(stuBasicInfo.getIdCard());
             familyAddress.setTDesc(stuBasicInfo.getAddress());
         }
         //父亲信息
-        if (stuFatherInfo != null){
+        if (stuFatherInfo != null) {
             fatherName.setTDesc(stuFatherInfo.getUserName());
             fatherMobile.setTDesc(stuFatherInfo.getMobile());
             fatherCard.setTDesc(stuFatherInfo.getIdCard());
         }
         //母亲信息
-        if (stuMotherInfo != null){
+        if (stuMotherInfo != null) {
             motherName.setTDesc(stuMotherInfo.getUserName());
             motherMobile.setTDesc(stuMotherInfo.getMobile());
             motherCard.setTDesc(stuMotherInfo.getIdCard());

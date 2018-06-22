@@ -24,17 +24,17 @@ import unit.moudle.eventregist.PutiChooseDetailActivity;
  * Created by lei on 2018/6/9.
  */
 
-public class EventDetailHolder extends BaseHolder<EventDetail> {
+public class AddEventDetailHolder extends BaseHolder<EventDetail> {
 
     @BindView(R.id.title)
     TextView title;
 
     private int mType;
-    public EventDetailHolder(Context context) {
+    public AddEventDetailHolder(Context context) {
         super(context);
     }
 
-    public EventDetailHolder(Context context, int mType) {
+    public AddEventDetailHolder(Context context, int mType) {
         super(context);
         this.mType = mType;
     }

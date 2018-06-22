@@ -1,7 +1,6 @@
 package unit.moudle.eventregist;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,13 +15,12 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unit.entity.EventDetail;
 import unit.entity.Student;
 import unit.eventbus.ChooseStuEvent;
-import unit.moudle.eventregist.ptr.EventDetailPtr;
-import unit.moudle.eventregist.view.EventDetailView;
+import unit.moudle.eventregist.ptr.AddEventDetailPtr;
+import unit.moudle.eventregist.view.AddEventDetailView;
 import unit.widget.HeadView;
 
 /**
@@ -30,7 +28,7 @@ import unit.widget.HeadView;
  * 事件登记的详情页面
  */
 
-public class PutiChooseDetailActivity extends PutiActivity implements EventDetailView {
+public class PutiChooseDetailActivity extends PutiActivity implements AddEventDetailView {
 
     public static final String Parse_Intent = "Parse_Intent";
 
@@ -47,7 +45,7 @@ public class PutiChooseDetailActivity extends PutiActivity implements EventDetai
     @BindView(R.id.commit)
     TextView TCommit;
 
-    private EventDetailPtr mPtr;
+    private AddEventDetailPtr mPtr;
     private EventDetail eventDetail;
 
     @Override
@@ -58,7 +56,7 @@ public class PutiChooseDetailActivity extends PutiActivity implements EventDetai
     @Override
     public void BindPtr() {
         if (mPtr == null) {
-            mPtr = new EventDetailPtr(this, this);
+            mPtr = new AddEventDetailPtr(this, this);
         }
     }
 

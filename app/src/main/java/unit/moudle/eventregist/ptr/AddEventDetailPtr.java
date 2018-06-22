@@ -22,16 +22,16 @@ import unit.moudle.eventregist.holder.ChooseStuHolder;
 import unit.moudle.eventregist.holder.EventDescHolder;
 import unit.moudle.eventregist.holder.EventEvidenceHolder;
 import unit.moudle.eventregist.holder.EventTimeAndSpaceHolder;
-import unit.moudle.eventregist.view.EventDetailView;
+import unit.moudle.eventregist.view.AddEventDetailView;
 
 /**
  * Created by lei on 2018/6/11.
  */
 
-public class EventDetailPtr implements BaseMvpPtr {
+public class AddEventDetailPtr implements BaseMvpPtr {
 
     private Context mContext;
-    private EventDetailView mView;
+    private AddEventDetailView mView;
 
     private ChooseStuHolder mChooseStuHolder;//选择学生holder
     private EventTimeAndSpaceHolder mTimeAndSpaceHolder;//时间和地点Holder
@@ -40,7 +40,7 @@ public class EventDetailPtr implements BaseMvpPtr {
 
 
     private ArrayList<Student> mChooseStuList;
-    public EventDetailPtr(Context mContext, EventDetailView mView) {
+    public AddEventDetailPtr(Context mContext, AddEventDetailView mView) {
         this.mContext = mContext;
         this.mView = mView;
     }

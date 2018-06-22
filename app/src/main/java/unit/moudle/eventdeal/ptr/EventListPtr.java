@@ -8,11 +8,11 @@ import com.puti.education.netFrame.response.PageInfo;
 import com.puti.education.util.ToastUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import unit.api.PutiCommonModel;
 import unit.api.PutiTeacherModel;
 import unit.entity.ClassSimple;
+import unit.entity.Event;
 import unit.entity.PutiEvents;
 import unit.moudle.eventdeal.view.EventListView;
 
@@ -68,7 +68,7 @@ public class EventListPtr implements BaseMvpPtr {
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 PutiEvents events = (PutiEvents) infoObj;
-                ArrayList<PutiEvents.Event> eventList = (ArrayList<PutiEvents.Event>) events.getEvents();
+                ArrayList<Event> eventList = (ArrayList<Event>) events.getEvents();
                 handleResult(eventList);
             }
 
@@ -79,13 +79,13 @@ public class EventListPtr implements BaseMvpPtr {
         });
     }
 
-    private void handleResult(ArrayList<PutiEvents.Event> eventList){
+    private void handleResult(ArrayList<Event> eventList){
         mView.success(eventList);
         int size = eventList.size();
         int waitSureEventCount = 0;
         int importEventCount = 0;
         for (int i = 0; i < size; i++) {
-            PutiEvents.Event event = eventList.get(i);
+            Event event = eventList.get(i);
             if (ImportEvent.equals(event.getCategories())){
                 importEventCount++;
             }else {

@@ -11,7 +11,7 @@ import com.puti.education.util.ViewUtils;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import unit.entity.PutiEvents;
+import unit.entity.Event;
 import unit.moudle.eventdeal.adapter.EventsSureAdapter;
 import unit.moudle.eventdeal.ptr.EventListPtr;
 import unit.moudle.eventdeal.view.EventListView;
@@ -34,7 +34,7 @@ public class EventListActivity extends PutiActivity implements EventListView {
 
     private EventListPtr mPtr;
     private EventsSureAdapter mAdapter;
-    private ArrayList<PutiEvents.Event> mData;
+    private ArrayList<Event> mData;
     @Override
     public int getContentView() {
         return R.layout.puti_event_list;
@@ -101,7 +101,7 @@ public class EventListActivity extends PutiActivity implements EventListView {
     }
 
     @Override
-    public void success(ArrayList<PutiEvents.Event> events) {
+    public void success(ArrayList<Event> events) {
         mData.clear();
         mData.addAll(events);
         mAdapter.notifyDataSetChanged();

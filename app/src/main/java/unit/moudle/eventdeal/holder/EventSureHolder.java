@@ -1,8 +1,8 @@
-package unit.moudle.eventdeal;
+package unit.moudle.eventdeal.holder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +14,15 @@ import com.puti.education.base.holder.BaseHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import unit.entity.PutiEvents;
+import unit.entity.Event;
+import unit.moudle.eventdeal.EventDetailActivity;
 
 /**
  * Created by lei on 2018/6/22.
  * 事件确认-事件列表
  */
 
-public class EventSureHolder extends BaseHolder<PutiEvents.Event> {
+public class EventSureHolder extends BaseHolder<Event> {
 
     @BindView(R.id.time)
     TextView time;
@@ -49,7 +50,7 @@ public class EventSureHolder extends BaseHolder<PutiEvents.Event> {
     }
 
     @Override
-    protected void updateUI(Context context, PutiEvents.Event data) {
+    protected void updateUI(Context context, final Event data) {
         if (data == null) {
             return;
         }
@@ -63,7 +64,9 @@ public class EventSureHolder extends BaseHolder<PutiEvents.Event> {
         mRootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(mContext, EventDetailActivity.class);
+                intent.putExtra(EventDetailActivity.Parse_Intent,data);
+                mContext.startActivity(intent);
             }
         });
     }

@@ -9,7 +9,7 @@ import com.puti.education.base.holder.BaseHolder;
 import java.util.List;
 
 import unit.entity.EventDetail;
-import unit.moudle.eventregist.holder.EventDetailHolder;
+import unit.moudle.eventregist.holder.AddEventDetailHolder;
 
 /**
  * Created by lei on 2018/6/9.
@@ -46,7 +46,7 @@ public class EventDetailAdapter extends BaseRVAdapter {
 
     @Override
     protected BaseHolder getViewHolder(Context context, ViewGroup parent, int viewType) {
-        mHolder = new EventDetailHolder(context,type);
+        mHolder = new AddEventDetailHolder(context,type);
         return mHolder;
     }
 

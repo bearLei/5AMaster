@@ -15,6 +15,7 @@ import com.puti.education.R;
  */
 
 public class HeadView extends RelativeLayout {
+    private Context context;
     private TextView back;
     private TextView title;
     private TextView rightTv;
@@ -31,6 +32,7 @@ public class HeadView extends RelativeLayout {
     }
 
     private void initView(Context context,AttributeSet attrs){
+        this.context  = context;
         View view = LayoutInflater.from(context).inflate(R.layout.puti_head_view, this,true);
         back = (TextView) view.findViewById(R.id.back);
         title = (TextView) view.findViewById(R.id.title);
@@ -77,6 +79,13 @@ public class HeadView extends RelativeLayout {
     public void showRightTV(boolean show){
         rightTv.setVisibility(show ? VISIBLE : GONE);
     }
+    public void setRightTV(String title){
+        rightTv.setText(title);
+    }
+    public void setRightColor(int color){
+        rightTv.setTextColor(context.getResources().getColor(color));
+    }
+
     public void setCallBack(HeadViewCallBack callBack) {
         this.callBack = callBack;
     }

@@ -357,7 +357,11 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
             />
-
+        <!--事件详情-->
+        <activity android:name="unit.moudle.eventdeal.EventDetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
+            />
         <!--Debug页面-->
         <activity android:name="unit.debug.DebugActivity"/>
 

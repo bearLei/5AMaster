@@ -8,30 +8,30 @@ import com.puti.education.base.holder.BaseHolder;
 
 import java.util.ArrayList;
 
-import unit.entity.Event;
-import unit.moudle.eventdeal.holder.EventSureHolder;
+import unit.entity.Event2Involved;
 
 /**
  * Created by lei on 2018/6/22.
  */
 
-public class EventsSureAdapter extends BaseRVAdapter {
+public class DealEventDetailAdapter extends BaseRVAdapter {
 
-    private Context mContext;
-    private ArrayList<Event> mData;
+    private Context context;
+    private ArrayList<Event2Involved> mData;
 
-    public EventsSureAdapter(Context context, ArrayList<Event> mData) {
+
+    public DealEventDetailAdapter(Context context, ArrayList<Event2Involved> mData) {
         super(context);
         this.mData = mData;
     }
 
-    public EventsSureAdapter(Context context) {
+    public DealEventDetailAdapter(Context context) {
         super(context);
     }
 
     @Override
     protected Object getItem(int position) {
-        if (mData == null ) return null;
+        if (mData == null) return null;
         return mData.get(position);
     }
 
@@ -43,7 +43,6 @@ public class EventsSureAdapter extends BaseRVAdapter {
 
     @Override
     protected BaseHolder getViewHolder(Context context, ViewGroup parent, int viewType) {
-        EventSureHolder holder = new EventSureHolder(context);
-        return holder;
+        return null;
     }
 }

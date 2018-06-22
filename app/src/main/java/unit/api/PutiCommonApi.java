@@ -75,6 +75,8 @@ public interface PutiCommonApi {
 
     @GET("Common/Classes/CoursInfo")//获取谋学期的课表
     Observable<BaseResponseInfo> queryCoursInfo(@Query("classUID")String classUID,
-                                                @Query("termUID")String termUID
-                                                );
+                                                @Query("termUID")String termUID);
+
+    @GET("Common/Events/EventDetail")//获取学生事件详情
+    Observable<BaseResponseInfo> getEventDetail(@Query("eventUID")String eventUID);
 }

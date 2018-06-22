@@ -8,7 +8,7 @@ import com.puti.education.base.BaseMvpView;
  * Created by lei on 2018/6/11.
  */
 
-public interface EventDetailView extends BaseMvpView {
+public interface AddEventDetailView extends BaseMvpView {
 
     void addChooseStuView(View view);
     void addTimeAndSpaceView(View view);

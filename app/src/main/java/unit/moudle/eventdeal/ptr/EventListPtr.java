@@ -1,7 +1,6 @@
 package unit.moudle.eventdeal.ptr;
 
 import android.content.Context;
-import android.content.Intent;
 
 import com.puti.education.base.BaseMvpPtr;
 import com.puti.education.listener.BaseListener;
@@ -9,10 +8,12 @@ import com.puti.education.netFrame.response.PageInfo;
 import com.puti.education.util.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import unit.api.PutiCommonModel;
 import unit.api.PutiTeacherModel;
 import unit.entity.ClassSimple;
+import unit.entity.PutiEvents;
 import unit.moudle.eventdeal.view.EventListView;
 
 /**
@@ -20,6 +21,9 @@ import unit.moudle.eventdeal.view.EventListView;
  */
 
 public class EventListPtr implements BaseMvpPtr {
+
+    private static final String ImportEvent = "严重事件";
+
     private Context mContext;
     private EventListView mView;
 
@@ -60,7 +64,44 @@ public class EventListPtr implements BaseMvpPtr {
     }
 
     private void queryEvent(String classUid){
-        PutiCommonModel.getInstance().queryEvent(classUid,-1,1, Integer.MAX_VALUE,new BaseListener());
+        PutiCommonModel.getInstance().queryEvent(classUid,-1,1, Integer.MAX_VALUE,new BaseListener(PutiEvents.class){
+            @Override
+            public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
+                PutiEvents events = (PutiEvents) infoObj;
+                ArrayList<PutiEvents.Event> eventList = (ArrayList<PutiEvents.Event>) events.getEvents();
+                handleResult(eventList);
+            }
+
+            @Override
+            public void requestFailed(boolean status, int code, String errorMessage) {
+                ToastUtil.show(errorMessage);
+            }
+        });
     }
+
+    private void handleResult(ArrayList<PutiEvents.Event> eventList){
+        mView.success(eventList);
+        int size = eventList.size();
+        int waitSureEventCount = 0;
+        int importEventCount = 0;
+        for (int i = 0; i < size; i++) {
+            PutiEvents.Event event = eventList.get(i);
+            if (ImportEvent.equals(event.getCategories())){
+                importEventCount++;
+            }else {
+                waitSureEventCount++;
+            }
+        }
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("待确认事件 ")
+                .append(String.valueOf(waitSureEventCount))
+                .append(" 件")
+                .append("    其中重点事件 ")
+                .append(String.valueOf(importEventCount))
+                .append(" 件");
+        mView.setDesc(builder.toString());
+    }
+
 
 }

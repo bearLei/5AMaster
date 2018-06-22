@@ -23,9 +23,9 @@
            android:id="@+id/desc"
            android:layout_width="0dp"
            android:layout_height="match_parent"
-           android:layout_weight="3"
+           android:layout_weight="4"
            android:gravity="center"
-           android:textSize="@dimen/sp_14"
+           android:textSize="@dimen/sp_11"
            android:textColor="@color/base_333333"
            />
         <View
@@ -37,9 +37,9 @@
             android:id="@+id/class_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:gravity="center"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp_11"
             android:textColor="@color/base_333333"
             android:drawableRight="@drawable/puti_down_big"
             android:drawablePadding="@dimen/dp_10"

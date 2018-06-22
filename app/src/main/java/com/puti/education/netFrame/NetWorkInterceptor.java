@@ -85,7 +85,6 @@ public class NetWorkInterceptor implements Interceptor{
             String bodyString = buffer.clone().readString(charset);
             LogUtil.i("body",bodyString);
 
-
         return response;
     }
 

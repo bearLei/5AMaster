@@ -3,12 +3,13 @@ package unit.base;
 
 import com.alibaba.fastjson.JSONException;
 import com.puti.education.listener.BaseListener;
-import com.puti.education.netFrame.response.ResponseInfo;
 
 import java.net.SocketTimeoutException;
 
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
+import unit.eventbus.TokenErrorEvent;
+import unit.eventbus.PutiEventBus;
 
 public class PutiBaseSubscriber extends Subscriber<BaseResponseInfo>{
 
@@ -43,7 +44,11 @@ public class PutiBaseSubscriber extends Subscriber<BaseResponseInfo>{
             this.baseListener.requestFailed(false, -1, "json解析失败了！");
         }else if (e instanceof HttpException){
             int httpcode = ((HttpException) e).code();
-            this.baseListener.requestFailed(false, -1, "网络请求失败" + (httpcode));
+            if (httpcode == 401){
+                PutiEventBus.g().post(new TokenErrorEvent());
+            }else {
+                this.baseListener.requestFailed(false, -1, "网络请求失败" + (httpcode));
+            }
         }else{
             this.baseListener.requestFailed(false, -1, "网络出错！");
         }

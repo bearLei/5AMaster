@@ -36,7 +36,7 @@ public class EduDialog extends Dialog {
     private View mCheckBoxGorup;// 单选框组
     private CheckBox mCheckBox;// 单选框
     private TextView mCBTextView;// 单选框文字
-    private ImageView mCloseIcon;
+//    private ImageView mCloseIcon;
     // ---------------------------------构造函数
 
     /**
@@ -83,13 +83,13 @@ public class EduDialog extends Dialog {
         mContext = context;
         View contentView = LayoutInflater.from(context).inflate(
                 R.layout.dialog_edu, null);
-        mCloseIcon = (ImageView) contentView.findViewById(R.id.dialog_close);
-        mCloseIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+//        mCloseIcon = (ImageView) contentView.findViewById(R.id.dialog_close);
+//        mCloseIcon.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dismiss();
+//            }
+//        });
         mTitleTextView = (TextView) contentView
                 .findViewById(R.id.title_textview);
         if (title != null && !title.isEmpty()) {
@@ -166,9 +166,9 @@ public class EduDialog extends Dialog {
         if (!((Activity) mContext).isFinishing()) {
             if(mPositiveBtn != null && mPositiveBtn.getVisibility() == View.VISIBLE &&
                     mNegativeBtn != null && mNegativeBtn.getVisibility() == View.VISIBLE){
-                mCloseIcon.setVisibility(View.GONE);
+//                mCloseIcon.setVisibility(View.GONE);
             }else{
-                mCloseIcon.setVisibility(View.VISIBLE);
+//                mCloseIcon.setVisibility(View.VISIBLE);
             }
             super.show();
         }
@@ -383,9 +383,10 @@ public class EduDialog extends Dialog {
         public void delete();
     }
 
-    public void setCloseIconVisibility(int visibility){
-        if(mCloseIcon != null){
-            mCloseIcon.setVisibility(visibility);
-        }
-    }
+//    public void setCloseIconVisibility(boolean visible){
+//        if(mCloseIcon != null){
+//           mCloseIcon.setVisibility( visible ? View.VISIBLE : View.GONE);
+//        }
+//    }
+
 }

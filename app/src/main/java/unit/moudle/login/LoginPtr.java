@@ -116,7 +116,6 @@ public class LoginPtr implements BaseMvpPtr {
     private void handleResult(UserInfo userInfo){
         //sp存储
         saveUserInfo(userInfo);
-        NetWorkInterceptor.setToken(userInfo.getToken());
         //获取uid
         getUid();
     }

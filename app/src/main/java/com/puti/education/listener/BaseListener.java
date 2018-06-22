@@ -38,12 +38,13 @@ public  class BaseListener {
     public void onstart(){}
 
     //非必须实现（根据业务需求）
-    public void onCompleted(){};
+    public void onCompleted(){}
 
     //必须实现
     public void requestFailed(boolean status,int code, String errorMessage){
 
-    };
+    }
+
 
 
 }

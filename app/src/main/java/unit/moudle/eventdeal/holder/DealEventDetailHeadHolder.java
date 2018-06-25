@@ -18,6 +18,7 @@ import unit.entity.EventMainTier;
 
 /**
  * Created by lei on 2018/6/22.
+ * 事件确认详情-头部基础信息
  */
 
 public class DealEventDetailHeadHolder extends BaseHolder<DealEventMain> {

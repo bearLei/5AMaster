@@ -1,43 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
+        android:id="@+id/notify"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textSize="@dimen/sp_14"
         android:textColor="@color/base_666666"
         android:text="通知"
-        android:gravity="center_vertical"
+        android:gravity="center_vertical|left"
         />
 
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flexDirection="row"
+        app:flexWrap="wrap"
+        android:layout_toRightOf="@+id/notify"
+        android:layout_marginLeft="@dimen/dp_10"
+        >
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/student_office"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:textSize="@dimen/sp_14"
         android:textColor="@color/base_333333"
         android:text="学生处"
-        android:gravity="center_vertical"
-        android:layout_marginLeft="@dimen/dp_10"
+        android:gravity="center_vertical|left"
+        app:layout_flexGrow="1"
+        android:drawableLeft="@drawable/puti_check_cdcdcd"
+        android:drawablePadding="@dimen/dp_3"
+        android:paddingBottom="@dimen/dp_5"
         />
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/parent"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:textSize="@dimen/sp_14"
         android:textColor="@color/base_333333"
         android:text="家长"
-        android:gravity="center_vertical"
-        android:layout_marginLeft="@dimen/dp_10"
+        android:gravity="center_vertical|left"
+        app:layout_flexGrow="1"
+        android:drawablePadding="@dimen/dp_3"
+        android:drawableLeft="@drawable/puti_check_cdcdcd"
+        android:paddingBottom="@dimen/dp_5"
         />
+
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/psy_teacher"
+        android:layout_width="110dp"
         android:layout_height="match_parent"
         android:textSize="@dimen/sp_14"
         android:textColor="@color/base_333333"
         android:text="心理老师"
-        android:gravity="center_vertical"
-        android:layout_marginLeft="@dimen/dp_10"
+        android:gravity="center_vertical|left"
+        app:layout_flexGrow="1"
+        android:drawablePadding="@dimen/dp_3"
+        android:drawableLeft="@drawable/puti_check_cdcdcd"
+        android:paddingBottom="@dimen/dp_5"
         />
-</LinearLayout>
+    </com.google.android.flexbox.FlexboxLayout>
+</RelativeLayout>

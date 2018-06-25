@@ -1,11 +1,13 @@
 package unit.moudle.eventdeal.ptr;
 
 import android.content.Context;
+import android.view.View;
 
 import com.puti.education.base.BaseMvpPtr;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.response.PageInfo;
 import com.puti.education.util.ToastUtil;
+import com.puti.education.widget.CommonDropView;
 
 import java.util.ArrayList;
 
@@ -102,6 +104,25 @@ public class EventListPtr implements BaseMvpPtr {
                 .append(" 件");
         mView.setDesc(builder.toString());
     }
-
+    //班级筛选列表
+    public void showClassDialog(View view){
+        ArrayList<String> list = new ArrayList<>();
+        int size = mClassList.size();
+        for (int i = 0; i < size; i++) {
+            list.add(mClassList.get(i).getName());
+        }
+        final CommonDropView dropView = new CommonDropView(mContext,view,list);
+        dropView.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                String uid = mClassList.get(position).getUID();
+                String name = mClassList.get(position).getName();
+                mView.setClassName(name);
+                queryEvent(uid);
+                dropView.dismiss();
+            }
+        });
+        dropView.showAsDropDown(view);
+    }
 
 }

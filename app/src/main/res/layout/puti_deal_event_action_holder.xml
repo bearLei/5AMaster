@@ -39,8 +39,8 @@
             android:textColor="@color/base_ff3e3e"
             android:text="驳回"
             android:gravity="center"
-            android:paddingLeft="@dimen/dp_30"
-            android:paddingRight="@dimen/dp_30"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
             android:background="@drawable/puti_shape_stock_ff3e3e"
             />
         <TextView
@@ -51,8 +51,8 @@
             android:textColor="@color/base_39BCA1"
             android:text="确认"
             android:gravity="center"
-            android:paddingLeft="@dimen/dp_30"
-            android:paddingRight="@dimen/dp_30"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
             android:layout_marginLeft="@dimen/dp_10"
             android:background="@drawable/puti_shape_stock_39bca1"
             />

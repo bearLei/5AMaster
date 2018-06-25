@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -49,18 +54,21 @@
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:layout_marginLeft="@dimen/dp_10"
-        android:background="@drawable/puti_shape_stock_39bca1"
+        android:background="@drawable/puti_shape_stock_666666"
         android:textColor="@color/base_39BCA1"
         android:textSize="@dimen/sp_14"
         />
+    </LinearLayout>
     <TextView
         android:id="@+id/refer_score"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="参考扣分区间"
         android:textColor="@color/base_666666"
         android:textSize="@dimen/sp_12"
-        android:gravity="bottom"
+        android:gravity="bottom|right"
         android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+
         />
 </LinearLayout>

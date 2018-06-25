@@ -1,19 +1,24 @@
 package unit.moudle.eventdeal;
 
-import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
+import com.puti.education.util.ViewUtils;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import unit.entity.Event;
+import unit.entity.Event2Involved;
+import unit.moudle.eventdeal.adapter.DealEventDetailAdapter;
 import unit.moudle.eventdeal.ptr.EventDetailPtr;
 import unit.moudle.eventdeal.view.EventDetailView;
 import unit.widget.HeadView;
+import unit.widget.SpaceItemDecoration;
 
 /**
  * Created by lei on 2018/6/22.
@@ -33,9 +38,11 @@ public class EventDetailActivity extends PutiActivity implements EventDetailView
     private Event eventDetail;
     private EventDetailPtr mPtr;
 
+    private DealEventDetailAdapter mAdapter;
+    private ArrayList<Event2Involved> mData;
     @Override
     public int getContentView() {
-        return R.layout.puti_event_happened_detail_activity;
+        return R.layout.puti_deal_event_detail_activity;
     }
 
     @Override
@@ -76,6 +83,7 @@ public class EventDetailActivity extends PutiActivity implements EventDetailView
             }
         });
         headview.setRightTV("批量确认");
+        headview.showRightTV(true);
         headview.setRightColor(R.color.base_39BCA1);
         headview.setRightCallBack(new HeadView.HeadViewRightCallBack() {
             @Override
@@ -83,7 +91,17 @@ public class EventDetailActivity extends PutiActivity implements EventDetailView
 
             }
         });
+        if (mData == null){
+            mData = new ArrayList<>();
+        }
 
+        if (mAdapter == null){
+            mAdapter = new DealEventDetailAdapter(this,mData);
+        }
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        recyclerview.setLayoutManager(manager);
+        recyclerview.addItemDecoration(new SpaceItemDecoration(ViewUtils.dip2px(this,10)));
+        recyclerview.setAdapter(mAdapter);
     }
 
     @Override
@@ -93,7 +111,14 @@ public class EventDetailActivity extends PutiActivity implements EventDetailView
 
     @Override
     public void setTitle(String title) {
-
+        if (eventDetail != null){
+            StringBuilder builder = new StringBuilder();
+            builder.append(eventDetail.getEventTypeName())
+                    .append("(")
+                    .append(title)
+                    .append("人)");
+            headview.setTitle(builder.toString());
+        }
     }
 
     @Override
@@ -103,8 +128,10 @@ public class EventDetailActivity extends PutiActivity implements EventDetailView
     }
 
     @Override
-    public void success() {
-
+    public void success(ArrayList<Event2Involved> data) {
+        mData.clear();
+        mData.addAll(data);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

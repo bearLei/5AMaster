@@ -7,10 +7,12 @@ import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.response.PageInfo;
 import com.puti.education.util.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import unit.api.PutiCommonModel;
 import unit.entity.DealEventMain;
+import unit.entity.Event2Involved;
 import unit.moudle.eventdeal.holder.DealEventDetailHeadHolder;
 import unit.moudle.eventdeal.view.EventDetailView;
 
@@ -19,11 +21,11 @@ import unit.moudle.eventdeal.view.EventDetailView;
  */
 
 public class EventDetailPtr implements BaseMvpPtr {
+
     private Context context;
     private EventDetailView mView;
-
-
     private DealEventDetailHeadHolder dealEventDetailHeadHolder;
+
     public EventDetailPtr(Context context, EventDetailView mView) {
         this.context = context;
         this.mView = mView;
@@ -67,6 +69,9 @@ public class EventDetailPtr implements BaseMvpPtr {
 
     private void handleResult(DealEventMain eventMain){
         dealEventDetailHeadHolder.setData(eventMain);
+        mView.setTitle(String.valueOf(eventMain.getEvent2Involveds().size()));
+        mView.success((ArrayList<Event2Involved>) eventMain.getEvent2Involveds());
     }
+
 
 }

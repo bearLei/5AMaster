@@ -1,5 +1,6 @@
 package unit.moudle.eventdeal;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
@@ -11,6 +12,8 @@ import com.puti.education.util.ViewUtils;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import unit.entity.Event;
 import unit.moudle.eventdeal.adapter.EventsSureAdapter;
 import unit.moudle.eventdeal.ptr.EventListPtr;
@@ -35,6 +38,7 @@ public class EventListActivity extends PutiActivity implements EventListView {
     private EventListPtr mPtr;
     private EventsSureAdapter mAdapter;
     private ArrayList<Event> mData;
+
     @Override
     public int getContentView() {
         return R.layout.puti_event_list;
@@ -42,8 +46,8 @@ public class EventListActivity extends PutiActivity implements EventListView {
 
     @Override
     public void BindPtr() {
-        if (mPtr == null){
-            mPtr = new EventListPtr(this,this);
+        if (mPtr == null) {
+            mPtr = new EventListPtr(this, this);
         }
     }
 
@@ -72,16 +76,16 @@ public class EventListActivity extends PutiActivity implements EventListView {
         });
         headview.setTitle("事件确认");
 
-        if (mData == null){
+        if (mData == null) {
             mData = new ArrayList<>();
         }
-        if (mAdapter == null){
-            mAdapter = new EventsSureAdapter(this,mData);
+        if (mAdapter == null) {
+            mAdapter = new EventsSureAdapter(this, mData);
         }
 
-        LinearLayoutManager manager  = new LinearLayoutManager(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerview.setLayoutManager(manager);
-        recyclerview.addItemDecoration(new SpaceItemDecoration(ViewUtils.dip2px(this,15)));
+        recyclerview.addItemDecoration(new SpaceItemDecoration(ViewUtils.dip2px(this, 15)));
         recyclerview.setAdapter(mAdapter);
     }
 
@@ -105,5 +109,11 @@ public class EventListActivity extends PutiActivity implements EventListView {
         mData.clear();
         mData.addAll(events);
         mAdapter.notifyDataSetChanged();
+    }
+
+
+    @OnClick(R.id.class_name)
+    public void onClick() {
+        mPtr.showClassDialog(className);
     }
 }

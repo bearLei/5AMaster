@@ -28,4 +28,11 @@ public interface PutiTeacherApi {
     @GET("Common/Teacher/Records")//教师档案：获取教师所有的任课/班主任记录
     Observable<BaseResponseInfo> getRecords(@Query("teacherUID")String teacherUID,
                                             @Query("termUID")String termUID);
+
+
+    @POST("Teacher/Events/Deal")//学生事件处理
+    Observable<BaseResponseInfo> eventDeal(@Body RequestBody route);
+
+    @POST("Teacher/Events/Deals")//学生事件批量处理
+    Observable<BaseResponseInfo> eventDeals(@Body RequestBody route);
 }

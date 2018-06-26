@@ -13,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unit.entity.Event2Involved;
+import unit.moudle.eventdeal.callback.EventDealCallBack;
 
 /**
  * Created by lei on 2018/6/25.
@@ -30,8 +31,14 @@ public class DealEventDetailActionHolder extends BaseHolder<Event2Involved> {
     @BindView(R.id.sure)
     TextView sure;
 
+    private EventDealCallBack mEventDealCallBack;
     public DealEventDetailActionHolder(Context context) {
         super(context);
+    }
+
+    public DealEventDetailActionHolder(Context context, EventDealCallBack mEventDealCallBack) {
+        super(context);
+        this.mEventDealCallBack = mEventDealCallBack;
     }
 
     @NonNull
@@ -52,8 +59,14 @@ public class DealEventDetailActionHolder extends BaseHolder<Event2Involved> {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.reject:
+                if (mEventDealCallBack != null){
+                    mEventDealCallBack.reject();
+                }
                 break;
             case R.id.sure:
+                if (mEventDealCallBack != null){
+                    mEventDealCallBack.sure();
+                }
                 break;
         }
     }

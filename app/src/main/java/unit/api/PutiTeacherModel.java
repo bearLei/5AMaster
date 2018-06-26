@@ -4,6 +4,7 @@ import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.RetrofitUtil;
 
 import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import unit.base.BaseResponseInfo;
@@ -107,4 +108,39 @@ public class PutiTeacherModel extends PutiBaseModel{
                 });
     }
 
+    /**
+     * 学生事件处理
+     * @param str
+     * @param listener
+     */
+    public void dealEvent(String str,final BaseListener listener){
+        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
+        mTeacherApi.eventDeal(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
+    /**
+     * 批量处理事件
+     * @param str
+     * @param listener
+     */
+    public void dealsEvent(String str,final BaseListener listener){
+        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
+        mTeacherApi.eventDeals(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
 }

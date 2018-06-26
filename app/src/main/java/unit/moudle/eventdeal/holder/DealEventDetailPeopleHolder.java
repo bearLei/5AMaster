@@ -13,13 +13,14 @@ import com.puti.education.base.holder.BaseHolder;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import unit.entity.Event2Involved;
+import unit.moudle.eventdeal.callback.EventDealCallBack;
 
 /**
  * Created by lei on 2018/6/22.
  * 事件确认详情-涉事学生holder
  */
 
-public class DealEventDetailPeopleHolder extends BaseHolder<Event2Involved> {
+public class DealEventDetailPeopleHolder extends BaseHolder<Event2Involved> implements EventDealCallBack {
 
     @BindView(R.id.action_layout)
     LinearLayout actionLayout;
@@ -50,7 +51,7 @@ public class DealEventDetailPeopleHolder extends BaseHolder<Event2Involved> {
     @Override
     protected void updateUI(Context context, Event2Involved data) {
         if (mDealEventDetailActionHolder == null){
-            mDealEventDetailActionHolder = new DealEventDetailActionHolder(context);
+            mDealEventDetailActionHolder = new DealEventDetailActionHolder(context,this);
         }
         if (mDealEventDetailDeductHolder == null){
             mDealEventDetailDeductHolder = new DealEventDetailDeductHolder(context);
@@ -82,6 +83,63 @@ public class DealEventDetailPeopleHolder extends BaseHolder<Event2Involved> {
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(params);
         return view;
+    }
+
+    @Override
+    public void reject() {
+
+    }
+
+    @Override
+    public void sure() {
+
+    }
+
+    /**'
+     *
+     * {
+     "Event2InvolvedUID": "string",
+     "Confirm": true,
+     "Reason": "string",
+     "Punishment": "string",
+     "NeedValid": true,
+     "NeedParentNotice": true,
+     "NeedPsycholog": true,
+     "PunishmentInfo": "string",
+     "Score": 0
+     }
+     */
+    private String buildDealJson(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        sb.append("\"Event2InvolvedUID\":\"").append("").append("\"");
+        sb.append(",\"Confirm\":\"").append("").append("\"");
+        sb.append("\"Reason\":\"").append("").append("\"");
+        sb.append(",\"Punishment\":\"").append("").append("\"");
+        sb.append("\"NeedValid\":\"").append("").append("\"");
+        sb.append(",\"NeedParentNotice\":\"").append("").append("\"");
+        sb.append(",\"NeedPsycholog\":\"").append("").append("\"");
+        sb.append("\"PunishmentInfo\":\"").append("").append("\"");
+        sb.append(",\"Score\":\"").append("").append("\"");
+        sb.append("}");
+        return sb.toString();
+    }
+
+    //批量处理事件
+    private String buildDealsJson(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        sb.append("\"EventUID\":\"").append("").append("\"");
+        sb.append(",\"Confirm\":\"").append("").append("\"");
+        sb.append("\"Reason\":\"").append("").append("\"");
+        sb.append(",\"Punishment\":\"").append("").append("\"");
+        sb.append("\"NeedValid\":\"").append("").append("\"");
+        sb.append(",\"NeedParentNotice\":\"").append("").append("\"");
+        sb.append(",\"NeedPsycholog\":\"").append("").append("\"");
+        sb.append("\"PunishmentInfo\":\"").append("").append("\"");
+        sb.append(",\"Score\":\"").append("").append("\"");
+        sb.append("}");
+        return sb.toString();
     }
 
 }

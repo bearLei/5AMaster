@@ -368,4 +368,21 @@ public class PutiCommonModel extends PutiBaseModel{
                 });
     }
 
+    /**
+     * 查询学生涉事详情
+     * @param event2InvolvedUID 学生涉事Id
+     * @param listener
+     */
+    public void queryEvent2InvolvedUID(String event2InvolvedUID,final BaseListener listener){
+        mCommonApi.getInvolvedDetail(event2InvolvedUID)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
 }

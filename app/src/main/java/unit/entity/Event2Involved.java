@@ -15,7 +15,7 @@ public class Event2Involved {
     private String HeadName;
     private String StatusName;
     private String Reason;
-    private int    Score;
+    private String    Score;
     private String InvolStudentDealUID;
 
     public Event2Involved() {
@@ -101,11 +101,11 @@ public class Event2Involved {
         Reason = reason;
     }
 
-    public int getScore() {
+    public String getScore() {
         return Score;
     }
 
-    public void setScore(int score) {
+    public void setScore(String score) {
         Score = score;
     }
 

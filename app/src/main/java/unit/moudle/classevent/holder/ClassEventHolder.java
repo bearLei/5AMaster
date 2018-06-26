@@ -1,7 +1,9 @@
 package unit.moudle.classevent.holder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.ActivityChooserView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import com.puti.education.base.holder.BaseHolder;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import unit.entity.Event;
+import unit.moudle.classevent.PutiClassEventDetailActivity;
 
 /**
  * Created by lei on 2018/6/26.
@@ -48,7 +51,7 @@ public class ClassEventHolder extends BaseHolder<Event> {
     }
 
     @Override
-    protected void updateUI(Context context, Event data) {
+    protected void updateUI(Context context, final Event data) {
         if (data == null){
             return;
         }
@@ -58,5 +61,14 @@ public class ClassEventHolder extends BaseHolder<Event> {
         address.setText("地点：   "+data.getAddress());
         deduct.setText("扣分：   "+data.getScores());
         desc.setText("描述：   "+data.getDescription());
+
+        mRootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, PutiClassEventDetailActivity.class);
+                intent.putExtra(PutiClassEventDetailActivity.Parse_Intent,data);
+                mContext.startActivity(intent);
+            }
+        });
     }
 }

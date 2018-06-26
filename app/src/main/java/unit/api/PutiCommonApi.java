@@ -79,4 +79,7 @@ public interface PutiCommonApi {
 
     @GET("Common/Events/EventDetail")//获取学生事件详情
     Observable<BaseResponseInfo> getEventDetail(@Query("eventUID")String eventUID);
+
+    @GET("Common/Events/InvolvedDetail")//获取学生涉事详情
+    Observable<BaseResponseInfo> getInvolvedDetail(@Query("event2InvolvedUID")String event2InvolvedUID);
 }

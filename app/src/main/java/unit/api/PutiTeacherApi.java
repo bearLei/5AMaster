@@ -35,4 +35,6 @@ public interface PutiTeacherApi {
 
     @POST("Teacher/Events/Deals")//学生事件批量处理
     Observable<BaseResponseInfo> eventDeals(@Body RequestBody route);
+
+
 }

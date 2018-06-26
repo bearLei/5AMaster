@@ -14,6 +14,7 @@ import com.puti.education.util.ToastUtil;
 import com.puti.education.util.ViewUtils;
 
 import unit.debug.DebugActivity;
+import unit.moudle.classevent.PutiClassEventActivity;
 import unit.moudle.eventdeal.EventListActivity;
 import unit.moudle.eventregist.PutiChooseEventActivity;
 import unit.moudle.record.PutiChooseStuRecordAcitivity;
@@ -74,7 +75,7 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
-                        ToastUtil.show("班级事件");
+                      jump(PutiClassEventActivity.class);
                     }
                 }));
         //家长举报

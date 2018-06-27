@@ -122,9 +122,19 @@ public class PutiClassEventDetailActivity extends PutiActivity implements ClassE
 
     @Override
     public void success(ArrayList<DealEntity> data) {
-        mData.clear();
         mData.addAll(data);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void addData(DealEntity data) {
+        mData.add(data);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void clearData() {
+        mData.clear();
     }
 
     @Override

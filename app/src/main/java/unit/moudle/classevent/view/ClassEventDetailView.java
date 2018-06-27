@@ -15,5 +15,7 @@ public interface ClassEventDetailView {
     void setTitle(String title);
     void getHeadHolderView(View view);
     void success(ArrayList<DealEntity> data);
+    void addData(DealEntity data);
+    void clearData();
     String getEventId();
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/item"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|left"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/base_333333"
+        android:text="记大过"
+        android:drawableLeft="@drawable/puti_check_39bca1"
+        android:drawablePadding="@dimen/dp_3"
+        android:paddingBottom="@dimen/dp_5"
+        />
+
+</LinearLayout>

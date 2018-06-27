@@ -2,14 +2,18 @@ package unit.moudle.classevent.holder;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.flexbox.FlexboxLayout;
 import com.puti.education.R;
 import com.puti.education.base.InflateService;
 import com.puti.education.base.holder.BaseHolder;
+import com.puti.education.util.ViewUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +52,41 @@ public class ClassEventDetailHolder extends BaseHolder<DealEntity> {
 
     @Override
     protected void updateUI(Context context, DealEntity data) {
+        if (data == null){
+            return;
+        }
+        name.setText(TextUtils.isEmpty(data.getStudentName()) ? "" : data.getStudentName());
+        className.setText(TextUtils.isEmpty(data.getClassName()) ? "" : data.getClassName());
+        decuctScore.setText(String.valueOf(data.getScore()));
+        notifyLayout.removeAllViews();
+        punishLayout.removeAllViews();
+        if (data.isNeedValid()){
+            notifyLayout.addView(buildItem("学生处"));
+        }
+        if (data.isNeedParentNotice()){
+            notifyLayout.addView(buildItem("家长"));
+        }
+        if (data.isNeedPsycholog()){
+            notifyLayout.addView(buildItem("心理老师"));
+        }
+        if (!TextUtils.isEmpty(data.getPunishment())){
+            punishLayout.addView(buildItem(data.getPunishment()));
+        }
 
+    }
+
+
+    private View buildItem(String title){
+        LinearLayout item = (LinearLayout) InflateService.g().inflate(R.layout.puti_notify_item);
+        TextView tv = (TextView) item.findViewById(R.id.item);
+        tv.setText(title);
+        FlexboxLayout.LayoutParams params = new FlexboxLayout.LayoutParams(
+                ViewUtils.dip2px(mContext,100),
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.flexShrink = 1.0f;
+        params.flexGrow = 1.0f;
+        item.setSelected(true);
+        item.setLayoutParams(params);
+        return item;
     }
 }

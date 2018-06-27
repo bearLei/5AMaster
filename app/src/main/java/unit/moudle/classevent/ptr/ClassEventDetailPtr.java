@@ -30,8 +30,6 @@ public class ClassEventDetailPtr implements BaseMvpPtr {
     private ClassEventDetailView mView;
     private DealEventDetailHeadHolder dealEventDetailHeadHolder;
 
-    private ArrayList<DealEntity> mData;
-
     public ClassEventDetailPtr(Context context, ClassEventDetailView mView) {
         this.context = context;
         this.mView = mView;
@@ -76,17 +74,14 @@ public class ClassEventDetailPtr implements BaseMvpPtr {
     private void handleResult(DealEventMain eventMain){
         dealEventDetailHeadHolder.setData(eventMain);
         mView.setTitle(String.valueOf(eventMain.getEvent2Involveds().size()));
-        if (mData == null){
-            mData = new ArrayList<>();
-        }
-        mData.clear();
+
+        mView.clearData();
         List<Event2Involved> list = eventMain.getEvent2Involveds();
         int size = list.size();
         for (int i = 0; i < size; i++) {
             String event2InvolvedUID = list.get(i).getEvent2InvolvedUID();
             queryEvent2InvolvedUID(event2InvolvedUID);
         }
-        mView.success(mData);
     }
 
 
@@ -98,7 +93,10 @@ public class ClassEventDetailPtr implements BaseMvpPtr {
                 if (studentEvent != null){
                     List<DealEntity> deals = studentEvent.getDeals();
                     if (deals != null && deals.size() > 0){
-                        mData.add(deals.get(0));
+                        DealEntity entity = deals.get(0);
+                        entity.setClassName(studentEvent.getInfo().getClassName());
+                        entity.setStudentName(studentEvent.getInfo().getStudentName());
+                        mView.addData(entity);
                     }
                 }
             }

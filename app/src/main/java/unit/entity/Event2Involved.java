@@ -18,6 +18,14 @@ public class Event2Involved {
     private String    Score;
     private String InvolStudentDealUID;
 
+    private int defaultUpScore;
+    private int defaultDownScore;
+    private int sign;
+    private boolean defaultNeedVaied;
+    private boolean defaultNeedParent;
+    private boolean defaultPsy;
+
+
     public Event2Involved() {
     }
 
@@ -115,5 +123,53 @@ public class Event2Involved {
 
     public void setInvolStudentDealUID(String involStudentDealUID) {
         InvolStudentDealUID = involStudentDealUID;
+    }
+
+    public int getDefaultUpScore() {
+        return defaultUpScore;
+    }
+
+    public void setDefaultUpScore(int defaultUpScore) {
+        this.defaultUpScore = defaultUpScore;
+    }
+
+    public int getDefaultDownScore() {
+        return defaultDownScore;
+    }
+
+    public void setDefaultDownScore(int defaultDownScore) {
+        this.defaultDownScore = defaultDownScore;
+    }
+
+    public int getSign() {
+        return sign;
+    }
+
+    public void setSign(int sign) {
+        this.sign = sign;
+    }
+
+    public boolean isDefaultNeedVaied() {
+        return defaultNeedVaied;
+    }
+
+    public void setDefaultNeedVaied(boolean defaultNeedVaied) {
+        this.defaultNeedVaied = defaultNeedVaied;
+    }
+
+    public boolean isDefaultNeedParent() {
+        return defaultNeedParent;
+    }
+
+    public void setDefaultNeedParent(boolean defaultNeedParent) {
+        this.defaultNeedParent = defaultNeedParent;
+    }
+
+    public boolean isDefaultPsy() {
+        return defaultPsy;
+    }
+
+    public void setDefaultPsy(boolean defaultPsy) {
+        this.defaultPsy = defaultPsy;
     }
 }

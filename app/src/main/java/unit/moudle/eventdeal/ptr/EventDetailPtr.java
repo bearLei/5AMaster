@@ -70,6 +70,17 @@ public class EventDetailPtr implements BaseMvpPtr {
     private void handleResult(DealEventMain eventMain){
         dealEventDetailHeadHolder.setData(eventMain);
         mView.setTitle(String.valueOf(eventMain.getEvent2Involveds().size()));
+        List<Event2Involved> event2Involveds = eventMain.getEvent2Involveds();
+        int size = event2Involveds.size();
+        for (int i = 0; i < size; i++) {
+            Event2Involved event2Involved = event2Involveds.get(i);
+            event2Involved.setDefaultDownScore(eventMain.getDefaultDownScore());
+            event2Involved.setDefaultUpScore(eventMain.getDefaultUpScore());
+            event2Involved.setSign(eventMain.getDefaultSign());
+            event2Involved.setDefaultNeedParent(eventMain.isDefaultNeedParentNotice());
+            event2Involved.setDefaultNeedVaied(eventMain.isDefaultNeedValid());
+            event2Involved.setDefaultPsy(eventMain.isDefaultNeedPsycholog());
+        }
         mView.success((ArrayList<Event2Involved>) eventMain.getEvent2Involveds());
     }
 

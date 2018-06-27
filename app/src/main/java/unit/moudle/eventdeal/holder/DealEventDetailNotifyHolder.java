@@ -47,7 +47,12 @@ public class DealEventDetailNotifyHolder extends BaseHolder<Event2Involved> {
 
     @Override
     protected void updateUI(Context context, Event2Involved data) {
-
+        if (data == null){
+            return;
+        }
+        studentOffice.setSelected(data.isDefaultNeedVaied() ? true : false);
+        parent.setSelected(data.isDefaultNeedParent() ? true : false);
+        psyTeacher.setSelected(data.isDefaultPsy() ? true : false);
     }
 
     @OnClick({R.id.student_office, R.id.parent, R.id.psy_teacher})
@@ -77,5 +82,16 @@ public class DealEventDetailNotifyHolder extends BaseHolder<Event2Involved> {
         }
         drawable.setBounds(0,0,drawable.getMinimumWidth(),drawable.getMinimumHeight());
         view.setCompoundDrawables(drawable,null,null,null);
+    }
+
+    public boolean needValid(){
+        return mSelectedStudentOffice;
+    }
+
+    public boolean needParentNotice(){
+        return mSelectedParent;
+    }
+    public boolean needPsy(){
+        return mSelectedPsy;
     }
 }

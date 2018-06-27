@@ -14,7 +14,7 @@ public class DealEventMain {
     private String Description;
     private String TypeUID;
     private String Categories;
-    private String DefaultDownScore;
+    private int DefaultDownScore;
     private boolean DefaultNeedParentNotice;
     private boolean DefaultNeedPsycholog;
     private boolean DefaultNeedValid;
@@ -87,11 +87,11 @@ public class DealEventMain {
         Categories = categories;
     }
 
-    public String getDefaultDownScore() {
+    public int getDefaultDownScore() {
         return DefaultDownScore;
     }
 
-    public void setDefaultDownScore(String defaultDownScore) {
+    public void setDefaultDownScore(int defaultDownScore) {
         DefaultDownScore = defaultDownScore;
     }
 

@@ -10,6 +10,11 @@ import com.puti.education.R;
 import com.puti.education.base.InflateService;
 import com.puti.education.base.holder.BaseHolder;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -44,6 +49,8 @@ public class DealEventDetailPunishHolder extends BaseHolder<Event2Involved> {
     private boolean mSelectedDiscourag;
     private boolean mSelectedDropOutSchool;
 
+    private HashMap<TextView,Boolean> mViewSelectedMap;
+
     public DealEventDetailPunishHolder(Context context) {
         super(context);
     }
@@ -58,39 +65,44 @@ public class DealEventDetailPunishHolder extends BaseHolder<Event2Involved> {
 
     @Override
     protected void updateUI(Context context, Event2Involved data) {
+        mSelectedWarning = true;
+        oprateDrawble(warning,mSelectedWarning);
 
+        if (mViewSelectedMap == null){
+            mViewSelectedMap = new LinkedHashMap<>();
+        }
+        mViewSelectedMap.put(warning,true);
+        mViewSelectedMap.put(seriousWarnig,false);
+        mViewSelectedMap.put(gig,false);
+        mViewSelectedMap.put(bigGig,false);
+        mViewSelectedMap.put(detention,false);
+        mViewSelectedMap.put(discourag,false);
+        mViewSelectedMap.put(dropOutSchool,false);
     }
 
     @OnClick({R.id.warning, R.id.serious_warnig, R.id.gig, R.id.big_gig, R.id.detention, R.id.discourag, R.id.drop_out_school})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.warning:
-                mSelectedWarning = !mSelectedWarning;
-                oprateDrawble(warning,mSelectedWarning);
+                oprateViewStatus(warning);
                 break;
             case R.id.serious_warnig:
-                mSelectedSeriousWarnig = !mSelectedSeriousWarnig;
-                oprateDrawble(seriousWarnig,mSelectedSeriousWarnig);
+                oprateViewStatus(seriousWarnig);
                 break;
             case R.id.gig:
-                mSelectedGig = !mSelectedGig;
-                oprateDrawble(gig,mSelectedGig);
+                oprateViewStatus(gig);
                 break;
             case R.id.big_gig:
-                mSelectedBigGig = !mSelectedBigGig;
-                oprateDrawble(bigGig,mSelectedBigGig);
+                oprateViewStatus(bigGig);
                 break;
             case R.id.detention:
-                mSelectedDetention = !mSelectedDetention;
-                oprateDrawble(detention,mSelectedDetention);
+                oprateViewStatus(detention);
                 break;
             case R.id.discourag:
-                mSelectedDiscourag = !mSelectedDiscourag;
-                oprateDrawble(discourag,mSelectedDiscourag);
+                oprateViewStatus(discourag);
                 break;
             case R.id.drop_out_school:
-                mSelectedDropOutSchool = !mSelectedDropOutSchool;
-                oprateDrawble(dropOutSchool,mSelectedDropOutSchool);
+                oprateViewStatus(dropOutSchool);
                 break;
         }
     }
@@ -106,4 +118,31 @@ public class DealEventDetailPunishHolder extends BaseHolder<Event2Involved> {
         view.setCompoundDrawables(drawable,null,null,null);
     }
 
+    private void oprateViewStatus(View view){
+        Iterator<Map.Entry<TextView, Boolean>> iterator = mViewSelectedMap.entrySet().iterator();
+        while (iterator.hasNext()){
+            Map.Entry<TextView, Boolean> entry = iterator.next();
+            TextView item = entry.getKey();
+            if (view == item){
+                mViewSelectedMap.put(item,true);
+                oprateDrawble(item,true);
+            }else {
+                mViewSelectedMap.put(item,false);
+                oprateDrawble(item,false);
+            }
+        }
+    }
+
+    public String getPunish(){
+        Iterator<Map.Entry<TextView, Boolean>> iterator = mViewSelectedMap.entrySet().iterator();
+        while (iterator.hasNext()){
+            Map.Entry<TextView, Boolean> entry = iterator.next();
+            Boolean value = entry.getValue();
+            View view = entry.getKey();
+            if (value == true && view instanceof TextView){
+                return ((TextView) view).getText().toString();
+            }
+        }
+        return "";
+    }
 }

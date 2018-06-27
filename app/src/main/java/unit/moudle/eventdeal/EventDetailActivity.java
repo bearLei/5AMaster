@@ -87,7 +87,9 @@ public class EventDetailActivity extends PutiActivity implements EventDetailView
         headview.setRightCallBack(new HeadView.HeadViewRightCallBack() {
             @Override
             public void click() {
-
+                DealsDialog dialog = new DealsDialog(EventDetailActivity.this);
+                dialog.setData(mData.get(0));
+                dialog.show();
             }
         });
         if (mData == null){

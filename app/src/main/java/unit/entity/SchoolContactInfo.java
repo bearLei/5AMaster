@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class SchoolContactInfo {
     private String letter;
-    private ArrayList<ContactInfo> contactInfos;
+    private ArrayList<TeacherContactInfo> contactInfos;
 
     public SchoolContactInfo() {
     }
@@ -23,11 +23,11 @@ public class SchoolContactInfo {
         this.letter = letter;
     }
 
-    public ArrayList<ContactInfo> getContactInfos() {
+    public ArrayList<TeacherContactInfo> getContactInfos() {
         return contactInfos;
     }
 
-    public void setContactInfos(ArrayList<ContactInfo> contactInfos) {
+    public void setContactInfos(ArrayList<TeacherContactInfo> contactInfos) {
         this.contactInfos = contactInfos;
     }
 }

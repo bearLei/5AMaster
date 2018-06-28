@@ -4,14 +4,17 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.puti.education.R;
 import com.puti.education.base.InflateService;
+import com.puti.education.util.ViewUtils;
 
 import java.util.ArrayList;
 
 import unit.entity.ContactInfo;
+import unit.entity.TeacherContactInfo;
 
 /**
  * Created by lei on 2018/6/19.
@@ -20,9 +23,9 @@ import unit.entity.ContactInfo;
 public class SchoolContactHolderAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<ContactInfo> mData;
+    private ArrayList<TeacherContactInfo> mData;
 
-    public SchoolContactHolderAdapter(Context context, ArrayList<ContactInfo> mData) {
+    public SchoolContactHolderAdapter(Context context, ArrayList<TeacherContactInfo> mData) {
         this.context = context;
         this.mData = mData;
     }
@@ -49,6 +52,8 @@ public class SchoolContactHolderAdapter extends BaseAdapter {
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = InflateService.g().inflate(R.layout.puti_school_contact_holder_adapter_item);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewUtils.dip2px(context,50));
+            convertView.setLayoutParams(params);
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
             viewHolder.job = (TextView) convertView.findViewById(R.id.job);
             viewHolder.telePhone = (TextView) convertView.findViewById(R.id.telephone);
@@ -58,10 +63,10 @@ public class SchoolContactHolderAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        ContactInfo info = mData.get(position);
-        viewHolder.name.setText(info.getName());
-        viewHolder.job.setText(info.getMajor());
-        viewHolder.telePhone.setText(info.getTelephone());
+        TeacherContactInfo info = mData.get(position);
+        viewHolder.name.setText(info.getRealName());
+        viewHolder.job.setText(info.getRoles());
+//        viewHolder.telePhone.setText(info.getTelephone());
         viewHolder.mobile.setText(info.getMobile());
         return convertView;
     }

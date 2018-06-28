@@ -82,4 +82,16 @@ public interface PutiCommonApi {
 
     @GET("Common/Events/InvolvedDetail")//获取学生涉事详情
     Observable<BaseResponseInfo> getInvolvedDetail(@Query("event2InvolvedUID")String event2InvolvedUID);
+
+    @GET("Common/TeacherBook")//学校教师通讯录
+    Observable<BaseResponseInfo> getTeacherBook(@Query("pageIndex")int pageIndex,
+                                                @Query("pageSize") int pageSize,
+                                                @Query("teacherName")String teacherName);
+
+
+    @GET("Common/ParentBook")//学校教师通讯录
+    Observable<BaseResponseInfo> getParentBook( @Query("pageIndex")int pageIndex,
+                                                @Query("pageSize") int pageSize,
+                                                @Query("studentName")String studentName,
+                                                @Query("classUID")String classUID);
 }

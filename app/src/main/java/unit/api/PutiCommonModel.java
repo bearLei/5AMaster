@@ -385,4 +385,39 @@ public class PutiCommonModel extends PutiBaseModel{
                 });
     }
 
+
+    /**
+     * 获取教师通讯录
+     * @param listener
+     */
+    public void getTeacherBook(final BaseListener listener){
+        mCommonApi.getTeacherBook(-1,Integer.MAX_VALUE,"")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
+
+    /**
+     * 获取家长通讯录
+     * @param classId 班级id
+     * @param listener
+     */
+    public void getParentBook(String classId,final BaseListener listener){
+        mCommonApi.getParentBook(-1,Integer.MAX_VALUE,"",classId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
 }

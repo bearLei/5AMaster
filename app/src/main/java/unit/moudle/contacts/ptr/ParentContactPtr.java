@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import unit.api.PutiCommonModel;
 import unit.api.PutiTeacherModel;
 import unit.entity.ClassSimple;
 import unit.entity.ContactInfo;
@@ -32,7 +33,7 @@ public class ParentContactPtr implements BaseMvpPtr {
     private Context mContext;
     private ParentContactView mView;
 
-    private Map<String,ArrayList<ParContactInfo>> contactMap;
+    private Map<String,ArrayList<ParContactInfo.ParContactDetailInfo>> contactMap;
     private ArrayList<ParShowContactInfo> contactList;
     private CharacterParser characterParser;
     private ArrayList<ClassSimple> mClassList;
@@ -67,6 +68,7 @@ public class ParentContactPtr implements BaseMvpPtr {
                 super.responseListResult(infoObj, listObj, pageInfo, code, status);
                 mClassList = (ArrayList<ClassSimple>) listObj;
                 //默认拉取第一个班级的家长
+                queryData(mClassList.get(0).getUID());
                 mView.setClassName(mClassList.get(0).getName());
             }
 
@@ -77,29 +79,37 @@ public class ParentContactPtr implements BaseMvpPtr {
             }
         });
     }
-    private void queryData(){
-
+    private void queryData(String classId){
+        PutiCommonModel.getInstance().getParentBook(classId,new BaseListener(ParContactInfo.class){
+            @Override
+            public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
+                ParContactInfo info = (ParContactInfo) infoObj;
+                if (info != null) {
+                    handleResult((ArrayList<ParContactInfo.ParContactDetailInfo>) info.getParents());
+                }
+            }
+        });
     }
 
-    public void handleResult(ArrayList<ParContactInfo> contactInfos) {
+    public void handleResult(ArrayList<ParContactInfo.ParContactDetailInfo> contactInfos) {
 
         final int size = contactInfos.size();
         contactMap.clear();
         contactList.clear();
         for (int i = 0; i < size; i++) {
-            ParContactInfo info = contactInfos.get(i);
-            String s = getSelling(info.getName());
+            ParContactInfo.ParContactDetailInfo info = contactInfos.get(i);
+            String s = getSelling(info.getStudentName());
             if (contactMap.containsKey(s)) {
                 contactMap.get(s).add(info);
             } else {
-                ArrayList<ParContactInfo> list = new ArrayList<ParContactInfo>();
+                ArrayList<ParContactInfo.ParContactDetailInfo> list = new ArrayList<>();
                 list.add(info);
                 contactMap.put(s, list);
             }
         }
-        Iterator<Map.Entry<String, ArrayList<ParContactInfo>>> iterator = contactMap.entrySet().iterator();
+        Iterator<Map.Entry<String, ArrayList<ParContactInfo.ParContactDetailInfo>>> iterator = contactMap.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry<String, ArrayList<ParContactInfo>> entry = iterator.next();
+            Map.Entry<String, ArrayList<ParContactInfo.ParContactDetailInfo>> entry = iterator.next();
             ParShowContactInfo parShowContactInfo = new ParShowContactInfo();
             parShowContactInfo.setLetter(entry.getKey());
             parShowContactInfo.setContactInfos(entry.getValue());
@@ -133,7 +143,7 @@ public class ParentContactPtr implements BaseMvpPtr {
                 String uid = mClassList.get(position).getUID();
                 String name = mClassList.get(position).getName();
                 mView.setClassName(name);
-
+                queryData(uid);
                 dropView.dismiss();
             }
         });

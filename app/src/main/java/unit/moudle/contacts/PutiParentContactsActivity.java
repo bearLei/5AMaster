@@ -124,6 +124,7 @@ public class PutiParentContactsActivity extends PutiActivity implements ParentCo
     public void success(ArrayList<ParShowContactInfo> data) {
         mData.clear();
         mData.addAll(data);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

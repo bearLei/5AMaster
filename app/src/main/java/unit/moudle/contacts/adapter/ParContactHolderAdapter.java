@@ -4,10 +4,12 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.puti.education.R;
 import com.puti.education.base.InflateService;
+import com.puti.education.util.ViewUtils;
 
 import java.util.ArrayList;
 
@@ -21,9 +23,9 @@ import unit.entity.ParContactInfo;
 public class ParContactHolderAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<ParContactInfo> mData;
+    private ArrayList<ParContactInfo.ParContactDetailInfo> mData;
 
-    public ParContactHolderAdapter(Context context, ArrayList<ParContactInfo> mData) {
+    public ParContactHolderAdapter(Context context, ArrayList<ParContactInfo.ParContactDetailInfo> mData) {
         this.context = context;
         this.mData = mData;
     }
@@ -50,6 +52,10 @@ public class ParContactHolderAdapter extends BaseAdapter {
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = InflateService.g().inflate(R.layout.puti_par_contact_holder_adapter_item);
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewUtils.dip2px(context,100));
+            convertView.setLayoutParams(params);
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
             viewHolder.guardian = (TextView) convertView.findViewById(R.id.guardian);
             viewHolder.guandianMoble = (TextView) convertView.findViewById(R.id.guardian_mobile);
@@ -62,15 +68,15 @@ public class ParContactHolderAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        ParContactInfo info = mData.get(position);
+        ParContactInfo.ParContactDetailInfo info = mData.get(position);
 
-        viewHolder.name.setText(info.getName());
+        viewHolder.name.setText(info.getStudentName());
         viewHolder.guardian.setText(info.getGuardian());
-        viewHolder.guandianMoble.setText(info.getGuardianMobile());
-        viewHolder.fName.setText(info.getfName());
-        viewHolder.fMobile.setText(info.getfMobile());
-        viewHolder.mName.setText(info.getmName());
-        viewHolder.mMobile.setText(info.getmMobile());
+        viewHolder.guandianMoble.setText(info.getGuardianPhone());
+        viewHolder.fName.setText(info.getFather());
+        viewHolder.fMobile.setText(info.getFatherPhone());
+        viewHolder.mName.setText(info.getMother());
+        viewHolder.mMobile.setText(info.getMotherPhone());
         return convertView;
     }
 

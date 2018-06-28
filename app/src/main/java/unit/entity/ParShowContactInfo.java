@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class ParShowContactInfo {
     private String letter;
-    private ArrayList<ParContactInfo> contactInfos;
+    private ArrayList<ParContactInfo.ParContactDetailInfo> contactInfos;
 
     public ParShowContactInfo() {
     }
@@ -22,11 +22,11 @@ public class ParShowContactInfo {
         this.letter = letter;
     }
 
-    public ArrayList<ParContactInfo> getContactInfos() {
+    public ArrayList<ParContactInfo.ParContactDetailInfo> getContactInfos() {
         return contactInfos;
     }
 
-    public void setContactInfos(ArrayList<ParContactInfo> contactInfos) {
+    public void setContactInfos(ArrayList<ParContactInfo.ParContactDetailInfo> contactInfos) {
         this.contactInfos = contactInfos;
     }
 }

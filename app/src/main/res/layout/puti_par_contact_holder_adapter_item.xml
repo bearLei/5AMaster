@@ -5,12 +5,14 @@
     android:layout_height="wrap_content">
 
     <TextView
-    android:id="@+id/name"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:textColor="@color/base_666666"
-    android:textSize="@dimen/sp_12"
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/base_666666"
+        android:textSize="@dimen/sp_12"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_6"
     />
     <LinearLayout
         android:layout_width="0dp"
@@ -23,6 +25,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left|center_vertical"
+            android:paddingTop="@dimen/dp_6"
+            android:paddingBottom="@dimen/dp_6"
             >
             <TextView
                 android:layout_width="0dp"
@@ -31,6 +35,7 @@
                 android:textColor="@color/base_666666"
                 android:textSize="@dimen/sp_12"
                 android:text="监护人"
+
                 />
             <TextView
                 android:id="@+id/guardian"
@@ -54,6 +59,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left|center_vertical"
+            android:paddingTop="@dimen/dp_6"
+            android:paddingBottom="@dimen/dp_6"
             >
             <TextView
                 android:layout_width="0dp"
@@ -94,6 +101,8 @@
                 android:textColor="@color/base_666666"
                 android:textSize="@dimen/sp_12"
                 android:text="母亲"
+                android:paddingTop="@dimen/dp_6"
+                android:paddingBottom="@dimen/dp_6"
                 />
             <TextView
                 android:id="@+id/mname"

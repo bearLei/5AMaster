@@ -5,6 +5,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
 import com.puti.education.R;
@@ -25,6 +27,7 @@ import unit.base.BaseResponseInfo;
 import unit.entity.Event2Involved;
 import unit.eventbus.DealEventDissEvent;
 import unit.eventbus.PutiEventBus;
+import unit.moudle.eventdeal.EventDealManager;
 import unit.moudle.eventdeal.EventDetailActivity;
 import unit.moudle.eventdeal.callback.EventDealCallBack;
 
@@ -216,12 +219,20 @@ public class DealEventDetailPeopleHolder extends BaseHolder<Event2Involved> impl
 
 
     private void dealResult(String dealJson, final String eventId) {
-        container.setVisibility(View.GONE);
+
         PutiTeacherModel.getInstance().dealEvent(dealJson, new BaseListener(BaseResponseInfo.class) {
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 super.responseResult(infoObj, listObj, code, status);
-                container.setVisibility(View.GONE);
+                if (EventDealManager.needDealEventId.contains(eventId)){
+                    EventDealManager.needDealEventId.remove(eventId);
+                }
+                dissMissView();
+                if (EventDealManager.needDealEventId.size() == 0){
+                    if (mContext instanceof Activity){
+                        ((Activity) mContext).finish();
+                    }
+                }
             }
 
             @Override
@@ -249,6 +260,13 @@ public class DealEventDetailPeopleHolder extends BaseHolder<Event2Involved> impl
                 ToastUtil.show(errorMessage);
             }
         });
+    }
+
+
+    private void dissMissView(){
+        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.hide_item);
+        container.startAnimation(animation);
+        container.setVisibility(View.GONE);
     }
 
 }

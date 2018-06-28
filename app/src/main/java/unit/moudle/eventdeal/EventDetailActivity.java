@@ -132,6 +132,10 @@ public class EventDetailActivity extends PutiActivity implements EventDetailView
     public void success(ArrayList<Event2Involved> data) {
         mData.clear();
         mData.addAll(data);
+        EventDealManager.needDealEventId = new ArrayList<>();
+        for (int i = 0; i < mData.size(); i++) {
+            EventDealManager.needDealEventId.add(mData.get(i).getEvent2InvolvedUID());
+        }
         mAdapter.notifyDataSetChanged();
     }
 

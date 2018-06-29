@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import unit.moudle.contacts.PutiParentContactsActivity;
 import unit.moudle.contacts.PutiSchoolContactsActivity;
 import unit.moudle.schedule.PutiClassScheduleActivity;
+import unit.moudle.schedule.PutiMyScheduleActivity;
 
 /**
  * Created by lei on 2018/6/6.
@@ -87,7 +88,7 @@ public class HomeToolHolder extends BaseHolder<Object> {
                 new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
-                        jump(PutiClassScheduleActivity.class);
+                        jump(PutiMyScheduleActivity.class);
                     }
                 }));
 

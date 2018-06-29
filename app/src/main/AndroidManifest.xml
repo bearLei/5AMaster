@@ -382,6 +382,11 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
             />
+        <!--我的课表页面-->
+        <activity android:name="unit.moudle.schedule.PutiMyScheduleActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
+            />
         <!--Debug页面-->
         <activity android:name="unit.debug.DebugActivity"/>
 

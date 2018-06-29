@@ -8,6 +8,7 @@
 
     <unit.widget.HeadView
         android:id="@+id/headview"
+        android:layout_marginLeft="@dimen/dp_15"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"></unit.widget.HeadView>
 

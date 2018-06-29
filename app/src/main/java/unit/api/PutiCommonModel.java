@@ -66,13 +66,7 @@ public class PutiCommonModel extends PutiBaseModel{
         sb.append("\"LoginName\":\"").append(userName).append("\"");
         sb.append(",\"PassWord\":\"").append(psd).append("\"");
         sb.append("}");
-//        sb.append(",\"verifyCode\":{").append("\"uuidKey\":\"").append(verifyInfo.getUuidKey());
-//        sb.append(",\"vericode\":\""+verifyInfo.getVericode()+"}");
-//        sb.append(",\"deviceInfo\":{");
-//        sb.append("\"type\":10,");
-//        sb.append("\"deviceDesc\":\"" + Build.MODEL+ "\",");
-//        sb.append("\"pushId\":\"" + App.mJPushRegId + "\",");
-//        sb.append("\"deviceToken\":\" \"}}");
+
 
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),sb.toString());
         mCommonApi.login(body).subscribeOn(Schedulers.io())//请求在子线程

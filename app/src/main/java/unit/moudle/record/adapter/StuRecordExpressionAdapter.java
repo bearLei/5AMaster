@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.puti.education.R;
 import com.puti.education.base.InflateService;
+import com.puti.education.util.ViewUtils;
 
 import java.util.List;
 
@@ -54,6 +55,9 @@ public class StuRecordExpressionAdapter extends BaseAdapter {
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = InflateService.g().inflate(R.layout.puti_record_stu_expression_item);
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
+            , ViewUtils.dip2px(context,50));
+            convertView.setLayoutParams(params);
             viewHolder.title = (TextView) convertView.findViewById(R.id.title);
             viewHolder.score = (TextView) convertView.findViewById(R.id.score);
             convertView.setTag(viewHolder);

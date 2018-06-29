@@ -13,6 +13,7 @@
         android:id="@+id/headview"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"
+        android:layout_marginLeft="@dimen/dp_15"
         ></unit.widget.HeadView>
         <LinearLayout
             android:id="@+id/stu_likeness"

@@ -1,5 +1,6 @@
 package unit.api;
 
+import com.puti.education.base.holder.BaseHolder;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.RetrofitUtil;
 
@@ -143,4 +144,58 @@ public class PutiTeacherModel extends PutiBaseModel{
                     }
                 });
     }
+
+
+    /**
+     * 获取所在学校的问卷结果
+     * @param listener
+     */
+    public void getQuesList(final BaseListener listener){
+        mTeacherApi.getQuesList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
+
+    /**
+     * 获取问卷详情
+     * @param surveyUID 问卷id
+     * @param listener
+     */
+    public void getQuesDetail(String surveyUID, final BaseListener listener){
+        mTeacherApi.getQuesDetail(surveyUID)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
+    /**
+     * 提交问卷
+     * @param str
+     * @param listener
+     */
+    public void commitQues(String str,String surveyUID, final BaseListener listener){
+        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
+        mTeacherApi.commitQues(body,surveyUID)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
 }

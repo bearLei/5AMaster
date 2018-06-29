@@ -372,6 +372,16 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
             />
+        <!--我的问卷页面-->
+        <activity android:name="unit.moudle.ques.PutiQuesActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
+            />
+        <!--我的问卷详情页面-->
+        <activity android:name="unit.moudle.ques.PutiQuesDetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
+            />
         <!--Debug页面-->
         <activity android:name="unit.debug.DebugActivity"/>
 

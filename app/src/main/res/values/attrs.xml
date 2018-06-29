@@ -26,4 +26,12 @@
         <attr name="pickerview_dividerColor" format="color"/>
         <attr name="pickerview_lineSpacingMultiplier" format="float"/>
     </declare-styleable>
+
+    <declare-styleable name="FNRadioGroup">
+               <attr name="checkedButton" format="integer" />
+               <attr name="childMarginLeft" format="dimension"/>
+             <attr name="childMarginRight" format="dimension"/>
+              <attr name="childMarginTop" format="dimension"/>
+               <attr name="childMarginBottom" format="dimension"/>
+          </declare-styleable>
 </resources>

@@ -17,6 +17,7 @@ import unit.debug.DebugActivity;
 import unit.moudle.classevent.PutiClassEventActivity;
 import unit.moudle.eventdeal.EventListActivity;
 import unit.moudle.eventregist.PutiChooseEventActivity;
+import unit.moudle.ques.PutiQuesActivity;
 import unit.moudle.record.PutiChooseStuRecordAcitivity;
 import unit.moudle.record.PutiTeacherRecordActivity;
 import unit.moudle.work.PutiWorkCheckActivity;
@@ -52,9 +53,7 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 new HomeBaseItemHolder.ItemClickListener() {
             @Override
             public void itemClick() {
-                ToastUtil.show("事件登记");
-                Intent intent = new Intent(mContext, PutiChooseEventActivity.class);
-                mContext.startActivity(intent);
+               jump(PutiChooseEventActivity.class);
             }
         }));
         //事件确认
@@ -64,8 +63,7 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
-                        Intent intent = new Intent(mContext, EventListActivity.class);
-                        mContext.startActivity(intent);
+                        jump(EventListActivity.class);
                     }
                 }));
         //班级事件
@@ -115,7 +113,7 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
-                        ToastUtil.show("我的问卷");
+                      jump(PutiQuesActivity.class);
                     }
                 }));
         //工作检查

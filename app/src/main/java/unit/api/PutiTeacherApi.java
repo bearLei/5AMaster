@@ -36,5 +36,14 @@ public interface PutiTeacherApi {
     @POST("Teacher/Events/Deals")//学生事件批量处理
     Observable<BaseResponseInfo> eventDeals(@Body RequestBody route);
 
+    @GET("Common/MySurveys/List")//获取问卷列表
+    Observable<BaseResponseInfo> getQuesList();
+
+    @GET("Common/MySurveys/Detail")//获取问卷详情
+    Observable<BaseResponseInfo> getQuesDetail(@Query("userSurveyUID")String userSurveyUID);
+
+
+    @POST("Common/Survey/Submit")//提交问卷
+    Observable<BaseResponseInfo> commitQues(@Body RequestBody route,@Query("userSurveyUID")String userSurveyUID);
 
 }

@@ -208,7 +208,6 @@ public class PutiCommonModel extends PutiBaseModel{
     public void getEventType(final BaseListener listener){
         if (UserInfoUtils.isInLoginStata()){
             String areaUid = UserInfoUtils.getAreaUid();
-
             mCommonApi.getEventType(areaUid)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

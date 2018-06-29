@@ -59,8 +59,8 @@ public class HomeCountHolder extends BaseHolder<HomeCountEntity>{
        if (data == null){
            return;
        }
-        weekNewEvent.setText(String.valueOf(data.getWeekCount()));
-        myPost.setText(String.valueOf(data.getMyPost()));
+        weekNewEvent.setText(String.valueOf(data.getSchoolWeekCount()));
+        myPost.setText(String.valueOf(data.getMyWriteCount()));
 
     }
 
@@ -68,7 +68,7 @@ public class HomeCountHolder extends BaseHolder<HomeCountEntity>{
     //教师端查询统计信息
     public void queryData() {
         if (UserInfoUtils.isInLoginStata()) {
-            PutiCommonModel.getInstance().queryCountInfo(UserInfoUtils.getUid(),
+            PutiCommonModel.getInstance().queryCountInfo(
                     new BaseListener(HomeCountEntity.class){
                         @Override
                         public void responseResult(Object infoObj, Object listObj, int code, boolean status) {

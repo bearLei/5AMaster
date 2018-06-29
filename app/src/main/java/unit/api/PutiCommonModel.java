@@ -122,13 +122,12 @@ public class PutiCommonModel extends PutiBaseModel{
 
     /**
      * 教师端查询首页统计信息
-     * @param uid 查询id
      * @param listener 回调
      */
-    public void queryCountInfo(String uid,final BaseListener listener){
-        mCommonApi.getHomeCountInfo(uid)
+    public void queryCountInfo(final BaseListener listener){
+        mCommonApi.getHomeCountInfo()
                 .subscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new PutiCommonSubscriber(listener){
                     @Override
                     public void onNext(BaseResponseInfo responseInfo) {

@@ -27,8 +27,8 @@ public interface PutiCommonApi {
     @GET("Common/getConfig")//获取APP配置信息
     Observable<BaseResponseInfo> getAppConfig(@Query("Uid") String uid);
 
-    @GET("Teacher/queryCount")//查询首页统计信息
-    Observable<BaseResponseInfo>getHomeCountInfo(@Query("Uid") String uid);
+    @GET("Teacher/MyEventSummary")//查询首页统计信息
+    Observable<BaseResponseInfo>getHomeCountInfo();
 
     @GET("Teacher/getMessageList")//获取消息列表
     Observable<BaseResponseInfo>getMessageList(

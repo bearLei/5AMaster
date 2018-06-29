@@ -6,25 +6,25 @@ package unit.entity;
  */
 
 public class HomeCountEntity {
-    private int weekCount;
-    private int myPost;
+    private int schoolWeekCount;
+    private int myWriteCount;
 
     public HomeCountEntity() {
     }
 
-    public int getWeekCount() {
-        return weekCount;
+    public int getSchoolWeekCount() {
+        return schoolWeekCount;
     }
 
-    public void setWeekCount(int weekCount) {
-        this.weekCount = weekCount;
+    public void setSchoolWeekCount(int schoolWeekCount) {
+        this.schoolWeekCount = schoolWeekCount;
     }
 
-    public int getMyPost() {
-        return myPost;
+    public int getMyWriteCount() {
+        return myWriteCount;
     }
 
-    public void setMyPost(int myPost) {
-        this.myPost = myPost;
+    public void setMyWriteCount(int myWriteCount) {
+        this.myWriteCount = myWriteCount;
     }
 }

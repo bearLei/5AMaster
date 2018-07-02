@@ -79,4 +79,10 @@ public class HomeHeadHolder extends BaseHolder<Object> {
         Intent intent = new Intent(mContext, MessageActivity.class);
         mContext.startActivity(intent);
     }
+
+    public void updateAvatar(){
+        if (UserInfoUtils.isInLoginStata()){
+            headIcon.setImageURI(UserInfoUtils.getUserInfo().getAvatar());
+        }
+    }
 }

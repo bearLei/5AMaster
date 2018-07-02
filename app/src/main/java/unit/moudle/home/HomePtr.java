@@ -9,6 +9,12 @@ import com.puti.education.base.BaseMvpPtr;
 import com.puti.education.base.holder.BaseHolder;
 import com.puti.education.util.ViewUtils;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import unit.eventbus.AvatarChangeEvent;
+import unit.eventbus.PutiEventBus;
+import unit.eventbus.TokenErrorEvent;
 import unit.moudle.home.holder.HomeCountHolder;
 import unit.moudle.home.holder.HomeFeedBackHolder;
 import unit.moudle.home.holder.HomeHeadHolder;
@@ -33,6 +39,9 @@ public class HomePtr implements BaseMvpPtr {
     public HomePtr(Context mContext, HomeView mView) {
         this.mContext = mContext;
         this.mView = mView;
+        if (!PutiEventBus.g().isRegistered(this)){
+            PutiEventBus.g().register(this);
+        }
     }
 
     @Override
@@ -107,4 +116,12 @@ public class HomePtr implements BaseMvpPtr {
         rootView.setLayoutParams(params);
         return rootView;
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void on3EventMainThread(AvatarChangeEvent event) {
+        if (mHeadHolder != null){
+            mHeadHolder.updateAvatar();
+        }
+    }
+
 }

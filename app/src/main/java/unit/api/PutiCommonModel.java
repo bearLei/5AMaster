@@ -56,15 +56,15 @@ public class PutiCommonModel extends PutiBaseModel{
      *
      * @param userName 登录账号
      * @param psd 登录密码
-      * @param verifyInfo 验证码信息
-     * @param deviceInfo 设备信息
+     *@param pushId  极光pushId
      * @param baseListener 回调
      */
-    public void login(String userName, String psd, VerifyPostInfo verifyInfo, String deviceInfo, final BaseListener baseListener){
+    public void login(String userName, String psd, String pushId, final BaseListener baseListener){
         StringBuilder sb = new StringBuilder();
         sb.append("{");
         sb.append("\"LoginName\":\"").append(userName).append("\"");
         sb.append(",\"PassWord\":\"").append(psd).append("\"");
+        sb.append(",\"PushID\":\"").append(pushId).append("\"");
         sb.append("}");
 
 

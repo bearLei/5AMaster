@@ -18,6 +18,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unit.entity.UserBaseInfo;
+import unit.eventbus.AvatarChangeEvent;
+import unit.eventbus.PutiEventBus;
 import unit.util.UserInfoUtils;
 import unit.widget.HeadView;
 import unit.widget.SettingItem;
@@ -136,6 +138,7 @@ public class PersonalActivity extends PutiActivity implements PersonView {
     public void updateAvatar(String path) {
         headIcon.setImageURI(path);
         UserInfoUtils.setAvatar(path);
+        PutiEventBus.g().post(new AvatarChangeEvent());
     }
 
 }

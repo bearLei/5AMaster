@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.baidu.location.BDLocation;
+import com.puti.education.App;
 import com.puti.education.base.BaseMvpPtr;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.NetWorkInterceptor;
@@ -68,7 +69,7 @@ public class LoginPtr implements BaseMvpPtr {
 
     //登录
     public void login(){
-        PutiCommonModel.getInstance().login(mView.getEditAccount(),mView.getEditPsw(),getPostVerify(),null,new BaseListener(UserInfo.class){
+        PutiCommonModel.getInstance().login(mView.getEditAccount(),mView.getEditPsw(), App.mJPushRegId,new BaseListener(UserInfo.class){
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 super.responseResult(infoObj, listObj, code, status);

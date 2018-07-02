@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.baidu.platform.comapi.map.F;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
 import com.puti.education.util.ImgLoadUtil;
@@ -29,7 +30,7 @@ import unit.widget.SettingItem;
 public class PersonalActivity extends PutiActivity implements PersonView {
 
     @BindView(R.id.head_icon)
-    ImageView headIcon;
+    SimpleDraweeView headIcon;
     @BindView(R.id.trouble_help)
     SettingItem troubleHelp;
     @BindView(R.id.current_version)
@@ -77,10 +78,7 @@ public class PersonalActivity extends PutiActivity implements PersonView {
         if (UserInfoUtils.isInLoginStata()) {
             UserBaseInfo userInfo = UserInfoUtils.getUserInfo();
             if (userInfo != null) {
-                ImgLoadUtil.displayPic(
-                        R.mipmap.ic_avatar_default,
-                        userInfo.getAvatar(),
-                        headIcon);
+                headIcon.setImageURI(userInfo.getAvatar());
                 headview.setTitle(userInfo.getRealName());
             }
         }
@@ -136,10 +134,7 @@ public class PersonalActivity extends PutiActivity implements PersonView {
 
     @Override
     public void updateAvatar(String path) {
-        ImgLoadUtil.displayPic(
-                R.mipmap.ic_avatar_default,
-                path,
-                headIcon);
+        headIcon.setImageURI(path);
         UserInfoUtils.setAvatar(path);
     }
 

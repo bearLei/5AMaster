@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.puti.education.R;
 import com.puti.education.base.InflateService;
 import com.puti.education.base.holder.BaseHolder;
@@ -29,7 +30,7 @@ public class HomeHeadHolder extends BaseHolder<Object> {
 
 
     @BindView(R.id.head_icon)
-    ImageView headIcon;
+    SimpleDraweeView headIcon;
     @BindView(R.id.nick_name)
     TextView nickName;
     @BindView(R.id.school_name)
@@ -58,12 +59,13 @@ public class HomeHeadHolder extends BaseHolder<Object> {
     protected void updateUI(Context context, Object data) {
         if (UserInfoUtils.isInLoginStata()) {
             UserBaseInfo userInfo = UserInfoUtils.getUserInfo();
-            ImgLoadUtil.displayPic(R.mipmap.ic_avatar_default, userInfo.getAvatar(), headIcon);
+            headIcon.setImageURI(userInfo.getAvatar());
             nickName.setText(userInfo.getRealName());
             roleName.setText(userInfo.getRole());
             schoolName.setText(userInfo.getSchoolName());
 
         } else {
+
             ImgLoadUtil.displayPic(R.mipmap.ic_avatar_default, "", headIcon);
             nickName.setText("");
             roleName.setText("");

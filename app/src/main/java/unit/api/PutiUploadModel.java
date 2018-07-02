@@ -117,7 +117,7 @@ public class PutiUploadModel extends PutiBaseModel{
 
         NetWorkInterceptor.gType = 2;
         if (type == 0) {
-            mUploadApi.uploadImage(uploadfiles).subscribeOn(Schedulers.io())//请求在子线程
+            mUploadApi.changeAvatar(uploadfiles).subscribeOn(Schedulers.io())//请求在子线程
                     .observeOn(AndroidSchedulers.mainThread())//回调在主线程
                     .subscribe(new PutiCommonSubscriber(baseListener){
                         @Override

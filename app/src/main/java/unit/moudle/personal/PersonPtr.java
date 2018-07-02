@@ -23,6 +23,7 @@ import java.util.List;
 
 import unit.api.PutiCommonModel;
 import unit.api.PutiUploadModel;
+import unit.entity.PutiAvatarInfo;
 import unit.entity.UpLoadInfo;
 import unit.eventbus.LogoutEvent;
 import unit.eventbus.PutiEventBus;
@@ -89,17 +90,12 @@ public class PersonPtr implements BaseMvpPtr {
     private void uploadFile(String path){
         ArrayList<String> tempList = new ArrayList<String>();
         tempList.add(path);
-        PutiUploadModel.getInstance().changeAvatar(tempList, 0, new BaseListener(UpLoadInfo.class) {
+        PutiUploadModel.getInstance().changeAvatar(tempList, 0, new BaseListener(PutiAvatarInfo.class) {
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
-                super.responseResult(infoObj, listObj, code, status);
-            }
-
-            @Override
-            public void responseListResult(Object infoObj, Object listObj, PageInfo pageInfo, int code, boolean status) {
-                List<UpLoadInfo> upLoadInfoList = (List<UpLoadInfo>) listObj;
-                if (upLoadInfoList != null && upLoadInfoList.size() > 0) {
-                    mView.updateAvatar(upLoadInfoList.get(0).getUrl());
+                PutiAvatarInfo info = (PutiAvatarInfo) infoObj;
+                if (info != null){
+                    mView.updateAvatar(info.getPhoto());
                 }
             }
 

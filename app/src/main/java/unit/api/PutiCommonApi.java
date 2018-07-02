@@ -33,10 +33,13 @@ public interface PutiCommonApi {
     @GET("Common/MyLogs")//获取消息列表
     Observable<BaseResponseInfo>getMessageList();
 
-    @POST("Common/updatePassword")//修改密码
-    Observable<BaseResponseInfo> updatePsw(@Body RequestBody route );
+    @POST("Common/ChangePwd")//修改密码
+    Observable<BaseResponseInfo> updatePsw(@Query("oldPwd")String oldPwd,
+                                           @Query("newPwd")String newPwd,
+                                           @Query("confirmNewPwd")String confirmNewPwd
+                                           );
 
-    @GET("Common/Logout")//退出登录
+    @POST("Common/Logout")//退出登录
     Observable<BaseResponseInfo> logout();
 
     @GET("Common/commitSuggestion")//提交有奖反馈

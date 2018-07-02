@@ -26,6 +26,10 @@ public interface PutiUploadApi {
     @POST("Common/Upload")
     Observable<BaseResponseInfo> uploadImage(@PartMap
                                                  Map<String, RequestBody> imgs1);
+    @Multipart
+    @POST("Common/ChangePhoto")
+    Observable<BaseResponseInfo> changeAvatar(@PartMap
+                                                     Map<String, RequestBody> imgs1);
 
     /**
      * 上传多个音频文件

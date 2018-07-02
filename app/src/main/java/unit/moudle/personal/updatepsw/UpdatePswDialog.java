@@ -108,8 +108,7 @@ public class UpdatePswDialog extends Dialog {
         }
 
         PutiCommonModel.getInstance().updatePsw(
-                UserInfoUtils.getUid()
-                ,oldPsw
+                oldPsw
                 ,newPsw
         ,new BaseListener(BaseResponseInfo.class){
                     @Override

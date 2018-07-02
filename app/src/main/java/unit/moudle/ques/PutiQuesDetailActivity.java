@@ -131,8 +131,8 @@ public class PutiQuesDetailActivity extends PutiActivity {
     private void handleResult(QuesDetailInfo info) {
         if (info != null) {
             List<Question> questionList = info.getQuestions();
-            quesType.setText(info.getRemark());
-            quesDesc.setText(info.getCategoryName());
+            quesType.setText(info.getCategoryName());
+            quesDesc.setText(info.getRemark());
             mData.clear();
             mData.addAll(questionList);
             mAdapter.notifyDataSetChanged();

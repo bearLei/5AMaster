@@ -9,6 +9,7 @@ import com.baidu.platform.comapi.map.F;
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
 import com.puti.education.util.ImgLoadUtil;
+import com.puti.education.widget.EduDialog;
 
 import java.io.File;
 
@@ -122,7 +123,7 @@ public class PersonalActivity extends PutiActivity implements PersonView {
                 mPtr.currentCode();
                 break;
             case R.id.lgout:
-                mPtr.logOut();
+                mPtr.ReqlogoutDialog();
                 break;
         }
     }
@@ -135,9 +136,11 @@ public class PersonalActivity extends PutiActivity implements PersonView {
 
     @Override
     public void updateAvatar(String path) {
-        ImgLoadUtil.displayLocalPictrue(this, R.mipmap.ic_avatar_default,
-                new File(path),
+        ImgLoadUtil.displayPic(
+                R.mipmap.ic_avatar_default,
+                path,
                 headIcon);
+        UserInfoUtils.setAvatar(path);
     }
 
 }

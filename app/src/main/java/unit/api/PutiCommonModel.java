@@ -130,21 +130,14 @@ public class PutiCommonModel extends PutiBaseModel{
 
     /**
      * 修改密码
-     * @param uid 请求人id
      * @param oldPsw 旧密码
      * @param newPsw 新密码
      * @param listener 回调
      */
-    public void updatePsw(String uid,String oldPsw,String newPsw,final BaseListener listener){
-        StringBuilder sb = new StringBuilder();
-        sb.append("{");
-        sb.append("\"Uid\":\"").append(uid).append("\"");
-        sb.append(",\"oldPsw\":\"").append(oldPsw).append("\"");
-        sb.append(",\"newPsw\":\"").append(newPsw).append("\"");
-        sb.append("}");
-        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),sb.toString());
+    public void updatePsw(String oldPsw,String newPsw,final BaseListener listener){
 
-        mCommonApi.updatePsw(body)
+
+        mCommonApi.updatePsw(oldPsw,newPsw,newPsw)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new PutiCommonSubscriber(listener){

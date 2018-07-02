@@ -26,12 +26,18 @@ public class UserInfoUtils {
             return "";
     }
 
+
     public static boolean isInLoginStata(){
         if (getUserInfo() == null){
             return false;
         }else {
             return true;
         }
+    }
+    public static void setAvatar(String url){
+        UserBaseInfo userInfo = getUserInfo();
+        userInfo.setAvatar(url);
+        setUserInfo(userInfo);
     }
 
     public static String getUid(){

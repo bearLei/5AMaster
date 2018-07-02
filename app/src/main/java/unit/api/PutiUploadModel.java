@@ -100,4 +100,35 @@ public class PutiUploadModel extends PutiBaseModel{
 
     }
 
+
+    /**
+     * 发图片或者文件
+     * @param paths
+     */
+    public void changeAvatar(ArrayList<String> paths,int type, final BaseListener baseListener){
+        Map<String,RequestBody> uploadfiles = new HashMap<>();
+        File upfile = null;
+        if (paths.size()>0) {
+            for (int i = 0; i < paths.size(); i++) {
+                upfile = new File(paths.get(i));
+                uploadfiles.put("file\"; filename=\"" + upfile.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), upfile));
+            }
+        }
+
+        NetWorkInterceptor.gType = 2;
+        if (type == 0) {
+            mUploadApi.uploadImage(uploadfiles).subscribeOn(Schedulers.io())//请求在子线程
+                    .observeOn(AndroidSchedulers.mainThread())//回调在主线程
+                    .subscribe(new PutiCommonSubscriber(baseListener){
+                        @Override
+                        public void onNext(BaseResponseInfo responseInfo) {
+                            dealJson(responseInfo, baseListener);
+                            NetWorkInterceptor.gType = 1;
+                        }
+                    });
+        }else{
+            NetWorkInterceptor.gType = 1;
+        }
+
+    }
 }

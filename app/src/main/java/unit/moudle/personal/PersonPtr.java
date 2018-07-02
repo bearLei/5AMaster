@@ -6,19 +6,27 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.puti.education.base.BaseMvpPtr;
+import com.puti.education.bean.UploadFileBean;
 import com.puti.education.listener.BaseListener;
-import com.puti.education.ui.uiCommon.LoginActivity;
+import com.puti.education.netFrame.response.PageInfo;
 import com.puti.education.util.FileUtils;
+import com.puti.education.util.SimpleTextWatcher;
 import com.puti.education.util.ToastUtil;
+import com.puti.education.widget.EduDialog;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import unit.api.PutiCommonModel;
+import unit.api.PutiUploadModel;
+import unit.entity.UpLoadInfo;
 import unit.eventbus.LogoutEvent;
 import unit.eventbus.PutiEventBus;
+import unit.moudle.login.LoginActivity;
 import unit.moudle.personal.feedback.FeedBackActivity;
 import unit.moudle.personal.qrcode.MyQrCodeActivity;
 import unit.moudle.personal.updatepsw.UpdatePswDialog;
@@ -66,18 +74,58 @@ public class PersonPtr implements BaseMvpPtr {
             chooser.chooseDialog(new PhotoChooser.ChooseCallBack() {
                 @Override
                 public void chooseCamer(String path) {
-                    // TODO: 2018/6/7 上传头像
-                    mView.updateAvatar(path);
+                    uploadFile(path);
                 }
 
                 @Override
                 public void chooseAlbum(ArrayList<String> list) {
-                    // TODO: 2018/6/7 上传头像
                     if (list != null && list.size() > 0){
-                        mView.updateAvatar(list.get(0));
+                        uploadFile(list.get(0));
                     }
                 }
             });
+    }
+
+    private void uploadFile(String path){
+        ArrayList<String> tempList = new ArrayList<String>();
+        tempList.add(path);
+        PutiUploadModel.getInstance().changeAvatar(tempList, 0, new BaseListener(UpLoadInfo.class) {
+            @Override
+            public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
+                super.responseResult(infoObj, listObj, code, status);
+            }
+
+            @Override
+            public void responseListResult(Object infoObj, Object listObj, PageInfo pageInfo, int code, boolean status) {
+                List<UpLoadInfo> upLoadInfoList = (List<UpLoadInfo>) listObj;
+                if (upLoadInfoList != null && upLoadInfoList.size() > 0) {
+                    mView.updateAvatar(upLoadInfoList.get(0).getUrl());
+                }
+            }
+
+            @Override
+            public void requestFailed(boolean status, int code, String errorMessage) {
+                super.requestFailed(status, code, errorMessage);
+                ToastUtil.show("图片上传失败");
+            }
+        });
+    }
+
+    public void ReqlogoutDialog(){
+        final EduDialog dialog = new EduDialog(mContext,"确定退出登录吗？");
+        dialog.setOnButtonClickListener(new EduDialog.OnButtonClickListener() {
+            @Override
+            public void onNegativeButtonClick(View view) {
+                logOut();
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onPositiveButtonClick(View view) {
+                dialog.dismiss();
+            }
+        },"确定","取消");
+        dialog.show();
     }
 
     /**

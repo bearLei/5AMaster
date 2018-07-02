@@ -98,4 +98,7 @@ public class HomeFragment extends PutiFragment implements HomeView {
         VToolLayout.removeAllViews();
         VToolLayout.addView(view);
     }
+
+
+
 }

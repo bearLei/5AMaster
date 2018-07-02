@@ -72,14 +72,12 @@ public class LoginPtr implements BaseMvpPtr {
         PutiCommonModel.getInstance().login(mView.getEditAccount(),mView.getEditPsw(), App.mJPushRegId,new BaseListener(UserInfo.class){
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
-                super.responseResult(infoObj, listObj, code, status);
                 UserInfo userInfo = (UserInfo) infoObj;
                 handleResult(userInfo);
             }
 
             @Override
             public void requestFailed(boolean status, int code, String errorMessage) {
-                super.requestFailed(status, code, errorMessage);
                 //处理下验证码的逻辑
                 ToastUtil.show(errorMessage);
                 switch (code){

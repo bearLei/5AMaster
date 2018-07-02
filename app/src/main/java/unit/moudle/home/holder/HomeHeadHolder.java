@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unit.entity.UserBaseInfo;
 import unit.moudle.message.MessageActivity;
+import unit.sp.DataStorage;
 import unit.util.UserInfoUtils;
 
 /**
@@ -63,19 +64,21 @@ public class HomeHeadHolder extends BaseHolder<Object> {
             nickName.setText(userInfo.getRealName());
             roleName.setText(userInfo.getRole());
             schoolName.setText(userInfo.getSchoolName());
-
+            setRedDog(DataStorage.getUserHasNotice());
         } else {
-
             ImgLoadUtil.displayPic(R.mipmap.ic_avatar_default, "", headIcon);
             nickName.setText("");
             roleName.setText("");
             schoolName.setText("");
+            setRedDog(false);
         }
     }
 
     //跳转消息列表
     @OnClick(R.id.forward_msg_list)
     public void onClick() {
+        setRedDog(false);
+        DataStorage.putUserHasNotice(false);
         Intent intent = new Intent(mContext, MessageActivity.class);
         mContext.startActivity(intent);
     }
@@ -84,5 +87,9 @@ public class HomeHeadHolder extends BaseHolder<Object> {
         if (UserInfoUtils.isInLoginStata()){
             headIcon.setImageURI(UserInfoUtils.getUserInfo().getAvatar());
         }
+    }
+
+    public void setRedDog(boolean show){
+        redDog.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 }

@@ -14,6 +14,10 @@ public class DataStorage {
     public static final String User_info = "UserInfo";
     public static final String User_id = "UserId";//用户id
     public static final String User_Type = "UserType";//用户身份类型
+    public static final String User_Has_Notice = "HasMsgNotice";//是否有消息通知
+    public static final String User_Has_Ques = "HasQues";//是否有事件待确认
+    public static final String User_Has_Report = "HasReport";//是否有举报事件
+
     /**
      * 将一个Serializable对象保存到sp中. <br/>
      * 如果参数key为空, 则直接返回, 不进行任何操作.<br/>
@@ -72,5 +76,28 @@ public class DataStorage {
 
     public static void putUserType(int userType){
         DataStorageBase.putInt(User_Type,userType);
+    }
+
+
+    public static void putUserHasNotice(boolean has){
+        DataStorageBase.putBool(User_Has_Notice,has);
+    }
+
+    public static boolean getUserHasNotice(){
+        return DataStorageBase.getBool(User_Has_Notice,false);
+    }
+    public static void putUserQues(boolean has){
+        DataStorageBase.putBool(User_Has_Ques,has);
+    }
+
+    public static boolean getUserHasQues(){
+        return DataStorageBase.getBool(User_Has_Ques,false);
+    }
+    public static void putUserHasReport(boolean has){
+        DataStorageBase.putBool(User_Has_Report,has);
+    }
+
+    public static boolean getUserHasReport(){
+        return DataStorageBase.getBool(User_Has_Report,false);
     }
 }

@@ -61,4 +61,7 @@ public class UserInfoUtils {
         }
         return getUserInfo().getAreaUID();
     }
+
+
+
 }

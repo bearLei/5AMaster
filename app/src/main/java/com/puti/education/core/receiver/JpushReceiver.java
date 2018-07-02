@@ -31,6 +31,10 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
+import unit.entity.PushInfo;
+import unit.eventbus.PutiEventBus;
+import unit.eventbus.PutiMsgNotice;
+import unit.moudle.home.HomeActivity;
 
 /**
  * Created by icebery on 2017/5/24 0024.
@@ -63,7 +67,22 @@ public class JpushReceiver extends BroadcastReceiver {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知");
             int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
+            String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+            PushInfo dateInfo = null;
+            if (!TextUtils.isEmpty(extras)) {
+                try {
+                    dateInfo = JSON.parseObject(extras, PushInfo.class);
+                    if (null != dateInfo) {
+                        int category = dateInfo.getCategory();
+                        PutiMsgNotice putiMsgNotice = new PutiMsgNotice();
+                        putiMsgNotice.setCategory(category);
+                        PutiEventBus.g().post(putiMsgNotice);
+                    }
+                } catch (Exception e) {
 
+                }
+
+            }
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
 
@@ -118,15 +137,13 @@ public class JpushReceiver extends BroadcastReceiver {
 
 
     private void processNotify(Context ctx, Bundle bundle){
-        String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
         String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-        PushData dateInfo = null;
+        PushInfo dateInfo = null;
         if (!TextUtils.isEmpty(extras)) {
             try {
-                dateInfo = JSON.parseObject(extras, PushData.class);
+                dateInfo = JSON.parseObject(extras, PushInfo.class);
                 if (null != dateInfo) {
-                    dateInfo.parseExtContent();
-                    parseExtraData(dateInfo);
+                    openHomePage();
                 }
             } catch (Exception e) {
 
@@ -203,6 +220,13 @@ public class JpushReceiver extends BroadcastReceiver {
             }
         }
     }
+
+    private void openHomePage(){
+        Intent intent = new Intent(mCtx, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+        mCtx.startActivity(intent);
+    }
+
 
     //互评列表
     private void openReviewPage(){

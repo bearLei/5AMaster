@@ -16,14 +16,20 @@
         android:numColumns="4"
         ></com.puti.education.widget.GridViewForScrollView>
 
-    <ImageView
+    <RelativeLayout
         android:id="@+id/scan"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        >
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="center"
         android:src="@drawable/puti_scan"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
         />
-
+    </RelativeLayout>
 </RelativeLayout>

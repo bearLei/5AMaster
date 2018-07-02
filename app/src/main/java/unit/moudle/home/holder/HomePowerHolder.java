@@ -22,6 +22,7 @@ import unit.moudle.record.PutiChooseStuRecordAcitivity;
 import unit.moudle.record.PutiTeacherRecordActivity;
 import unit.moudle.reports.PutiParReportsActivity;
 import unit.moudle.work.PutiWorkCheckActivity;
+import unit.sp.DataStorage;
 
 /**
  * Created by lei on 2018/6/6.
@@ -32,6 +33,9 @@ public class HomePowerHolder extends BaseHolder<Object>{
 
     private FlexboxLayout mParentView;
 
+    private HomeBaseItemHolder mEventSureHolder;//事件确认
+    private HomeBaseItemHolder mReportHolder;//举报
+    private HomeBaseItemHolder mQuesHolder;//问卷
     public HomePowerHolder(Context context) {
         super(context);
     }
@@ -58,15 +62,16 @@ public class HomePowerHolder extends BaseHolder<Object>{
             }
         }));
         //事件确认
-        mParentView.addView(getItem(
+        mEventSureHolder = new HomeBaseItemHolder(mContext, new HomeBaseItemHolder.ItemClickListener() {
+            @Override
+            public void itemClick() {
+                jump(EventListActivity.class);
+            }
+        });
+        mParentView.addView(getItem(mEventSureHolder,
                 R.drawable.puti_home_event_sure,
-                R.string.puti_home_event_sure,
-                new HomeBaseItemHolder.ItemClickListener() {
-                    @Override
-                    public void itemClick() {
-                        jump(EventListActivity.class);
-                    }
-                }));
+                R.string.puti_home_event_sure));
+
         //班级事件
         mParentView.addView(getItem(
                 R.drawable.puti_home_event_manager,
@@ -77,16 +82,23 @@ public class HomePowerHolder extends BaseHolder<Object>{
                       jump(PutiClassEventActivity.class);
                     }
                 }));
+
+
         //家长举报
-        mParentView.addView(getItem(
+        mReportHolder = new HomeBaseItemHolder(mContext, new HomeBaseItemHolder.ItemClickListener() {
+            @Override
+            public void itemClick() {
+                setmReportHolderRedDog(false);
+                DataStorage.putUserHasReport(false);
+                jump(PutiParReportsActivity.class);
+            }
+        });
+        setmReportHolderRedDog(DataStorage.getUserHasReport());
+        mParentView.addView(getItem(mReportHolder,
                 R.drawable.puti_home_parent_report,
-                R.string.puti_home_parent_report,
-                new HomeBaseItemHolder.ItemClickListener() {
-                    @Override
-                    public void itemClick() {
-                       jump(PutiParReportsActivity.class);
-                    }
-                }));
+                R.string.puti_home_parent_report));
+
+
         //学生档案
         mParentView.addView(getItem(
                 R.drawable.puti_home_stu_record,
@@ -108,15 +120,19 @@ public class HomePowerHolder extends BaseHolder<Object>{
                     }
                 }));
         //我的问卷
-        mParentView.addView(getItem(
+        mQuesHolder = new HomeBaseItemHolder(mContext, new HomeBaseItemHolder.ItemClickListener() {
+            @Override
+            public void itemClick() {
+                setmQuesHolderRedDog(false);
+                DataStorage.putUserQues(false);
+                jump(PutiQuesActivity.class);
+            }
+        });
+        mQuesHolder.showRedDog(DataStorage.getUserHasQues());
+        mParentView.addView(getItem(mQuesHolder,
                 R.drawable.puti_home_my_psq,
-                R.string.puti_home_my_question,
-                new HomeBaseItemHolder.ItemClickListener() {
-                    @Override
-                    public void itemClick() {
-                      jump(PutiQuesActivity.class);
-                    }
-                }));
+                R.string.puti_home_my_question));
+
         //工作检查
         mParentView.addView(getItem(
                 R.drawable.puti_home_work_check,
@@ -140,9 +156,28 @@ public class HomePowerHolder extends BaseHolder<Object>{
         return holder.getRootView();
     }
 
+    private View getItem(HomeBaseItemHolder holder,int iconRes, int titleRes){
+        holder.setUI(iconRes,titleRes);
+        View rootView = holder.getRootView();
+        FlexboxLayout.LayoutParams params= new FlexboxLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        params.width = ViewUtils.getScreenWid(mContext)/4;
+        params.height = ViewUtils.dip2px(mContext,100);
+        rootView.setLayoutParams(params);
+        return holder.getRootView();
+    }
     private void jump(Class t){
         Intent intent = new Intent(mContext,t);
         mContext.startActivity(intent);
+    }
+
+    //控制问卷红点
+    public void setmQuesHolderRedDog(boolean show){
+        mQuesHolder.showRedDog(show);
+    }
+
+    //控件举报红点
+    public void setmReportHolderRedDog(boolean show){
+        mReportHolder.showRedDog(show);
     }
 
 }

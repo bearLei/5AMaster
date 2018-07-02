@@ -12,14 +12,17 @@ import com.puti.education.util.ViewUtils;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import unit.entity.PushInfo;
 import unit.eventbus.AvatarChangeEvent;
 import unit.eventbus.PutiEventBus;
+import unit.eventbus.PutiMsgNotice;
 import unit.eventbus.TokenErrorEvent;
 import unit.moudle.home.holder.HomeCountHolder;
 import unit.moudle.home.holder.HomeFeedBackHolder;
 import unit.moudle.home.holder.HomeHeadHolder;
 import unit.moudle.home.holder.HomePowerHolder;
 import unit.moudle.home.holder.HomeToolHolder;
+import unit.sp.DataStorage;
 
 /**
  * Created by lei on 2018/6/5.
@@ -27,6 +30,10 @@ import unit.moudle.home.holder.HomeToolHolder;
  */
 
 public class HomePtr implements BaseMvpPtr {
+
+    private static final int Msg_event = 1;//事件通知
+    private static final int Msg_Report = 2;//家长举报
+    private static final int Msg_Ques = 3;//问卷
 
     private Context mContext;
     private HomeView mView;
@@ -121,6 +128,25 @@ public class HomePtr implements BaseMvpPtr {
     public void on3EventMainThread(AvatarChangeEvent event) {
         if (mHeadHolder != null){
             mHeadHolder.updateAvatar();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void on3EventMainThread(PutiMsgNotice event) {
+        int category = event.getCategory();
+        switch (category){
+            case Msg_event:
+                mHeadHolder.setRedDog(true);
+                DataStorage.putUserHasNotice(true);
+                break;
+            case Msg_Ques:
+                mPowerHolder.setmQuesHolderRedDog(true);
+                DataStorage.putUserQues(true);
+                break;
+            case Msg_Report:
+                mPowerHolder.setmReportHolderRedDog(true);
+                DataStorage.putUserHasReport(true);
+                break;
         }
     }
 

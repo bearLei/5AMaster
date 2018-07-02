@@ -9,58 +9,70 @@ import java.util.List;
 
 public class MessageEntity {
 
-    private List<MessageInfo> messageList;
+    private int Id;
+    private String CreateTime;
+    private String Msg;
+    private String UserUID;
+    private int UserType;
+    private String IP;
+    private int Type;
 
     public MessageEntity() {
     }
 
-    public List<MessageInfo> getMessageList() {
-        return messageList;
+    public int getId() {
+        return Id;
     }
 
-    public void setMessageList(List<MessageInfo> messageList) {
-        this.messageList = messageList;
+    public void setId(int id) {
+        Id = id;
     }
 
-    public class MessageInfo{
-        private String msgId;
-        private String msgTitle;
-        private int msgType;
-        private String scheme;
+    public String getCreateTime() {
+        return CreateTime;
+    }
 
-        public MessageInfo() {
-        }
+    public void setCreateTime(String createTime) {
+        CreateTime = createTime;
+    }
 
-        public String getMsgId() {
-            return msgId;
-        }
+    public String getMsg() {
+        return Msg;
+    }
 
-        public void setMsgId(String msgId) {
-            this.msgId = msgId;
-        }
+    public void setMsg(String msg) {
+        Msg = msg;
+    }
 
-        public String getMsgTitle() {
-            return msgTitle;
-        }
+    public String getUserUID() {
+        return UserUID;
+    }
 
-        public void setMsgTitle(String msgTitle) {
-            this.msgTitle = msgTitle;
-        }
+    public void setUserUID(String userUID) {
+        UserUID = userUID;
+    }
 
-        public int getMsgType() {
-            return msgType;
-        }
+    public int getUserType() {
+        return UserType;
+    }
 
-        public void setMsgType(int msgType) {
-            this.msgType = msgType;
-        }
+    public void setUserType(int userType) {
+        UserType = userType;
+    }
 
-        public String getScheme() {
-            return scheme;
-        }
+    public String getIP() {
+        return IP;
+    }
 
-        public void setScheme(String scheme) {
-            this.scheme = scheme;
-        }
+    public void setIP(String IP) {
+        this.IP = IP;
+    }
+
+    public int getType() {
+        return Type;
+    }
+
+    public void setType(int type) {
+        Type = type;
     }
 }

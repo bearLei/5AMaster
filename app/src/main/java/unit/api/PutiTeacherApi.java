@@ -46,4 +46,9 @@ public interface PutiTeacherApi {
     @POST("Common/Survey/Submit")//提交问卷
     Observable<BaseResponseInfo> commitQues(@Body RequestBody route,@Query("userSurveyUID")String userSurveyUID);
 
+
+    @GET("Teacher/Reports")//获取家长举报
+    Observable<BaseResponseInfo> getParReports(@Query("pageIndex")int pageIndex,
+                                               @Query("pageSize")int pageSize
+                                               );
 }

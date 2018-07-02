@@ -1,6 +1,7 @@
 package unit.moudle.home.holder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -16,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unit.entity.UserBaseInfo;
+import unit.moudle.message.MessageActivity;
 import unit.util.UserInfoUtils;
 
 /**
@@ -72,6 +74,7 @@ public class HomeHeadHolder extends BaseHolder<Object> {
     //跳转消息列表
     @OnClick(R.id.forward_msg_list)
     public void onClick() {
-
+        Intent intent = new Intent(mContext, MessageActivity.class);
+        mContext.startActivity(intent);
     }
 }

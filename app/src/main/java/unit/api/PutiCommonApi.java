@@ -30,11 +30,8 @@ public interface PutiCommonApi {
     @GET("Teacher/MyEventSummary")//查询首页统计信息
     Observable<BaseResponseInfo>getHomeCountInfo();
 
-    @GET("Teacher/getMessageList")//获取消息列表
-    Observable<BaseResponseInfo>getMessageList(
-            @Query("Uid") String uid,
-            @Query("pageIndex") int pageIndex,
-            @Query("pageSize") int pageSize);
+    @GET("Common/MyLogs")//获取消息列表
+    Observable<BaseResponseInfo>getMessageList();
 
     @POST("Common/updatePassword")//修改密码
     Observable<BaseResponseInfo> updatePsw(@Body RequestBody route );

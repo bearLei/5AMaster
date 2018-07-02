@@ -18,7 +18,7 @@ import unit.entity.MessageEntity;
  * 消息Holder
  */
 
-public class MessageHolder extends BaseHolder<MessageEntity.MessageInfo> {
+public class MessageHolder extends BaseHolder<MessageEntity> {
 
     @BindView(R.id.title)
     TextView title;
@@ -36,18 +36,13 @@ public class MessageHolder extends BaseHolder<MessageEntity.MessageInfo> {
     }
 
     @Override
-    protected void updateUI(Context context, MessageEntity.MessageInfo data) {
+    protected void updateUI(Context context, MessageEntity data) {
         if (data == null) {
             return;
         }
 
-        title.setText(data.getMsgTitle());
-        mRootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: 2018/6/7 需要处理消息点击的时候直接处理Schmeme就可以
-            }
-        });
+        title.setText(data.getMsg());
+
 
     }
 }

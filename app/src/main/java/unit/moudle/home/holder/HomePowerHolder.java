@@ -20,6 +20,7 @@ import unit.moudle.eventregist.PutiChooseEventActivity;
 import unit.moudle.ques.PutiQuesActivity;
 import unit.moudle.record.PutiChooseStuRecordAcitivity;
 import unit.moudle.record.PutiTeacherRecordActivity;
+import unit.moudle.reports.PutiParReportsActivity;
 import unit.moudle.work.PutiWorkCheckActivity;
 
 /**
@@ -83,7 +84,7 @@ public class HomePowerHolder extends BaseHolder<Object>{
                 new HomeBaseItemHolder.ItemClickListener() {
                     @Override
                     public void itemClick() {
-                        ToastUtil.show("家长举报");
+                       jump(PutiParReportsActivity.class);
                     }
                 }));
         //学生档案

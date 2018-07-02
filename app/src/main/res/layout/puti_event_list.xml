@@ -10,6 +10,7 @@
         android:id="@+id/headview"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48"
+        android:layout_marginLeft="15dp"
         ></unit.widget.HeadView>
     
     <LinearLayout

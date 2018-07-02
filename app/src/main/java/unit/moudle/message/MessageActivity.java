@@ -2,12 +2,15 @@ package unit.moudle.message;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
 import com.puti.education.listener.BaseListener;
+import com.puti.education.netFrame.response.PageInfo;
 import com.puti.education.util.ToastUtil;
+import com.puti.education.util.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,7 @@ import unit.api.PutiCommonModel;
 import unit.entity.MessageEntity;
 import unit.util.UserInfoUtils;
 import unit.widget.HeadView;
+import unit.widget.SpaceItemDecoration;
 
 /**
  * Created by lei on 2018/6/7.
@@ -27,18 +31,15 @@ import unit.widget.HeadView;
 
 public class MessageActivity extends PutiActivity {
 
-    private static final int Default_Size = 10;//默认查询的个数
-
 
     @BindView(R.id.list)
-    LRecyclerView VList;
+    RecyclerView VList;
     @BindView(R.id.headview)
     HeadView headview;
 
 
     private MessageAdapter mAdapter;
-    private List<MessageEntity.MessageInfo> mData;
-    private int index;
+    private List<MessageEntity> mData;
 
     @Override
     public int getContentView() {
@@ -83,34 +84,6 @@ public class MessageActivity extends PutiActivity {
         VList.setLayoutManager(manager);
         VList.setAdapter(mAdapter);
 
-        VList.setLScrollListener(new LRecyclerView.LScrollListener() {
-            @Override
-            public void onRefresh() {
-                index = 0;
-                queryData();
-            }
-
-            @Override
-            public void onScrollUp() {
-
-            }
-
-            @Override
-            public void onScrollDown() {
-
-            }
-
-            @Override
-            public void onBottom() {
-                index = mData.size() - 1;
-                queryData();
-            }
-
-            @Override
-            public void onScrolled(int distanceX, int distanceY) {
-
-            }
-        });
     }
 
     @Override
@@ -119,16 +92,13 @@ public class MessageActivity extends PutiActivity {
     }
 
     private void queryData() {
-        String uid = "";
-        if (UserInfoUtils.isInLoginStata()) {
-            uid = UserInfoUtils.getUid();
-        }
-        PutiCommonModel.getInstance().queryMessageList(uid, index, Default_Size, new BaseListener(MessageEntity.class) {
+
+        PutiCommonModel.getInstance().queryMessageList( new BaseListener(MessageEntity.class) {
+
             @Override
-            public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
-                super.responseResult(infoObj, listObj, code, status);
-                MessageEntity messageEntity = (MessageEntity) infoObj;
-                handleResult(messageEntity);
+            public void responseListResult(Object infoObj, Object listObj, PageInfo pageInfo, int code, boolean status) {
+               List <MessageEntity> msgList = (List<MessageEntity>) listObj;
+                handleResult(msgList);
             }
 
             @Override
@@ -139,11 +109,12 @@ public class MessageActivity extends PutiActivity {
         });
     }
 
-    private void handleResult(MessageEntity messageEntity) {
-        if (messageEntity == null) return;
-        List<MessageEntity.MessageInfo> messageList = messageEntity.getMessageList();
+    private void handleResult( List <MessageEntity> msgList) {
+        if (msgList == null || msgList.size() == 0) return;
+
         mData.clear();
-        mData.addAll(messageList);
+        mData.addAll(msgList);
+        mAdapter.notifyDataSetChanged();
     }
 
 }

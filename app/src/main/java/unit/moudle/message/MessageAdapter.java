@@ -16,21 +16,22 @@ import unit.entity.MessageEntity;
 
 public class MessageAdapter extends BaseRVAdapter {
 
-    private List<MessageEntity.MessageInfo> mList;
+    private List<MessageEntity> mList;
 
     private BaseHolder mHolder;
     public MessageAdapter(Context context) {
         super(context);
     }
 
-    public MessageAdapter(Context context, List<MessageEntity.MessageInfo> mList) {
+    public MessageAdapter(Context context, List<MessageEntity> mList) {
         super(context);
         this.mList = mList;
     }
 
     @Override
     protected Object getItem(int position) {
-        return position;
+        if (mList == null ) return null;
+        return mList.get(position);
     }
 
     @Override

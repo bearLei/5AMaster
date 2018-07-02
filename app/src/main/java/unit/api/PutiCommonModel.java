@@ -97,13 +97,10 @@ public class PutiCommonModel extends PutiBaseModel{
 
     /**
      * 教师端查询消息列表
-     * @param uid 查询的id
-     * @param pageIndex 查询下标
-     * @param pageSize 查询个数
      * @param listener 回调
      */
-    public void queryMessageList(String uid,int pageIndex,int pageSize,final BaseListener listener){
-        mCommonApi.getMessageList(uid, pageIndex, pageSize)
+    public void queryMessageList(final BaseListener listener){
+        mCommonApi.getMessageList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new PutiCommonSubscriber(listener){
@@ -411,5 +408,7 @@ public class PutiCommonModel extends PutiBaseModel{
                     }
                 });
     }
+
+
 
 }

@@ -387,6 +387,12 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
             />
+        <!--家长举报页面-->
+        <activity android:name="unit.moudle.reports.PutiParReportsActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
+            />
+
         <!--Debug页面-->
         <activity android:name="unit.debug.DebugActivity"/>
 

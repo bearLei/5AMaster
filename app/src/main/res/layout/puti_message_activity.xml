@@ -22,4 +22,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_15"
         ></android.support.v7.widget.RecyclerView>
+
+    <unit.widget.EmptyView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@+id/headview"
+        ></unit.widget.EmptyView>
+    <unit.widget.LoadingView
+        android:id="@+id/loading_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@+id/headview"
+        ></unit.widget.LoadingView>
 </LinearLayout>

@@ -3,26 +3,24 @@ package unit.moudle.message;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
-import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.response.PageInfo;
 import com.puti.education.util.ToastUtil;
-import com.puti.education.util.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import unit.api.PutiCommonModel;
 import unit.entity.MessageEntity;
-import unit.util.UserInfoUtils;
+import unit.widget.EmptyView;
 import unit.widget.HeadView;
-import unit.widget.SpaceItemDecoration;
+import unit.widget.LoadingView;
 
 /**
  * Created by lei on 2018/6/7.
@@ -36,6 +34,10 @@ public class MessageActivity extends PutiActivity {
     RecyclerView VList;
     @BindView(R.id.headview)
     HeadView headview;
+    @BindView(R.id.empty_view)
+    EmptyView emptyView;
+    @BindView(R.id.loading_view)
+    LoadingView loadingView;
 
 
     private MessageAdapter mAdapter;
@@ -65,6 +67,7 @@ public class MessageActivity extends PutiActivity {
     public void DettachPtrView() {
 
     }
+
     @Override
     public void InitView() {
         headview.setCallBack(new HeadView.HeadViewCallBack() {
@@ -88,16 +91,17 @@ public class MessageActivity extends PutiActivity {
 
     @Override
     public void Star() {
+        showLoading();
         queryData();
     }
 
     private void queryData() {
 
-        PutiCommonModel.getInstance().queryMessageList( new BaseListener(MessageEntity.class) {
+        PutiCommonModel.getInstance().queryMessageList(new BaseListener(MessageEntity.class) {
 
             @Override
             public void responseListResult(Object infoObj, Object listObj, PageInfo pageInfo, int code, boolean status) {
-               List <MessageEntity> msgList = (List<MessageEntity>) listObj;
+                List<MessageEntity> msgList = (List<MessageEntity>) listObj;
                 handleResult(msgList);
             }
 
@@ -105,16 +109,45 @@ public class MessageActivity extends PutiActivity {
             public void requestFailed(boolean status, int code, String errorMessage) {
                 super.requestFailed(status, code, errorMessage);
                 ToastUtil.show(errorMessage);
+                hideLoading();
+                showErrorView();
             }
         });
     }
 
-    private void handleResult( List <MessageEntity> msgList) {
-        if (msgList == null || msgList.size() == 0) return;
+    private void handleResult(List<MessageEntity> msgList) {
+        hideLoading();
+        if (msgList == null || msgList.size() == 0) {
+            showErrorView();
+            return;
+        }
 
         mData.clear();
         mData.addAll(msgList);
         mAdapter.notifyDataSetChanged();
+    }
+
+    public void showLoading() {
+        loadingView.setVisibility(View.VISIBLE);
+    }
+
+    public void hideLoading() {
+        loadingView.setVisibility(View.GONE);
+    }
+
+    public void showErrorView() {
+        emptyView.setVisibility(View.VISIBLE);
+        emptyView.showErrorDataView(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    public void showEmptyView() {
+        emptyView.setVisibility(View.VISIBLE);
+        emptyView.showNoDataView("暂无数据");
     }
 
 }

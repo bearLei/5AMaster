@@ -100,5 +100,23 @@ public class HomeFragment extends PutiFragment implements HomeView {
     }
 
 
+    @Override
+    public void showLoading() {
 
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showErrorView() {
+
+    }
+
+    @Override
+    public void showEmptyView() {
+
+    }
 }

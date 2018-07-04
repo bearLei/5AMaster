@@ -81,4 +81,24 @@ public class PutiWorkCheckActivity extends PutiActivity implements WorkCheckView
     public void onClick() {
         mPtr.showClassDialog(fillterClass);
     }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showErrorView() {
+
+    }
+
+    @Override
+    public void showEmptyView() {
+
+    }
 }

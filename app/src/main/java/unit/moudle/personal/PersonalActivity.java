@@ -141,4 +141,23 @@ public class PersonalActivity extends PutiActivity implements PersonView {
         PutiEventBus.g().post(new AvatarChangeEvent());
     }
 
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showErrorView() {
+
+    }
+
+    @Override
+    public void showEmptyView() {
+
+    }
 }

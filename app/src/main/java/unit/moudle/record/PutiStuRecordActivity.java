@@ -99,4 +99,24 @@ public class PutiStuRecordActivity extends PutiActivity implements PutiStuView {
             headview.setTitle(name);
         }
     }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showErrorView() {
+
+    }
+
+    @Override
+    public void showEmptyView() {
+
+    }
 }

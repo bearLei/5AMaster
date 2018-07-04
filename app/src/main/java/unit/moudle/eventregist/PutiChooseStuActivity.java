@@ -190,4 +190,23 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
        return ChooseStuManager.Event_Choose;
     }
 
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showErrorView() {
+
+    }
+
+    @Override
+    public void showEmptyView() {
+
+    }
 }

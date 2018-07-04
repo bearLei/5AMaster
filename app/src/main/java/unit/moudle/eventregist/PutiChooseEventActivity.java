@@ -124,4 +124,24 @@ public class PutiChooseEventActivity extends PutiActivity implements ChooseEvent
     public void setJumpSecondPosition(int position) {
 
     }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showErrorView() {
+
+    }
+
+    @Override
+    public void showEmptyView() {
+
+    }
 }

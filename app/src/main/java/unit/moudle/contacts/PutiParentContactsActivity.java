@@ -137,4 +137,24 @@ public class PutiParentContactsActivity extends PutiActivity implements ParentCo
     public void onClick() {
         mPtr.showClassDialog(filterClass);
     }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showErrorView() {
+
+    }
+
+    @Override
+    public void showEmptyView() {
+
+    }
 }

@@ -5,4 +5,8 @@ package com.puti.education.base;
  */
 
 public interface BaseMvpView<T> {
+    void showLoading();
+    void hideLoading();
+    void showErrorView();
+    void showEmptyView();
 }

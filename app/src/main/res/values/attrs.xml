@@ -34,4 +34,16 @@
               <attr name="childMarginTop" format="dimension"/>
                <attr name="childMarginBottom" format="dimension"/>
           </declare-styleable>
+
+    <!-- LoadingView -->
+    <declare-styleable name="loading_view">
+        <attr name="loadingText" format="reference|string" /> <!-- 文字提示 -->
+    </declare-styleable>
+
+    <declare-styleable name="empty_view">
+        <attr name="emptyText" format="reference|string" /> <!-- 文字提示 -->
+        <attr name="drawableTop" format="reference" /> <!-- 上方图片 -->
+        <attr name="bgcolor" format="reference" /> <!-- 背景颜色 -->
+        <attr name="show" format="boolean" /> <!-- 是否展示 -->
+    </declare-styleable>
 </resources>

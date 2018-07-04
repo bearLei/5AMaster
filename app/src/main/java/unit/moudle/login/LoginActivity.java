@@ -170,4 +170,24 @@ public class LoginActivity extends PutiActivity implements LoginView, View.OnCli
                 break;
         }
     }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showErrorView() {
+
+    }
+
+    @Override
+    public void showEmptyView() {
+
+    }
 }

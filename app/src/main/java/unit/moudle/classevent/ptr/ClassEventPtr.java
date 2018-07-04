@@ -115,13 +115,16 @@ public class ClassEventPtr implements BaseMvpPtr{
 
             @Override
             public void requestFailed(boolean status, int code, String errorMessage) {
+
                 ToastUtil.show(errorMessage);
+                mView.showErrorView();
             }
         });
     }
 
     private void handleResult(ArrayList<Event> eventList){
         mView.succuess(eventList);
+
     }
 
 }

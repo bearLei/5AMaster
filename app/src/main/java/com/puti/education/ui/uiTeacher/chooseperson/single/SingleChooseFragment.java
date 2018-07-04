@@ -394,4 +394,19 @@ public class SingleChooseFragment extends BaseFragment implements ChoosePersonVi
         fragment.setArguments(args);
         return fragment;
     }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showErrorView() {
+
+    }
+
+    @Override
+    public void showEmptyView() {
+
+    }
 }

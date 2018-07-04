@@ -12,7 +12,6 @@ import com.puti.education.base.PutiActivity;
 import com.puti.education.util.ViewUtils;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,7 +20,9 @@ import unit.entity.Event;
 import unit.moudle.classevent.adapter.ClassEventAdapter;
 import unit.moudle.classevent.ptr.ClassEventPtr;
 import unit.moudle.classevent.view.ClassEventView;
+import unit.widget.EmptyView;
 import unit.widget.HeadView;
+import unit.widget.LoadingView;
 import unit.widget.SpaceItemDecoration;
 
 /**
@@ -42,11 +43,16 @@ public class PutiClassEventActivity extends PutiActivity implements ClassEventVi
     TextView TStatus;
     @BindView(R.id.class_name)
     TextView TClassName;
+    @BindView(R.id.loading_view)
+    LoadingView loadingView;
+    @BindView(R.id.empty_view)
+    EmptyView emptyView;
 
 
     private ClassEventPtr mPtr;
     private ArrayList<Event> mData;
     private ClassEventAdapter mAdapter;
+
     @Override
     public int getContentView() {
         return R.layout.puti_class_event_activity;
@@ -85,21 +91,22 @@ public class PutiClassEventActivity extends PutiActivity implements ClassEventVi
         });
         headview.setTitle("班级事件");
 
-        if (mData == null){
+        if (mData == null) {
             mData = new ArrayList<>();
         }
-        if (mAdapter == null){
-            mAdapter = new ClassEventAdapter(this,mData);
+        if (mAdapter == null) {
+            mAdapter = new ClassEventAdapter(this, mData);
         }
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerview.setLayoutManager(manager);
-        recyclerview.addItemDecoration(new SpaceItemDecoration(ViewUtils.dip2px(this,10)));
+        recyclerview.addItemDecoration(new SpaceItemDecoration(ViewUtils.dip2px(this, 10)));
         recyclerview.setAdapter(mAdapter);
     }
 
     @Override
     public void Star() {
         mPtr.star();
+        showLoading();
     }
 
 
@@ -107,7 +114,7 @@ public class PutiClassEventActivity extends PutiActivity implements ClassEventVi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.status_choose:
-                mPtr.showStatusDialog(this,VStatusChoose);
+                mPtr.showStatusDialog(this, VStatusChoose);
                 break;
             case R.id.class_choose:
                 mPtr.showClassDialog(VClassChoose);
@@ -127,9 +134,40 @@ public class PutiClassEventActivity extends PutiActivity implements ClassEventVi
 
     @Override
     public void succuess(ArrayList<Event> data) {
+        hideLoading();
+        if (data.size() == 0){
+            showEmptyView();
+        }
         mData.clear();
         mData.addAll(data);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showLoading() {
+        loadingView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        loadingView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showErrorView() {
+        emptyView.setVisibility(View.VISIBLE);
+        emptyView.showErrorDataView(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    @Override
+    public void showEmptyView() {
+        emptyView.setVisibility(View.VISIBLE);
+        emptyView.showNoDataView("暂无数据");
     }
 
 }

@@ -117,4 +117,24 @@ public class PutiSchoolContactsActivity extends PutiActivity implements SchoolCo
         mData.addAll(data);
         mAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showErrorView() {
+
+    }
+
+    @Override
+    public void showEmptyView() {
+
+    }
 }

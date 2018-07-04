@@ -116,4 +116,24 @@ public class EventListActivity extends PutiActivity implements EventListView {
     public void onClick() {
         mPtr.showClassDialog(className);
     }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showErrorView() {
+
+    }
+
+    @Override
+    public void showEmptyView() {
+
+    }
 }

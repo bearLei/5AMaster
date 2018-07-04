@@ -62,10 +62,13 @@ public class ClassEventDetailPtr implements BaseMvpPtr {
                 if (list != null && list.size() > 0){
                     handleResult(list.get(0));
                 }
+                mView.hideLoading();
             }
 
             @Override
             public void requestFailed(boolean status, int code, String errorMessage) {
+                mView.hideLoading();
+                mView.showErrorView();
                 ToastUtil.show(errorMessage);
             }
         });

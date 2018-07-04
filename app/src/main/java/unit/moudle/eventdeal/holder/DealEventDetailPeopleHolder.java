@@ -65,9 +65,6 @@ public class DealEventDetailPeopleHolder extends BaseHolder<Event2Involved> impl
     public DealEventDetailPeopleHolder(Context context, boolean isBatch) {
         super(context);
         this.isBatch = isBatch;
-        if (!PutiEventBus.g().isRegistered(this)) {
-            PutiEventBus.g().register(this);
-        }
     }
 
     @NonNull

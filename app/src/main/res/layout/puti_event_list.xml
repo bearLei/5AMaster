@@ -47,6 +47,9 @@
             />
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
@@ -56,4 +59,17 @@
         android:layout_marginRight="@dimen/dp_15"
         ></android.support.v7.widget.RecyclerView>
 
+        <unit.widget.EmptyView
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            ></unit.widget.EmptyView>
+        <unit.widget.LoadingView
+            android:id="@+id/loading_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            ></unit.widget.LoadingView>
+    </RelativeLayout>
 </LinearLayout>

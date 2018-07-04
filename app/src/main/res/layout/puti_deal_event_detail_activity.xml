@@ -38,14 +38,14 @@
         <unit.widget.EmptyView
             android:id="@+id/empty_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="1000dp"
             android:visibility="gone"
             android:layout_below="@+id/headview"
             ></unit.widget.EmptyView>
         <unit.widget.LoadingView
             android:id="@+id/loading_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="1000dp"
             android:visibility="gone"
             android:layout_below="@+id/headview"
             ></unit.widget.LoadingView>

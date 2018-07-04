@@ -76,6 +76,8 @@ public class ChooseStuPtr implements BaseMvpPtr {
             public void requestFailed(boolean status, int code, String errorMessage) {
                 super.requestFailed(status, code, errorMessage);
                 ToastUtil.show("拉取班级列表失败");
+                mView.hideLoading();
+                mView.showErrorView();
             }
         });
     }
@@ -93,6 +95,8 @@ public class ChooseStuPtr implements BaseMvpPtr {
             public void requestFailed(boolean status, int code, String errorMessage) {
                 super.requestFailed(status, code, errorMessage);
                 ToastUtil.show("拉取学生列表失败");
+                mView.hideLoading();
+                mView.showErrorView();
             }
         });
     }

@@ -3,6 +3,7 @@ package unit.moudle.eventdeal;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.puti.education.R;
@@ -18,7 +19,9 @@ import unit.entity.Event;
 import unit.moudle.eventdeal.adapter.EventsSureAdapter;
 import unit.moudle.eventdeal.ptr.EventListPtr;
 import unit.moudle.eventdeal.view.EventListView;
+import unit.widget.EmptyView;
 import unit.widget.HeadView;
+import unit.widget.LoadingView;
 import unit.widget.SpaceItemDecoration;
 
 /**
@@ -34,6 +37,10 @@ public class EventListActivity extends PutiActivity implements EventListView {
     TextView className;
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
+    @BindView(R.id.empty_view)
+    EmptyView emptyView;
+    @BindView(R.id.loading_view)
+    LoadingView loadingView;
 
     private EventListPtr mPtr;
     private EventsSureAdapter mAdapter;
@@ -92,6 +99,7 @@ public class EventListActivity extends PutiActivity implements EventListView {
     @Override
     public void Star() {
         mPtr.star();
+        showLoading();
     }
 
     @Override
@@ -106,6 +114,10 @@ public class EventListActivity extends PutiActivity implements EventListView {
 
     @Override
     public void success(ArrayList<Event> events) {
+        hideLoading();
+        if (events == null ||events.size() == 0){
+            showEmptyView();
+        }
         mData.clear();
         mData.addAll(events);
         mAdapter.notifyDataSetChanged();
@@ -119,21 +131,29 @@ public class EventListActivity extends PutiActivity implements EventListView {
 
     @Override
     public void showLoading() {
-
+        loadingView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        loadingView.setVisibility(View.GONE);
     }
 
     @Override
     public void showErrorView() {
+        emptyView.setVisibility(View.VISIBLE);
+        emptyView.showErrorDataView(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
     @Override
     public void showEmptyView() {
-
+        emptyView.setVisibility(View.VISIBLE);
+        emptyView.showNoDataView("暂无数据");
     }
+
 }

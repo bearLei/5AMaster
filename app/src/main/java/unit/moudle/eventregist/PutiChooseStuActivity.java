@@ -1,7 +1,9 @@
 package unit.moudle.eventregist;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import com.puti.education.widget.QuickIndexBar;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unit.entity.Student;
 import unit.eventbus.ChooseStuEvent;
@@ -22,7 +25,9 @@ import unit.moudle.eventregist.callback.OprateStuCallBack;
 import unit.moudle.eventregist.entity.ChooseStuEntity;
 import unit.moudle.eventregist.ptr.ChooseStuPtr;
 import unit.moudle.eventregist.view.ChooseStuView;
+import unit.widget.EmptyView;
 import unit.widget.HeadView;
+import unit.widget.LoadingView;
 
 /**
  * Created by lei on 2018/6/14.
@@ -43,6 +48,10 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
     TextView className;
     @BindView(R.id.filter_class)
     LinearLayout VFilterClassLayout;
+    @BindView(R.id.empty_view)
+    EmptyView emptyView;
+    @BindView(R.id.loading_view)
+    LoadingView loadingView;
 
     private ChooseStuPtr mPtr;
     private ArrayList<ChooseStuEntity> mData;
@@ -100,7 +109,7 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
 
             }
         });
-        if (getRefer() == ChooseStuManager.Event_Choose){
+        if (getRefer() == ChooseStuManager.Event_Choose) {
             headview.showRightTV(true);
             setChooseTitle(ChooseStuManager.students.size());
             headview.setRightCallBack(new HeadView.HeadViewRightCallBack() {
@@ -112,7 +121,7 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
                     finish();
                 }
             });
-        }else {
+        } else {
             headview.showRightTV(false);
             headview.setTitle("学生档案");
         }
@@ -123,8 +132,8 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
                 int size = mData.size();
                 for (int i = 0; i < size; i++) {
                     ChooseStuEntity entity = mData.get(i);
-                    if (letter.equalsIgnoreCase(entity.getLetter())){
-                            recyclerview.scrollToPosition(i);
+                    if (letter.equalsIgnoreCase(entity.getLetter())) {
+                        recyclerview.scrollToPosition(i);
                         break;
                     }
                 }
@@ -140,11 +149,14 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
     @Override
     public void Star() {
         mPtr.star();
+        showLoading();
     }
 
     @Override
     public void success(ArrayList<ChooseStuEntity> list) {
-        if (list == null) {
+        hideLoading();
+        if (list == null || list.size() == 0) {
+            showEmptyView();
             return;
         }
         mData.clear();
@@ -162,7 +174,7 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
         if (headview != null) {
             if (size > 0) {
                 headview.setTitle("选择 (" + size + ")人");
-            }else {
+            } else {
                 headview.setTitle("选择");
             }
         }
@@ -186,27 +198,36 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
         setChooseTitle(ChooseStuManager.students.size());
     }
 
-    public int getRefer(){
-       return ChooseStuManager.Event_Choose;
+    public int getRefer() {
+        return ChooseStuManager.Event_Choose;
     }
 
     @Override
     public void showLoading() {
-
+        loadingView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        loadingView.setVisibility(View.GONE);
     }
 
     @Override
     public void showErrorView() {
+        emptyView.setVisibility(View.VISIBLE);
+        emptyView.showErrorDataView(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
     @Override
     public void showEmptyView() {
-
+        emptyView.setVisibility(View.VISIBLE);
+        emptyView.showNoDataView("暂无数据");
     }
+
+
 }

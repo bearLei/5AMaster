@@ -54,14 +54,16 @@ public class ChooseEventPtr implements BaseMvpPtr {
 
             @Override
             public void responseListResult(Object infoObj, Object listObj, PageInfo pageInfo, int code, boolean status) {
-                ArrayList<EventTypeEntity> list = (ArrayList<EventTypeEntity>) listObj;
-              handleResult(list);
+                    ArrayList<EventTypeEntity> list = (ArrayList<EventTypeEntity>) listObj;
+                     handleResult(list);
             }
 
             @Override
             public void requestFailed(boolean status, int code, String errorMessage) {
                 super.requestFailed(status, code, errorMessage);
                 ToastUtil.show(errorMessage);
+                mView.hideLoading();
+                mView.showErrorView();
             }
         });
     }

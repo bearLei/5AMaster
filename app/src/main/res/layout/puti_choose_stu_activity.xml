@@ -102,5 +102,19 @@
             android:layout_marginRight="@dimen/dp_15"
             android:layout_toLeftOf="@+id/quick_indexbar"
             />
+
+        <unit.widget.EmptyView
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="1000dp"
+            android:visibility="gone"
+            ></unit.widget.EmptyView>
+        <unit.widget.LoadingView
+            android:id="@+id/loading_view"
+            android:layout_width="match_parent"
+            android:layout_height="1000dp"
+            android:visibility="gone"
+            ></unit.widget.LoadingView>
+
     </RelativeLayout>
 </LinearLayout>

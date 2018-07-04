@@ -3,24 +3,23 @@ package unit.moudle.eventregist;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.EditText;
 
-import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import unit.entity.EventMainTier;
-import unit.entity.EventTypeEntity;
 import unit.moudle.eventregist.adapter.EventChooseAdapter;
 import unit.moudle.eventregist.ptr.ChooseEventPtr;
 import unit.moudle.eventregist.view.ChooseEventView;
+import unit.widget.EmptyView;
 import unit.widget.HeadView;
+import unit.widget.LoadingView;
 
 /**
  * Created by lei on 2018/6/8.
@@ -35,12 +34,17 @@ public class PutiChooseEventActivity extends PutiActivity implements ChooseEvent
     RecyclerView recyclerview;
     @BindView(R.id.headview)
     HeadView headview;
+    @BindView(R.id.empty_view)
+    EmptyView emptyView;
+    @BindView(R.id.loading_view)
+    LoadingView loadingView;
 
     private ChooseEventPtr mPtr;
 
 
     private ArrayList<EventMainTier> mData;
     private EventChooseAdapter mAdapter;
+
     @Override
     public int getContentView() {
         return R.layout.puti_choose_event_activity;
@@ -48,8 +52,8 @@ public class PutiChooseEventActivity extends PutiActivity implements ChooseEvent
 
     @Override
     public void BindPtr() {
-        if (mPtr == null){
-            mPtr = new ChooseEventPtr(this,this);
+        if (mPtr == null) {
+            mPtr = new ChooseEventPtr(this, this);
         }
     }
 
@@ -79,11 +83,11 @@ public class PutiChooseEventActivity extends PutiActivity implements ChooseEvent
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerview.setLayoutManager(manager);
-        if (mData == null){
+        if (mData == null) {
             mData = new ArrayList<>();
         }
-        if (mAdapter == null){
-            mAdapter = new EventChooseAdapter(this,mData);
+        if (mAdapter == null) {
+            mAdapter = new EventChooseAdapter(this, mData);
         }
         recyclerview.setAdapter(mAdapter);
     }
@@ -91,10 +95,15 @@ public class PutiChooseEventActivity extends PutiActivity implements ChooseEvent
     @Override
     public void Star() {
         mPtr.star();
+        showLoading();
     }
 
     @Override
     public void handleResult(ArrayList<EventMainTier> list) {
+        hideLoading();
+        if (list == null || list.size() == 0){
+            showEmptyView();
+        }
         mData.clear();
         mData.addAll(list);
         mAdapter.notifyDataSetChanged();
@@ -127,21 +136,29 @@ public class PutiChooseEventActivity extends PutiActivity implements ChooseEvent
 
     @Override
     public void showLoading() {
-
+        loadingView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        loadingView.setVisibility(View.GONE);
     }
 
     @Override
     public void showErrorView() {
+        emptyView.setVisibility(View.VISIBLE);
+        emptyView.showErrorDataView(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
     @Override
     public void showEmptyView() {
-
+        emptyView.setVisibility(View.VISIBLE);
+        emptyView.showNoDataView("暂无数据");
     }
+
 }

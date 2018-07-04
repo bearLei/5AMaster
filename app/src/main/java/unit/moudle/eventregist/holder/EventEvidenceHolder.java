@@ -30,6 +30,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import unit.api.PutiUploadModel;
+import unit.entity.Student;
+import unit.entity.UpLoadInfo;
 
 /**
  * Created by lei on 2018/6/11.
@@ -43,18 +45,20 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
     LinearLayout VChooseMusic;
     @BindView(R.id.choose_video)
     LinearLayout VChooseVideo;
-    @BindView(R.id.test)
-    TextView test;
+
 
     private ArrayList<String> mImagePaths;
     private String mImageTextStr;
     private String mVideoPaths;
     private ArrayList<LocalFile> mAudioLocalFileList;
+    private boolean mNeedUploadImage;
+    private boolean mNeedUploadVideo;
+    private boolean mNeedUploadAudios;
 
     //下载完成后承载的集合
-    private ArrayList<UploadFileBean> mUploadedImages;
-    private ArrayList<UploadFileBean> mUploadAudios;
-    private ArrayList<UploadFileBean> mUploadVideos;
+    private ArrayList<UpLoadInfo> mUploadedImages;
+    private ArrayList<UpLoadInfo> mUploadAudios;
+    private ArrayList<UpLoadInfo> mUploadVideos;
     public EventEvidenceHolder(Context context) {
         super(context);
     }
@@ -74,7 +78,6 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
         VChooseImage.setOnClickListener(this);
         VChooseMusic.setOnClickListener(this);
         VChooseVideo.setOnClickListener(this);
-        test.setOnClickListener(this);
         return mRootView;
     }
 
@@ -102,10 +105,6 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
                 videoIntent.putExtra(Key.RECORD_VIDEO, mVideoPaths);
                 ((Activity) mContext).startActivityForResult(videoIntent, Constant.CODE_REQUEST_VIDEO);
                 break;
-
-            case R.id.test:
-                uploadImages();
-                break;
         }
     }
 
@@ -114,6 +113,11 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
             case Constant.CODE_RESULT_VIDEO: {
                 ToastUtil.show("成功添加视频");
                 mVideoPaths = intent.getStringExtra(Key.RECORD_VIDEO);
+                if (!TextUtils.isEmpty(mVideoPaths)){
+                    mNeedUploadVideo = true;
+                }else {
+                    mNeedUploadVideo = false;
+                }
             }
             break;
             case Constant.CODE_RESULT_IMG_TEXT: {
@@ -122,6 +126,11 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
                 mImageTextStr = intent.getStringExtra(Key.RECORD_IMG_TEXT);
                 List<String> tempImgList = intent.getStringArrayListExtra(Key.BEAN);
                 mImagePaths.addAll(tempImgList);
+                if (mImagePaths.size() > 0 ){
+                    mNeedUploadImage = true;
+                }else {
+                    mNeedUploadImage = false;
+                }
             }
             break;
             case Constant.CODE_RESULT_MEDIA: {
@@ -129,13 +138,18 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
                 mAudioLocalFileList.clear();
                 List<LocalFile> temImgList = intent.getParcelableArrayListExtra(Key.BEAN);
                 mAudioLocalFileList.addAll(temImgList);
+                if (mAudioLocalFileList.size() > 0){
+                    mNeedUploadAudios = true;
+                }else {
+                    mNeedUploadAudios = false;
+                }
             }
         }
     }
 
     //上传图片
     private void uploadImages() {
-        PutiUploadModel.getInstance().uploadMany(mImagePaths, 0, new BaseListener(UploadFileBean.class) {
+        PutiUploadModel.getInstance().uploadMany(mImagePaths, 0, new BaseListener(UpLoadInfo.class) {
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 super.responseResult(infoObj, listObj, code, status);
@@ -144,7 +158,14 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
             @Override
             public void responseListResult(Object infoObj, Object listObj, PageInfo pageInfo, int code, boolean status) {
                 super.responseListResult(infoObj, listObj, pageInfo, code, status);
-                mUploadedImages = (ArrayList<UploadFileBean>) listObj;
+                mUploadedImages = (ArrayList<UpLoadInfo>) listObj;
+                if (mNeedUploadAudios){
+                    uploadAudio();
+                }else if (mNeedUploadVideo){
+                    uploadVideo();
+                }else if (uploadFinishCallBack != null){
+                    uploadFinishCallBack.finish();
+                }
             }
 
             @Override
@@ -161,7 +182,7 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
         for (LocalFile localFile :mAudioLocalFileList){
             tempAudioList.add(localFile.localPath);
         }
-        PutiUploadModel.getInstance().uploadMany(tempAudioList, 0, new BaseListener(UploadFileBean.class) {
+        PutiUploadModel.getInstance().uploadMany(tempAudioList, 0, new BaseListener(UpLoadInfo.class) {
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 super.responseResult(infoObj, listObj, code, status);
@@ -170,7 +191,12 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
             @Override
             public void responseListResult(Object infoObj, Object listObj, PageInfo pageInfo, int code, boolean status) {
                 super.responseListResult(infoObj, listObj, pageInfo, code, status);
-                mUploadAudios = (ArrayList<UploadFileBean>) listObj;
+                mUploadAudios = (ArrayList<UpLoadInfo>) listObj;
+                if (mNeedUploadVideo){
+                    uploadVideo();
+                }else if (uploadFinishCallBack != null){
+                    uploadFinishCallBack.finish();
+                }
             }
 
             @Override
@@ -189,7 +215,7 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
             tempVideoList.add(mVideoPaths);
         }
 
-        PutiUploadModel.getInstance().uploadMany(tempVideoList, 0, new BaseListener(UploadFileBean.class) {
+        PutiUploadModel.getInstance().uploadMany(tempVideoList, 0, new BaseListener(UpLoadInfo.class) {
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 super.responseResult(infoObj, listObj, code, status);
@@ -198,7 +224,10 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
             @Override
             public void responseListResult(Object infoObj, Object listObj, PageInfo pageInfo, int code, boolean status) {
                 super.responseListResult(infoObj, listObj, pageInfo, code, status);
-                mUploadVideos = (ArrayList<UploadFileBean>) listObj;
+                mUploadVideos = (ArrayList<UpLoadInfo>) listObj;
+                if (uploadFinishCallBack != null){
+                    uploadFinishCallBack.finish();
+                }
             }
 
             @Override
@@ -212,7 +241,38 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
 
     public JSONArray getEvidenceJson(){
         JSONArray array = new JSONArray();
+        if (mUploadedImages != null && mUploadedImages.size() > 0) {
+            for (UpLoadInfo upLoadInfo : mUploadedImages) {
+                array.add(upLoadInfo.getFileuid());
+            }
+        }
+        if (mUploadAudios!= null && mUploadAudios.size() > 0) {
+            for (UpLoadInfo upLoadInfo : mUploadAudios) {
+                array.add(upLoadInfo.getFileuid());
+            }
+        }
+        if (mUploadVideos != null && mUploadVideos.size() > 0) {
+            for (UpLoadInfo upLoadInfo : mUploadVideos) {
+                array.add(upLoadInfo.getFileuid());
+            }
+        }
         return array;
     }
 
+    public void doUpload(UploadFinishCallBack callBack){
+        this.uploadFinishCallBack = callBack;
+        if (mNeedUploadImage){
+            uploadImages();
+        } else if (mNeedUploadAudios){
+            uploadAudio();
+        } else if (mNeedUploadVideo){
+            uploadVideo();
+        }
+    }
+
+    private UploadFinishCallBack uploadFinishCallBack;
+
+    public interface  UploadFinishCallBack{
+        void finish();
+    }
 }

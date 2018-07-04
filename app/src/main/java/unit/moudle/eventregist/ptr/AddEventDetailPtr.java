@@ -152,9 +152,9 @@ public class AddEventDetailPtr implements BaseMvpPtr {
      * @param Description 事件描述
      * @param EventType 事件类型
      */
-    public void addEvent(String Time,String PlaceUID,
-                         String Address,String Description,
-                         String EventType){
+    public void addEvent(final String Time, final String PlaceUID,
+                         final String Address, final String Description,
+                         final String EventType){
 
             if (TextUtils.isEmpty(Time)){
                 ToastUtil.show("请输入时间");
@@ -172,18 +172,26 @@ public class AddEventDetailPtr implements BaseMvpPtr {
             ToastUtil.show("请选择涉事学生");
             return;
         }
-        String eventStr = buildJson(Time, PlaceUID, Address, Description, EventType);
-        PutiCommonModel.getInstance().addEvent(eventStr,new BaseListener(BaseResponseInfo.class){
+        mEvidenceHolder.doUpload(new EventEvidenceHolder.UploadFinishCallBack() {
             @Override
-            public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
-                super.responseResult(infoObj, listObj, code, status);
-            }
+            public void finish() {
+                JSONArray evidenceJson = mEvidenceHolder.getEvidenceJson();
+                String eventStr = buildJson(Time, PlaceUID, Address, Description, EventType,evidenceJson);
+                PutiCommonModel.getInstance().addEvent(eventStr,new BaseListener(BaseResponseInfo.class){
+                    @Override
+                    public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
+                        ToastUtil.show("提交成功");
+                        mView.finishView();
+                    }
 
-            @Override
-            public void requestFailed(boolean status, int code, String errorMessage) {
-                ToastUtil.show("提交失败："+errorMessage);
+                    @Override
+                    public void requestFailed(boolean status, int code, String errorMessage) {
+                        ToastUtil.show("提交失败："+errorMessage);
+                    }
+                });
             }
         });
+
 
 
     }
@@ -191,7 +199,7 @@ public class AddEventDetailPtr implements BaseMvpPtr {
 
     private String buildJson(String Time,String PlaceUID,
                              String Address,String Description,
-                             String EventType){
+                             String EventType,JSONArray evidences){
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Time",Time);
@@ -206,7 +214,7 @@ public class AddEventDetailPtr implements BaseMvpPtr {
         }
         jsonObject.put("Students",students);
 
-        jsonObject.put("Evidences",mEvidenceHolder.getEvidenceJson());
+        jsonObject.put("Evidences",evidences);
 
         return jsonObject.toString();
     }

@@ -130,6 +130,11 @@ public class PutiChooseDetailActivity extends PutiActivity implements AddEventDe
     }
 
     @Override
+    public void finishView() {
+        finish();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode ){

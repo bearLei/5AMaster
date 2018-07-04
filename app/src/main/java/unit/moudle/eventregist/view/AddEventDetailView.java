@@ -15,4 +15,5 @@ public interface AddEventDetailView extends BaseMvpView {
     void addDescView(View view);
     void addEvidenceView(View view);
     String getEventType();
+    void finishView();
 }

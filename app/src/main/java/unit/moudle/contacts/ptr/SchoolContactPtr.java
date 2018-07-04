@@ -68,6 +68,8 @@ public class SchoolContactPtr implements BaseMvpPtr {
             @Override
             public void requestFailed(boolean status, int code, String errorMessage) {
                 ToastUtil.show(errorMessage);
+                mView.hideLoading();
+                mView.showErrorView();
             }
         });
     }

@@ -3,6 +3,7 @@ package unit.moudle.contacts;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,7 +21,9 @@ import unit.entity.ParShowContactInfo;
 import unit.moudle.contacts.adapter.ParContactAdapter;
 import unit.moudle.contacts.ptr.ParentContactPtr;
 import unit.moudle.contacts.view.ParentContactView;
+import unit.widget.EmptyView;
 import unit.widget.HeadView;
+import unit.widget.LoadingView;
 
 /**
  * Created by lei on 2018/6/19.
@@ -39,6 +42,10 @@ public class PutiParentContactsActivity extends PutiActivity implements ParentCo
     QuickIndexBar quickIndexbar;
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
+    @BindView(R.id.empty_view)
+    EmptyView emptyView;
+    @BindView(R.id.loading_view)
+    LoadingView loadingView;
 
 
     private ParentContactPtr mPtr;
@@ -117,11 +124,16 @@ public class PutiParentContactsActivity extends PutiActivity implements ParentCo
     @Override
     public void Star() {
         mPtr.star();
+        showLoading();
     }
 
 
     @Override
     public void success(ArrayList<ParShowContactInfo> data) {
+        hideLoading();
+        if (data == null || data.size() == 0){
+            showEmptyView();
+        }
         mData.clear();
         mData.addAll(data);
         mAdapter.notifyDataSetChanged();
@@ -140,21 +152,29 @@ public class PutiParentContactsActivity extends PutiActivity implements ParentCo
 
     @Override
     public void showLoading() {
-
+        loadingView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        loadingView.setVisibility(View.GONE);
     }
 
     @Override
     public void showErrorView() {
+        emptyView.setVisibility(View.VISIBLE);
+        emptyView.showErrorDataView(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
     @Override
     public void showEmptyView() {
-
+        emptyView.setVisibility(View.VISIBLE);
+        emptyView.showNoDataView("暂无数据");
     }
+
 }

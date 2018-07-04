@@ -88,6 +88,14 @@ public class ParentContactPtr implements BaseMvpPtr {
                     handleResult((ArrayList<ParContactInfo.ParContactDetailInfo>) info.getParents());
                 }
             }
+
+            @Override
+            public void requestFailed(boolean status, int code, String errorMessage) {
+                ToastUtil.show(errorMessage);
+                mView.hideLoading();
+                mView.showErrorView();
+
+            }
         });
     }
 

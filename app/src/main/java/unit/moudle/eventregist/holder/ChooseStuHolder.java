@@ -61,12 +61,12 @@ public class ChooseStuHolder extends BaseHolder<Object> {
             mAdapter = new EventDetailChooseStuAdapter(mContext,mData);
         }
         gridView.setAdapter(mAdapter);
-        scan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestPermissions((Activity) mContext);
-            }
-        });
+       scan.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               requestPermissions((Activity) mContext);
+           }
+       });
         return mRootView;
     }
 

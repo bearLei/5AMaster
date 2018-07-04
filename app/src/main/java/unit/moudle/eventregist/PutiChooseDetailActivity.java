@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.puti.education.R;
 import com.puti.education.base.PutiActivity;
 import com.puti.education.util.Constant;
+import com.puti.education.zxing.ZxingUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -131,11 +132,18 @@ public class PutiChooseDetailActivity extends PutiActivity implements AddEventDe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (resultCode) {
-            case Constant.CODE_RESULT_VIDEO:
-            case Constant.CODE_RESULT_IMG_TEXT:
-            case Constant.CODE_RESULT_MEDIA:
-                mPtr.evidenceActivityResult(requestCode, resultCode, data);
+        switch (requestCode ){
+            case ZxingUtil.REQUEST_CODE:
+                mPtr.onActivityResult(requestCode, resultCode, data);
+                break;
+            default:
+                switch (resultCode) {
+                    case Constant.CODE_RESULT_VIDEO:
+                    case Constant.CODE_RESULT_IMG_TEXT:
+                    case Constant.CODE_RESULT_MEDIA:
+                        mPtr.evidenceActivityResult(requestCode, resultCode, data);
+                        break;
+                }
                 break;
         }
     }
@@ -152,4 +160,5 @@ public class PutiChooseDetailActivity extends PutiActivity implements AddEventDe
     public void onClick() {
         mPtr.addEvent();
     }
+
 }

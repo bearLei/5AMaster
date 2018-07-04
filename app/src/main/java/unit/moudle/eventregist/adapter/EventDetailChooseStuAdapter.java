@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.baidu.mapapi.map.Text;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.puti.education.R;
 import com.puti.education.base.InflateService;
@@ -57,6 +59,7 @@ public class EventDetailChooseStuAdapter extends BaseAdapter {
             convertView.setLayoutParams(params);
             holder = new ViewHolder();
             holder.avatar = (SimpleDraweeView) convertView.findViewById(R.id.avatar);
+            holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.addLayout = (RelativeLayout) convertView.findViewById(R.id.add_layout);
             convertView.setTag(holder);
         }else {
@@ -65,11 +68,14 @@ public class EventDetailChooseStuAdapter extends BaseAdapter {
         final Student student = mData.get(position);
         if (student.isAdd()){
             holder.avatar.setVisibility(View.GONE);
+            holder.name.setVisibility(View.GONE);
             holder.addLayout.setVisibility(View.VISIBLE);
         }else {
             holder.avatar.setVisibility(View.VISIBLE);
             holder.addLayout.setVisibility(View.GONE);
+            holder.name.setVisibility(View.VISIBLE);
             holder.avatar.setImageURI("");
+            holder.name.setText(student.getStudentName());
         }
 
         holder.addLayout.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +90,7 @@ public class EventDetailChooseStuAdapter extends BaseAdapter {
 
     public class ViewHolder{
         public SimpleDraweeView avatar;
+        public TextView name;
         public RelativeLayout addLayout;
     }
 }

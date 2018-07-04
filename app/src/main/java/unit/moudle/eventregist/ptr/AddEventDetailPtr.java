@@ -7,11 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.puti.education.base.BaseMvpPtr;
+import com.puti.education.bean.EventAboutPeople;
 import com.puti.education.listener.BaseListener;
+import com.puti.education.util.LogUtil;
 import com.puti.education.util.ToastUtil;
+import com.puti.education.zxing.ZxingUserInfo;
+import com.puti.education.zxing.ZxingUtil;
 
 import java.util.ArrayList;
 
@@ -125,9 +131,10 @@ public class AddEventDetailPtr implements BaseMvpPtr {
         if (mChooseStuList == null){
             mChooseStuList = new ArrayList<>();
         }
-        mChooseStuList.clear();
+//        mChooseStuList.clear();
+
         mChooseStuList.addAll(list);
-        mChooseStuHolder.setList(list);
+        mChooseStuHolder.setList(mChooseStuList);
     }
 
     public void addEvent(){
@@ -202,5 +209,32 @@ public class AddEventDetailPtr implements BaseMvpPtr {
         jsonObject.put("Evidences",mEvidenceHolder.getEvidenceJson());
 
         return jsonObject.toString();
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ZxingUtil.g().onActivityResult(requestCode, resultCode, data, new ZxingUtil.ZxingCallBack() {
+            @Override
+            public void result(String result) {
+                try {
+                    ZxingUserInfo info = JSON.parseObject(result, ZxingUserInfo.class);
+                    Student student = new Student();
+                    student.setStudentName(info.Name);
+                    student.setStudentUID(info.UID);
+                    if (mChooseStuList == null){
+                        mChooseStuList = new ArrayList<Student>();
+                    }
+                    mChooseStuList.add(student);
+                    mChooseStuHolder.setList(mChooseStuList);
+                }catch (JSONException e){
+                    LogUtil.d("lei","二维码解析错误");
+                }
+            }
+
+            @Override
+            public void fail() {
+
+            }
+        });
     }
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.puti.education.R;
@@ -69,6 +70,7 @@ public class StudentAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.avatar = (SimpleDraweeView) convertView.findViewById(R.id.avatar);
             holder.checkedIcon = (ImageView) convertView.findViewById(R.id.checked);
+            holder.name = (TextView) convertView.findViewById(R.id.name);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder) convertView.getTag();
@@ -111,7 +113,7 @@ public class StudentAdapter extends BaseAdapter {
             }
         }
         holder.avatar.setImageURI("");
-
+        holder.name.setText(student.getStudentName());
         return convertView;
     }
 
@@ -119,5 +121,6 @@ public class StudentAdapter extends BaseAdapter {
     public class ViewHolder{
         public SimpleDraweeView avatar;
         public ImageView checkedIcon;
+        public TextView name;
     }
 }

@@ -16,4 +16,5 @@ public interface ChooseStuView extends BaseMvpView{
     void success(ArrayList<ChooseStuEntity> list);
     void setClassName(String name);
     void setChooseTitle(int size);
+    String getEditSearch();
 }

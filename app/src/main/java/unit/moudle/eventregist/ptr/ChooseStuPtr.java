@@ -37,6 +37,7 @@ public class ChooseStuPtr implements BaseMvpPtr {
     private ArrayList<ChooseStuEntity> mStudentList;
     private Map<String,ArrayList<Student>> studentMap;
     private  StudentEntity entity;
+    private String mChooseClassId;
     public ChooseStuPtr(Context mContext, ChooseStuView mView) {
         this.mContext = mContext;
         this.mView = mView;
@@ -68,7 +69,8 @@ public class ChooseStuPtr implements BaseMvpPtr {
                 super.responseListResult(infoObj, listObj, pageInfo, code, status);
                 mClassList = (ArrayList<ClassSimple>) listObj;
                 //默认拉取第一个班级的学生
-                queryStudent(mClassList.get(0).getUID());
+                mChooseClassId = mClassList.get(0).getUID();
+                queryStudent("");
                 mView.setClassName(mClassList.get(0).getName());
             }
 
@@ -82,8 +84,9 @@ public class ChooseStuPtr implements BaseMvpPtr {
         });
     }
 
-    public void queryStudent(String classUid){
-        PutiTeacherModel.getInstance().getStudent(classUid,"",0,1,Integer.MAX_VALUE,new BaseListener(StudentEntity.class){
+    public void queryStudent(String studentName){
+        mView.showLoading();
+        PutiTeacherModel.getInstance().getStudent(mChooseClassId,"",0,1,Integer.MAX_VALUE,studentName,new BaseListener(StudentEntity.class){
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 super.responseResult(infoObj, listObj, code, status);
@@ -151,10 +154,10 @@ public class ChooseStuPtr implements BaseMvpPtr {
         dropView.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                String uid = mClassList.get(position).getUID();
+                mChooseClassId= mClassList.get(position).getUID();
                 String name = mClassList.get(position).getName();
                 mView.setClassName(name);
-                queryStudent(uid);
+                queryStudent(mView.getEditSearch());
                 dropView.dismiss();
             }
         });

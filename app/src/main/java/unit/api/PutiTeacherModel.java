@@ -64,10 +64,11 @@ public class PutiTeacherModel extends PutiBaseModel{
      * @param status -1不限 0正常 1转班 2退学 3休学 4毕业
      * @param pageIndex 查询起始下标
      * @param pageSize 查询个数
+     *@param studentName 学生姓名
      * @param listener
      */
-    public void getStudent( String classUID,String termUID,int status,int pageIndex,int pageSize,final BaseListener listener){
-        mTeacherApi.getStudent(classUID, termUID, status, pageIndex, pageSize)
+    public void getStudent( String classUID,String termUID,int status,int pageIndex,int pageSize,String studentName,final BaseListener listener){
+        mTeacherApi.getStudent(classUID, termUID, status, pageIndex, pageSize,studentName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new PutiCommonSubscriber(listener){

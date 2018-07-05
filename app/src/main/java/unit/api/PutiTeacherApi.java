@@ -21,7 +21,8 @@ public interface PutiTeacherApi {
                                             @Query("termUID")String termUID,
                                             @Query("status") int status,
                                             @Query("pageIndex") int pageIndex,
-                                            @Query("pageSize")int pageSize);
+                                            @Query("pageSize")int pageSize,
+                                            @Query("studentName")String studentName);
     @GET("Common/MyUID")//获取自己的uid
     Observable<BaseResponseInfo> getUid();
 

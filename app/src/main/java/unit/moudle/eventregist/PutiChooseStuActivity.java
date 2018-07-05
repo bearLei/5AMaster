@@ -3,6 +3,8 @@ package unit.moudle.eventregist;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -144,21 +146,36 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
 
             }
         });
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mPtr.queryStudent(s.toString());
+            }
+        });
     }
 
     @Override
     public void Star() {
         mPtr.star();
-        showLoading();
     }
 
     @Override
     public void success(ArrayList<ChooseStuEntity> list) {
-        hideLoading();
         if (list == null || list.size() == 0) {
             showEmptyView();
             return;
         }
+        showSuccessView();
         mData.clear();
         mData.addAll(list);
         mAdapter.notifyDataSetChanged();
@@ -178,6 +195,11 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
                 headview.setTitle("选择");
             }
         }
+    }
+
+    @Override
+    public String getEditSearch() {
+        return search.getText().toString();
     }
 
 
@@ -229,5 +251,10 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
         emptyView.showNoDataView("暂无数据");
     }
 
+    private void showSuccessView(){
+        recyclerview.setVisibility(View.VISIBLE);
+        emptyView.setVisibility(View.GONE);
+        hideLoading();
+    }
 
 }

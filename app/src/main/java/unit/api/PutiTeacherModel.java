@@ -203,7 +203,7 @@ public class PutiTeacherModel extends PutiBaseModel{
      * @param listener
      */
     public void getParReports(final BaseListener listener){
-        mTeacherApi.getParReports(-1,Integer.MAX_VALUE)
+        mTeacherApi.getParReports(1,Integer.MAX_VALUE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new PutiCommonSubscriber(listener){

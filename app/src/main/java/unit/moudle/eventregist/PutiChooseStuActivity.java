@@ -15,6 +15,7 @@ import com.puti.education.base.PutiActivity;
 import com.puti.education.widget.QuickIndexBar;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -178,6 +179,7 @@ public class PutiChooseStuActivity extends PutiActivity implements ChooseStuView
         showSuccessView();
         mData.clear();
         mData.addAll(list);
+        Collections.sort(mData,new PutiStudentCompartor());
         mAdapter.notifyDataSetChanged();
     }
 

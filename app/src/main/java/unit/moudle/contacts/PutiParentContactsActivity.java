@@ -16,6 +16,7 @@ import com.puti.education.base.PutiActivity;
 import com.puti.education.widget.QuickIndexBar;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -157,6 +158,7 @@ public class PutiParentContactsActivity extends PutiActivity implements ParentCo
         showSuccessView();
         mData.clear();
         mData.addAll(data);
+        Collections.sort(mData,new PutiSchoolContactCompartor());
         mAdapter.notifyDataSetChanged();
     }
 

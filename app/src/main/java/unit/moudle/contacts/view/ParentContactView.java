@@ -14,5 +14,6 @@ public interface ParentContactView extends BaseMvpView {
 
     void success(ArrayList<ParShowContactInfo> data);
     void setClassName(String name);
+    String getEditName();
 
 }

@@ -3,6 +3,8 @@ package unit.moudle.contacts.holder;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.puti.education.R;
@@ -37,6 +39,10 @@ public class SchoolContactsHolder extends BaseHolder<SchoolContactInfo> {
     protected View initView(Context context) {
         mRootView = InflateService.g().inflate(R.layout.puti_school_contact_holder);
         ButterKnife.bind(this, mRootView);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        contactList.setLayoutParams(params);
         return mRootView;
     }
 
@@ -48,9 +54,7 @@ public class SchoolContactsHolder extends BaseHolder<SchoolContactInfo> {
         }
 
         letter.setText(data.getLetter());
-        if (mAdapter == null){
-            mAdapter = new SchoolContactHolderAdapter(mContext,data.getContactInfos());
-        }
+        mAdapter = new SchoolContactHolderAdapter(mContext,data.getContactInfos());
         contactList.setAdapter(mAdapter);
     }
 }

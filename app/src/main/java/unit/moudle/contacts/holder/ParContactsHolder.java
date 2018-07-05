@@ -51,9 +51,7 @@ public class ParContactsHolder extends BaseHolder<ParShowContactInfo> {
         }
 
         letter.setText(data.getLetter());
-        if (mAdapter == null){
-            mAdapter = new ParContactHolderAdapter(mContext,data.getContactInfos());
-        }
+        mAdapter = new ParContactHolderAdapter(mContext,data.getContactInfos());
         contactList.setAdapter(mAdapter);
     }
 }

@@ -52,17 +52,22 @@ public class SchoolContactHolderAdapter extends BaseAdapter {
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = InflateService.g().inflate(R.layout.puti_school_contact_holder_adapter_item);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewUtils.dip2px(context,50));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewUtils.dip2px(context,61));
             convertView.setLayoutParams(params);
             viewHolder.name = (TextView) convertView.findViewById(R.id.name);
             viewHolder.job = (TextView) convertView.findViewById(R.id.job);
             viewHolder.telePhone = (TextView) convertView.findViewById(R.id.telephone);
             viewHolder.mobile = (TextView) convertView.findViewById(R.id.mobile);
+            viewHolder.line = convertView.findViewById(R.id.line_bottom);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
+        if (mData.size() <= 1){
+            viewHolder.line.setVisibility(View.GONE);
+        }else {
+            viewHolder.line.setVisibility(View.VISIBLE);
+        }
         TeacherContactInfo info = mData.get(position);
         viewHolder.name.setText(info.getRealName());
         viewHolder.job.setText(info.getRoles());
@@ -73,6 +78,7 @@ public class SchoolContactHolderAdapter extends BaseAdapter {
 
     public class ViewHolder{
         public TextView name,job,telePhone,mobile;
+        private View line;
     }
 
 }

@@ -63,9 +63,15 @@ public class ParContactHolderAdapter extends BaseAdapter {
             viewHolder.fMobile = (TextView) convertView.findViewById(R.id.fmobile);
             viewHolder.mName = (TextView) convertView.findViewById(R.id.mname);
             viewHolder.mMobile = (TextView) convertView.findViewById(R.id.mmobile);
+            viewHolder.line = convertView.findViewById(R.id.line_bottom);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
+        }
+        if (mData.size() <= 1){
+            viewHolder.line.setVisibility(View.GONE);
+        }else {
+            viewHolder.line.setVisibility(View.VISIBLE);
         }
 
         ParContactInfo.ParContactDetailInfo info = mData.get(position);
@@ -82,6 +88,7 @@ public class ParContactHolderAdapter extends BaseAdapter {
 
     public class ViewHolder{
         public TextView name,guardian,guandianMoble,fName,fMobile,mName,mMobile;
+        private View line;
     }
 
 }

@@ -49,7 +49,7 @@ public class SchoolContactPtr implements BaseMvpPtr {
         if (characterParser == null){
             characterParser = new CharacterParser();
         }
-        queryData();
+        queryData("");
     }
 
     @Override
@@ -57,8 +57,9 @@ public class SchoolContactPtr implements BaseMvpPtr {
 
     }
 
-    private void queryData(){
-        PutiCommonModel.getInstance().getTeacherBook(new BaseListener(ContactInfo.class){
+    public void queryData(String name){
+        mView.showLoading();
+        PutiCommonModel.getInstance().getTeacherBook(name,new BaseListener(ContactInfo.class){
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 ContactInfo contactInfo = (ContactInfo) infoObj;

@@ -37,6 +37,7 @@ public class ParentContactPtr implements BaseMvpPtr {
     private ArrayList<ParShowContactInfo> contactList;
     private CharacterParser characterParser;
     private ArrayList<ClassSimple> mClassList;
+    private String mChooseClassId;
 
     public ParentContactPtr(Context mContext, ParentContactView mView) {
         this.mContext = mContext;
@@ -68,7 +69,8 @@ public class ParentContactPtr implements BaseMvpPtr {
                 super.responseListResult(infoObj, listObj, pageInfo, code, status);
                 mClassList = (ArrayList<ClassSimple>) listObj;
                 //默认拉取第一个班级的家长
-                queryData(mClassList.get(0).getUID());
+                mChooseClassId = mClassList.get(0).getUID();
+                queryData("");
                 mView.setClassName(mClassList.get(0).getName());
             }
 
@@ -76,11 +78,13 @@ public class ParentContactPtr implements BaseMvpPtr {
             public void requestFailed(boolean status, int code, String errorMessage) {
                 super.requestFailed(status, code, errorMessage);
                 ToastUtil.show("拉取班级列表失败");
+                mView.showErrorView();
             }
         });
     }
-    private void queryData(String classId){
-        PutiCommonModel.getInstance().getParentBook(classId,new BaseListener(ParContactInfo.class){
+    public void queryData(String name){
+        mView.showLoading();
+        PutiCommonModel.getInstance().getParentBook(mChooseClassId,name,new BaseListener(ParContactInfo.class){
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 ParContactInfo info = (ParContactInfo) infoObj;
@@ -148,10 +152,10 @@ public class ParentContactPtr implements BaseMvpPtr {
         dropView.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                String uid = mClassList.get(position).getUID();
+                mChooseClassId = mClassList.get(position).getUID();
                 String name = mClassList.get(position).getName();
                 mView.setClassName(name);
-                queryData(uid);
+                queryData(mView.getEditName());
                 dropView.dismiss();
             }
         });

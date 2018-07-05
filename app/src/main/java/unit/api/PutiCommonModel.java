@@ -371,9 +371,10 @@ public class PutiCommonModel extends PutiBaseModel{
     /**
      * 获取教师通讯录
      * @param listener
+     * @param name 检索姓名
      */
-    public void getTeacherBook(final BaseListener listener){
-        mCommonApi.getTeacherBook(-1,Integer.MAX_VALUE,"")
+    public void getTeacherBook(String name,final BaseListener listener){
+        mCommonApi.getTeacherBook(1,Integer.MAX_VALUE,name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new PutiCommonSubscriber(listener){
@@ -388,10 +389,11 @@ public class PutiCommonModel extends PutiBaseModel{
     /**
      * 获取家长通讯录
      * @param classId 班级id
+     * @param name 学生名字
      * @param listener
      */
-    public void getParentBook(String classId,final BaseListener listener){
-        mCommonApi.getParentBook(-1,Integer.MAX_VALUE,"",classId)
+    public void getParentBook(String classId,String name,final BaseListener listener){
+        mCommonApi.getParentBook(1,Integer.MAX_VALUE,name,classId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new PutiCommonSubscriber(listener){

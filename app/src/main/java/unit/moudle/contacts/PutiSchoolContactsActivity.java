@@ -3,6 +3,9 @@ package unit.moudle.contacts;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 
@@ -114,12 +117,29 @@ public class PutiSchoolContactsActivity extends PutiActivity implements SchoolCo
             }
         });
 
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String insert = s.toString();
+                mPtr.queryData(insert);
+            }
+        });
     }
 
     @Override
     public void Star() {
         mPtr.star();
-        showLoading();
     }
 
     @Override
@@ -128,6 +148,7 @@ public class PutiSchoolContactsActivity extends PutiActivity implements SchoolCo
         if (data == null || data.size() == 0){
             showEmptyView();
         }
+       showSuccessView();
         mData.clear();
         mData.addAll(data);
         mAdapter.notifyDataSetChanged();
@@ -160,10 +181,9 @@ public class PutiSchoolContactsActivity extends PutiActivity implements SchoolCo
         emptyView.showNoDataView("暂无数据");
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    private void showSuccessView(){
+        emptyView.setVisibility(View.GONE);
+        hideLoading();
+        recyclerview.setVisibility(View.VISIBLE);
     }
 }

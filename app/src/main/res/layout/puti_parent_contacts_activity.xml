@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
         android:background="@color/base_ffffff"
         android:orientation="horizontal"
-
         android:gravity="center_vertical"
         >
         <LinearLayout
@@ -75,6 +74,12 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/base_f3f3f3"
+        />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

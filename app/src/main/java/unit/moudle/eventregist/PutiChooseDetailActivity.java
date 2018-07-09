@@ -98,6 +98,12 @@ public class PutiChooseDetailActivity extends PutiActivity implements AddEventDe
 
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ChooseStuManager.students.clear();
+    }
+
+    @Override
     public void addChooseStuView(View view) {
         VChooseStuLayout.removeAllViews();
         VChooseStuLayout.addView(view);

@@ -41,7 +41,7 @@ public class DealEventDetailDeductHolder extends BaseHolder<Event2Involved> {
     @BindView(R.id.sign)
     TextView TSign;
 
-    private HashMap<View,Boolean> mViewSelectedMap;
+    private HashMap<TextView,Boolean> mViewSelectedMap;
 
     public DealEventDetailDeductHolder(Context context) {
         super(context);
@@ -93,6 +93,7 @@ public class DealEventDetailDeductHolder extends BaseHolder<Event2Involved> {
         mViewSelectedMap.put(scoreOne,false);
         mViewSelectedMap.put(scoreTwo,false);
         mViewSelectedMap.put(scoreThree,false);
+
     }
 
     @OnClick({R.id.score_one, R.id.score_two, R.id.score_three})
@@ -109,17 +110,36 @@ public class DealEventDetailDeductHolder extends BaseHolder<Event2Involved> {
                 break;
         }
     }
-    private void oprateView(View view){
-        Iterator<Map.Entry<View, Boolean>> iterator = mViewSelectedMap.entrySet().iterator();
+    private void oprateView(final TextView view){
+        Iterator<Map.Entry<TextView, Boolean>> iterator = mViewSelectedMap.entrySet().iterator();
         while (iterator.hasNext()){
-            Map.Entry<View, Boolean> entry = iterator.next();
-            View item = entry.getKey();
+            Map.Entry<TextView, Boolean> entry = iterator.next();
+            TextView item = entry.getKey();
             if (view == item){
                 mViewSelectedMap.put(item,true);
                 item.setSelected(true);
+                item.setTextColor(mContext.getResources().getColor(R.color.base_ffffff));
+//                view.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        if (view instanceof TextView){
+//                            ((TextView) view).setTextColor(mContext.getResources().getColor(R.color.base_ffffff));
+//                        }
+//                    }
+//                },500);
+
             }else {
                 mViewSelectedMap.put(item,false);
                 item.setSelected(false);
+                item.setTextColor(mContext.getResources().getColor(R.color.base_39BCA1));
+//                view.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        if (view instanceof TextView){
+//                            ((TextView) view).setTextColor(mContext.getResources().getColor(R.color.base_39BCA1));
+//                        }
+//                    }
+//                },500);
             }
         }
     }
@@ -133,9 +153,9 @@ public class DealEventDetailDeductHolder extends BaseHolder<Event2Involved> {
                 return score;
             }
         }else {
-            Iterator<Map.Entry<View, Boolean>> iterator = mViewSelectedMap.entrySet().iterator();
+            Iterator<Map.Entry<TextView, Boolean>> iterator = mViewSelectedMap.entrySet().iterator();
             while (iterator.hasNext()){
-                Map.Entry<View, Boolean> entry = iterator.next();
+                Map.Entry<TextView  , Boolean> entry = iterator.next();
                 Boolean value = entry.getValue();
                 View view = entry.getKey();
                 if (value == true && view instanceof TextView){

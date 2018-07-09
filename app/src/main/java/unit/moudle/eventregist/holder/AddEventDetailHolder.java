@@ -78,7 +78,6 @@ public class AddEventDetailHolder extends BaseHolder<EventDetail> {
         mRootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2018/6/11 跳转
                 Intent intent = new Intent(mContext, PutiChooseDetailActivity.class);
                 intent.putExtra(PutiChooseDetailActivity.Parse_Intent, (Serializable) data);
                 mContext.startActivity(intent);

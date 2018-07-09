@@ -66,7 +66,7 @@ public class EventBaseHolder<T> extends BaseHolder<EventMainTier> {
         pullDown.setImageResource(isPullDown
                 ? R.drawable.puti_up :
                 R.drawable.puti_down);
-        pullDown.setOnClickListener(new View.OnClickListener() {
+        mRootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (pullCallBack != null){

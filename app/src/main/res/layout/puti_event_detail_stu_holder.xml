@@ -8,14 +8,6 @@
     android:paddingRight="@dimen/dp_10"
     android:background="@color/base_ffffff"
     >
-
-    <com.puti.education.widget.GridViewForScrollView
-        android:id="@+id/gridView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="4"
-        ></com.puti.education.widget.GridViewForScrollView>
-
     <RelativeLayout
         android:id="@+id/scan"
         android:layout_width="wrap_content"
@@ -24,12 +16,21 @@
         android:layout_alignParentTop="true"
         >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="center"
-        android:src="@drawable/puti_scan"
-        android:layout_centerInParent="true"
-        />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:src="@drawable/puti_scan"
+            android:layout_centerInParent="true"
+            />
     </RelativeLayout>
+    <com.puti.education.widget.GridViewForScrollView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="4"
+        android:layout_toLeftOf="@+id/scan"
+        android:layout_marginRight="@dimen/dp_5"
+        ></com.puti.education.widget.GridViewForScrollView>
+
 </RelativeLayout>

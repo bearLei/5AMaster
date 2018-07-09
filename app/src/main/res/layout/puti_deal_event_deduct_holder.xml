@@ -25,7 +25,7 @@
         android:textColor="@color/base_39BCA1"
         android:text="-5"
         android:gravity="center"
-        android:background="@drawable/puti_shape_stock_39bca1"
+        android:background="@drawable/puti_selector_39bca1"
         android:layout_marginLeft="@dimen/dp_10"
         />
     <TextView
@@ -36,7 +36,7 @@
         android:textColor="@color/base_39BCA1"
         android:text="-5"
         android:gravity="center"
-        android:background="@drawable/puti_shape_stock_39bca1"
+        android:background="@drawable/puti_selector_39bca1"
         android:layout_marginLeft="@dimen/dp_10"
         />
     <TextView
@@ -47,7 +47,7 @@
         android:textColor="@color/base_39BCA1"
         android:text="-5"
         android:gravity="center"
-        android:background="@drawable/puti_shape_stock_39bca1"
+        android:background="@drawable/puti_selector_39bca1"
         android:layout_marginLeft="@dimen/dp_10"
         />
     <EditText

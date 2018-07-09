@@ -17,7 +17,9 @@ import com.puti.education.util.ViewUtils;
 import java.util.ArrayList;
 
 import unit.entity.Student;
+import unit.moudle.eventregist.ChooseStuManager;
 import unit.moudle.eventregist.PutiChooseStuActivity;
+import unit.moudle.eventregist.callback.OprateStuCallBack;
 
 /**
  * Created by lei on 2018/6/17.
@@ -26,10 +28,17 @@ import unit.moudle.eventregist.PutiChooseStuActivity;
 public class EventDetailChooseStuAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<Student> mData;
+    private OprateStuCallBack callBack;
 
     public EventDetailChooseStuAdapter(Context context, ArrayList<Student> mData) {
         this.mContext = context;
         this.mData = mData;
+    }
+
+    public EventDetailChooseStuAdapter(Context mContext, ArrayList<Student> mData, OprateStuCallBack callBack) {
+        this.mContext = mContext;
+        this.mData = mData;
+        this.callBack = callBack;
     }
 
     @Override
@@ -83,6 +92,16 @@ public class EventDetailChooseStuAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, PutiChooseStuActivity.class);
                 mContext.startActivity(intent);
+            }
+        });
+
+        holder.avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ChooseStuManager.students.contains(student) && callBack != null){
+                    ChooseStuManager.students.remove(student);
+                    callBack.removeStu(student);
+                }
             }
         });
         return convertView;

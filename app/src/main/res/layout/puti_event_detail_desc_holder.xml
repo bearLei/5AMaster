@@ -44,7 +44,7 @@
         android:layout_marginRight="@dimen/dp_15"
         android:background="@null"
         android:gravity="left|top"
-
+        android:textColor="@color/base_666666"
         />
 
 </LinearLayout>

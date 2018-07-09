@@ -29,7 +29,9 @@ import butterknife.ButterKnife;
 import unit.entity.Student;
 import unit.entity.StudentEntity;
 import unit.location.LocationHelper;
+import unit.moudle.eventregist.ChooseStuManager;
 import unit.moudle.eventregist.adapter.EventDetailChooseStuAdapter;
+import unit.moudle.eventregist.callback.OprateStuCallBack;
 import unit.permission.PermissionUtil;
 
 /**
@@ -58,7 +60,18 @@ public class ChooseStuHolder extends BaseHolder<Object> {
             mData = new ArrayList<>();
         }
         if (mAdapter == null){
-            mAdapter = new EventDetailChooseStuAdapter(mContext,mData);
+            mAdapter = new EventDetailChooseStuAdapter(mContext, mData, new OprateStuCallBack() {
+                @Override
+                public void chooseStu(Student student) {
+
+                }
+
+                @Override
+                public void removeStu(Student student) {
+                    mData.remove(student);
+                    mAdapter.notifyDataSetChanged();
+                }
+            });
         }
         gridView.setAdapter(mAdapter);
        scan.setOnClickListener(new View.OnClickListener() {

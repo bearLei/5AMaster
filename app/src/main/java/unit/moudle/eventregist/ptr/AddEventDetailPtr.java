@@ -164,10 +164,10 @@ public class AddEventDetailPtr implements BaseMvpPtr {
             ToastUtil.show("请输入地点");
             return;
         }
-        if (TextUtils.isEmpty(Description)){
-            ToastUtil.show("事件描述不能为空");
-            return;
-        }
+//        if (TextUtils.isEmpty(Description)){
+//            ToastUtil.show("事件描述不能为空");
+//            return;
+//        }
         if (mChooseStuList == null || mChooseStuList.size() == 0){
             ToastUtil.show("请选择涉事学生");
             return;

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.puti.education.R;
@@ -44,27 +45,27 @@ public class SpaceBuildAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View rootView;
-        ViewHolder holder;
+    public View getView(final int position, final View convertView, ViewGroup parent) {
+        final View rootView;
+        final ViewHolder holder;
 
         if (convertView == null){
             rootView = InflateService.g().inflate(R.layout.puti_space_adapter_item);
             holder = new ViewHolder();
             holder.title = (TextView) rootView.findViewById(R.id.title);
             rootView.setTag(holder);
-
         }else {
             rootView = convertView;
             holder = (ViewHolder) rootView.getTag();
         }
 
-        holder.title.setText(mData.get(position).getTypeName());
+        holder.title.setText(mData.get(position).getBuild());
 
         return rootView;
     }
 
     public class ViewHolder{
         TextView title;
+
     }
 }

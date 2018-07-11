@@ -3,7 +3,6 @@ package unit.moudle.eventdeal.holder;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -26,10 +25,8 @@ import com.puti.education.util.DownLoadManagerUtil;
 import com.puti.education.util.LogUtil;
 import com.puti.education.util.PopupWindowFactory;
 import com.puti.education.util.ToastUtil;
-import com.puti.education.widget.MediaDialog;
 
 import java.io.File;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +56,8 @@ public class DealEventDetailHeadHolder extends BaseHolder<DealEventMain> {
     GridView evidenceVioceLayout;
     @BindView(R.id.evidence_video_layout)
     ImageView evidenceVideoLayout;
+    @BindView(R.id.evidence_tv)
+    TextView evidenceTv;
 
     private EvidenceImageAdapter mImageAdapter;
     private EvidenceVioceAdapter mVioceAdapter;
@@ -66,6 +65,8 @@ public class DealEventDetailHeadHolder extends BaseHolder<DealEventMain> {
     private PopupWindowFactory mPop;
     private String mDownloadPath;
     private ProgressDialog mProgressDialog;
+    private String videoUrl;
+
     public DealEventDetailHeadHolder(Context context) {
         super(context);
     }
@@ -89,12 +90,16 @@ public class DealEventDetailHeadHolder extends BaseHolder<DealEventMain> {
         address.setText(data.getAddress());
         desc.setText(data.getDescription());
         List<Evidence> evidences = data.getEvidences();
-        List<String> imageData =new ArrayList<>();
+        if (evidences == null || evidences.size() == 0){
+            evidenceTv.setVisibility(View.GONE);
+        }else {
+            evidenceTv.setVisibility(View.VISIBLE);
+        }
+        List<String> imageData = new ArrayList<>();
         List<String> voiceData = new ArrayList<>();
-        String videoUrl = "";
         for (int i = 0; i < evidences.size(); i++) {
             Evidence evidence = evidences.get(i);
-            switch (evidence.getFileType()){
+            switch (evidence.getFileType()) {
                 case 0:
                     imageData.add(evidences.get(i).getFile());
                     break;
@@ -111,13 +116,13 @@ public class DealEventDetailHeadHolder extends BaseHolder<DealEventMain> {
             evidenceIconLayout.setVisibility(View.VISIBLE);
             mImageAdapter = new EvidenceImageAdapter(mContext, (ArrayList<String>) imageData);
             evidenceIconLayout.setAdapter(mImageAdapter);
-        }else {
+        } else {
             evidenceIconLayout.setVisibility(View.GONE);
         }
 
-        if (voiceData.size() > 0){
+        if (voiceData.size() > 0) {
             evidenceVioceLayout.setVisibility(View.VISIBLE);
-            mVioceAdapter = new EvidenceVioceAdapter(mContext,voiceData);
+            mVioceAdapter = new EvidenceVioceAdapter(mContext, voiceData);
             mVioceAdapter.setChooseVioceCallBack(new EvidenceVioceAdapter.ChooseVioceCallBack() {
                 @Override
                 public void show() {
@@ -126,35 +131,35 @@ public class DealEventDetailHeadHolder extends BaseHolder<DealEventMain> {
 
                 @Override
                 public void dissmiss() {
-                    if (mPop != null){
+                    if (mPop != null) {
                         mPop.dismiss();
                     }
                 }
             });
             evidenceVioceLayout.setAdapter(mVioceAdapter);
 
-        }else {
+        } else {
             evidenceVioceLayout.setVisibility(View.GONE);
         }
 
-        if (TextUtils.isEmpty(videoUrl)){
+        if (TextUtils.isEmpty(videoUrl)) {
             evidenceVideoLayout.setVisibility(View.GONE);
-            final String finalVideoUrl = videoUrl;
+        } else {
+            evidenceVideoLayout.setVisibility(View.VISIBLE);
             evidenceVideoLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    videoPlay(finalVideoUrl);
+                    videoPlay(videoUrl);
                 }
             });
-        }else {
-            evidenceVideoLayout.setVisibility(View.VISIBLE);
         }
     }
-    private void videoPlay(String path) {
+
+    private void videoPlay(final String path) {
 
         LogUtil.i("video play path", path);
 
-        File file = isHasCurrentFile(path);
+        final File file = isHasCurrentFile(path);
 
         if (file != null) {
             //播放
@@ -164,10 +169,28 @@ public class DealEventDetailHeadHolder extends BaseHolder<DealEventMain> {
             Toast.makeText(mContext, "开始下载...", Toast.LENGTH_LONG).show();
             disLoading("正在下载...");
             DownLoadManagerUtil.getInstance().downLoadFile(mContext, path);
+            DownLoadManagerUtil.getInstance().setDownStatusImp(new DownLoadManagerUtil.DownStatusImp() {
+                @Override
+                public void success() {
+                    hideLoading();
+                    videoPlay(videoUrl);
+                }
+
+                @Override
+                public void fail() {
+                    hideLoading();
+                    ToastUtil.show("下载视频失败");
+                }
+
+                @Override
+                public void downloading() {
+
+                }
+            });
         }
     }
 
-    private void startPlayVideo(File videofile){
+    private void startPlayVideo(File videofile) {
         String absolutePath = videofile.getAbsolutePath();
         //调用系统自带的播放器
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -175,8 +198,8 @@ public class DealEventDetailHeadHolder extends BaseHolder<DealEventMain> {
             Uri uri;
             if (Build.VERSION.SDK_INT >= 24) {
                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                uri= FileProvider.getUriForFile(mContext, mContext.getPackageName()+".fileprovider", new File(videofile.getAbsolutePath()));
-            }else {
+                uri = FileProvider.getUriForFile(mContext, mContext.getPackageName() + ".fileprovider", new File(videofile.getAbsolutePath()));
+            } else {
                 uri = Uri.parse("file://" + videofile.getAbsolutePath());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             }
@@ -186,13 +209,21 @@ public class DealEventDetailHeadHolder extends BaseHolder<DealEventMain> {
             e.printStackTrace();
         }
     }
-    public void disLoading(String msg){
+
+    public void disLoading(String msg) {
         mProgressDialog = new ProgressDialog(mContext);
         mProgressDialog.setMessage(msg);
         mProgressDialog.show();
     }
+
+    public void hideLoading() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
+
     private File isHasCurrentFile(String url) {
-        mDownloadPath = Constant.STORAGE_ROOT +  "/download/";
+        mDownloadPath = Constant.STORAGE_ROOT + "/download/";
         String curentFileName = url.substring(url.lastIndexOf("/") + 1);
         File fileDir = new File(mDownloadPath);
 
@@ -209,12 +240,13 @@ public class DealEventDetailHeadHolder extends BaseHolder<DealEventMain> {
         }
         return null;
     }
-    private void showPopDialog(View viewPar){
+
+    private void showPopDialog(View viewPar) {
         //PopupWindow的布局文件
         final View view = View.inflate(mContext, R.layout.layout_speaker, null);
         View time = view.findViewById(R.id.tv_recording_time);
         time.setVisibility(View.GONE);
-        mPop = new PopupWindowFactory(mContext,view);
-        mPop.showAtLocation(viewPar,Gravity.CENTER,0,0);
+        mPop = new PopupWindowFactory(mContext, view);
+        mPop.showAtLocation(viewPar, Gravity.CENTER, 0, 0);
     }
 }

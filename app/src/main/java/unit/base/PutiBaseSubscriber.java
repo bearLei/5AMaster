@@ -38,7 +38,7 @@ public class PutiBaseSubscriber extends Subscriber<BaseResponseInfo>{
 
     @Override
     public void onError(Throwable e) {
-        if (e instanceof SocketTimeoutException){
+            if (e instanceof SocketTimeoutException){
             this.baseListener.requestFailed(false, -1, "请求超时！");
         }else if (e instanceof JSONException){
             this.baseListener.requestFailed(false, -1, "json解析失败了！");

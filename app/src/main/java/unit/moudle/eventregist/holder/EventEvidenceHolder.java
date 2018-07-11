@@ -182,7 +182,7 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
         for (LocalFile localFile :mAudioLocalFileList){
             tempAudioList.add(localFile.localPath);
         }
-        PutiUploadModel.getInstance().uploadMany(tempAudioList, 0, new BaseListener(UpLoadInfo.class) {
+        PutiUploadModel.getInstance().uploadMany(tempAudioList, 1, new BaseListener(UpLoadInfo.class) {
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 super.responseResult(infoObj, listObj, code, status);
@@ -215,7 +215,7 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
             tempVideoList.add(mVideoPaths);
         }
 
-        PutiUploadModel.getInstance().uploadMany(tempVideoList, 0, new BaseListener(UpLoadInfo.class) {
+        PutiUploadModel.getInstance().uploadMany(tempVideoList, 2, new BaseListener(UpLoadInfo.class) {
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 super.responseResult(infoObj, listObj, code, status);

@@ -2,8 +2,10 @@ package com.puti.education.util;
 
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
@@ -11,6 +13,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import java.io.File;
+
 
 /**
  * Created by xbjin on 2017/5/27 0027.
@@ -22,6 +25,8 @@ import java.io.File;
 public class DownLoadManagerUtil {
 
     static DownLoadManagerUtil downLoadManagerUtil;
+    private int downloadId;
+    private DownloadManager dManager;
 
     public static  DownLoadManagerUtil getInstance(){
 
@@ -33,7 +38,7 @@ public class DownLoadManagerUtil {
 
     public long downLoadFile(Context context,String downLoadPath){
          String fileName = downLoadPath.substring(downLoadPath.lastIndexOf("/")+1);
-         DownloadManager dManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+          dManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
          Uri uri = Uri.parse(downLoadPath);
          DownloadManager.Request request = new DownloadManager.Request(uri);
         // 设置下载路径和文件名
@@ -49,10 +54,41 @@ public class DownLoadManagerUtil {
          request.allowScanningByMediaScanner();
          // 设置为可见和可管理
          request.setVisibleInDownloadsUi(true);
+        context.registerReceiver(receiver,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
          // 获取此次下载的ID
+        downloadId = (int) dManager.enqueue(request);
         return dManager.enqueue(request);
 
     }
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            DownloadManager.Query query = new DownloadManager.Query();
+            query.setFilterById(downloadId);
+            Cursor c = dManager.query(query);
+            if (c.moveToFirst()){
+                int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
+                LogUtil.d("lei","当前状态："+status);
+                switch (status){
+                    case DownloadManager.STATUS_SUCCESSFUL:
+                        if (downStatusImp != null){
+                            downStatusImp.success();
+                        }
+                        break;
+                    case DownloadManager.STATUS_RUNNING:
+                        if (downStatusImp != null){
+                            downStatusImp.downloading();
+                        }
+                        break;
+                    case DownloadManager.STATUS_FAILED:
+                        if (downStatusImp != null){
+                            downStatusImp.fail();
+                        }
+                        break;
+                }
+            }
+        }
+    };
 
     public void openDownloadFile(Context context,long downloadId){
 
@@ -108,4 +144,17 @@ public class DownLoadManagerUtil {
         }
         return mime;
     }
+
+    private DownStatusImp downStatusImp;
+
+    public void setDownStatusImp(DownStatusImp downStatusImp) {
+        this.downStatusImp = downStatusImp;
+    }
+
+    public interface DownStatusImp{
+        void success();
+        void fail();
+        void downloading();
+    }
+
 }

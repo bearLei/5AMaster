@@ -92,6 +92,13 @@
         android:layout_marginTop="@dimen/dp_10"
         ></GridView>
 
+    <LinearLayout
+        android:layout_width="70dp"
+        android:layout_height="@dimen/dp_70"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/puti_shape_stock_666666"
+        >
     <ImageView
         android:id="@+id/evidence_video_layout"
         android:layout_width="@dimen/dp_60"
@@ -99,4 +106,5 @@
         android:scaleType="center"
         android:src="@drawable/puti_video_choose"
         />
+    </LinearLayout>
 </LinearLayout>

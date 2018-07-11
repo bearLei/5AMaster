@@ -838,9 +838,6 @@ public class TeacherEventDetailActivity extends BaseActivity {
                 mMediaDialog.finishPlay();
             }
         }
-
-
-
     }
 
     private void stopAudioPlay(){

@@ -63,5 +63,11 @@ public class UserInfoUtils {
     }
 
 
+    public static boolean isMaster(){
+        if (getUserInfo() == null){
+            return false;
+        }
+        return getUserInfo().getPersonType() == 3;
+    }
 
 }

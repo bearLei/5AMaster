@@ -392,7 +392,11 @@
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
             />
-
+        <!--图片预览页面-->
+        <activity android:name="unit.preview.PreviewActivity"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan"
+            />
         <!--Debug页面-->
         <activity android:name="unit.debug.DebugActivity"/>
 

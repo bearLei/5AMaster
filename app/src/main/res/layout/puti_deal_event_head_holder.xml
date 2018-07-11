@@ -65,4 +65,37 @@
             />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/base_666666"
+        android:text="佐证："
+        android:layout_marginTop="@dimen/dp_10"
+        />
+    <GridView
+        android:id="@+id/evidence_icon_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="3"
+        android:columnWidth="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        ></GridView>
+
+    <GridView
+        android:id="@+id/evidence_vioce_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="3"
+        android:columnWidth="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        ></GridView>
+
+    <ImageView
+        android:id="@+id/evidence_video_layout"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:scaleType="center"
+        android:src="@drawable/puti_video_choose"
+        />
 </LinearLayout>

@@ -23,6 +23,7 @@ import unit.moudle.record.PutiTeacherRecordActivity;
 import unit.moudle.reports.PutiParReportsActivity;
 import unit.moudle.work.PutiWorkCheckActivity;
 import unit.sp.DataStorage;
+import unit.util.UserInfoUtils;
 
 /**
  * Created by lei on 2018/6/6.
@@ -85,19 +86,18 @@ public class HomePowerHolder extends BaseHolder<Object>{
 
 
         //家长举报
-        mReportHolder = new HomeBaseItemHolder(mContext, new HomeBaseItemHolder.ItemClickListener() {
-            @Override
-            public void itemClick() {
-                setmReportHolderRedDog(false);
-                DataStorage.putUserHasReport(false);
-                jump(PutiParReportsActivity.class);
-            }
-        });
-        setmReportHolderRedDog(DataStorage.getUserHasReport());
-        mParentView.addView(getItem(mReportHolder,
-                R.drawable.puti_home_parent_report,
-                R.string.puti_home_parent_report));
-
+            mReportHolder = new HomeBaseItemHolder(mContext, new HomeBaseItemHolder.ItemClickListener() {
+                @Override
+                public void itemClick() {
+                    setmReportHolderRedDog(false);
+                    DataStorage.putUserHasReport(false);
+                    jump(PutiParReportsActivity.class);
+                }
+            });
+            setmReportHolderRedDog(DataStorage.getUserHasReport());
+            mParentView.addView(getItem(mReportHolder,
+                    R.drawable.puti_home_parent_report,
+                    R.string.puti_home_parent_report));
 
         //学生档案
         mParentView.addView(getItem(

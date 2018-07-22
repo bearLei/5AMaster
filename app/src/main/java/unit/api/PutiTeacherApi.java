@@ -58,4 +58,10 @@ public interface PutiTeacherApi {
     Observable<BaseResponseInfo> getWeekImpEvents(@Query("classUID")String classUID,
                                                @Query("termUID")String termUID
     );
+
+
+    @GET("Teacher/GetUnUsedType")//获取为录入时间
+    Observable<BaseResponseInfo> getUnUsedEvents(@Query("classUID")String classUID,
+                                                  @Query("termUID")String termUID
+    );
 }

@@ -14,9 +14,11 @@ import java.util.List;
 
 import unit.api.PutiTeacherModel;
 import unit.entity.ClassSimple;
+import unit.entity.PutiUnUsedEntity;
 import unit.entity.PutiWeekEventImp;
 import unit.entity.WeekEvent;
 import unit.moudle.work.holder.WorkEventCountHolder;
+import unit.moudle.work.holder.WorkUnUsedHolder;
 import unit.moudle.work.view.WorkCheckView;
 
 /**
@@ -30,7 +32,7 @@ public class WorkCheckPtr implements BaseMvpPtr {
     private ArrayList<ClassSimple> mClassList;
 
     private WorkEventCountHolder workEventCountHolder;
-
+    private WorkUnUsedHolder workUnUsedHolder;
     public WorkCheckPtr(Context mContext, WorkCheckView mView) {
         this.mContext = mContext;
         this.mView = mView;
@@ -39,6 +41,7 @@ public class WorkCheckPtr implements BaseMvpPtr {
     @Override
     public void star() {
         initWorkEventCountHolder();
+        initWorkEventUnusedHolder();
         queryClass();
     }
 
@@ -56,6 +59,7 @@ public class WorkCheckPtr implements BaseMvpPtr {
                 mClassList = (ArrayList<ClassSimple>) listObj;
                 //默认拉取第一个班级的课表
                 getWeekEvent(mClassList.get(0).getUID());
+                getUnUseEvent(mClassList.get(0).getUID());
                 mView.setClassName(mClassList.get(0).getName());
             }
 
@@ -82,12 +86,13 @@ public class WorkCheckPtr implements BaseMvpPtr {
                 String name = mClassList.get(position).getName();
                 mView.setClassName(name);
                 getWeekEvent(uid);
+                getUnUseEvent(uid);
                 dropView.dismiss();
             }
         });
         dropView.showAsDropDown(view);
     }
-
+    //获取学生事件统计结果
     private void getWeekEvent(String classUid){
         mView.showLoading();
         PutiTeacherModel.getInstance().getWeekEvent(classUid,new BaseListener(PutiWeekEventImp.class){
@@ -110,12 +115,35 @@ public class WorkCheckPtr implements BaseMvpPtr {
             }
         });
     }
+    //获取未录入事件
+    private void getUnUseEvent(String classUid){
+        PutiTeacherModel.getInstance().getUnUsedEvent(classUid,new BaseListener(PutiUnUsedEntity.class){
+            @Override
+            public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
+                super.responseResult(infoObj, listObj, code, status);
+                PutiUnUsedEntity entity = (PutiUnUsedEntity) infoObj;
+                workUnUsedHolder.setData(entity);
+            }
+
+            @Override
+            public void requestFailed(boolean status, int code, String errorMessage) {
+                super.requestFailed(status, code, errorMessage);
+                ToastUtil.show(errorMessage);
+            }
+        });
+    }
 
     private void initWorkEventCountHolder(){
         if (workEventCountHolder == null){
             workEventCountHolder = new WorkEventCountHolder(mContext);
         }
         mView.addChartView(workEventCountHolder.getRootView());
+    }
+    private void initWorkEventUnusedHolder(){
+        if (workUnUsedHolder == null){
+            workUnUsedHolder = new WorkUnUsedHolder(mContext);
+        }
+        mView.addUnUsedView(workUnUsedHolder.getRootView());
     }
 
 }

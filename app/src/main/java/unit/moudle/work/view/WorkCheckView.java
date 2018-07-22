@@ -11,5 +11,6 @@ import com.puti.education.base.BaseMvpView;
 public interface WorkCheckView extends BaseMvpView{
     void setClassName(String name);
     void addChartView(View view);
+    void addUnUsedView(View view);
     void showSuccessView();
 }

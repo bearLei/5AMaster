@@ -4,10 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/base_666666"
+        android:textSize="@dimen/sp_16"
+        />
+
     <lecho.lib.hellocharts.view.LineChartView
         android:id="@+id/chart_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_200"
         android:padding="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_20"
         />
 </LinearLayout>

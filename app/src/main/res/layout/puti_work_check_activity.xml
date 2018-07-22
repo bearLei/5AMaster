@@ -67,6 +67,14 @@
                 android:layout_marginRight="@dimen/dp_15"
                 ></LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/unUsed_Container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/dp_20"
+                ></LinearLayout>
+
         </LinearLayout>
     </ScrollView>
     <unit.widget.LoadingView

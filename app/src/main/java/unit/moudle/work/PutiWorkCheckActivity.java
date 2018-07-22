@@ -36,6 +36,8 @@ public class PutiWorkCheckActivity extends PutiActivity implements WorkCheckView
     EmptyView emptyView;
     @BindView(R.id.container)
     LinearLayout container;
+    @BindView(R.id.unUsed_Container)
+    LinearLayout unUsedContainer;
 
 
     private WorkCheckPtr mPtr;
@@ -95,6 +97,12 @@ public class PutiWorkCheckActivity extends PutiActivity implements WorkCheckView
     }
 
     @Override
+    public void addUnUsedView(View view) {
+        unUsedContainer.removeAllViews();
+        unUsedContainer.addView(view);
+    }
+
+    @Override
     public void showSuccessView() {
         emptyView.setVisibility(View.GONE);
         hideLoading();
@@ -133,7 +141,6 @@ public class PutiWorkCheckActivity extends PutiActivity implements WorkCheckView
         emptyView.setVisibility(View.VISIBLE);
         emptyView.showNoDataView("暂无数据");
     }
-
 
 
 

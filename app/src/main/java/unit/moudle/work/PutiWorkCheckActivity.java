@@ -1,6 +1,8 @@
 package unit.moudle.work;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.puti.education.R;
@@ -11,7 +13,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unit.moudle.work.ptr.WorkCheckPtr;
 import unit.moudle.work.view.WorkCheckView;
+import unit.widget.EmptyView;
 import unit.widget.HeadView;
+import unit.widget.LoadingView;
 
 /**
  * Created by lei on 2018/6/19.
@@ -24,6 +28,14 @@ public class PutiWorkCheckActivity extends PutiActivity implements WorkCheckView
     TextView title;
     @BindView(R.id.fillter_class)
     TextView fillterClass;
+    @BindView(R.id.chart_Container)
+    LinearLayout chartContainer;
+    @BindView(R.id.loading_view)
+    LoadingView loadingView;
+    @BindView(R.id.empty_view)
+    EmptyView emptyView;
+    @BindView(R.id.container)
+    LinearLayout container;
 
 
     private WorkCheckPtr mPtr;
@@ -68,12 +80,25 @@ public class PutiWorkCheckActivity extends PutiActivity implements WorkCheckView
 
     @Override
     public void Star() {
-
+        mPtr.star();
     }
 
     @Override
     public void setClassName(String name) {
         fillterClass.setText(name);
+    }
+
+    @Override
+    public void addChartView(View view) {
+        chartContainer.removeAllViews();
+        chartContainer.addView(view);
+    }
+
+    @Override
+    public void showSuccessView() {
+        emptyView.setVisibility(View.GONE);
+        hideLoading();
+        container.setVisibility(View.VISIBLE);
     }
 
 
@@ -84,21 +109,32 @@ public class PutiWorkCheckActivity extends PutiActivity implements WorkCheckView
 
     @Override
     public void showLoading() {
-
+        loadingView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        loadingView.setVisibility(View.GONE);
     }
 
     @Override
     public void showErrorView() {
+        emptyView.setVisibility(View.VISIBLE);
+        emptyView.showErrorDataView(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
     @Override
     public void showEmptyView() {
-
+        emptyView.setVisibility(View.VISIBLE);
+        emptyView.showNoDataView("暂无数据");
     }
+
+
+
+
 }

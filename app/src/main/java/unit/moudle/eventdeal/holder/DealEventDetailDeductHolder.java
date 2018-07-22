@@ -52,6 +52,16 @@ public class DealEventDetailDeductHolder extends BaseHolder<Event2Involved> {
     protected View initView(Context context) {
         mRootView = InflateService.g().inflate(R.layout.puti_deal_event_deduct_holder);
         ButterKnife.bind(this, mRootView);
+        editScore.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+                    editScore.setCursorVisible(true);
+                }else {
+                    editScore.setCursorVisible(false);
+                }
+            }
+        });
         return mRootView;
     }
 
@@ -111,6 +121,7 @@ public class DealEventDetailDeductHolder extends BaseHolder<Event2Involved> {
         }
     }
     private void oprateView(final TextView view){
+        editScore.clearFocus();
         Iterator<Map.Entry<TextView, Boolean>> iterator = mViewSelectedMap.entrySet().iterator();
         while (iterator.hasNext()){
             Map.Entry<TextView, Boolean> entry = iterator.next();

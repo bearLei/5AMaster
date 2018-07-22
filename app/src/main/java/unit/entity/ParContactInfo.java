@@ -32,7 +32,8 @@ public class ParContactInfo {
         private String MotherPhone;
         private String Guardian;
         private String GuardianPhone;
-
+        private String Parent;
+        private String ParentPhone;
         public ParContactDetailInfo() {
         }
 
@@ -98,6 +99,22 @@ public class ParContactInfo {
 
         public void setGuardianPhone(String guardianPhone) {
             GuardianPhone = guardianPhone;
+        }
+
+        public String getParent() {
+            return Parent;
+        }
+
+        public void setParent(String parent) {
+            Parent = parent;
+        }
+
+        public String getParentPhone() {
+            return ParentPhone;
+        }
+
+        public void setParentPhone(String parentPhone) {
+            ParentPhone = parentPhone;
         }
     }
 

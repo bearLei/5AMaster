@@ -107,7 +107,8 @@ public class QuestDetailAdapter extends BaseRVAdapter implements WriteAnswerRpc 
         for (int i = 0; i < mData.size(); i++) {
             String questionUid = mData.get(i).getQuestionUID();
             if (!mQuesAnswerMap.containsKey(questionUid)){
-                ToastUtil.show("请回答第"+i+1+"道题");
+                int j = i+1;
+                ToastUtil.show("请回答第"+j+"道题");
                 return false;
             }
         }

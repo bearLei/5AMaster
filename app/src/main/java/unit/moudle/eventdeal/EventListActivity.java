@@ -3,6 +3,7 @@ package unit.moudle.eventdeal;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
 import android.view.View;
 import android.widget.TextView;
 
@@ -103,8 +104,8 @@ public class EventListActivity extends PutiActivity implements EventListView {
     }
 
     @Override
-    public void setDesc(String desc) {
-        TDesc.setText(desc);
+    public void addDesc(SpannableString desc) {
+        TDesc.append(desc);
     }
 
     @Override

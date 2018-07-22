@@ -215,4 +215,22 @@ public class PutiTeacherModel extends PutiBaseModel{
                 });
     }
 
+
+    /**
+     * 获取班级周事件
+     * @param classUid
+     * @param listener
+     */
+    public void getWeekEvent(String classUid,final  BaseListener listener){
+        mTeacherApi.getWeekImpEvents(classUid,"")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
+
 }

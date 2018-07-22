@@ -52,4 +52,10 @@ public interface PutiTeacherApi {
     Observable<BaseResponseInfo> getParReports(@Query("pageIndex")int pageIndex,
                                                @Query("pageSize")int pageSize
                                                );
+
+
+    @GET("Teacher/WeekImpEvents")//获取周事件统计
+    Observable<BaseResponseInfo> getWeekImpEvents(@Query("classUID")String classUID,
+                                               @Query("termUID")String termUID
+    );
 }

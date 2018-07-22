@@ -10,9 +10,13 @@ import com.puti.education.util.ToastUtil;
 import com.puti.education.widget.CommonDropView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import unit.api.PutiTeacherModel;
 import unit.entity.ClassSimple;
+import unit.entity.PutiWeekEventImp;
+import unit.entity.WeekEvent;
+import unit.moudle.work.holder.WorkEventCountHolder;
 import unit.moudle.work.view.WorkCheckView;
 
 /**
@@ -24,6 +28,9 @@ public class WorkCheckPtr implements BaseMvpPtr {
     private WorkCheckView mView;
 
     private ArrayList<ClassSimple> mClassList;
+
+    private WorkEventCountHolder workEventCountHolder;
+
     public WorkCheckPtr(Context mContext, WorkCheckView mView) {
         this.mContext = mContext;
         this.mView = mView;
@@ -31,6 +38,7 @@ public class WorkCheckPtr implements BaseMvpPtr {
 
     @Override
     public void star() {
+        initWorkEventCountHolder();
         queryClass();
     }
 
@@ -47,6 +55,7 @@ public class WorkCheckPtr implements BaseMvpPtr {
                 super.responseListResult(infoObj, listObj, pageInfo, code, status);
                 mClassList = (ArrayList<ClassSimple>) listObj;
                 //默认拉取第一个班级的课表
+                getWeekEvent(mClassList.get(0).getUID());
                 mView.setClassName(mClassList.get(0).getName());
             }
 
@@ -72,10 +81,41 @@ public class WorkCheckPtr implements BaseMvpPtr {
                 String uid = mClassList.get(position).getUID();
                 String name = mClassList.get(position).getName();
                 mView.setClassName(name);
-
+                getWeekEvent(uid);
                 dropView.dismiss();
             }
         });
         dropView.showAsDropDown(view);
     }
+
+    private void getWeekEvent(String classUid){
+        mView.showLoading();
+        PutiTeacherModel.getInstance().getWeekEvent(classUid,new BaseListener(PutiWeekEventImp.class){
+            @Override
+            public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
+                super.responseResult(infoObj, listObj, code, status);
+                PutiWeekEventImp weekEventImp = (PutiWeekEventImp) infoObj;
+                if (weekEventImp != null && workEventCountHolder != null){
+                   workEventCountHolder.setData(weekEventImp);
+                }
+                mView.showSuccessView();
+            }
+
+            @Override
+            public void requestFailed(boolean status, int code, String errorMessage) {
+                super.requestFailed(status, code, errorMessage);
+                ToastUtil.show(errorMessage);
+                mView.hideLoading();
+                mView.showErrorView();
+            }
+        });
+    }
+
+    private void initWorkEventCountHolder(){
+        if (workEventCountHolder == null){
+            workEventCountHolder = new WorkEventCountHolder(mContext);
+        }
+        mView.addChartView(workEventCountHolder.getRootView());
+    }
+
 }

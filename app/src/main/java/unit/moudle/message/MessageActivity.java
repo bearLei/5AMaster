@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import unit.api.PutiCommonModel;
 import unit.entity.MessageEntity;
+import unit.entity.MessageResponse;
 import unit.widget.EmptyView;
 import unit.widget.HeadView;
 import unit.widget.LoadingView;
@@ -96,15 +97,12 @@ public class MessageActivity extends PutiActivity {
     }
 
     private void queryData() {
-
-        PutiCommonModel.getInstance().queryMessageList(new BaseListener(MessageEntity.class) {
-
+        PutiCommonModel.getInstance().queryMessageList(new BaseListener(MessageResponse.class) {
             @Override
-            public void responseListResult(Object infoObj, Object listObj, PageInfo pageInfo, int code, boolean status) {
-                List<MessageEntity> msgList = (List<MessageEntity>) listObj;
+            public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
+                List<MessageEntity> msgList = ((MessageResponse)infoObj).getMsgs();
                 handleResult(msgList);
             }
-
             @Override
             public void requestFailed(boolean status, int code, String errorMessage) {
                 super.requestFailed(status, code, errorMessage);

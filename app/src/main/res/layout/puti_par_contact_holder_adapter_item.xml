@@ -66,6 +66,7 @@
             android:gravity="left|center_vertical"
             android:paddingTop="@dimen/dp_6"
             android:paddingBottom="@dimen/dp_6"
+            android:layout_marginRight="@dimen/dp_40"
             >
             <TextView
                 android:layout_width="0dp"
@@ -73,7 +74,7 @@
                 android:layout_weight="1"
                 android:textColor="@color/base_666666"
                 android:textSize="@dimen/sp_12"
-                android:text="父亲"
+                android:text="家长"
                 />
             <TextView
                 android:id="@+id/fname"
@@ -98,6 +99,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="left|center_vertical"
+            android:visibility="gone"
             >
             <TextView
                 android:layout_width="0dp"

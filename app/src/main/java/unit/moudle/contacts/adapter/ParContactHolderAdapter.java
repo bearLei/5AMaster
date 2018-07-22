@@ -79,10 +79,10 @@ public class ParContactHolderAdapter extends BaseAdapter {
         viewHolder.name.setText(info.getStudentName());
         viewHolder.guardian.setText(info.getGuardian());
         viewHolder.guandianMoble.setText(info.getGuardianPhone());
-        viewHolder.fName.setText(info.getFather());
-        viewHolder.fMobile.setText(info.getFatherPhone());
-        viewHolder.mName.setText(info.getMother());
-        viewHolder.mMobile.setText(info.getMotherPhone());
+        viewHolder.fName.setText(info.getParent());
+        viewHolder.fMobile.setText(info.getParentPhone());
+//        viewHolder.mName.setText(info.getMother());
+//        viewHolder.mMobile.setText(info.getMotherPhone());
         return convertView;
     }
 

@@ -158,7 +158,7 @@ public class PutiParentContactsActivity extends PutiActivity implements ParentCo
         showSuccessView();
         mData.clear();
         mData.addAll(data);
-        Collections.sort(mData,new PutiSchoolContactCompartor());
+        Collections.sort(mData,new PutiParContactCompartor());
         mAdapter.notifyDataSetChanged();
     }
 

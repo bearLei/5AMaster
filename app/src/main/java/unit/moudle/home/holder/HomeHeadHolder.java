@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -19,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unit.entity.UserBaseInfo;
 import unit.moudle.message.MessageActivity;
+import unit.moudle.personal.PersonalActivity;
 import unit.sp.DataStorage;
 import unit.util.UserInfoUtils;
 
@@ -42,6 +44,8 @@ public class HomeHeadHolder extends BaseHolder<Object> {
     TextView roleName;
     @BindView(R.id.forward_msg_list)
     FrameLayout VForwardMsgList;
+    @BindView(R.id.home_top_layout)
+    RelativeLayout homeTopLayout;
 
 
     public HomeHeadHolder(Context context) {
@@ -83,13 +87,19 @@ public class HomeHeadHolder extends BaseHolder<Object> {
         mContext.startActivity(intent);
     }
 
-    public void updateAvatar(){
-        if (UserInfoUtils.isInLoginStata()){
+    public void updateAvatar() {
+        if (UserInfoUtils.isInLoginStata()) {
             headIcon.setImageURI(UserInfoUtils.getUserInfo().getAvatar());
         }
     }
 
-    public void setRedDog(boolean show){
+    public void setRedDog(boolean show) {
         redDog.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @OnClick(R.id.head_icon)
+    public void onHeadIconClick() {
+        Intent intent = new Intent(mContext, PersonalActivity.class);
+        mContext.startActivity(intent);
     }
 }

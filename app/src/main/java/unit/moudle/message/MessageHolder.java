@@ -40,9 +40,6 @@ public class MessageHolder extends BaseHolder<MessageEntity> {
         if (data == null) {
             return;
         }
-
-        title.setText(data.getMsg());
-
-
+        title.setText(data.getContent());
     }
 }

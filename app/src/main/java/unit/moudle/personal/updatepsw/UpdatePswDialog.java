@@ -14,11 +14,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.google.firebase.auth.UserInfo;
 import com.puti.education.R;
 import com.puti.education.listener.BaseListener;
-import com.puti.education.ui.uiCommon.LoginActivity;
 import com.puti.education.util.ToastUtil;
 import com.puti.education.util.ViewUtils;
 
@@ -28,6 +25,7 @@ import butterknife.OnClick;
 import butterknife.OnFocusChange;
 import unit.api.PutiCommonModel;
 import unit.base.BaseResponseInfo;
+import unit.moudle.login.LoginActivity;
 import unit.util.UserInfoUtils;
 
 /**
@@ -96,12 +94,14 @@ public class UpdatePswDialog extends Dialog {
             ToastUtil.show(R.string.puti_update_new_psw);
             return;
         }
-
+        if (newPsw.length() < 6){
+            ToastUtil.show(R.string.puti_update_too_short);
+            return;
+        }
         if (TextUtils.isEmpty(newPswAgagin)){
             ToastUtil.show(R.string.puti_update_new_psw_again);
             return;
         }
-
         if (!newPsw.equals(newPswAgagin)){
             ToastUtil.show(R.string.puti_update_comparison_psw);
             return;

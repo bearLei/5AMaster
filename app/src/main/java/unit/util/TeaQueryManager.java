@@ -2,6 +2,7 @@ package unit.util;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.TextView;
 
 import com.puti.education.listener.BaseListener;
 import com.puti.education.netFrame.response.PageInfo;
@@ -47,7 +48,7 @@ public class TeaQueryManager {
     }
 
     //班级筛选列表
-    public void showClassDialog(Context mContext,View view){
+    public void showClassDialog(Context mContext, final View view){
         ArrayList<String> list = new ArrayList<>();
         int size = mClassList.size();
         for (int i = 0; i < size; i++) {

@@ -102,11 +102,14 @@ public class DealEventDetailPeopleHolder extends BaseHolder<Event2Involved> impl
         deductLayout.removeAllViews();
         notifyLayout.removeAllViews();
         punishLayout.removeAllViews();
-
-        actionLayout.addView(oprateView(mDealEventDetailActionHolder.getRootView()));
-        deductLayout.addView(oprateView(mDealEventDetailDeductHolder.getRootView()));
-        notifyLayout.addView(oprateView(mDealEventDetailNotifyHolder.getRootView()));
-        punishLayout.addView(oprateView(mDealEventDetailPunishHolder.getRootView()));
+        if (mData.getStatus() != 0) {
+            actionLayout.addView(oprateView(mDealEventDetailActionHolder.getRootView()));
+        } else {
+            actionLayout.addView(oprateView(mDealEventDetailActionHolder.getRootView()));
+            deductLayout.addView(oprateView(mDealEventDetailDeductHolder.getRootView()));
+            notifyLayout.addView(oprateView(mDealEventDetailNotifyHolder.getRootView()));
+            punishLayout.addView(oprateView(mDealEventDetailPunishHolder.getRootView()));
+        }
     }
 
     private View oprateView(View view) {
@@ -221,6 +224,7 @@ public class DealEventDetailPeopleHolder extends BaseHolder<Event2Involved> impl
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 super.responseResult(infoObj, listObj, code, status);
+                ToastUtil.show("事件处理成功");
                 if (EventDealManager.needDealEventId.contains(eventId)){
                     EventDealManager.needDealEventId.remove(eventId);
                 }

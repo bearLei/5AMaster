@@ -150,6 +150,8 @@ public class PutiQuesDetailActivity extends PutiActivity {
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 super.responseResult(infoObj, listObj, code, status);
+                ToastUtil.show("提交成功");
+                finish();
             }
 
             @Override

@@ -1,7 +1,5 @@
 package unit.entity;
 
-import java.util.List;
-
 /**
  * Created by lei on 2018/6/7.
  * 消息实体
@@ -11,9 +9,9 @@ public class MessageEntity {
 
     private int Id;
     private String CreateTime;
-    private String Msg;
-    private String UserUID;
-    private int UserType;
+    private String Content;
+    private String UID;
+    private int status;
     private String IP;
     private int Type;
 
@@ -36,28 +34,28 @@ public class MessageEntity {
         CreateTime = createTime;
     }
 
-    public String getMsg() {
-        return Msg;
+    public String getContent() {
+        return Content;
     }
 
-    public void setMsg(String msg) {
-        Msg = msg;
+    public void setContent(String content) {
+        Content = content;
     }
 
-    public String getUserUID() {
-        return UserUID;
+    public String getUID() {
+        return UID;
     }
 
-    public void setUserUID(String userUID) {
-        UserUID = userUID;
+    public void setUID(String UID) {
+        this.UID = UID;
     }
 
-    public int getUserType() {
-        return UserType;
+    public int getStatus() {
+        return status;
     }
 
-    public void setUserType(int userType) {
-        UserType = userType;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getIP() {

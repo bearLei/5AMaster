@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import unit.api.PutiCommonModel;
 import unit.entity.HomeCountEntity;
 import unit.moudle.personal.PersonalActivity;
+import unit.moudle.work.PutiWorkCheckActivity;
 import unit.util.UserInfoUtils;
 
 /**
@@ -46,7 +47,7 @@ public class HomeCountHolder extends BaseHolder<HomeCountEntity>{
         VForwardPersonalInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, PersonalActivity.class);
+                Intent intent = new Intent(mContext, PutiWorkCheckActivity.class);
                 mContext.startActivity(intent);
             }
         });

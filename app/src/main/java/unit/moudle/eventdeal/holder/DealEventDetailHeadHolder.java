@@ -55,7 +55,7 @@ public class DealEventDetailHeadHolder extends BaseHolder<DealEventMain> {
     @BindView(R.id.evidence_vioce_layout)
     GridView evidenceVioceLayout;
     @BindView(R.id.evidence_video_layout)
-    ImageView evidenceVideoLayout;
+    LinearLayout evidenceVideoLayout;
     @BindView(R.id.evidence_tv)
     TextView evidenceTv;
 

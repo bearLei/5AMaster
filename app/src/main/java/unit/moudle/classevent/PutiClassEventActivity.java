@@ -138,6 +138,8 @@ public class PutiClassEventActivity extends PutiActivity implements ClassEventVi
         if (data.size() == 0){
             showEmptyView();
         }
+        recyclerview.setVisibility(View.VISIBLE);
+        emptyView.setVisibility(View.GONE);
         mData.clear();
         mData.addAll(data);
         mAdapter.notifyDataSetChanged();

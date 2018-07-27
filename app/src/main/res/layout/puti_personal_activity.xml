@@ -63,6 +63,7 @@
             android:layout_height="@dimen/dp_60"
             app:title="@string/puti_person_suggestion_feedback"
             android:background="@color/base_ffffff"
+            android:visibility="gone"
             ></unit.widget.SettingItem>
 
         <!--去赏个好评-->

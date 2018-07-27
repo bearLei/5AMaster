@@ -89,8 +89,8 @@ public class HomeFragment extends PutiFragment implements HomeView {
 
     @Override
     public void addFeedBackLayout(View view) {
-        VFeedbackLayout.removeAllViews();
-        VFeedbackLayout.addView(view);
+//        VFeedbackLayout.removeAllViews();
+//        VFeedbackLayout.addView(view);
     }
 
     @Override

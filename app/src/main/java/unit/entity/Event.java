@@ -18,7 +18,7 @@ public class Event implements Serializable {
     private String ClassNames;
     private String Scores;
     private String StatusArr;
-
+    private boolean IsTypical;
     public Event() {
     }
 
@@ -116,5 +116,13 @@ public class Event implements Serializable {
 
     public void setStatusArr(String statusArr) {
         StatusArr = statusArr;
+    }
+
+    public boolean isTypical() {
+        return IsTypical;
+    }
+
+    public void setTypical(boolean typical) {
+        IsTypical = typical;
     }
 }

@@ -267,6 +267,10 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
             uploadAudio();
         } else if (mNeedUploadVideo){
             uploadVideo();
+        }else {
+            if (uploadFinishCallBack != null){
+                uploadFinishCallBack.finish();
+            }
         }
     }
 

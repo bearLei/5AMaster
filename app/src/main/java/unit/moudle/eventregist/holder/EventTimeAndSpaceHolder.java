@@ -39,7 +39,7 @@ public class EventTimeAndSpaceHolder extends BaseHolder<Object> implements View.
     @BindView(R.id.space)
     TextView space;
     @BindView(R.id.edit_space)
-    EditText editSpace;
+    TextView editSpace;
     @BindView(R.id.choose_space)
     ImageView chooseSpace;
     @BindView(R.id.space_layout)

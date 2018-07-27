@@ -1,12 +1,13 @@
 package unit.entity;
 
+import com.baidu.mapapi.SDKInitializer;
+
 import java.io.Serializable;
 
 /**
  * Created by lei on 2018/6/17.
  */
 public class Student implements Serializable{
-    private String StudentName;
     private String StudentUID;
     private int Status;
     private String SchoolUID;
@@ -17,19 +18,20 @@ public class Student implements Serializable{
     private String Birthday;
     private int Score;
     private int ClassIndex;
+    private String IdCard;
+    private String Mobile;
+    private String Photo;
+    private String RealName;
+    private String Sex;
+    private String Address;
+    private String UserUID;
+    private String UserName;
 
     private boolean isAdd;//默认是false,如果是ture，则代表是新增按钮
 
     public Student() {
     }
 
-    public String getStudentName() {
-        return StudentName;
-    }
-
-    public void setStudentName(String studentName) {
-        StudentName = studentName;
-    }
 
     public String getStudentUID() {
         return StudentUID;
@@ -131,6 +133,70 @@ public class Student implements Serializable{
             }
         }
         return false;
+    }
+
+    public String getIdCard() {
+        return IdCard;
+    }
+
+    public void setIdCard(String idCard) {
+        IdCard = idCard;
+    }
+
+    public String getMobile() {
+        return Mobile;
+    }
+
+    public void setMobile(String mobile) {
+        Mobile = mobile;
+    }
+
+    public String getPhoto() {
+        return Photo;
+    }
+
+    public void setPhoto(String photo) {
+        Photo = photo;
+    }
+
+    public String getRealName() {
+        return RealName;
+    }
+
+    public void setRealName(String realName) {
+        RealName = realName;
+    }
+
+    public String getSex() {
+        return Sex;
+    }
+
+    public void setSex(String sex) {
+        Sex = sex;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
+
+    public String getUserUID() {
+        return UserUID;
+    }
+
+    public void setUserUID(String userUID) {
+        UserUID = userUID;
+    }
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String userName) {
+        UserName = userName;
     }
 
     @Override

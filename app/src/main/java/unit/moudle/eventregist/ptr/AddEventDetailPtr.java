@@ -155,15 +155,15 @@ public class AddEventDetailPtr implements BaseMvpPtr {
     public void addEvent(final String Time, final String PlaceUID,
                          final String Address, final String Description,
                          final String EventType){
-
-            if (TextUtils.isEmpty(Time)){
-                ToastUtil.show("请输入时间");
-                return;
-            }
-        if (TextUtils.isEmpty(Address)){
-            ToastUtil.show("请输入地点");
-            return;
-        }
+//
+//            if (TextUtils.isEmpty(Time)){
+//                ToastUtil.show("请输入时间");
+//                return;
+//            }
+//        if (TextUtils.isEmpty(Address)){
+//            ToastUtil.show("请输入地点");
+//            return;
+//        }
 //        if (TextUtils.isEmpty(Description)){
 //            ToastUtil.show("事件描述不能为空");
 //            return;
@@ -227,7 +227,7 @@ public class AddEventDetailPtr implements BaseMvpPtr {
                 try {
                     ZxingUserInfo info = JSON.parseObject(result, ZxingUserInfo.class);
                     Student student = new Student();
-                    student.setStudentName(info.Name);
+                    student.setRealName(info.Name);
                     student.setStudentUID(info.UID);
                     if (mChooseStuList == null){
                         mChooseStuList = new ArrayList<Student>();

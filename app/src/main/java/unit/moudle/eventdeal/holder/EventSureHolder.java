@@ -2,6 +2,7 @@ package unit.moudle.eventdeal.holder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -56,6 +57,13 @@ public class EventSureHolder extends BaseHolder<Event> {
         }
 
         time.setText(data.getTime());
+        if (data.isTypical()){
+            type.setTextColor(mContext.getResources().getColor(R.color.base_f03c28));
+            type.setTypeface(Typeface.DEFAULT_BOLD);
+        }else {
+            type.setTextColor(mContext.getResources().getColor(R.color.base_666666));
+            type.setTypeface(Typeface.DEFAULT);
+        }
         type.setText(data.getEventTypeName());
         students.setText(data.getStudentNames());
         address.setText(data.getAddress());

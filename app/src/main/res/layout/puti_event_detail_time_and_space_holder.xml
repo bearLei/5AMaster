@@ -52,7 +52,7 @@
             android:textColor="@color/base_666666"
             android:textSize="@dimen/sp_14"
             />
-        <EditText
+        <TextView
             android:id="@+id/edit_space"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -61,7 +61,7 @@
             android:textSize="@dimen/sp_14"
             android:layout_toRightOf="@+id/space"
             android:layout_marginLeft="@dimen/dp_15"
-            android:hint="请输入"
+            android:hint="请选择"
             android:textColorHint="@color/base_acb2c1"
             android:background="@null"
             />

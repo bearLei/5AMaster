@@ -15,6 +15,7 @@ import unit.entity.Event;
 public interface EventListView extends BaseMvpView {
 
     void addDesc(SpannableString desc);
+    void setDesc(String desc);
     void setClassName(String name);
     void success(ArrayList<Event> events);
 }

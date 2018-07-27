@@ -37,7 +37,7 @@ public class EventListPtr implements BaseMvpPtr {
     private EventListView mView;
 
     private ArrayList<ClassSimple> mClassList;
-
+    private String mClassUid;
     public EventListPtr(Context mContext, EventListView mView) {
         this.mContext = mContext;
         this.mView = mView;
@@ -60,7 +60,8 @@ public class EventListPtr implements BaseMvpPtr {
                 super.responseListResult(infoObj, listObj, pageInfo, code, status);
                 mClassList = (ArrayList<ClassSimple>) listObj;
                 //默认拉取第一个班级的事件
-                queryEvent(mClassList.get(0).getUID());
+                mClassUid = mClassList.get(0).getUID();
+                queryEvent();
                 mView.setClassName(mClassList.get(0).getName());
             }
 
@@ -74,8 +75,8 @@ public class EventListPtr implements BaseMvpPtr {
         });
     }
 
-    private void queryEvent(String classUid){
-        PutiCommonModel.getInstance().queryEvent(classUid,-1,1, Integer.MAX_VALUE,new BaseListener(PutiEvents.class){
+    public void queryEvent(){
+        PutiCommonModel.getInstance().queryEvent(mClassUid,-1,1, Integer.MAX_VALUE,new BaseListener(PutiEvents.class){
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 PutiEvents events = (PutiEvents) infoObj;
@@ -107,19 +108,20 @@ public class EventListPtr implements BaseMvpPtr {
         StringBuilder builder = new StringBuilder();
         builder.append("待确认事件 ")
                 .append(String.valueOf(waitSureEventCount))
-                .append(" 件").append("    其中重点事件 ");
+                .append(" 件").append("    其中重点事件 ").append(String.valueOf(importEventCount)).append("件");
 
-        StringBuilder importBuilder = new StringBuilder();
-        importBuilder.append(String.valueOf(importEventCount))
-                .append(" 件");
-        SpannableString normalString = new SpannableString(builder.toString());
-        normalString.setSpan(new StyleSpan(Typeface.NORMAL),0,normalString.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        SpannableString spannableString = new SpannableString(importBuilder.toString());
-        spannableString.setSpan(new StyleSpan(Typeface.BOLD),0,importBuilder.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.RED),0,importBuilder.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        mView.addDesc(normalString);
-        mView.addDesc(spannableString);
+//        StringBuilder importBuilder = new StringBuilder();
+//        importBuilder.append(String.valueOf(importEventCount))
+//                .append(" 件");
+//        SpannableString normalString = new SpannableString(builder.toString());
+//        normalString.setSpan(new StyleSpan(Typeface.NORMAL),0,normalString.length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//
+//        SpannableString spannableString = new SpannableString(importBuilder.toString());
+//        spannableString.setSpan(new StyleSpan(Typeface.BOLD),0,importBuilder.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        spannableString.setSpan(new ForegroundColorSpan(Color.RED),0,importBuilder.toString().length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mView.setDesc(builder.toString());
+//        mView.addDesc(normalString);
+//        mView.addDesc(spannableString);
     }
     //班级筛选列表
     public void showClassDialog(View view){
@@ -132,10 +134,10 @@ public class EventListPtr implements BaseMvpPtr {
         dropView.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                String uid = mClassList.get(position).getUID();
+                mClassUid = mClassList.get(position).getUID();
                 String name = mClassList.get(position).getName();
                 mView.setClassName(name);
-                queryEvent(uid);
+                queryEvent();
                 dropView.dismiss();
             }
         });

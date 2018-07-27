@@ -112,8 +112,8 @@ public class StudentAdapter extends BaseAdapter {
                 });
             }
         }
-        holder.avatar.setImageURI("");
-        holder.name.setText(student.getStudentName());
+        holder.avatar.setImageURI(student.getPhoto());
+        holder.name.setText(student.getRealName());
         return convertView;
     }
 

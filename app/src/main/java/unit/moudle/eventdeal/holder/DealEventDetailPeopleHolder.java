@@ -102,7 +102,7 @@ public class DealEventDetailPeopleHolder extends BaseHolder<Event2Involved> impl
         deductLayout.removeAllViews();
         notifyLayout.removeAllViews();
         punishLayout.removeAllViews();
-        if (mData.getStatus() != 0) {
+        if (mData.getStatus() == 0) {
             actionLayout.addView(oprateView(mDealEventDetailActionHolder.getRootView()));
         } else {
             actionLayout.addView(oprateView(mDealEventDetailActionHolder.getRootView()));

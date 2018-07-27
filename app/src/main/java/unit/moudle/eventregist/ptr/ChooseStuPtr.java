@@ -20,6 +20,7 @@ import unit.api.PutiTeacherModel;
 import unit.entity.ClassSimple;
 import unit.entity.Student;
 import unit.entity.StudentEntity;
+import unit.entity.StudentEvent;
 import unit.moudle.eventregist.entity.ChooseStuEntity;
 import unit.moudle.eventregist.view.ChooseStuView;
 
@@ -36,7 +37,7 @@ public class ChooseStuPtr implements BaseMvpPtr {
     private CharacterParser characterParser;
     private ArrayList<ChooseStuEntity> mStudentList;
     private Map<String,ArrayList<Student>> studentMap;
-    private  StudentEntity entity;
+//    private  StudentEntity entity;
     private String mChooseClassId;
     public ChooseStuPtr(Context mContext, ChooseStuView mView) {
         this.mContext = mContext;
@@ -90,8 +91,13 @@ public class ChooseStuPtr implements BaseMvpPtr {
             @Override
             public void responseResult(Object infoObj, Object listObj, int code, boolean status) {
                 super.responseResult(infoObj, listObj, code, status);
-                entity = (StudentEntity) infoObj;
-                handleResult();
+            }
+
+            @Override
+            public void responseListResult(Object infoObj, Object listObj, PageInfo pageInfo, int code, boolean status) {
+                super.responseListResult(infoObj, listObj, pageInfo, code, status);
+                ArrayList<StudentEntity> students = (ArrayList<StudentEntity>) listObj;
+                handleResult(students);
             }
 
             @Override
@@ -104,14 +110,13 @@ public class ChooseStuPtr implements BaseMvpPtr {
         });
     }
 
-    public void handleResult() {
-        final List<Student> students = entity.getStudents();
+    public void handleResult(List<StudentEntity> students) {
         final int size = students.size();
         studentMap.clear();
         mStudentList.clear();
         for (int i = 0; i < size; i++) {
-            Student student = students.get(i);
-            String s = getSelling(student.getStudentName());
+            Student student = students.get(i).getKey();
+            String s = getSelling(student.getRealName());
             if (studentMap.containsKey(s)) {
                 studentMap.get(s).add(student);
             } else {

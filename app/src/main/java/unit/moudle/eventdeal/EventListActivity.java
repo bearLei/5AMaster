@@ -59,6 +59,8 @@ public class EventListActivity extends PutiActivity implements EventListView {
         }
     }
 
+
+
     @Override
     public void ParseIntent() {
 
@@ -72,6 +74,14 @@ public class EventListActivity extends PutiActivity implements EventListView {
     @Override
     public void DettachPtrView() {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mPtr != null){
+            mPtr.queryEvent();
+        }
     }
 
     @Override
@@ -106,6 +116,11 @@ public class EventListActivity extends PutiActivity implements EventListView {
     @Override
     public void addDesc(SpannableString desc) {
         TDesc.append(desc);
+    }
+
+    @Override
+    public void setDesc(String desc) {
+        TDesc.setText(desc);
     }
 
     @Override

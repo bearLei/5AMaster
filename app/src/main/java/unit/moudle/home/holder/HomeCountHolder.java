@@ -51,6 +51,13 @@ public class HomeCountHolder extends BaseHolder<HomeCountEntity>{
                 mContext.startActivity(intent);
             }
         });
+        weekNewEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, PutiWorkCheckActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
         return mRootView;
     }
 

@@ -156,13 +156,23 @@ public class EventDetailActivity extends PutiActivity implements EventDetailView
 
     @Override
     public String getEventId() {
+        if (eventDetail == null){
+            return "";
+        }
+        return eventDetail.getEventUID();
+    }
+
+    @Override
+    public String getEventDealOneUid() {
         return mEventDealOneUid;
     }
 
     @Override
-    public void setEventId(String uid) {
+    public void setEventDealOneUid(String uid) {
         this.mEventDealOneUid = uid;
     }
+
+
 
 
     @Override

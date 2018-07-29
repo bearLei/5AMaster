@@ -73,7 +73,7 @@ public class DealEventDetailPeopleHolder extends BaseHolder<Event2Involved> impl
         mRootView = InflateService.g().inflate(R.layout.puti_deal_event_detail_people_holder);
         ButterKnife.bind(this, mRootView);
         if (mContext instanceof EventDetailActivity) {
-            mEventUid = ((EventDetailActivity) mContext).getEventId();
+            mEventUid = ((EventDetailActivity) mContext).getEventDealOneUid();
         }
         return mRootView;
     }
@@ -104,6 +104,7 @@ public class DealEventDetailPeopleHolder extends BaseHolder<Event2Involved> impl
         punishLayout.removeAllViews();
         if (mData.getStatus() == 0) {
             actionLayout.addView(oprateView(mDealEventDetailActionHolder.getRootView()));
+            notifyLayout.addView(oprateView(mDealEventDetailNotifyHolder.getRootView()));
         } else {
             actionLayout.addView(oprateView(mDealEventDetailActionHolder.getRootView()));
             deductLayout.addView(oprateView(mDealEventDetailDeductHolder.getRootView()));

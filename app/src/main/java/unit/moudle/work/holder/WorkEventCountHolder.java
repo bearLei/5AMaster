@@ -9,11 +9,16 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.LineChart;
 import com.puti.education.R;
 import com.puti.education.base.InflateService;
 import com.puti.education.base.holder.BaseHolder;
+import com.puti.education.util.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +36,8 @@ import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.LineChartView;
 import unit.entity.PutiWeekEventImp;
 import unit.entity.WeekEvent;
+import unit.moudle.work.LineChartManager;
+import unit.widget.MyMarkerView;
 
 /**
  * Created by lei on 2018/7/22.
@@ -40,12 +47,12 @@ public class WorkEventCountHolder extends BaseHolder<PutiWeekEventImp> {
 
 
     @BindView(R.id.chart_view)
-    LineChartView chartView;
+    LineChart mChart;
     @BindView(R.id.desc)
     TextView desc;
 
     private Map<Integer, Integer> mChartData = new HashMap<>();
-
+    private LineChartManager manager;
     public WorkEventCountHolder(Context context) {
         super(context);
     }
@@ -55,6 +62,13 @@ public class WorkEventCountHolder extends BaseHolder<PutiWeekEventImp> {
     protected View initView(Context context) {
         View view = InflateService.g().inflate(R.layout.puti_week_check_count_holder);
         ButterKnife.bind(this, view);
+        // no description text
+        int screenWid = ViewUtils.getScreenWid(mContext);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) (screenWid*1.5),ViewUtils.dip2px(mContext,200));
+        mChart.setLayoutParams(params);
+        MyMarkerView mv = new MyMarkerView(mContext, R.layout.custom_marker_view);
+        mv.setChartView(mChart); // For bounds control
+        mChart.setMarker(mv); // Set the marker to the chart
         return view;
     }
 
@@ -63,15 +77,7 @@ public class WorkEventCountHolder extends BaseHolder<PutiWeekEventImp> {
         List<WeekEvent> eventList = data.getWeekEvents();
         PutiWeekEventImp.Summary summary = data.getSummary();
         int size = eventList.size();
-//        for (int i = 0; i < size; i++) {
-//            if (i < 5) {
-//                eventList.get(i).setEventCount(2);
-//            } else if (5 <= i && i <= 10){
-//                eventList.get(i).setEventCount(5);
-//            }else {
-//                eventList.get(i).setEventCount(10);
-//            }
-//        }
+
         //设置desc
         StringBuilder builder = new StringBuilder();
         builder.append("本学期共发生事件 ")
@@ -91,41 +97,14 @@ public class WorkEventCountHolder extends BaseHolder<PutiWeekEventImp> {
         desc.append(normalString);
         desc.append(spannableString);
 
-
+        List<Integer> xValue = new ArrayList<>();
+        List<Integer> yValue = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             WeekEvent weekEvent = eventList.get(i);
-            mChartData.put(weekEvent.getWeekIndex(), weekEvent.getEventCount());
+            xValue.add(weekEvent.getWeekIndex());
+            yValue.add(weekEvent.getEventCount());
         }
-
-        List<Line> lines = new ArrayList<>();
-        List<PointValue> values = new ArrayList<>();
-        int index = 0;
-        for (Integer integerData : mChartData.values()) {
-            values.add(new PointValue(index, integerData));
-            index++;
-        }
-        Line line = new Line(values);
-        line.setHasLabels(false);
-        //折线的颜色
-        line.setColor(ChartUtils.COLOR_BLUE);
-        //折线图上每个数据点的形状
-        line.setShape(ValueShape.CIRCLE);
-        //设置数据点颜色
-        line.setPointColor(ChartUtils.COLOR_RED);
-        line.setHasLabelsOnlyForSelected(true);
-        line.setHasPoints(false);
-        //是否用线显示。如果为false 则没有曲线只有点显示
-        line.setHasLines(true);
-        line.setStrokeWidth(1);
-        lines.add(line);
-        //图形数据加载
-        LineChartData lineChartData = new LineChartData(lines);
-
-        lineChartData.setAxisYLeft(new Axis());
-        lineChartData.setAxisXBottom(new Axis());
-        //把数据放到控件中
-        chartView.setZoomEnabled(true);
-        chartView.setScrollEnabled(true);
-        chartView.setLineChartData(lineChartData);
+        manager = new LineChartManager(mChart);
+        manager.showLineChart(xValue,yValue,"",mContext.getResources().getColor(R.color.base_666666));
     }
 }

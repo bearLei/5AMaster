@@ -16,7 +16,7 @@ public abstract class ABaseAdapter<E> extends BaseAdapter{
      public List<E> mList = new ArrayList<E>();
      
      public interface BtnClickLintener<E>{
-    	 public void call(E e, int type);
+    	 void call(E e, int type);
      }
      
      public BtnClickLintener btnClickLintener;

@@ -297,12 +297,7 @@ public class TeacherAddEventActivity extends BaseActivity{
             mPushRaidoGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    if (checkedId == R.id.push_yes_radio) {
-                        mIsPushOffice = true;
-
-                    } else {
-                        mIsPushOffice = false;
-                    }
+                    mIsPushOffice = checkedId == R.id.push_yes_radio;
                 }
             });
             mPushRaidoGroup.check(R.id.push_no_radio);

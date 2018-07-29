@@ -95,7 +95,7 @@ public class QuestionnaireEtDetailAdapter extends BasicRecylerAdapter<Question>{
             Log.d("", "afterTextChanged: " + s.toString());
             if (s != null && !"".equals(s.toString())) {
                 Log.d("", "afterTextChanged111: " + s.toString());
-                Integer cartPosi =  (Integer) ((EditText)mHolder.obtainView(R.id.et_content)).getTag();
+                Integer cartPosi =  (Integer) mHolder.obtainView(R.id.et_content).getTag();
                 if (cartPosi != null)
                 {
                     int position = cartPosi.intValue();
@@ -333,10 +333,7 @@ public class QuestionnaireEtDetailAdapter extends BasicRecylerAdapter<Question>{
                 int subsize = subAnswer.length;
                 boolean isChoosed = false;
                 for (int j = 0; j<subsize;j++){
-                    isChoosed = false;
-                    if (qt.isAnswerd && subAnswer[j].equals(qt.answerd)){
-                        isChoosed = true;
-                    }
+                    isChoosed = qt.isAnswerd && subAnswer[j].equals(qt.answerd);
                     subview = setOneQuestionView(position, subAnswer[j], index,  isChoosed);
                     if (subview != null){
                         container.addView(subview);
@@ -359,10 +356,7 @@ public class QuestionnaireEtDetailAdapter extends BasicRecylerAdapter<Question>{
                 int subsize = subAnswer.length;
                 boolean isChoosed = false;
                 for (int j = 0; j<subsize;j++){
-                    isChoosed = false;
-                    if (qt.isAnswerd && containAnswer(subAnswer[j],qt.answerd)){
-                        isChoosed = true;
-                    }
+                    isChoosed = qt.isAnswerd && containAnswer(subAnswer[j], qt.answerd);
                     subview = setOneQuestionView(position, subAnswer[j], index,  isChoosed);
                     if (subview != null){
                         container.addView(subview);

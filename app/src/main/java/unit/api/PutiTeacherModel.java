@@ -56,7 +56,22 @@ public class PutiTeacherModel extends PutiBaseModel{
                     }
                 });
     }
-
+    /**
+     * 获取教师所带班级
+     * @param termUID 学期主键，为空时默认当前学期
+     * @param listener
+     */
+    public void getMyClass(String termUID, final BaseListener listener){
+        mTeacherApi.getMyClass(termUID)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PutiCommonSubscriber(listener){
+                    @Override
+                    public void onNext(BaseResponseInfo responseInfo) {
+                        dealJson(responseInfo,listener);
+                    }
+                });
+    }
     /**
      * 获取学生列表
      * @param classUID 班级id 为空时代表查询所有所带班级

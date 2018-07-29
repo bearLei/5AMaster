@@ -178,9 +178,9 @@ public class CodeUtils {
      */
     public interface AnalyzeCallback{
 
-        public void onAnalyzeSuccess(Bitmap mBitmap, String result);
+        void onAnalyzeSuccess(Bitmap mBitmap, String result);
 
-        public void onAnalyzeFailed();
+        void onAnalyzeFailed();
     }
 
 

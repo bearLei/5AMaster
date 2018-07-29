@@ -27,7 +27,7 @@ public abstract class BasicRecylerAdapter<T> extends RecyclerView.Adapter{
 	public ArrayList<T> mList = new ArrayList<T>();
 
 	public interface  MyItemLongOnclickListener{
-		public void onItemLongClick(int position);
+		void onItemLongClick(int position);
 	}
 
 	public MyItemLongOnclickListener myItemLongOnclickListener = null;
@@ -36,7 +36,7 @@ public abstract class BasicRecylerAdapter<T> extends RecyclerView.Adapter{
 	}
 
 	public interface MyItemOnclickListener{
-		public void onItemClick(int position);
+		void onItemClick(int position);
 	}
 	
 	public MyItemOnclickListener myItemOnclickListener;

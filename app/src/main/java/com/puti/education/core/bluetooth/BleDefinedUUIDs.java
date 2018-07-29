@@ -7,9 +7,9 @@ public class BleDefinedUUIDs {
 	public static class Service {
 		final static public UUID SOS_UUID               = UUID.fromString("0000ffe0-0000-1000-8000-00805f9b34fb");
 		final static public UUID SOS_BACK_UUID          = UUID.fromString("0000ff0e-0000-1000-8000-00805f9b34fb");
-	};
-	
-	public static class Characteristic {
+	}
+
+    public static class Characteristic {
 		final static public UUID HEART_RATE_MEASUREMENT   = UUID.fromString("00002a37-0000-1000-8000-00805f9b34fb");
 		final static public UUID MANUFACTURER_STRING      = UUID.fromString("00002a29-0000-1000-8000-00805f9b34fb");
 		final static public UUID MODEL_NUMBER_STRING      = UUID.fromString("00002a24-0000-1000-8000-00805f9b34fb");

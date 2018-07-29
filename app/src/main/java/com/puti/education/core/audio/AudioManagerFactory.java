@@ -217,12 +217,12 @@ public class AudioManagerFactory {
          * @param db 当前声音分贝
          * @param time 录音时长
          */
-        public void onUpdate(double db,long time);
+        void onUpdate(double db, long time);
 
         /**
          * 停止录音
          * @param filePath 保存路径
          */
-        public void onStop(String filePath);
+        void onStop(String filePath);
     }
 }

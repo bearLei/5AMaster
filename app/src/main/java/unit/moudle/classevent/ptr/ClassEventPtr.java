@@ -60,7 +60,7 @@ public class ClassEventPtr implements BaseMvpPtr{
         statusMap.put("已拒绝",0);
         statusMap.put("处理中",1);
         statusMap.put("审核中",2);
-        statusMap.put("已完结",3);
+        statusMap.put("已完结",4);
         queryClass();
     }
 

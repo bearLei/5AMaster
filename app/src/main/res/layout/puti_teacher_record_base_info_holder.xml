@@ -244,6 +244,15 @@
                     android:layout_weight="1"
                     app:record_title="最高学历"
                     />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:gravity="left"
+                >
+
                 <unit.widget.PutiRecordItem
                     android:id="@+id/graduation_time"
                     android:layout_width="0dp"
@@ -252,7 +261,6 @@
                     app:record_title="毕业时间"
                     />
             </LinearLayout>
-
         </LinearLayout>
 
     </LinearLayout>

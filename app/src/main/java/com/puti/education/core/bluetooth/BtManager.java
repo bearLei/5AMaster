@@ -106,10 +106,7 @@ public class BtManager {
         }
 
         if(mBluetoothAdapter == null) mBluetoothAdapter = mBluetoothManager.getAdapter();
-        if (mBluetoothAdapter == null) {
-            return false;
-        }
-        return true;
+        return mBluetoothAdapter != null;
     }
 
 
@@ -431,7 +428,7 @@ public class BtManager {
             else {
                 mUiCallback.uiFailedWrite(mBluetoothGatt, mBluetoothDevice, mBluetoothSelectedService, characteristic, description + " STATUS = " + status);
             }
-        };
+        }
 
         @Override
         public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status) {
@@ -439,7 +436,7 @@ public class BtManager {
                 // we got new value of RSSI of the connection, pass it to the UI
                 mUiCallback.uiNewRssiAvailable(mBluetoothGatt, mBluetoothDevice, rssi);
             }
-        };
+        }
     };
 
     //获取服务列表

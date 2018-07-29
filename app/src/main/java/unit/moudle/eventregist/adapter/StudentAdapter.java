@@ -106,7 +106,7 @@ public class StudentAdapter extends BaseAdapter {
                     public void onClick(View v) {
                         // TODO: 2018/6/18 学生档案详情
                         Intent intent = new Intent(mContext, PutiStuRecordActivity.class);
-                        intent.putExtra(PutiStuRecordActivity.Parse_Intent, (Serializable) student);
+                        intent.putExtra(PutiStuRecordActivity.Parse_Intent, student);
                         mContext.startActivity(intent);
                     }
                 });

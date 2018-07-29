@@ -493,7 +493,7 @@ public class LoginActivity extends BaseActivity {
             }
         }
         return result;
-    };
+    }
 
 
     //创建角色选择popwindow

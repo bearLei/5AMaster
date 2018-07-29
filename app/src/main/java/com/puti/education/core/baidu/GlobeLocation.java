@@ -43,7 +43,7 @@ public class GlobeLocation {
     }
 
     public interface GlobeLocationCb{
-        public void callback(double lng, double lat, String address);
+        void callback(double lng, double lat, String address);
     }
 
     public void initialize(Context ctx){

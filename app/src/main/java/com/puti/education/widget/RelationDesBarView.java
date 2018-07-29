@@ -168,7 +168,7 @@ public class RelationDesBarView extends View{
         for (int i=0;i < mPointList.size();i++){
             tempIndex = i;
             if (i > 5){
-                tempIndex = (int) (i % 6);
+                tempIndex = i % 6;
             }
             mBarPaint.setColor(BAR_COLORS[tempIndex]);
             point = mPointList.get(i);

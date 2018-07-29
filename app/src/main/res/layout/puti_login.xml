@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/base_ffffff"
             android:textSize="@dimen/sp_18"
-            android:text="佛山市"
+            android:text="深圳市"
             android:layout_alignParentLeft="true"
             />
         <TextView

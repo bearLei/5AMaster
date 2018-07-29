@@ -85,15 +85,22 @@
             android:layout_weight="1"
             app:record_title="民族"
             />
-        <unit.widget.PutiRecordItem
-            android:id="@+id/birth"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:record_title="出生日期"
-            />
     </LinearLayout>
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:gravity="left|center_vertical"
+                >
+                <unit.widget.PutiRecordItem
+                    android:id="@+id/birth"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:record_title="出生日期"
+                    />
+            </LinearLayout>
     <!--户口性质， - 户籍-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -109,15 +116,22 @@
             android:layout_weight="1"
             app:record_title="户口性质"
             />
-        <unit.widget.PutiRecordItem
-            android:id="@+id/cencus"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:record_title="户籍"
-            />
     </LinearLayout>
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:gravity="left|center_vertical"
+                >
+                <unit.widget.PutiRecordItem
+                    android:id="@+id/cencus"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:record_title="户籍"
+                    />
+            </LinearLayout>
     <!-- - 联系电话-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -185,6 +199,15 @@
                     android:layout_weight="1"
                     app:record_title="父亲"
                     />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:gravity="left"
+                >
+
                 <unit.widget.PutiRecordItem
                     android:id="@+id/father_mobile"
                     android:layout_width="0dp"
@@ -193,7 +216,6 @@
                     app:record_title="电话"
                     />
             </LinearLayout>
-
         <!--父亲身份证-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -226,6 +248,14 @@
                     android:layout_weight="1"
                     app:record_title="母亲"
                     />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp_20"
+                android:gravity="left"
+                >
                 <unit.widget.PutiRecordItem
                     android:id="@+id/mother_mobile"
                     android:layout_width="0dp"
@@ -234,7 +264,6 @@
                     app:record_title="电话"
                     />
             </LinearLayout>
-
             <!--母亲身份证-->
             <LinearLayout
                 android:layout_width="match_parent"

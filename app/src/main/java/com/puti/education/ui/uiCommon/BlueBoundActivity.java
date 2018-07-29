@@ -286,8 +286,7 @@ public class BlueBoundActivity extends BaseActivity {
             return false;
         }
 
-        if(mBtBinder.isBleAvaible() == false) return false;
-        return true;
+        return mBtBinder.isBleAvaible() != false;
     }
 
 
@@ -310,7 +309,7 @@ public class BlueBoundActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-    };
+    }
 
     /* check if user agreed to enable BT */
     @Override

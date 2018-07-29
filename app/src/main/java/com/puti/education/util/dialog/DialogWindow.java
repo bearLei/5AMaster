@@ -86,7 +86,7 @@ public class DialogWindow extends DialogFragment implements DialogInterface.OnDi
     private int marginBottom = 30;
     private boolean outSideClickDissMiss;
     private boolean onStopDismiss;
-    public static enum Style{
+    public enum Style{
         ActionSheet,
         Alert
     }

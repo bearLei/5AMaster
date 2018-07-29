@@ -110,11 +110,7 @@ public class StudentSosActivity extends BaseActivity {
     @Override
     public void initVariables() {
         int sosType = this.getIntent().getIntExtra("type", -1);
-        if (sosType == 1){
-            mIsSelfSos = true;
-        }else{
-            mIsSelfSos = false;
-        }
+        mIsSelfSos = sosType == 1;
 
         mBaiduMap = mMapView.getMap();
 

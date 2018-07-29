@@ -17,4 +17,5 @@ public interface EventDetailView extends BaseMvpView{
     void getHeadHolderView(View view);
     void success(ArrayList<Event2Involved> data);
     String getEventId();
+    void setEventId(String uid);
 }

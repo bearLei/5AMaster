@@ -113,11 +113,7 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
             case Constant.CODE_RESULT_VIDEO: {
                 ToastUtil.show("成功添加视频");
                 mVideoPaths = intent.getStringExtra(Key.RECORD_VIDEO);
-                if (!TextUtils.isEmpty(mVideoPaths)){
-                    mNeedUploadVideo = true;
-                }else {
-                    mNeedUploadVideo = false;
-                }
+                mNeedUploadVideo = !TextUtils.isEmpty(mVideoPaths);
             }
             break;
             case Constant.CODE_RESULT_IMG_TEXT: {
@@ -126,11 +122,7 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
                 mImageTextStr = intent.getStringExtra(Key.RECORD_IMG_TEXT);
                 List<String> tempImgList = intent.getStringArrayListExtra(Key.BEAN);
                 mImagePaths.addAll(tempImgList);
-                if (mImagePaths.size() > 0 ){
-                    mNeedUploadImage = true;
-                }else {
-                    mNeedUploadImage = false;
-                }
+                mNeedUploadImage = mImagePaths.size() > 0;
             }
             break;
             case Constant.CODE_RESULT_MEDIA: {
@@ -138,11 +130,7 @@ public class EventEvidenceHolder extends BaseHolder<Object> implements View.OnCl
                 mAudioLocalFileList.clear();
                 List<LocalFile> temImgList = intent.getParcelableArrayListExtra(Key.BEAN);
                 mAudioLocalFileList.addAll(temImgList);
-                if (mAudioLocalFileList.size() > 0){
-                    mNeedUploadAudios = true;
-                }else {
-                    mNeedUploadAudios = false;
-                }
+                mNeedUploadAudios = mAudioLocalFileList.size() > 0;
             }
         }
     }

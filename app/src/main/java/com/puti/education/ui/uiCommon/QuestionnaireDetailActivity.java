@@ -329,7 +329,7 @@ public class QuestionnaireDetailActivity extends BaseActivity {
             keyvalueDropView.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    TextView mTextView = (TextView) dropView;
+                    TextView mTextView = dropView;
                     mTextView.setText(mSchoolCourseList.get(position));
                     // String courseUid = mCourseList.get(position).uid;
                     String name = mSchoolCourseList.get(position);

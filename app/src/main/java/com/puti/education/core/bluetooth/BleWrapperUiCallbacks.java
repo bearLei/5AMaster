@@ -10,55 +10,55 @@ import android.bluetooth.le.ScanRecord;
 
 public interface BleWrapperUiCallbacks {
 
-	public void uiDeviceFound(final BluetoothDevice device, int rssi, ScanRecord record);
+	void uiDeviceFound(final BluetoothDevice device, int rssi, ScanRecord record);
 	
-	public void uiDeviceConnected(final BluetoothGatt gatt,
-								  final BluetoothDevice device);
+	void uiDeviceConnected(final BluetoothGatt gatt,
+                           final BluetoothDevice device);
 	
-	public void uiDeviceDisconnected(final BluetoothGatt gatt,
-									 final BluetoothDevice device);
+	void uiDeviceDisconnected(final BluetoothGatt gatt,
+                              final BluetoothDevice device);
 	
-	public void uiAvailableServices(final BluetoothGatt gatt,
-									final BluetoothDevice device,
-									final List<BluetoothGattService> services);
+	void uiAvailableServices(final BluetoothGatt gatt,
+                             final BluetoothDevice device,
+                             final List<BluetoothGattService> services);
 	
-	public void uiCharacteristicForService(final BluetoothGatt gatt,
-										   final BluetoothDevice device,
-										   final BluetoothGattService service,
-										   final List<BluetoothGattCharacteristic> chars);
+	void uiCharacteristicForService(final BluetoothGatt gatt,
+                                    final BluetoothDevice device,
+                                    final BluetoothGattService service,
+                                    final List<BluetoothGattCharacteristic> chars);
 
-	public void uiCharacteristicsDetails(final BluetoothGatt gatt,
-										 final BluetoothDevice device,
-										 final BluetoothGattService service,
-										 final BluetoothGattCharacteristic characteristic);
+	void uiCharacteristicsDetails(final BluetoothGatt gatt,
+                                  final BluetoothDevice device,
+                                  final BluetoothGattService service,
+                                  final BluetoothGattCharacteristic characteristic);
 	
-	public void uiNewValueForCharacteristic(final BluetoothGatt gatt,
-											final BluetoothDevice device,
-											final BluetoothGattService service,
-											final BluetoothGattCharacteristic ch,
-											final String strValue,
-											final int intValue,
-											final byte[] rawValue,
-											final String timestamp);
+	void uiNewValueForCharacteristic(final BluetoothGatt gatt,
+                                     final BluetoothDevice device,
+                                     final BluetoothGattService service,
+                                     final BluetoothGattCharacteristic ch,
+                                     final String strValue,
+                                     final int intValue,
+                                     final byte[] rawValue,
+                                     final String timestamp);
 	
-	public void uiGotNotification(final BluetoothGattCharacteristic characteristic);
+	void uiGotNotification(final BluetoothGattCharacteristic characteristic);
 	
-	public void uiSuccessfulWrite(final BluetoothGatt gatt,
-								  final BluetoothDevice device,
-								  final BluetoothGattService service,
-								  final BluetoothGattCharacteristic ch,
-								  final String description);
+	void uiSuccessfulWrite(final BluetoothGatt gatt,
+                           final BluetoothDevice device,
+                           final BluetoothGattService service,
+                           final BluetoothGattCharacteristic ch,
+                           final String description);
 	
-	public void uiFailedWrite(final BluetoothGatt gatt,
-							  final BluetoothDevice device,
-							  final BluetoothGattService service,
-							  final BluetoothGattCharacteristic ch,
-							  final String description);
+	void uiFailedWrite(final BluetoothGatt gatt,
+                       final BluetoothDevice device,
+                       final BluetoothGattService service,
+                       final BluetoothGattCharacteristic ch,
+                       final String description);
 	
-	public void uiNewRssiAvailable(final BluetoothGatt gatt, final BluetoothDevice device, final int rssi);
+	void uiNewRssiAvailable(final BluetoothGatt gatt, final BluetoothDevice device, final int rssi);
 	
 	/* define Null Adapter class for that interface */
-	public static class Null implements BleWrapperUiCallbacks {
+    class Null implements BleWrapperUiCallbacks {
 		@Override
 		public void uiDeviceConnected(BluetoothGatt gatt, BluetoothDevice device) {}
 		@Override

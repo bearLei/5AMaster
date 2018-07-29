@@ -50,7 +50,7 @@ public class LoginPtr implements BaseMvpPtr {
         if (!EventBus.getDefault().isRegistered(this)){
             EventBus.getDefault().register(this);
         }
-        getLocation();
+//        getLocation();
     }
 
     @Override
@@ -174,7 +174,7 @@ public class LoginPtr implements BaseMvpPtr {
         if (mapEvent.isSuccess){
             BDLocation bdLocation = mapEvent.bdLocation;
             String city = bdLocation.getCity();
-            mView.setLocationDesc(city);
+//            mView.setLocationDesc(city);
         }
     }
 

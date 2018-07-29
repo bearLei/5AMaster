@@ -95,7 +95,7 @@ public class QuestionListAdapter extends BasicRecylerAdapter<TeacherQuestion>{
     }
 
     public interface  DelLinstener{
-        public void click(int position);
+        void click(int position);
     }
 
     public DelLinstener delLinstener;

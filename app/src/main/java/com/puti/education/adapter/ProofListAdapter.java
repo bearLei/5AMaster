@@ -27,13 +27,13 @@ public class ProofListAdapter extends BasicRecylerAdapter<PersonProof>{
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         CommonViewHolder cHolder = (CommonViewHolder) holder;
-        TextView proofTypeTv = (TextView) cHolder.obtainView(R.id.proof_title_tv);
-        TextView proofContentTv = (TextView) cHolder.obtainView(R.id.proof_content_tv);
-        TextView proofAddressTv = (TextView) cHolder.obtainView(R.id.proof_address_tv);
+        TextView proofTypeTv = cHolder.obtainView(R.id.proof_title_tv);
+        TextView proofContentTv = cHolder.obtainView(R.id.proof_content_tv);
+        TextView proofAddressTv = cHolder.obtainView(R.id.proof_address_tv);
         //GridViewForScrollView gridView = (GridViewForScrollView) cHolder.obtainView(R.id.involved_people_grid);
-        ImageView headImg = (ImageView) cHolder.obtainView(R.id.involved_head_img);
-        TextView textView = (TextView) cHolder.obtainView(R.id.involved_name_tv);
-        TextView dateTv = (TextView) cHolder.obtainView(R.id.date_tv);
+        ImageView headImg = cHolder.obtainView(R.id.involved_head_img);
+        TextView textView = cHolder.obtainView(R.id.involved_name_tv);
+        TextView dateTv = cHolder.obtainView(R.id.date_tv);
 
 
     }

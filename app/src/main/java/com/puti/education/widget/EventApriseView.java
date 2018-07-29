@@ -68,7 +68,7 @@ public class EventApriseView extends View{
     @Override
     protected void onDraw(Canvas canvas) {
 
-        Rect rect = new Rect(0,0,(int)mViewWidth,(int)mViewHeight);
+        Rect rect = new Rect(0,0, mViewWidth, mViewHeight);
         canvas.clipRect(rect);
         canvas.drawColor(Color.WHITE);
 

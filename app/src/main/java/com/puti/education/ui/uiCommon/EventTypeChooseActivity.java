@@ -182,7 +182,7 @@ public class EventTypeChooseActivity extends BaseActivity {
                 intent.putExtra("eventtypename", et.name);
                 intent.putExtra("isabnormal", et.bAbnormal);
                 intent.putExtra("type",EventDutyChooseActivity.REFER_ZXING);
-                intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mList);
+                intent.putExtra(AddEventZxingActivity.ZXING_LIST, mList);
                 intent.setClass(this,EventDutyChooseActivity.class);
             } else {
                 intent.putExtra("eventtypeid", et.id);
@@ -195,7 +195,7 @@ public class EventTypeChooseActivity extends BaseActivity {
                         eventAboutPeople.dutyType = "1";
                         eventAboutPeople.involveType = "主要责任人";
                     }
-                    intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mList);
+                    intent.putExtra(AddEventZxingActivity.ZXING_LIST, mList);
                 }
                 intent.setClass(this, TeacherAddEventActivity.class);
             }

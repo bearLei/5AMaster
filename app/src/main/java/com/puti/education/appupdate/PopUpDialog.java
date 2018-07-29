@@ -214,7 +214,7 @@ public class PopUpDialog extends Dialog {
 		/**
 		 * PopUpDialog消失时调用
 		 */
-		public void onDismiss();
+        void onDismiss();
 	}
 
 	/**
@@ -228,7 +228,7 @@ public class PopUpDialog extends Dialog {
 		 * @param which
 		 *            id从0,1,2..开始,根据不同的id设置响应事件
 		 */
-		public void OnClick(View clickedView, int which);
+        void OnClick(View clickedView, int which);
 	}
 
 	/**

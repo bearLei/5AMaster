@@ -95,6 +95,11 @@ public class StuBaseInfoHolder extends BaseHolder<StudentInfo> {
         //基础信息
         if (stuBasicInfo != null) {
             name.setTDesc(stuBasicInfo.getUserName());
+            if (stuBasicInfo.getSex().equals("F")){
+                sex.setTDesc("男");
+            }else {
+                sex.setTDesc("女");
+            }
             sex.setTDesc(stuBasicInfo.getSex());
             // TODO: 2018/6/18 民族
             birth.setTDesc(stuBasicInfo.getBirthday());

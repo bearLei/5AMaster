@@ -391,11 +391,7 @@ public class InvolvedEditAdapter extends BasicRecylerAdapter<InvolvedSettingBean
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
         InvolvedSettingBean settingBean = (InvolvedSettingBean) group.getTag();
-        if (checkedId == R.id.yes_rbtn){
-            settingBean.isFollow = true;
-        }else{
-            settingBean.isFollow = false;
-        }
+        settingBean.isFollow = checkedId == R.id.yes_rbtn;
 
     }
 }

@@ -370,11 +370,7 @@ public class TeacherPersonalInfoActivity extends BaseActivity {
     }
 
     private boolean isEmptyStr(TextView editText) {
-        if (TextUtils.isEmpty(editText.getText().toString())) {
-            return true;
-        } else {
-            return false;
-        }
+        return TextUtils.isEmpty(editText.getText().toString());
     }
 
     private void modifyTeacherInfo() {

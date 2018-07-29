@@ -28,10 +28,10 @@ public class EventAddressListAdapter extends BasicRecylerAdapter<EventAddress>{
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
-        EventAddress eventAddress = (EventAddress)mList.get(position);
+        EventAddress eventAddress = mList.get(position);
 
         CommonViewHolder viewHolder = (CommonViewHolder) holder;
-        TextView textView = (TextView) viewHolder.obtainView(R.id.item_name_tv);
+        TextView textView = viewHolder.obtainView(R.id.item_name_tv);
         textView.setText(eventAddress.address);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

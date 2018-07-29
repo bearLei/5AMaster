@@ -123,20 +123,20 @@ public class AddEventZxingActivity extends BaseActivity implements View.OnClickL
                 if (refer == 2){
                     if (mbAbnormal) {
                         Intent intent = new Intent(this, EventDutyChooseActivity.class);
-                        intent.putExtra(ZXING_LIST, (Serializable) mList);
+                        intent.putExtra(ZXING_LIST, mList);
                         intent.putExtra("refer", 2);
                         intent.putExtra("type", 3);
                         startActivityForResult(intent, TeacherAddEventActivity.CODE_ZXING);
                     }else {
                         Intent intent = new Intent();
                         opearteLDutyist("1", "主要责任人");
-                        intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mList);
+                        intent.putExtra(AddEventZxingActivity.ZXING_LIST, mList);
                         setResult(TeacherAddEventActivity.CODE_ZXING,intent);
                         finish();
                     }
                 }else {
                     Intent intent = new Intent(this, EventTypeChooseActivity.class);
-                    intent.putExtra(ZXING_LIST, (Serializable) mList);
+                    intent.putExtra(ZXING_LIST, mList);
                     startActivity(intent);
                     finish();
                 }

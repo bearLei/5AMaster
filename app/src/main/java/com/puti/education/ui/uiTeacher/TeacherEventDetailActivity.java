@@ -756,7 +756,7 @@ public class TeacherEventDetailActivity extends BaseActivity {
             }
         }
         return tempProof;
-    };
+    }
 
 
     private void videoPlay(String path) {
@@ -1129,7 +1129,7 @@ public class TeacherEventDetailActivity extends BaseActivity {
                 mSbPunishScore.setEnabled(false);
                 if (tempMax == 0){
                     mPunishScore = mScoreRange.upScore;
-                    mTvSeekbarValue.layout((int) (mValueWidth/2), 10, mValueWidth, mLayoutHight - 10);
+                    mTvSeekbarValue.layout(mValueWidth/2, 10, mValueWidth, mLayoutHight - 10);
                     mTvSeekbarValue.setText("" + mPunishScore);
                 }
             }else{
@@ -1178,7 +1178,7 @@ public class TeacherEventDetailActivity extends BaseActivity {
             mMoveStep = (float) (((float) mValueWidth / tempMax) * 0.8);
             if (tempMax <= 0){
                 mSbPunishScore.setEnabled(false);
-                mTvSeekbarValue.layout((int) (mLayoutHight/2), 10, mValueWidth, mLayoutHight - 10);
+                mTvSeekbarValue.layout(mLayoutHight/2, 10, mValueWidth, mLayoutHight - 10);
                 mTvSeekbarValue.setText("" + (int)mScoreRange.upScore);
             }else{
                 mSbPunishScore.setEnabled(true);
@@ -1214,11 +1214,7 @@ public class TeacherEventDetailActivity extends BaseActivity {
         mRgCheck.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.check_yes_radio){
-                    mIsOfficeAccept = true;
-                }else{
-                    mIsOfficeAccept = false;
-                }
+                mIsOfficeAccept = checkedId == R.id.check_yes_radio;
             }
         });
         mRgCheck.check(R.id.check_yes_radio);
@@ -1908,7 +1904,7 @@ public class TeacherEventDetailActivity extends BaseActivity {
             keyvalueDropView.setPopOnItemClickListener(new KeyValueDropView.PopOnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    TextView mTextView = (TextView) dropView;
+                    TextView mTextView = dropView;
                     mTextView.setText(mWarnList.get(position).value);
                     mCurrentPunish = mTextView.getText().toString();
                     keyvalueDropView.dismiss();
@@ -2131,7 +2127,7 @@ public class TeacherEventDetailActivity extends BaseActivity {
             keyvalueDropView.setPopOnItemClickListener(new CommonDropView.PopOnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    TextView mTextView = (TextView) dropView;
+                    TextView mTextView = dropView;
                     mTextView.setText(mCourseList.get(position).name);
                     mCourseUid = mCourseList.get(position).uid;
                     keyvalueDropView.dismiss();

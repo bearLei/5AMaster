@@ -3,6 +3,9 @@ package unit.moudle.eventregist;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 
@@ -42,7 +45,9 @@ public class PutiChooseEventActivity extends PutiActivity implements ChooseEvent
     private ChooseEventPtr mPtr;
 
 
-    private ArrayList<EventMainTier> mData;
+    private ArrayList<EventMainTier> mData;//列表承载的数据
+    private ArrayList<EventMainTier> mAllData;//网络返回的全部数据
+    private ArrayList<EventMainTier> mTempList;//搜索返回的数据
     private EventChooseAdapter mAdapter;
 
     @Override
@@ -86,10 +91,40 @@ public class PutiChooseEventActivity extends PutiActivity implements ChooseEvent
         if (mData == null) {
             mData = new ArrayList<>();
         }
+        if (mTempList == null){
+            mTempList = new ArrayList<>();
+        }
+        if (mAllData == null){
+            mAllData = new ArrayList<>();
+        }
         if (mAdapter == null) {
             mAdapter = new EventChooseAdapter(this, mData);
         }
         recyclerview.setAdapter(mAdapter);
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (TextUtils.isEmpty(s.toString())) {
+                    mData.clear();
+                    mData.addAll(mAllData);
+                    mAdapter.notifyDataSetChanged();
+
+                } else {
+                    mPtr.search(s.toString());
+                }
+            }
+        });
     }
 
     @Override
@@ -106,27 +141,41 @@ public class PutiChooseEventActivity extends PutiActivity implements ChooseEvent
         }
         mData.clear();
         mData.addAll(list);
+        mAllData.clear();
+        mAllData.addAll(list);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void handleSearchResult(ArrayList<EventMainTier> list) {
+        if (list == null || list.size() == 0){
+            return;
+        }
+        mTempList.clear();
+        mTempList.addAll(list);
+        mData.clear();
+        mData.addAll(mTempList);
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public ArrayList<EventMainTier> getList() {
-        return mData;
+        return mAllData;
     }
 
     @Override
     public void putPullStatus(int position) {
-
+        mAdapter.putPullStatus(position);
     }
 
     @Override
     public void removePullStatus(int position) {
-
+        mAdapter.removePullStatus(position);
     }
 
     @Override
     public void setJumpMainPosition(int position) {
-
+        recyclerview.scrollToPosition(position);
     }
 
     @Override

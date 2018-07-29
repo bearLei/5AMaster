@@ -72,6 +72,7 @@ public class EventDetailPtr implements BaseMvpPtr {
     private void handleResult(DealEventMain eventMain){
         dealEventDetailHeadHolder.setData(eventMain);
         mView.setTitle(String.valueOf(eventMain.getEvent2Involveds().size()));
+        mView.setEventId(eventMain.getEventUID());
         List<Event2Involved> event2Involveds = eventMain.getEvent2Involveds();
         int size = event2Involveds.size();
         for (int i = 0; i < size; i++) {

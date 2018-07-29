@@ -291,7 +291,7 @@ public class CommitAuditActivity extends BaseActivity {
 
         }else if (resultCode == RESULT_CHOOSE_INVOLVED_PEOPLE){
 
-            EventDeailInvolvedPeople people =  (EventDeailInvolvedPeople) data.getParcelableExtra(Key.BEAN);
+            EventDeailInvolvedPeople people = data.getParcelableExtra(Key.BEAN);
             InvolvedSettingBean involvedSettingBean = createInvolvedSettingBean(people);
 
             if (!isContainItem(involvedSettingBean)){

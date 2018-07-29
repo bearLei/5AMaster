@@ -169,7 +169,7 @@ public abstract class HeaderFooterAdapter<T> extends RecyclerView.Adapter {
     }
 
     public interface MyItemOnclickListener{
-        public void onItemClick(int position);
+        void onItemClick(int position);
     }
 
     public MyItemOnclickListener myItemOnclickListener;

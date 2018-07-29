@@ -50,9 +50,9 @@ public class DealEventDetailNotifyHolder extends BaseHolder<Event2Involved> {
         if (data == null){
             return;
         }
-        studentOffice.setSelected(data.isDefaultNeedVaied() ? true : false);
-        parent.setSelected(data.isDefaultNeedParent() ? true : false);
-        psyTeacher.setSelected(data.isDefaultPsy() ? true : false);
+        studentOffice.setSelected(data.isDefaultNeedVaied());
+        parent.setSelected(data.isDefaultNeedParent());
+        psyTeacher.setSelected(data.isDefaultPsy());
     }
 
     @OnClick({R.id.student_office, R.id.parent, R.id.psy_teacher})

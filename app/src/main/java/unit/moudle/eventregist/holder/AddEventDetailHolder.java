@@ -79,7 +79,7 @@ public class AddEventDetailHolder extends BaseHolder<EventDetail> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, PutiChooseDetailActivity.class);
-                intent.putExtra(PutiChooseDetailActivity.Parse_Intent, (Serializable) data);
+                intent.putExtra(PutiChooseDetailActivity.Parse_Intent, data);
                 mContext.startActivity(intent);
             }
         });

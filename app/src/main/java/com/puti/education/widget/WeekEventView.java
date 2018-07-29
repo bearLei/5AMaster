@@ -537,8 +537,8 @@ public class WeekEventView extends View {
         Point p0 = points.get(i - 1);
         Point p1 = points.get(i);
         Point p2 = points.get(i + 1);
-        float k = (float)((float)(p2.y - p0.y) / (float)(p2.x - p0.x));
-        float b = (float)(p1.y - k * p1.x);
+        float k = (float)(p2.y - p0.y) / (float)(p2.x - p0.x);
+        float b = p1.y - k * p1.x;
         Point p01 = new Point();
         p01.x = (int)(p1.x - (p1.x - (p0.y - b) / k) * smoothness);
         p01.y = (int)(k * p01.x + b);

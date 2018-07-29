@@ -330,8 +330,8 @@ public class BaseCommonListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     interface MyOnItemClickLitener{
-        public void onItemLongClick(View view,int position);
-        public void onItemClick(View view,int position);
+        void onItemLongClick(View view, int position);
+        void onItemClick(View view, int position);
     }
 
     MyOnItemClickLitener mOnItemClickLitener;

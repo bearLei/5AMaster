@@ -544,7 +544,7 @@ public class StudentReportAddActivity extends BaseActivity {
                 refreshKnownPeople();
             }
         }else if (requestCode == Constant.REQUEST_CAMERA_CODE && data != null){
-            ArrayList<String> tempIamges = (ArrayList<String>)data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT);
+            ArrayList<String> tempIamges = data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT);
             if (tempIamges != null && tempIamges.size() > 0){
                 mImagePaths.clear();
                 mImagePaths.addAll(tempIamges);

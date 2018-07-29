@@ -380,7 +380,7 @@ public class EduDialog extends Dialog {
         dialog.show();
     }
    public   interface deleteOnClickListener{
-        public void delete();
+        void delete();
     }
 
 //    public void setCloseIconVisibility(boolean visible){

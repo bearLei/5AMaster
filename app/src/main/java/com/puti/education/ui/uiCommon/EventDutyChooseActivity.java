@@ -151,7 +151,7 @@ public class EventDutyChooseActivity extends BaseActivity {
               if (refer == 2){
 //                  intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mInvolvePeopleList);
                   opearteLDutyist(et.key, et.value);
-                  intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mInvolvePeopleList);
+                  intent.putExtra(AddEventZxingActivity.ZXING_LIST, mInvolvePeopleList);
                   setResult(TeacherAddEventActivity.CODE_ZXING,intent);
                   finish();
                   return;
@@ -161,7 +161,7 @@ public class EventDutyChooseActivity extends BaseActivity {
                   intent.putExtra("isabnormal", mAbnormal);
                   opearteLDutyist(et.key, et.value);
                   if (mInvolvePeopleList != null && mInvolvePeopleList.size() > 0) {
-                      intent.putExtra(AddEventZxingActivity.ZXING_LIST, (Serializable) mInvolvePeopleList);
+                      intent.putExtra(AddEventZxingActivity.ZXING_LIST, mInvolvePeopleList);
                   }
                   intent.setClass(this, TeacherAddEventActivity.class);
               }

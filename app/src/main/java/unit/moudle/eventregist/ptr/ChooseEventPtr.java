@@ -28,6 +28,8 @@ public class ChooseEventPtr implements BaseMvpPtr {
     private Context mContext;
     private ChooseEventView mView;
 
+
+    private ArrayList<EventMainTier> mTempList;
     public ChooseEventPtr(Context mContext, ChooseEventView mView) {
         this.mContext = mContext;
         this.mView = mView;
@@ -85,6 +87,7 @@ public class ChooseEventPtr implements BaseMvpPtr {
 
 
     public void search(String text){
+        mTempList = new ArrayList<>();
         ArrayList<EventMainTier> list = mView.getList();
         int size = list.size();
         for (int i = 0; i < size; i++) {
@@ -99,28 +102,28 @@ public class ChooseEventPtr implements BaseMvpPtr {
              */
 
             //第一层级匹配成功，并且存在子事件
-            if (text.contains(groupName.getGroupName())
+            if (groupName.getGroupName().contains(text)
                     && childEventSize > 0){
-                mView.putPullStatus(i);
-                mView.setJumpMainPosition(i);
+                mTempList.add(eventMainTier);
                 //继续查询第二层级,如果匹配到 就调整到第二层级
-                for (int j = 0; j < childEventSize ; j++) {
-                    EventDetail eventDetail = childEventList.get(i);
-                    if (text.contains(eventDetail.getTypeName())){
-                        mView.setJumpSecondPosition(j);
-                    }
-                }
-            }else if (!text.contains(groupName.getGroupName()) && childEventSize > 0){
+//                for (int j = 0; j < childEventSize ; j++) {
+//                    EventDetail eventDetail = childEventList.get(j);
+//                    if (text.contains(eventDetail.getTypeName())){
+//                        mView.setJumpSecondPosition(j);
+//                    }
+//                }
+            }else if (!groupName.getGroupName().contains(text) && childEventSize > 0){
                 //第一层级未匹配成功，但是存在子事件，就遍历子事件，如果 子事件匹配成功，展开列表，并且记录位置进行跳转
                 for (int j = 0; j < childEventSize; j++) {
-                    EventDetail eventDetail = childEventList.get(i);
-                    if (text.contains(eventDetail.getTypeName())){
-                        mView.setJumpSecondPosition(j);
-                        mView.setJumpMainPosition(i);
+                    EventDetail eventDetail = childEventList.get(j);
+                    if (eventDetail.getTypeName().contains(text)){
+                       mTempList.add(eventMainTier);
                     }
                 }
             }
         }
+
+        mView.handleSearchResult(mTempList);
     }
 
 }

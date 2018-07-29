@@ -28,11 +28,7 @@ public class UserInfoUtils {
 
 
     public static boolean isInLoginStata(){
-        if (getUserInfo() == null){
-            return false;
-        }else {
-            return true;
-        }
+        return getUserInfo() != null;
     }
     public static void setAvatar(String url){
         UserBaseInfo userInfo = getUserInfo();

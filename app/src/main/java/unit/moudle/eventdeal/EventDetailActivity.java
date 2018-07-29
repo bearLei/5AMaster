@@ -48,6 +48,7 @@ public class EventDetailActivity extends PutiActivity implements EventDetailView
     private DealEventDetailAdapter mAdapter;
     private ArrayList<Event2Involved> mData;
 
+    private String mEventDealOneUid;
     @Override
     public int getContentView() {
         return R.layout.puti_deal_event_detail_activity;
@@ -155,10 +156,12 @@ public class EventDetailActivity extends PutiActivity implements EventDetailView
 
     @Override
     public String getEventId() {
-        if (eventDetail != null) {
-            return eventDetail.getEventUID();
-        }
-        return "";
+        return mEventDealOneUid;
+    }
+
+    @Override
+    public void setEventId(String uid) {
+        this.mEventDealOneUid = uid;
     }
 
 

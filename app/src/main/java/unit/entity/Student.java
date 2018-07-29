@@ -128,9 +128,7 @@ public class Student implements Serializable{
         }
         if (obj instanceof Student){
             Student s = (Student) obj;
-            if (s.getStudentUID().equals(this.getStudentUID())){
-                return true;
-            }
+            return s.getStudentUID().equals(this.getStudentUID());
         }
         return false;
     }
